@@ -3,7 +3,7 @@
 (function (root) {
   'use strict';
   const T = root.Taxi3D;
-  const CACHE = 20, DRAW = 24, SKY = [176, 209, 219], FOG_STEPS = 24;
+  const CACHE = 24, DRAW = 28, SKY = [176, 209, 219], FOG_STEPS = 24;
   const samePoint = (a, i, j) => a[i] === a[j] && a[i + 1] === a[j + 1] && a[i + 2] === a[j + 2];
   function capacity(n) { let p = 64; while (p < n) p *= 2; return p; }
 
@@ -72,6 +72,7 @@
         dst[d + 16] = ay * bz - az * by;dst[d + 17] = az * bx - ax * bz;dst[d + 18] = ax * by - ay * bx;
         dst[d + 15] = Math.hypot(dst[d+16],dst[d+17],dst[d+18]);
         dst[d+19] = mesh.cull&&mesh.cull[t]?1:0;
+        dst[d+23]=3;
       }
       // Treat Mesh.quad's two triangles as one face for stable painter ordering.
       for (let t = 0; t + 1 < n; t++) {
@@ -80,7 +81,10 @@
         for (let k = 9; k < 12; k++) { const q = (dst[d + k] + dst[e + k]) / 2; dst[d + k] = dst[e + k] = q; }
         // A conservative bound remains valid after replacing the sort centre.
         const radius = Math.max(dst[d + 12], dst[e + 12]) * 1.5;
-        dst[d + 12] = dst[e + 12] = radius; t++;
+        dst[d + 12] = dst[e + 12] = radius;
+        // Keep the original quad as one polygon: half the path calls and no diagonal AA cracks.
+        for(let k=0;k<3;k++)dst[d+20+k]=src[s+30+k];
+        dst[d+23]=4;dst[e+23]=-1;dst[d+15]*=2; t++;
       }
     }
 
@@ -122,7 +126,7 @@
         this.calls++;
         const data = b.data;
         for (let t = 0; t < b.triangles; t++) {
-          const d = t * CACHE, dx = data[d + 9] - eye[0], dy = data[d + 10] - eye[1], dz = data[d + 11] - eye[2];
+          const d = t * CACHE;if(data[d+23]<0)continue;const vertexCount=data[d+23]||3;const dx = data[d + 9] - eye[0], dy = data[d + 10] - eye[1], dz = data[d + 11] - eye[2];
           // Solid volumes have consistent inward winding. Skip their rear-facing walls.
           if(data[d+19]&&data[d+16]*dx+data[d+17]*dy+data[d+18]*dz<0)continue;
           const horizontal = dx * cyaw + dz * syaw;
@@ -131,9 +135,9 @@
           if (depth + radius < near || depth - radius > far || Math.abs(right) - radius * sxNorm > depth * tanX || Math.abs(up) - radius * syNorm > depth * tanY) continue;
           // Subpixel details have no readable shape, especially in the small mirror.
           if (!flat && depth > 80 && data[d + 15] * focal * focal / (depth * depth) < (rect ? 1.1 : .18)) continue;
-          let input = this._clipA, output = this._clipB, n = 3, clipMask = 0, outsideMask = 63;
-          for (let v = 0; v < 3; v++) {
-            const k = d + v * 3, a = data[k] - eye[0], b = data[k + 1] - eye[1], c = data[k + 2] - eye[2], forward = a * cyaw + c * syaw;
+          let input = this._clipA, output = this._clipB, n = vertexCount, clipMask = 0, outsideMask = 63;
+          for (let v = 0; v < vertexCount; v++) {
+            const k = d + (v===3?20:v * 3), a = data[k] - eye[0], b = data[k + 1] - eye[1], c = data[k + 2] - eye[2], forward = a * cyaw + c * syaw;
             const rx = -a * syaw + c * cyaw, uy = b * cp - forward * sp, fz = forward * cp + b * sp;
             input[v * 3] = rx; input[v * 3 + 1] = uy; input[v * 3 + 2] = fz;
             const mask = (fz < near ? 1 : 0) | (fz > far ? 2 : 0) | (rx < -fz * tanX ? 4 : 0) | (rx > fz * tanX ? 8 : 0) | (uy < -fz * tanY ? 16 : 0) | (uy > fz * tanY ? 32 : 0);
