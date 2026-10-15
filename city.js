@@ -19,11 +19,28 @@
     const n=parseInt(hex.slice(1),16);
     return [(n>>16&255)/255,(n>>8&255)/255,(n&255)/255].map(v=>Math.max(0,Math.min(1,v*amount)));
   }
+  function enrich(map) {
+    if(map._depthCity)return;map._depthCity=true;
+    // Corner lots flank each parking apron. All actual solids are registered with physics.
+    for(let j=0;j<map.ys.length-1;j++)for(let i=0;i<map.xs.length-1;i++){
+      if(map.landmarks.some(l=>l.col===i&&l.row===j))continue;
+      const bay=map.bays.find(b=>b.col===i&&b.row===j);if(!bay)continue;
+      const left=map.xs[i]+108,right=map.xs[i+1]-108;
+      const lots=[[left,bay.x-142],[bay.x+142,right]];
+      for(let k=0;k<lots.length;k++){
+        const [x,end]=lots[k],w=end-x;if(w<32)continue;
+        const b={x,y:map.ys[j]+108,w,h:100,color:(i+j+k)%6,roof:(i+j)%3,urban:true};
+        if(map.buildings.some(o=>b.x<o.x+o.w+10&&b.x+b.w>o.x-10&&b.y<o.y+o.h+10&&b.y+b.h>o.y-10))continue;
+        map.buildings.push(b);
+      }
+    }
+  }
   function build(map) {
     if (!root.Taxi3D || !root.Taxi3D.Mesh) throw new Error('TaxiCity requires Taxi3D.Mesh.');
+    enrich(map);
     const mesh=new root.Taxi3D.Mesh(), signs=[], r=random((map.seed||8427)^0x51C170);
-    const stats={seed:map.seed||8427,buildings:0,backgroundBuildings:0,trees:0,lamps:0,shelters:0,landmarks:0,roadSegments:0,crosswalks:0};
-    const xs=map.xs, zs=map.ys, RH=map.roadHalf||82, SH=map.sidewalkHalf||94;
+    const stats={seed:map.seed||8427,buildings:0,skyscrapers:0,tallestBuilding:0,backgroundBuildings:0,trees:0,lamps:0,shelters:0,landmarks:0,roadSegments:0,crosswalks:0};
+    const xs=map.xs, zs=map.ys, lastX=xs.length-1, lastZ=zs.length-1, RH=map.roadHalf||82, SH=map.sidewalkHalf||94;
     const shore=map.h-65;
     function rect(x,z,w,d,y,col) { if(w<=0||d<=0)return;mesh.quad([x,y,z],[x,y,z+d],[x+w,y,z+d],[x+w,y,z],col); }
     function box(x,y,z,w,h,d,col,yaw) { mesh.box(x,y,z,w,h,d,col,yaw||0); }
@@ -109,7 +126,7 @@
       rect(x,z,45+r()*200,1.2+r()*2.2,-1.04,k%3?C.waterLight:'#5da7b8');
     }
     // Block paving stays below the curb and never replaces a drivable road or bay.
-    for(let j=0;j<4;j++)for(let i=0;i<5;i++){
+    for(let j=0;j<lastZ;j++)for(let i=0;i<lastX;i++){
       const x=xs[i]+RH,z=zs[j]+RH,w=xs[i+1]-xs[i]-RH*2,d=zs[j+1]-zs[j]-RH*2;
       rect(x,z,w,d,-.15,(i+j)%3===0?'#c6c7b3':C.paving);
       // North-of-road pavement is continuous. South-of-road pavement has a driveway.
@@ -124,31 +141,31 @@
       }else {rect(x,z,w,SH-RH,.4,C.paving);curbRun(x,z,x+w,z);}
     }
     // Street slabs do not overlap, which keeps flat surfaces stable at driver-eye height.
-    for(const z of zs){rect(120,z-RH,xs[5]+100-120,RH*2,0,C.asphalt);stats.roadSegments++;}
+    for(const z of zs){rect(120,z-RH,xs[lastX]+100-120,RH*2,0,C.asphalt);stats.roadSegments++;}
     for(const x of xs){
       let from=120;
       for(const z of zs){if(z-RH>from){rect(x-RH,from,RH*2,z-RH-from,0,C.asphalt);stats.roadSegments++;}from=z+RH;}
     }
     // Pavement at the outer road sides, with a distinct pale kerb.
     let edgeStart=120;
-    for(const edgeEnd of [...xs.map(x=>x-RH),xs[5]+100]){
+    for(const edgeEnd of [...xs.map(x=>x-RH),xs[lastX]+100]){
       if(edgeEnd>edgeStart){rect(edgeStart,zs[0]-SH,edgeEnd-edgeStart,SH-RH,.4,C.paving);curbRun(edgeStart,zs[0]-RH,edgeEnd,zs[0]-RH);}
       edgeStart=edgeEnd+RH*2;
     }
     edgeStart=120;
     for(const z of zs){
       if(z-RH>edgeStart){
-        for(const x of [xs[0]-SH,xs[5]+RH])rect(x,edgeStart,SH-RH,z-RH-edgeStart,.4,C.paving);
-        for(const x of [xs[0]-RH,xs[5]+RH])curbRun(x,edgeStart,x,z-RH);
+        for(const x of [xs[0]-SH,xs[lastX]+RH])rect(x,edgeStart,SH-RH,z-RH-edgeStart,.4,C.paving);
+        for(const x of [xs[0]-RH,xs[lastX]+RH])curbRun(x,edgeStart,x,z-RH);
       }
       edgeStart=z+RH;
     }
     // Mark two lanes in each direction, centred exactly on engine offsets 20 and 56.
-    for(const z of zs)for(let i=0;i<5;i++)marks(xs[i]+130,z,xs[i+1]-130,z);
-    for(const x of xs)for(let j=0;j<4;j++)marks(x,zs[j]+130,x,zs[j+1]-130);
+    for(const z of zs)for(let i=0;i<lastX;i++)marks(xs[i]+130,z,xs[i+1]-130,z);
+    for(const x of xs)for(let j=0;j<lastZ;j++)marks(x,zs[j]+130,x,zs[j+1]-130);
     for(const n of map.nodes){
-      if(n.i>0)crosswalk(n,'W');if(n.i<5)crosswalk(n,'E');
-      if(n.j>0)crosswalk(n,'N');if(n.j<4)crosswalk(n,'S');
+      if(n.i>0)crosswalk(n,'W');if(n.i<lastX)crosswalk(n,'E');
+      if(n.j>0)crosswalk(n,'N');if(n.j<lastZ)crosswalk(n,'S');
     }
     // Drive-through parking aprons are as wide/deep as isRoad(), with no kerb across access.
     for(const b of map.bays){
@@ -198,52 +215,83 @@
       for(let i=0;i<5;i++){const tx=p.x+20+(p.w-40)*(i/4),tz=p.y+(i%2?.78:.24)*p.h;tree(tx,tz,.85+r()*.35);}
       bench(p.x+p.w*.65,p.y+p.h*.45);bench(p.x+p.w*.26,p.y+p.h*.55,Math.PI);
     }
-    function facade(x,z,w,d,height,color,glassColor,windows=true) {
-      box(x+w/2,height/2,z+d/2,w,height,d,color);
-      box(x+w/2,height+1.2,z+d/2,w+1.2,2.4,d+1.2,tint(color,1.08));
+    function facade(x,z,w,d,height,color,glassColor,windows=true,base=0,style=0) {
+      // Each facade is built from a single opaque volume and a few visible glass strips.
+      // Explicit world-space floor bands, mullions and setbacks give depth without textures.
+      box(x+w/2,base+height/2,z+d/2,w,height,d,color);
+      box(x+w/2,base+height+1.2,z+d/2,w+1.2,2.4,d+1.2,tint(color,1.12));
       if(!windows)return;
-      // Broad glazing bands read cleanly in perspective without a sea of tiny geometry.
-      for(let y=10;y<height-9;y+=16){
-        const h=Math.min(7,height-y-5),p=.13,margin=5;
-        mesh.quad([x+margin,y,z-p],[x+w-margin,y,z-p],[x+w-margin,y+h,z-p],[x+margin,y+h,z-p],glassColor);
-        mesh.quad([x+w-margin,y,z+d+p],[x+margin,y,z+d+p],[x+margin,y+h,z+d+p],[x+w-margin,y+h,z+d+p],tint(glassColor,.85));
-        if(d>25){
-          mesh.quad([x-p,y,z+d-4],[x-p,y,z+4],[x-p,y+h,z+4],[x-p,y+h,z+d-4],tint(glassColor,.84));
-          mesh.quad([x+w+p,y,z+4],[x+w+p,y,z+d-4],[x+w+p,y+h,z+d-4],[x+w+p,y+h,z+4],tint(glassColor,1.03));
-        }
+      const top=base+height-5,bot=base+5,p=.25,margin=3.5;
+      const face=(v,col)=>{const old=mesh.solidFace;mesh.solidFace=true;mesh.quad(...v,col);mesh.solidFace=old;};
+      face([[x+margin,bot,z-p],[x+w-margin,bot,z-p],[x+w-margin,top,z-p],[x+margin,top,z-p]],glassColor);
+      face([[x+w-margin,bot,z+d+p],[x+margin,bot,z+d+p],[x+margin,top,z+d+p],[x+w-margin,top,z+d+p]],tint(glassColor,.72));
+      face([[x-p,bot,z+d-margin],[x-p,bot,z+margin],[x-p,top,z+margin],[x-p,top,z+d-margin]],tint(glassColor,.69));
+      face([[x+w+p,bot,z+margin],[x+w+p,bot,z+d-margin],[x+w+p,top,z+d-margin],[x+w+p,top,z+margin]],tint(glassColor,1.14));
+      const floorStep=height>250?22:18;
+      for(let y=base+14;y<top-4;y+=floorStep){
+        const col=tint(color,style===1?.94:.82),h=style===1?1.4:2.1,q=p+.07;
+        face([[x+2,y,z-q],[x+w-2,y,z-q],[x+w-2,y+h,z-q],[x+2,y+h,z-q]],col);
+        face([[x+w-2,y,z+d+q],[x+2,y,z+d+q],[x+2,y+h,z+d+q],[x+w-2,y+h,z+d+q]],tint(col,.81));
+        face([[x-q,y,z+d-2],[x-q,y,z+2],[x-q,y+h,z+2],[x-q,y+h,z+d-2]],tint(col,.73));
+        face([[x+w+q,y,z+2],[x+w+q,y,z+d-2],[x+w+q,y+h,z+d-2],[x+w+q,y+h,z+2]],tint(col,1.05));
       }
-      // Slim mullions split the continuous bands into intentionally oversized windows.
-      const step=Math.max(18,w/7);
-      for(let dx=step;dx<w-7;dx+=step){
-        mesh.quad([x+dx-.7,3,z-.3],[x+dx+.7,3,z-.3],[x+dx+.7,height-3,z-.3],[x+dx-.7,height-3,z-.3],tint(color,.77));
-        mesh.quad([x+dx+.7,3,z+d+.3],[x+dx-.7,3,z+d+.3],[x+dx-.7,height-3,z+d+.3],[x+dx+.7,height-3,z+d+.3],tint(color,.91));
+      // Full-height stone or aluminium mullions keep the window grid legible at street level.
+      const step=Math.max(15,w/7),sideStep=Math.max(15,d/5),mc=tint(color,style===2?1.05:.89),q=p+.17;
+      for(let dx=step;dx<w-6;dx+=step){
+        face([[x+dx-.65,bot,z-q],[x+dx+.65,bot,z-q],[x+dx+.65,top,z-q],[x+dx-.65,top,z-q]],mc);
+        face([[x+dx+.65,bot,z+d+q],[x+dx-.65,bot,z+d+q],[x+dx-.65,top,z+d+q],[x+dx+.65,top,z+d+q]],tint(mc,.76));
+      }
+      for(let dz=sideStep;dz<d-6;dz+=sideStep){
+        face([[x-q,bot,z+dz+.65],[x-q,bot,z+dz-.65],[x-q,top,z+dz-.65],[x-q,top,z+dz+.65]],tint(mc,.72));
+        face([[x+w+q,bot,z+dz-.65],[x+w+q,bot,z+dz+.65],[x+w+q,top,z+dz+.65],[x+w+q,top,z+dz-.65]],mc);
       }
     }
     const materials=[
-      ['#bec9c1','#729aa3'],['#c8b698','#687f87'],['#afbcbb','#648b9b'],
-      ['#af7964','#526e79'],['#9eafb0','#547e92']
+      ['#b9c8c4','#6795a4'],['#d0c2a7','#6592a0'],['#7d9ca8','#4f839c'],
+      ['#b57e67','#587d89'],['#c3ccc7','#6dabb9'],['#748794','#3c647a']
     ];
-    for(const b of map.buildings){
-      const col=materials[b.color%materials.length],east=(b.x-xs[0])/(xs[5]-xs[0]);
-      const height=48+Math.round(r()*78+east*r()*115),step=b.roof===2&&height>112;
-      if(step){
-        facade(b.x,b.y,b.w,b.h,38,col[0],col[1]);
-        facade(b.x+b.w*.12,b.y+b.h*.07,b.w*.76,b.h*.86,height,col[0],col[1]);
-      }else facade(b.x,b.y,b.w,b.h,height,col[0],col[1]);
-      // Small shop awnings stay entirely inside the original collision footprint.
-      if(height<140){box(b.x+b.w/2,15,b.y+2,b.w*.77,2.5,4,b.color===3?'#527f72':'#bb7057');}
-      if(b.roof===1)box(b.x+b.w*.7,height+5,b.y+b.h*.55,b.w*.14,8,b.h*.3,'#819393');
-      if(b.roof===2)box(b.x+b.w*.35,height+7,b.y+b.h*.5,b.w*.23,12,b.h*.55,tint(col[0],.91));
-      stats.buildings++;
+    function building(b,idx){
+      const col=materials[(b.color||0)%materials.length];
+      const downtown=1-Math.min(1,Math.hypot((b.x-xs[2])/1800,(b.y-zs[2])/1600));
+      const height=b.urban?250+r()*270:90+r()*170+downtown*210;
+      const tall=height>245,style=(idx+b.roof)%3;
+      if(tall){
+        const podium=30+(idx%3)*8,tw=Math.min(b.w*.78,85+(idx%3)*16),td=Math.max(24,b.h*.82);
+        facade(b.x,b.y,b.w,b.h,podium,col[0],col[1],true,0,2);
+        const tx=b.x+(b.w-tw)/2,tz=b.y+(b.h-td)/2;
+        facade(tx,tz,tw,td,height-podium,col[0],col[1],true,podium,style);
+        if(style===0){
+          facade(tx+tw*.13,tz+td*.1,tw*.74,td*.8,32,col[0],col[1],true,height,1);
+          box(tx+tw*.5,height+39,tz+td*.5,tw*.32,14,td*.38,tint(col[0],1.08));
+        }else if(style===1){
+          // Stepped, asymmetric crown: recognisable Toronto financial-district silhouette.
+          box(tx+tw*.34,height+13,tz+td*.5,tw*.67,26,td*.82,tint(col[0],1.12));
+          box(tx+tw*.25,height+33,tz+td*.5,tw*.38,15,td*.63,tint(col[0],1.04));
+          if(idx%4===1)box(tx+tw*.25,height+67,tz+td*.5,1.5,57,1.5,'#d9dcd1');
+        }else{
+          box(tx+tw/2,height+10,tz+td/2,tw*.58,20,td*.58,'#8eacb3');
+          box(tx+tw/2,height+22,tz+td/2,tw*.65,3,td*.65,'#d5ded5');
+        }
+        stats.skyscrapers++;
+      }else{
+        facade(b.x,b.y,b.w,b.h,height,col[0],col[1],true,0,style);
+        box(b.x+b.w*.68,height+5,b.y+b.h*.5,Math.min(26,b.w*.2),8,b.h*.35,'#7f9698');
+      }
+      // Recessed ground-floor shopfronts and projecting entrance canopies establish human scale.
+      box(b.x+b.w*.5,10,b.y-.12,b.w*.6,14,.5,'#355665');
+      box(b.x+b.w*.5,18,b.y+1,b.w*.68,2.5,4,idx%3===0?'#b8664c':'#517b75');
+      box(b.x+b.w*.5,7,b.y-.5,7,13,.6,'#a2c1be');
+      stats.buildings++;stats.tallestBuilding=Math.max(stats.tallestBuilding,height+45);
     }
-    // Sparse edge buildings extend the skyline beyond the playable street grid.
-    for(let i=0;i<15;i++){
-      const x=160+i*(map.w-250)/15,w=90+r()*75,h=75+r()*155;
-      facade(x,-90,w,145,h,'#9eafa9','#75989e',i%2===0);stats.backgroundBuildings++;
+    map.buildings.forEach(building);
+    // A second skyline layer gives strong parallax beyond the playable street walls.
+    for(let i=0;i<xs.length*3;i++){
+      const x=125+i*(map.w-100)/(xs.length*3),w=66+r()*74,h=190+r()*350;
+      facade(x,-180,w,145,h,'#99b0b7','#729fae',i%2===0,0,1);stats.backgroundBuildings++;
     }
-    for(const side of [-1,1])for(let i=0;i<7;i++){
-      const x=side<0?-130:map.w-45,z=230+i*270,w=145,h=50+r()*125;
-      facade(x,z,w,130,h,'#b2b7a5','#788f91',false);stats.backgroundBuildings++;
+    for(const side of [-1,1])for(let i=0;i<zs.length*2;i++){
+      const x=side<0?-170:map.w-18,z=160+i*(shore-210)/(zs.length*2),w=140,h=160+r()*300;
+      facade(x,z,w,120,h,'#9eafb0','#6d969f',false);stats.backgroundBuildings++;
     }
     // All landmark ground-level bodies use the engine colliders, not guessed centres.
     for(let li=0;li<map.landmarks.length;li++){
@@ -265,17 +313,18 @@
         for(const s of [-1,1])tree(l.x+(s<0?12:l.w-12),l.y+l.h*.6,.75);
       }else if(l.type==='tower'){
         box(x,6,z,b.w,12,b.h,'#d4d5c6');
-        mesh.cylinder(x,151,z,12.8,278,'#d8d8ca',12,6.5);
+        const towerCylinder=(x,y,z,r,h,c,n,rt)=>mesh.cylinder(x,y*1.65,z,r,h*1.65,c,n,rt);
+        towerCylinder(x,151,z,12.8,278,'#d8d8ca',12,6.5);
         // Tapered observation disk and two dark panoramic glass rings.
-        mesh.cylinder(x,289,z,8,16,'#c7cdc6',20,36);
-        mesh.cylinder(x,301,z,36,8,'#74949e',20,36);
-        mesh.cylinder(x,307,z,37,4,'#e9e9d8',20,37);
-        mesh.cylinder(x,314,z,35,10,'#b9c8c2',20,15);
-        mesh.cylinder(x,343,z,5.9,64,'#dce0d2',10,4.4);
-        mesh.cylinder(x,373,z,12,8,'#a1b7b7',16,10);
-        mesh.cylinder(x,382,z,8,10,'#dfe2d5',12,4.2);
-        for(let k=0;k<8;k++)mesh.cylinder(x,391+k*9,z,3.5-k*.35,9,k%2?'#f3ead8':'#b65b4d',8,3.15-k*.35);
-        mesh.cylinder(x,468,z,.65,10,'#eee9d4',6,.12);
+        towerCylinder(x,289,z,8,16,'#c7cdc6',20,36);
+        towerCylinder(x,301,z,36,8,'#74949e',20,36);
+        towerCylinder(x,307,z,37,4,'#e9e9d8',20,37);
+        towerCylinder(x,314,z,35,10,'#b9c8c2',20,15);
+        towerCylinder(x,343,z,5.9,64,'#dce0d2',10,4.4);
+        towerCylinder(x,373,z,12,8,'#a1b7b7',16,10);
+        towerCylinder(x,382,z,8,10,'#dfe2d5',12,4.2);
+        for(let k=0;k<8;k++)towerCylinder(x,391+k*9,z,3.5-k*.35,9,k%2?'#f3ead8':'#b65b4d',8,3.15-k*.35);
+        towerCylinder(x,468,z,.65,10,'#eee9d4',6,.12);
         box(x,13,b.y-.25,b.w*.57,13,.6,'#648993');
         streetSign(x,b.y-5,30,'CN TOWER','#355568');
         for(const s of [-1,1])tree(l.x+(s<0?22:l.w-22),l.y+l.h*.5,.9);
@@ -315,7 +364,7 @@
       const b=map.bays[idx];if(b)streetSign(b.x,b.roadY+194,35,text,'#52695f');
     }
     streetSign(xs[0]+100,map.hy-91,34,'GARDINER EXPRESSWAY  →','#39756b');
-    streetSign(xs[5]-100,map.hy-91,34,'←  GARDINER EXPRESSWAY','#39756b');
+    streetSign(xs[lastX]-100,map.hy-91,34,'←  GARDINER EXPRESSWAY','#39756b');
     streetSign(map.w*.53,shore-12,25,'LAKE ONTARIO','#497d89');
     stats.signs=signs.length;
     stats.vertices=mesh.data.length/6;
@@ -323,5 +372,5 @@
     stats.laneCenters=[-56,-20,20,56];
     return {mesh,signs,stats};
   }
-  root.TaxiCity={build};
+  root.TaxiCity={build,enrich};
 })(typeof window!=='undefined'?window:globalThis);

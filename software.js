@@ -3,7 +3,7 @@
 (function (root) {
   'use strict';
   const T = root.Taxi3D;
-  const CACHE = 16, DRAW = 24, SKY = [176, 209, 219], FOG_STEPS = 24;
+  const CACHE = 20, DRAW = 24, SKY = [176, 209, 219], FOG_STEPS = 24;
   const samePoint = (a, i, j) => a[i] === a[j] && a[i + 1] === a[j + 1] && a[i + 2] === a[j + 2];
   function capacity(n) { let p = 64; while (p < n) p *= 2; return p; }
 
@@ -69,7 +69,9 @@
         dst[d + 14] = ymax - ymin < .002 && ymax <= 1.12 ? 1 : 0;
         const ax = dst[d + 3] - dst[d], ay = dst[d + 4] - dst[d + 1], az = dst[d + 5] - dst[d + 2];
         const bx = dst[d + 6] - dst[d], by = dst[d + 7] - dst[d + 1], bz = dst[d + 8] - dst[d + 2];
-        dst[d + 15] = Math.hypot(ay * bz - az * by, az * bx - ax * bz, ax * by - ay * bx);
+        dst[d + 16] = ay * bz - az * by;dst[d + 17] = az * bx - ax * bz;dst[d + 18] = ax * by - ay * bx;
+        dst[d + 15] = Math.hypot(dst[d+16],dst[d+17],dst[d+18]);
+        dst[d+19] = mesh.cull&&mesh.cull[t]?1:0;
       }
       // Treat Mesh.quad's two triangles as one face for stable painter ordering.
       for (let t = 0; t + 1 < n; t++) {
@@ -121,6 +123,8 @@
         const data = b.data;
         for (let t = 0; t < b.triangles; t++) {
           const d = t * CACHE, dx = data[d + 9] - eye[0], dy = data[d + 10] - eye[1], dz = data[d + 11] - eye[2];
+          // Solid volumes have consistent inward winding. Skip their rear-facing walls.
+          if(data[d+19]&&data[d+16]*dx+data[d+17]*dy+data[d+18]*dz<0)continue;
           const horizontal = dx * cyaw + dz * syaw;
           const depth = horizontal * cp + dy * sp, right = -dx * syaw + dz * cyaw, up = dy * cp - horizontal * sp;
           const radius = data[d + 12], flat = data[d + 14] === 1;

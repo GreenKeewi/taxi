@@ -3,12 +3,12 @@
 const colorCache=new Map();
 function rgb(c){if(Array.isArray(c))return c;if(colorCache.has(c))return colorCache.get(c);let s=c.replace('#','');if(s.length===3)s=s.split('').map(x=>x+x).join('');const n=parseInt(s,16),v=[(n>>16&255)/255,(n>>8&255)/255,(n&255)/255];colorCache.set(c,v);return v;}
 class Mesh{
- constructor(){this.data=[];}
- tri(a,b,c,color){const v=rgb(color);for(const p of [a,b,c])this.data.push(p[0],p[1],p[2],...v);return this;}
+ constructor(){this.data=[];this.cull=[];this.solidFace=false;}
+ tri(a,b,c,color){this.cull.push(this.solidFace?1:0);const v=rgb(color);for(const p of [a,b,c])this.data.push(p[0],p[1],p[2],...v);return this;}
  quad(a,b,c,d,color){return this.tri(a,b,c,color).tri(a,c,d,color);}
  polygon(points,color){for(let i=1;i<points.length-1;i++)this.tri(points[0],points[i],points[i+1],color);return this;}
- box(x,y,z,w,h,d,color,yaw=0){const cs=Math.cos(yaw),sn=Math.sin(yaw),p=(a,b,c)=>[x+a*cs-c*sn,y+b,z+a*sn+c*cs],X=w/2,Y=h/2,Z=d/2,C=rgb(color),shade=n=>C.map(x=>x*n);const a=p(-X,-Y,-Z),b=p(X,-Y,-Z),c=p(X,-Y,Z),e=p(-X,-Y,Z),f=p(-X,Y,-Z),g=p(X,Y,-Z),i=p(X,Y,Z),j=p(-X,Y,Z);this.quad(f,g,i,j,C);this.quad(a,b,g,f,shade(.77));this.quad(b,c,i,g,shade(.87));this.quad(c,e,j,i,shade(.91));this.quad(e,a,f,j,shade(.7));this.quad(e,c,b,a,shade(.6));return this;}
- cylinder(x,y,z,r,h,color,sides=12,topR=r){const C=rgb(color);for(let i=0;i<sides;i++){const a=i/sides*Math.PI*2,b=(i+1)/sides*Math.PI*2,p=[x+Math.cos(a)*r,y-h/2,z+Math.sin(a)*r],q=[x+Math.cos(b)*r,y-h/2,z+Math.sin(b)*r],t=[x+Math.cos(a)*topR,y+h/2,z+Math.sin(a)*topR],u=[x+Math.cos(b)*topR,y+h/2,z+Math.sin(b)*topR];this.quad(p,q,u,t,C.map(c=>c*(.74+.16*Math.cos(a-.8))));this.tri([x,y+h/2,z],t,u,C);}return this;}
+ box(x,y,z,w,h,d,color,yaw=0){const cs=Math.cos(yaw),sn=Math.sin(yaw),p=(a,b,c)=>[x+a*cs-c*sn,y+b,z+a*sn+c*cs],X=w/2,Y=h/2,Z=d/2,C=rgb(color),shade=n=>C.map(x=>x*n);const a=p(-X,-Y,-Z),b=p(X,-Y,-Z),c=p(X,-Y,Z),e=p(-X,-Y,Z),f=p(-X,Y,-Z),g=p(X,Y,-Z),i=p(X,Y,Z),j=p(-X,Y,Z);const oldSolid=this.solidFace;this.solidFace=true;this.quad(f,g,i,j,C);this.quad(a,b,g,f,shade(.77));this.quad(b,c,i,g,shade(.87));this.quad(c,e,j,i,shade(.91));this.quad(e,a,f,j,shade(.7));this.quad(e,c,b,a,shade(.6));this.solidFace=oldSolid;return this;}
+ cylinder(x,y,z,r,h,color,sides=12,topR=r){const oldSolid=this.solidFace;this.solidFace=true;const C=rgb(color);for(let i=0;i<sides;i++){const a=i/sides*Math.PI*2,b=(i+1)/sides*Math.PI*2,p=[x+Math.cos(a)*r,y-h/2,z+Math.sin(a)*r],q=[x+Math.cos(b)*r,y-h/2,z+Math.sin(b)*r],t=[x+Math.cos(a)*topR,y+h/2,z+Math.sin(a)*topR],u=[x+Math.cos(b)*topR,y+h/2,z+Math.sin(b)*topR];this.quad(p,q,u,t,C.map(c=>c*(.74+.16*Math.cos(a-.8))));this.tri([x,y+h/2,z],t,u,C);}this.solidFace=oldSolid;return this;}
  line(ax,az,bx,bz,width,y,color){const dx=bx-ax,dz=bz-az,l=Math.hypot(dx,dz)||1,nx=-dz/l*width/2,nz=dx/l*width/2;return this.quad([ax+nx,y,az+nz],[bx+nx,y,bz+nz],[bx-nx,y,bz-nz],[ax-nx,y,az-nz],color);}
 }
 function perspective(fov,aspect,near,far){const f=1/Math.tan(fov/2),nf=1/(near-far);return new Float32Array([f/aspect,0,0,0,0,f,0,0,0,0,(far+near)*nf,-1,0,0,2*far*near*nf,0]);}
