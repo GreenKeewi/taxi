@@ -71,7 +71,22 @@ function signal(map,node,time){const n=typeof node==='number'?map.nodes[node]:no
 function nearestNode(map,p){let best=0,bd=Infinity;for(const n of map.nodes){const d=dist(n,p);if(d<bd){bd=d;best=n.id;}}return best;}
 // Directed-edge navigation starts at the current lane projection, never the nearest junction behind the cab.
 function hasSurfaceNavigation(map,car){return car.roadLayer!=='highway'&&!(car.roadLayer==='ramp'&&((car.height||0)>2||(car.roadSample&&car.roadSample.distanceAlong>(map.roadHalf||82)+20)));}
-function route(map,from,to){if(!hasSurfaceNavigation(map,from))return[];
+function hasNavigation(map,car){return hasSurfaceNavigation(map,car)||!!(Roads&&map.roadProfiles&&map.roadProfiles.some(p=>p.kind==='exit'));}
+function roadRoute(map,from,to){
+ if(!Roads||!map.roadProfiles)return[];const points=[],push=p=>{if(!points.length||dist(points[points.length-1],p)>.5)points.push(p);},sample=from.roadSample||Roads.sampleRoad(map,from.x,from.y),profile=sample.layer==='ramp'?map.roadProfiles[sample.rampIndex]:null;
+ push({x:from.x,y:from.y,height:from.height||sample.height});
+ function along(p,start,direction){const end=direction>0?p.total:0;for(let s=start;direction>0?s<end:s>end;s+=direction*20){const q=Roads.pointAt(p,s);push({x:q.x+(p.kind==='exit'?18*(1-Roads.smooth(s/250)):0),y:q.z,height:q.height,roadLayer:'ramp',rampIndex:p.index});}const q=Roads.pointAt(p,end);push({x:q.x+(p.kind==='exit'&&end===0?18:0),y:q.z,height:q.height,roadLayer:'ramp',rampIndex:p.index});}
+ function leave(p,start){along(p,start,-1);const exit={x:p.x0+18,y:p.z0-135,a:-PI/2,height:0,roadLayer:'ground'};push(exit);for(const q of route(map,exit,to))push(q);}
+ if(profile&&profile.kind==='exit'){leave(profile,Math.max(0,sample.distanceAlong-(sample.lateralDistance>5?110:12)));return points;}
+ let highwayFrom=from,direction=from.y>=map.hy?1:-1;
+ if(profile&&profile.kind==='entry'){direction=profile.highwayDir;if(sample.distanceAlong<profile.total-35){along(profile,Math.min(profile.total,sample.distanceAlong+(sample.lateralDistance>5?90:12)),1);highwayFrom={x:profile.highwayJoin.x,y:profile.highwayJoin.y,a:direction===1?0:PI,height:map.highwayHeight};}}
+ const exit=map.roadProfiles.find(p=>p.kind==='exit'&&p.highwayDir===direction);if(!exit)return[];
+ const ahead=(exit.highwayJoin.x-highwayFrom.x)*direction;
+ if(ahead>160){push({x:highwayFrom.x+direction*Math.min(140,ahead*.5),y:map.hy+direction*53,height:map.highwayHeight});push({x:exit.highwayJoin.x,y:exit.highwayJoin.y,height:map.highwayHeight});leave(exit,exit.total);}
+ else{const projection=Roads.project(exit,highwayFrom.x,highwayFrom.y),join=Math.max(0,projection.s-120),q=Roads.pointAt(exit,join);push({x:q.x,y:q.z,height:q.height,roadLayer:'ramp',rampIndex:exit.index});leave(exit,join);}
+ return points;
+}
+function route(map,from,to){if(!hasSurfaceNavigation(map,from))return roadRoute(map,from,to);
  if(to.type==='bus'){const dx=from.x-to.x,dy=from.y-to.y,along=dx*Math.cos(to.a)+dy*Math.sin(to.a),across=-dx*Math.sin(to.a)+dy*Math.cos(to.a);if(along>=-130&&along<=22&&Math.abs(across)<28&&(!Number.isFinite(from.a)||Math.abs(angleDiff(from.a,to.a))<.60)){const stopAlong=Math.max(0,along);return[{x:from.x,y:from.y},{x:to.x+Math.cos(to.a)*stopAlong,y:to.y+Math.sin(to.a)*stopAlong}];}}
 
  const cols=map.xs.length,targetRow=to.row===undefined?map.ys.reduce((best,y,j)=>Math.abs(y-to.y)<Math.abs(map.ys[best]-to.y)?j:best,0):to.row,targetCol=to.col===undefined?clamp(map.xs.findIndex(x=>x>to.x)-1,0,cols-2):to.col,goalFrom=to.edgeFrom===undefined?targetRow*cols+targetCol:to.edgeFrom,goalTo=to.edgeTo===undefined?goalFrom+1:to.edgeTo,goalA=map.nodes[goalFrom],goalB=map.nodes[goalTo],goalAngle=Math.atan2(goalB.y-goalA.y,goalB.x-goalA.x),goalAccess=(to.x-goalA.x)*Math.cos(goalAngle)+(to.y-goalA.y)*Math.sin(goalAngle);
@@ -116,7 +131,7 @@ class Game{
  planTraffic(c){const m=this.map,a=m.nodes[c.from],n=m.nodes[c.to],options=this.neighbors(n).filter(b=>b.id!==a.id),compatible=options.filter(b=>{const turn=turnKind(a,n,b);return !turn||(turn<0?0:1)===c.lane;}),pool=compatible.length?compatible:options,straight=pool.find(b=>turnKind(a,n,b)===0),next=straight&&this.rand()<.56?straight:pool[Math.floor(this.rand()*pool.length)];c.next=next.id;c.turnSign=turnKind(a,n,next);c.requiredLane=c.turnSign===0?c.lane:c.turnSign<0?0:1;}
  updateTraffic(dt){const m=this.map,rush=rushHour(this.time,this.startMinutes);for(const id in this.junctions)if(!this.traffic.some(c=>c.id===this.junctions[id]&&c.reserved===+id))delete this.junctions[id];
   for(const c of this.traffic){c.height=c.kind==='highway'?(m.highwayHeight||0):0;if(c.kind==='highway'){
-   if(!c.merge&&this.rand()<dt*.035){const lane=1-c.lane,targetY=m.hy+c.dir*(lane?53:26);if(!this.traffic.some(o=>o!==c&&o.kind==='highway'&&Math.abs(o.x-c.x)<120+rush*70&&Math.abs(o.y-targetY)<23)){c.lane=lane;c.merge=targetY;}}
+   if(!c.merge&&this.rand()<dt*.035){const lane=1-c.lane,targetY=m.hy+c.dir*(lane?53:26);if(!this.traffic.some(o=>o!==c&&o.kind==='highway'&&Math.abs(o.x-c.x)<120+rush*70&&Math.abs(o.y-targetY)<23)&&!(Math.abs(this.car.x-c.x)<130+(this.car.length||44)/2&&Math.abs(this.car.y-targetY)<45&&Math.abs((this.car.height||0)-(m.highwayHeight||0))<10)){c.lane=lane;c.merge=targetY;}}
    const want=m.hy+c.dir*(c.lane?53:26);c.y+=(want-c.y)*Math.min(1,dt*1.2);if(Math.abs(c.y-want)<1)c.merge=null;let desired=c.desired*(1+Math.min(.28,this.difficulty*.015))*(1-rush*.33);for(const o of [...this.traffic,this.car]){const ahead=(o.x-c.x)*c.dir;if(o!==c&&Math.abs(o.y-c.y)<24&&ahead>0&&ahead<130)desired=Math.min(desired,Math.max(0,(ahead-(22+(o.length||44)/2+9))*1.25));}c.speed+=clamp(desired-c.speed,-110*dt,45*dt);const nx=c.x+c.dir*c.speed*dt,wrapX=c.dir===1?(m.highwayStart||90)+5:(m.highwayEnd||m.w-90)-5;if(nx>(m.highwayEnd||m.w-90)||nx<(m.highwayStart||90)){if(!this.traffic.some(o=>o!==c&&Math.abs(o.x-wrapX)<90&&Math.abs(o.y-c.y)<24)&&Math.hypot(this.car.x-wrapX,this.car.y-c.y)>90)c.x=wrapX;else c.speed=0;}else c.x=nx;continue;}
    if(c.lane===undefined)c.lane=0;if(c.laneOffset===undefined)c.laneOffset=LANES[c.lane];if(c.next===undefined)this.planTraffic(c);
    let target=Math.min(67,c.desired*(1+Math.min(.3,this.difficulty*.015))*(1-rush*.2));
@@ -125,8 +140,8 @@ class Game{
     c.speed+=clamp(target-c.speed,-100*dt,40*dt);c.turn.t+=c.speed*dt;const pos=samplePath(c.turn.path,c.turn.t);c.x=pos.x;c.y=pos.y;c.a=pos.a;if(c.turn.t>=c.turn.path.length){const oldTo=c.to;c.from=oldTo;c.to=c.next;c.t=JUNCTION_EXIT;c.turn=null;delete this.junctions[c.reserved];c.reserved=undefined;c.laneOffset=LANES[c.lane];this.planTraffic(c);}c.stopped=c.speed<3;continue;
    }
    const n=m.nodes[c.from],to=m.nodes[c.to],L=dist(n,to),a=Math.atan2(to.y-n.y,to.x-n.x),left=L-c.t,stop=L-JUNCTION_ENTRY,s=signal(m,to,this.time),green=(Math.abs(to.x-n.x)>1?s.horizontal:s.vertical)==='green';
-   if(c.requiredLane!==c.lane&&left>160&&!this.traffic.some(o=>o!==c&&o.kind==='street'&&o.from===c.from&&o.to===c.to&&o.lane===c.requiredLane&&Math.abs(o.t-c.t)<90)){c.lane=c.requiredLane;}
-   c.laneOffset+=(LANES[c.lane]-c.laneOffset)*Math.min(1,dt*1.8);
+   if(c.requiredLane!==c.lane&&left>160&&dist(this.car,lanePoint(n,to,c.t,c.requiredLane))>100&&!this.traffic.some(o=>o!==c&&o.kind==='street'&&o.from===c.from&&o.to===c.to&&o.lane===c.requiredLane&&Math.abs(o.t-c.t)<90)){c.lane=c.requiredLane;}
+   if(c.requiredLane!==c.lane)target=Math.min(target,Math.max(0,(left-185)*.8));c.laneOffset+=(LANES[c.lane]-c.laneOffset)*Math.min(1,dt*1.8);
    const next=m.nodes[c.next],exitClear=!this.traffic.some(o=>o!==c&&o.kind==='street'&&o.from===c.to&&o.to===c.next&&o.lane===c.lane&&o.t<190),owner=this.junctions[c.to];
    // Hold before the stop line until green, the outbound lane is free, and this junction is reserved.
    if(left<190&&c.reserved===undefined&&green&&exitClear&&(owner===undefined||owner===c.id)&&c.lane===c.requiredLane&&Math.abs(c.laneOffset-LANES[c.lane])<2&&!this.traffic.some(o=>o!==c&&o.kind==='street'&&!o.turn&&o.from===c.from&&o.to===c.to&&o.lane===c.lane&&o.t>c.t)){
@@ -192,5 +207,5 @@ class Game{
  checkBusStop(dt){const c=this.car,b=this.target(),d=dist(c,b),angle=Math.abs(angleDiff(c.a,b.a));if(d<160&&c.speed>2&&angle<.45)this.bus.approachMeters+=c.speed*dt;if(d<100&&c.speed<-2)this.bus.approachMeters=0;const p=this.busParkingStatus();this.bus.doorsOpen=p.ready;if(p.ready)this.parkHold+=dt;else this.parkHold=Math.max(0,this.parkHold-dt*2);if(this.parkHold>=2.6)this.completeBusStop();}
  recover(){if(this.mode!=='playing')return;const n=this.map.nodes[nearestNode(this.map,this.car)];this.car={x:n.x+(n.i===this.map.xs.length-1?-110:110),y:n.y+(n.i===this.map.xs.length-1?-56:56),a:n.i===this.map.xs.length-1?Math.PI:0,speed:0,steer:0,kind:this.vehicleType,length:this.vehicle.length,width:this.vehicle.width};for(const offset of [0,65,130,-65]){const candidate={...this.car,x:this.car.x+offset};if(isRoad(this.map,candidate.x,candidate.y)&&!this.traffic.some(o=>carHit(candidate,o))){this.car=candidate;break;}}this.reverseMeters=0;if(this.bus)this.bus.approachMeters=0;this.cash-=15;this.job.timeLeft=Math.max(2,this.job.timeLeft-10);this.health=Math.max(1,this.health-5);this.parkHold=0;this.sampleCarRoad();this.note('ROADSIDE ASSIST','$15 and 10 seconds. Back on the road.','bad');}
 }
-return {Game,makeMap,VEHICLES,isRoad,signal,route,hasSurfaceNavigation,nearestNode,carHit,buildingHit,angleDiff,dist,clamp,rng,rushHour,trafficLimit,START_MINUTES,TRAFFIC_PRESETS,STREETS,AVENUES,ROAD_HALF,SIDEWALK_HALF,LANES};
+return {Game,makeMap,VEHICLES,isRoad,signal,route,hasSurfaceNavigation,hasNavigation,nearestNode,carHit,buildingHit,angleDiff,dist,clamp,rng,rushHour,trafficLimit,START_MINUTES,TRAFFIC_PRESETS,STREETS,AVENUES,ROAD_HALF,SIDEWALK_HALF,LANES};
 });

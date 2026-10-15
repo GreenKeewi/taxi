@@ -16,8 +16,8 @@ This independent version preserves the original 2D game at https://greenkeewi.gi
 
 ## Build
 
-Static HTML, CSS, and JavaScript; no backend, dependencies, or build step. Version: transit-6.
+Static HTML, CSS, and JavaScript; no backend, dependencies, or build step. Version: highway-air-7.
 
 The city and vehicles use 3D world geometry. The primary renderer uses WebGL, with a bounded perspective software renderer when WebGL is unavailable. Native WebGL visuals have not yet been verified in the cloud test browser, which disables WebGL.
 
-The transit update has passed integration, physical-input taxi fare, full bus-loop, and Canvas screenshot checks. Public browser gameplay and final presentation checks remain pending until Pages is enabled.
+The city includes elevated highways, rising and descending ramps, and an island runway with a taking-off aircraft. The update has passed integration, physical-input taxi fare and full bus-loop, highway round trips, road and aircraft geometry, and Canvas screenshot checks. Public browser gameplay and final presentation checks remain pending until Pages is enabled.

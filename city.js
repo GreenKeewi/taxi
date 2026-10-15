@@ -37,9 +37,11 @@
   }
   function build(map) {
     if (!root.Taxi3D || !root.Taxi3D.Mesh) throw new Error('TaxiCity requires Taxi3D.Mesh.');
+    if(root.TaxiRoads)root.TaxiRoads.configure(map);
     enrich(map);
     const mesh=new root.Taxi3D.Mesh(), signs=[], r=random((map.seed||8427)^0x51C170);
-    const stats={seed:map.seed||8427,busStops:0,buildings:0,skyscrapers:0,tallestBuilding:0,backgroundBuildings:0,trees:0,lamps:0,shelters:0,landmarks:0,roadSegments:0,crosswalks:0};
+    mesh.underRoad=[];mesh.roadMap=map;
+    const stats={seed:map.seed||8427,buildings:0,skyscrapers:0,tallestBuilding:0,backgroundBuildings:0,trees:0,lamps:0,shelters:0,landmarks:0,roadSegments:0,crosswalks:0,elevatedRoads:0,ramps:0,bridgePiers:0,busStops:0};
     const xs=map.xs, zs=map.ys, lastX=xs.length-1, lastZ=zs.length-1, RH=map.roadHalf||82, SH=map.sidewalkHalf||94;
     const shore=map.h-65;
     function rect(x,z,w,d,y,col) { if(w<=0||d<=0)return;mesh.quad([x,y,z],[x,y,z+d],[x+w,y,z+d],[x+w,y,z],col); }
@@ -183,30 +185,122 @@
         line(b.x-65,b.roadY+174,b.x+65,b.roadY+174,1.2,.06,'#c0c8bf');
       }
     }
-    // At-grade Gardiner expressway and the engine's actual slip-road polylines.
-    rect(90,map.hy-76,map.w-180,152,0,C.highway);
-    for(const off of [-72,72])line(95,map.hy+off,map.w-95,map.hy+off,2,.055,C.white);
-    for(const off of [-39.5,39.5])dash(95,map.hy+off,map.w-95,map.hy+off,2,.055,C.white,33,26);
-    for(const ramp of map.ramps){
-      for(let k=1;k<ramp.length;k++){
-        const a=ramp[k-1],b=ramp[k];line(a.x,a.y,b.x,b.y,74,.012,C.highway);
-        disc(a.x,.014,a.y,37,37,C.highway,12);
-        if(k<ramp.length-1){const dx=b.x-a.x,dz=b.y-a.y,len=Math.hypot(dx,dz),nx=-dz/len,nz=dx/len;
-          for(const side of [-1,1])line(a.x+nx*side*33,a.y+nz*side*33,b.x+nx*side*33,b.y+nz*side*33,1.6,.08,C.white);
-        }
+    // A real concrete viaduct. Ground remains visible under every span; the
+    // upper asphalt, soffit, edge beams, rails and piers are all world geometry.
+    const roads=root.TaxiRoads,H=map.highwayHeight||32,HX=map.highwayStart||90,HE=map.highwayEnd||map.w-90;
+    const concrete='#aeb9b5',soffit='#74868b',rail='#c3cbc4',post='#8a9a9b';
+    // Solid volumes use the renderer's inward winding, including the hidden
+    // underside. This also prevents back faces painting through in Canvas2D.
+    function roadQuad(a,b,c,d,col){const old=mesh.solidFace;mesh.solidFace=true;mesh.quad(d,c,b,a,col);mesh.solidFace=old;}
+    function roadTri(a,b,c,col){const old=mesh.solidFace;mesh.solidFace=true;mesh.tri(c,b,a,col);mesh.solidFace=old;}
+    function elevatedLine(ax,az,ay,bx,bz,by,width,col){
+      const dx=bx-ax,dz=bz-az,len=Math.hypot(dx,dz)||1,nx=-dz/len*width/2,nz=dx/len*width/2;
+      roadQuad([ax+nx,ay,az+nz],[bx+nx,by,bz+nz],[bx-nx,by,bz-nz],[ax-nx,ay,az-nz],col);
+    }
+    function railSegment(a,b){
+      mesh.quad([a.x,a.height+3.5,a.z],[b.x,b.height+3.5,b.z],[b.x,b.height+6,b.z],[a.x,a.height+6,a.z],rail);
+      elevatedLine(a.x,a.z,a.height+6,b.x,b.z,b.height+6,1.2,'#e0e1d1');
+    }
+    function highwayEntryAt(x,z){
+      return roads&&map.roadProfiles.some(p=>{const q=roads.project(p,x,z);return q.distance<roads.pointAt(p,q.s).halfWidth+4&&roads.elevation(p,q.s).height>H-.04;});
+    }
+    function supportQuad(...args){
+      const first=mesh.cull.length;roadQuad(...args);
+      for(let i=first;i<mesh.cull.length;i++)mesh.underRoad[i]=1;
+    }
+    function supportBox(...args){
+      const first=mesh.cull.length;box(...args);
+      for(let i=first;i<mesh.cull.length;i++)mesh.underRoad[i]=1;
+    }
+    function highwayPier(x){
+      // Twin columns leave a broad, readable opening below the road.
+      for(const dz of [-53,53])supportBox(x,(H-8)/2-.35,map.hy+dz,10,H-8.7,13,concrete);
+      supportBox(x,H-7,map.hy,16,5,149,'#95a5a5');stats.bridgePiers++;
+    }
+    for(let x=HX;x<HE;x+=80){
+      const end=Math.min(HE,x+80),mid=(x+end)/2;
+      for(let xx=x;xx<end;xx+=40)for(let z=map.hy-76;z<map.hy+76;z+=38){const xe=Math.min(end,xx+40);roadQuad([xx,H,z],[xx,H,z+38],[xe,H,z+38],[xe,H,z],C.highway);}
+      supportQuad([x,H,map.hy-76],[end,H,map.hy-76],[end,H-5,map.hy-76],[x,H-5,map.hy-76],concrete);
+      supportQuad([end,H,map.hy+76],[x,H,map.hy+76],[x,H-5,map.hy+76],[end,H-5,map.hy+76],'#96a6a7');
+      supportQuad([x,H-5,map.hy-76],[end,H-5,map.hy-76],[end,H-5,map.hy+76],[x,H-5,map.hy+76],soffit);
+      for(const side of [-1,1]){
+        const z=map.hy+side*75;
+        // Openings follow the actual acceleration lanes, never block a merge.
+        for(let xx=x;xx<end;xx+=20){const xe=Math.min(end,xx+20);if(!highwayEntryAt((xx+xe)/2,z))railSegment({x:xx,z,height:H},{x:xe,z,height:H});}
+        if(!highwayEntryAt(mid,z))box(mid,H+3,z,1.5,6,1.5,post);
       }
     }
-    const medianGaps=map.ramps.map(p=>{const a=p[p.length-2],b=p[p.length-1],t=(map.hy-a.y)/(b.y-a.y);return a.x+(b.x-a.x)*t;});
-    for(let x=95;x<map.w-95;x+=26){if(medianGaps.some(g=>Math.abs(g-(x+12))<65))continue;box(x+12,2.1,map.hy,23,4.2,5.5,C.curb);}
+    supportQuad([HX,H-5,map.hy-76],[HX,H-5,map.hy+76],[HX,H,map.hy+76],[HX,H,map.hy-76],concrete);
+    supportQuad([HE,H-5,map.hy+76],[HE,H-5,map.hy-76],[HE,H,map.hy-76],[HE,H,map.hy+76],concrete);
+    for(let x=HX+110;x<HE-70;x+=260)highwayPier(x);
+    for(const off of [-72,72]){
+      for(let x=HX;x<HE;x+=20){const end=Math.min(HE,x+20);if(!highwayEntryAt((x+end)/2,map.hy+off))elevatedLine(x,map.hy+off,H+.055,end,map.hy+off,H+.055,1.7,C.white);}
+    }
+    for(const off of [-39.5,39.5])for(let x=HX+5;x<HE-4;x+=59)elevatedLine(x,map.hy+off,H+.065,Math.min(x+33,HE-4),map.hy+off,H+.065,1.8,C.white);
+    for(let x=HX;x<HE;x+=26){const w=Math.min(23,HE-x);box(x+w/2,H+2.1,map.hy,w,4.2,5.5,C.curb);}
+    stats.elevatedRoads++;
+    if(roads)for(const profile of map.roadProfiles){
+      const points=profile.points,half=profile.halfWidth;
+      function edge(q,off,vertical=0){return[q.x+q.nx*off,q.height+vertical,q.z+q.nz*off];}
+      for(let k=1;k<points.length;k++){
+        const a=points[k-1],b=points[k],la=edge(a,a.halfWidth),ra=edge(a,-a.halfWidth),lb=edge(b,b.halfWidth),rb=edge(b,-b.halfWidth);
+        const ma=edge(a,0),mb=edge(b,0);roadQuad(la,lb,mb,ma,C.highway);roadQuad(ma,mb,rb,ra,C.highway);
+        supportQuad(edge(a,a.halfWidth,-4.5),edge(a,-a.halfWidth,-4.5),edge(b,-b.halfWidth,-4.5),edge(b,b.halfWidth,-4.5),soffit);
+        supportQuad(la,edge(a,a.halfWidth,-4.5),edge(b,b.halfWidth,-4.5),lb,concrete);
+        supportQuad(rb,edge(b,-b.halfWidth,-4.5),edge(a,-a.halfWidth,-4.5),ra,'#95a5a5');
+        const middle=roads.pointAt(profile,(a.s+b.s)/2);
+        for(const side of [-1,1]){
+          const pa=edge(a,side*(a.halfWidth-2)),pb=edge(b,side*(b.halfWidth-2)),mx=(pa[0]+pb[0])/2,mz=(pa[2]+pb[2])/2;
+          const meetsDeck=mx>=HX&&mx<=HE&&Math.abs(mz-map.hy)<78&&middle.height>H-.04;
+          if(!meetsDeck){
+            elevatedLine(pa[0],pa[2],pa[1]+.07,pb[0],pb[2],pb[1]+.07,1.5,C.white);
+            if(middle.s>130)railSegment({x:pa[0],z:pa[2],height:pa[1]},{x:pb[0],z:pb[2],height:pb[1]});
+          }
+        }
+      }
+      // Sparse piers, rail posts and chevrons read clearly at driving speed.
+      for(let s=190;s<profile.total-40;s+=80){
+        const q=roads.pointAt(profile,s);
+        for(const side of [-1,1]){const x=q.x+q.nx*side*(q.halfWidth-2),z=q.z+q.nz*side*(q.halfWidth-2);if(!(x>=HX&&x<=HE&&Math.abs(z-map.hy)<78&&q.height>H-.04))box(x,q.height+3,z,1.5,6,1.5,post);}
+      }
+      for(let s=370;s<profile.turnEnd+profile.acceleration;s+=220){
+        const q=roads.pointAt(profile,s);if(q.height<12)continue;
+        // Keep pillars under the centre of this independent narrow ramp deck.
+        supportBox(q.x,(q.height-7)/2-.35,q.z,8,q.height-7.7,9,concrete);
+        supportBox(q.x,q.height-6,q.z,12,3,65,'#97a7a7',Math.atan2(q.dz,q.dx));stats.bridgePiers++;
+      }
+      // The level acceleration lane has a broken inner edge through the merge.
+      for(let s=profile.turnEnd+28;s<profile.total-20;s+=52){
+        const a=roads.pointAt(profile,s),b=roads.pointAt(profile,Math.min(profile.total,s+27));
+        const side=-profile.side*profile.dir,off=side*(a.halfWidth-4);
+        elevatedLine(a.x+a.nx*off,a.z+a.nz*off,H+.09,b.x+b.nx*off,b.z+b.nz*off,H+.09,1.5,C.white);
+      }
+      // Short lane-centred arrows show the bend and safe merge direction.
+      for(const s of [profile.riseStart+120,profile.turnEnd+70,profile.turnEnd+profile.acceleration+130]){
+        const q=roads.pointAt(profile,s),y=q.height+.1;
+        function ap(f,n){f*=profile.travelDir;n*=profile.travelDir;return[q.x+q.dx*f+q.nx*n,y+q.grade*f,q.z+q.dz*f+q.nz*n];}
+        roadQuad(ap(-17,-1.5),ap(-17,1.5),ap(3,1.5),ap(3,-1.5),C.white);roadTri(ap(15,0),ap(2,-6),ap(2,6),C.white);
+      }
+      const start=points[0],signSide=profile.index%2===0?-1:1;
+      box(start.x+signSide*47,20,start.z+153,2,40,2,C.metal);
+      box(start.x+signSide*47,36,start.z+153,30,13,2,'#39756b');
+      streetSign(start.x+signSide*47,start.z+150,37,profile.kind==='exit'?'CITY STREETS':profile.dir>0?'GARDINER EAST →':'← GARDINER WEST','#f0eddc');
+      const merge=roads.pointAt(profile,profile.turnEnd+profile.acceleration*.42);
+      streetSign(merge.x,merge.z-profile.side*48,H+19,profile.kind==='exit'?'EXIT  •  CITY STREETS':'MERGE  •  90 km/h','#365d5c');
+      stats.ramps++;
+    }
     // Waterfront promenade: its seaward edge coincides with the simulation boundary.
     rect(90,map.hy+91,map.w-180,shore-map.hy-91,.3,'#d9d3ba');
     for(let z=map.hy+102;z<shore-6;z+=12)line(90,z,map.w-90,z,.5,.34,'#c1baa3');
     for(let x=110;x<map.w-100;x+=100){
       box(x,5,shore-3,2,10,2,C.metal);
       if(x+100<map.w-90)box(x+50,8,shore-3,100,1.3,1.3,C.metal);
-      if(x%300===110){bench(x,map.hy+107);lamp(x,map.hy+94,Math.PI/2);}
+      if(x%300===110){bench(x,shore-21);lamp(x,shore-14,-Math.PI/2);}
     }
-    for(let x=145;x<map.w-100;x+=190)tree(x,map.hy+100,.85);
+    for(let x=145;x<map.w-100;x+=190){
+      const z=shore-25;
+      if(!roads||[[x,z],[x-15,z],[x+15,z],[x,z-15],[x,z+15]].every(q=>roads.sampleRoad(map,q[0],q[1]).height<2))tree(x,z,.85);
+    }
     // Parks use their precise open map rectangles; paths, seating and sparse faceted trees.
     for(const p of map.parks){
       rect(p.x,p.y,p.w,p.h,.2,C.grass);
@@ -360,7 +454,7 @@
       const dx=Math.cos(stop.a),dz=Math.sin(stop.a),nx=-dz,nz=dx;
       const p=(along,out,y=0)=>[stop.x+dx*along+nx*out,y,stop.y+dz*along+nz*out];
       const half=(stop.length||132)/2;
-      function stopLine(a,b,c,d,width,col){const u=p(a,b,.09),v=p(c,d,.09);line(u[0],u[2],v[0],v[2],width,.09,col);}
+      function stopLine(a,b,c,d,width,col){const u=p(a,b,.09),v=p(c,d,.09);elevatedLine(u[0],u[2],u[1],v[0],v[2],v[1],width,col);}
       stopLine(-half,-14,half,-14,1.7,'#e8c879');
       for(const s of [-half,half])stopLine(s,-14,s,14,1.7,'#e8c879');
       // A simple yellow bus pictogram reads without texture text or extra assets.
@@ -369,7 +463,7 @@
       const pole=p(-half-7,30);box(pole[0],16,pole[2],1.6,32,1.6,C.metal);box(pole[0],28,pole[2],8,9,1.3,'#b65043',stop.a);
       streetSign(pole[0],pole[2],35,'509  '+stop.place.toUpperCase(),'#9a4b43');
       const center=p(0,55),yaw=stop.a,corners=[[-24,-10],[24,-10],[24,10],[-24,10]].map(([a,b])=>({x:center[0]+dx*a+nx*b,y:center[2]+dz*a+nz*b}));
-      const clear=corners.every(q=>!root.TaxiEngine3D.isRoad(map,q.x,q.y)&&![...map.buildings,...(map.landmarkColliders||[])].some(b=>q.x>b.x-4&&q.x<b.x+b.w+4&&q.y>b.y-4&&q.y<b.y+b.h+4));
+      const clear=corners.every(q=>!roads.isRoad(map,q.x,q.y)&&![...map.buildings,...(map.landmarkColliders||[])].some(b=>q.x>b.x-4&&q.x<b.x+b.w+4&&q.y>b.y-4&&q.y<b.y+b.h+4));
       if(clear){
         box(center[0],24,center[2],46,2,18,C.ink,yaw);
         for(const along of [-21,21])for(const side of [-7,7]){const x=center[0]+dx*along+nx*side,z=center[2]+dz*along+nz*side;box(x,12,z,1.3,24,1.3,C.metal);}
@@ -387,13 +481,16 @@
     for(const [idx,text] of [[0,'QUEEN WEST'],[8,'ENTERTAINMENT DISTRICT'],[19,'ST. LAWRENCE'],[20,'HARBOURFRONT']]){
       const b=map.bays[idx];if(b)streetSign(b.x,b.roadY+194,35,text,'#52695f');
     }
-    streetSign(xs[0]+100,map.hy-91,34,'GARDINER EXPRESSWAY  →','#39756b');
-    streetSign(xs[lastX]-100,map.hy-91,34,'←  GARDINER EXPRESSWAY','#39756b');
+    streetSign(HX+400,map.hy-84,H+24,'GARDINER EXPRESSWAY  →','#39756b');
+    streetSign(HE-400,map.hy-84,H+24,'←  GARDINER EXPRESSWAY','#39756b');
     streetSign(map.w*.53,shore-12,25,'LAKE ONTARIO','#497d89');
+    for(let i=0;i<mesh.cull.length;i++)if(mesh.underRoad[i]!==1)mesh.underRoad[i]=0;
+    stats.underRoadTriangles=mesh.underRoad.reduce((sum,n)=>sum+n,0);
     stats.signs=signs.length;
     stats.vertices=mesh.data.length/6;
     stats.triangles=stats.vertices/3;
     stats.laneCenters=[-56,-20,20,56];
+    stats.highwayHeight=H;stats.highwayClearance=H-8;stats.rampLength=map.roadProfiles?map.roadProfiles.map(p=>p.total):[];
     return {mesh,signs,stats};
   }
   root.TaxiCity={build,enrich};

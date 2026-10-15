@@ -308,6 +308,8 @@
     label(ctx,state.doorsOpen?'OPEN':'DOOR',w*.638,h*.894,8*unit,state.doorsOpen?'#223e2c':'#c2d4ba','center');
     box(ctx,w*.433,h*.95,w*.15,h*.033,4*unit,'#213629','#657559',1);
     label(ctx,String(state.clock||'4:00 PM'),w*.508,h*.967,13*unit,'#dee5c7','center');
+    const cash=Math.floor(number(state.cash,0));
+    label(ctx,'NET '+(cash<0?'−$':'$')+Math.abs(cash).toLocaleString('en-CA'),w*.933,h*.974,12*unit,cash<0?'#efad91':'#d5dfbe','right',600);
     drawWheel(ctx,w,h,state);
   }
 
