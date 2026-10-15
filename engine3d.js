@@ -175,9 +175,13 @@ class Game{
    if(c.turn){
     target=Math.min(target,c.turnSign===0?kmhToSpeed(48):kmhToSpeed(18));const look=22+(this.car.length||44)/2+28+c.speed*.7+c.speed*c.speed/100;for(const o of [this.car,...this.traffic]){if(o===c||Math.abs((o.height||0)-(c.height||0))>10)continue;const rx=o.x-c.x,ry=o.y-c.y,along=rx*Math.cos(c.a)+ry*Math.sin(c.a),across=Math.abs(-rx*Math.sin(c.a)+ry*Math.cos(c.a));if(along>0&&along<look&&across<((c.width||22)+(o.width||22))/2+3)target=Math.min(target,this.followingSpeed(c,o,along,c.a,45));}
     if(this.turnConflictsWithPlayer(c,target))target=0;
-    c.speed+=clamp(target-c.speed,-65*dt,28*dt);c.turn.t+=c.speed*dt;const pos=samplePath(c.turn.path,c.turn.t);c.x=pos.x;c.y=pos.y;c.a=pos.a;if(c.turn.t>=c.turn.path.length){const oldTo=c.to;c.from=oldTo;c.to=c.next;c.t=JUNCTION_EXIT;c.turn=null;delete this.junctions[c.reserved];c.reserved=undefined;c.laneOffset=LANES[c.lane];this.planTraffic(c);}c.stopped=c.speed<3;continue;
+    c.speed+=clamp(target-c.speed,-65*dt,28*dt);const nextTurnT=c.turn.t+c.speed*dt,pos=samplePath(c.turn.path,nextTurnT);
+    // Keep emergency cut-ins from creating an overlap that pins the player.
+    // Ordinary following still brakes normally; only an unsafe final pose stops.
+    if(carHit({...c,...pos},this.car)){c.speed=0;c.stopped=true;continue;}
+    c.turn.t=nextTurnT;c.x=pos.x;c.y=pos.y;c.a=pos.a;if(c.turn.t>=c.turn.path.length){const oldTo=c.to;c.from=oldTo;c.to=c.next;c.t=JUNCTION_EXIT;c.turn=null;delete this.junctions[c.reserved];c.reserved=undefined;c.laneOffset=LANES[c.lane];this.planTraffic(c);}c.stopped=c.speed<3;continue;
    }
-   const n=m.nodes[c.from],to=m.nodes[c.to],L=dist(n,to),a=Math.atan2(to.y-n.y,to.x-n.x),left=L-c.t,stop=L-JUNCTION_ENTRY,s=signal(m,to,this.time),green=(Math.abs(to.x-n.x)>1?s.horizontal:s.vertical)==='green';
+   const oldT=c.t,oldLaneOffset=c.laneOffset,n=m.nodes[c.from],to=m.nodes[c.to],L=dist(n,to),a=Math.atan2(to.y-n.y,to.x-n.x),left=L-c.t,stop=L-JUNCTION_ENTRY,s=signal(m,to,this.time),green=(Math.abs(to.x-n.x)>1?s.horizontal:s.vertical)==='green';
    if(c.requiredLane!==c.lane&&left>160&&dist(this.car,lanePoint(n,to,c.t,c.requiredLane))>100&&!this.traffic.some(o=>o!==c&&o.kind==='street'&&o.from===c.from&&o.to===c.to&&o.lane===c.requiredLane&&Math.abs(o.t-c.t)<90)){c.lane=c.requiredLane;}
    if(c.requiredLane!==c.lane)target=Math.min(target,Math.max(0,(left-185)*.8));c.laneOffset+=(LANES[c.lane]-c.laneOffset)*Math.min(1,dt*1.8);
    const next=m.nodes[c.next],exitClear=!this.traffic.some(o=>o!==c&&o.kind==='street'&&o.from===c.to&&o.to===c.next&&o.lane===c.lane&&o.t<190),owner=this.junctions[c.to];
@@ -190,7 +194,9 @@ class Game{
    const look=22+(this.car.length||44)/2+30+c.speed*.8+c.speed*c.speed/100;for(const o of [this.car,...this.traffic]){if(o===c||Math.abs((o.height||0)-(c.height||0))>10)continue;const rx=o.x-c.x,ry=o.y-c.y,along=rx*Math.cos(a)+ry*Math.sin(a),across=Math.abs(-rx*Math.sin(a)+ry*Math.cos(a));if(along>0&&along<look&&across<((c.width||22)+(o.width||22))/2+3)target=Math.min(target,this.followingSpeed(c,o,along,a,45));}
    c.speed+=clamp(target-c.speed,-70*dt,28*dt);c.stopped=c.speed<3;let advance=c.speed*dt;if(c.reserved!==c.to&&c.t+advance>stop){advance=Math.max(0,stop-c.t);c.speed=0;}c.t+=advance;
    if(c.t>=stop&&c.reserved===c.to){c.t=stop;c.laneOffset=LANES[c.lane];c.turn={path:preparePath(curvePoints(n,to,next,c.lane,c.lane)),t:0};}
-   const pos=lanePoint(n,to,c.t,c.lane),delta=c.laneOffset-LANES[c.lane];c.x=pos.x-Math.sin(a)*delta;c.y=pos.y+Math.cos(a)*delta;c.a=a;
+   const pos=lanePoint(n,to,c.t,c.lane),delta=c.laneOffset-LANES[c.lane],nx=pos.x-Math.sin(a)*delta,ny=pos.y+Math.cos(a)*delta;
+   if(carHit({...c,x:nx,y:ny,a},this.car)){c.t=oldT;c.laneOffset=oldLaneOffset;c.turn=null;c.speed=0;c.stopped=true;c.stalled=(c.stalled||0)+dt;continue;}
+   c.x=nx;c.y=ny;c.a=a;
    c.stalled=c.speed<2?(c.stalled||0)+dt:0;
    // A blocked cab can hold a lane; off-screen recovery prevents a permanent traffic jam after a long obstruction.
    if(c.stalled>40&&dist(c,this.car)>900){const safeT=135,p=lanePoint(n,to,safeT,c.lane);if(!this.traffic.some(o=>o!==c&&dist(o,p)<95)){c.t=safeT;c.x=p.x;c.y=p.y;c.speed=20;c.stalled=0;if(c.reserved!==undefined){delete this.junctions[c.reserved];c.reserved=undefined;}}}
