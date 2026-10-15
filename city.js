@@ -39,7 +39,7 @@
     if (!root.Taxi3D || !root.Taxi3D.Mesh) throw new Error('TaxiCity requires Taxi3D.Mesh.');
     enrich(map);
     const mesh=new root.Taxi3D.Mesh(), signs=[], r=random((map.seed||8427)^0x51C170);
-    const stats={seed:map.seed||8427,buildings:0,skyscrapers:0,tallestBuilding:0,backgroundBuildings:0,trees:0,lamps:0,shelters:0,landmarks:0,roadSegments:0,crosswalks:0};
+    const stats={seed:map.seed||8427,busStops:0,buildings:0,skyscrapers:0,tallestBuilding:0,backgroundBuildings:0,trees:0,lamps:0,shelters:0,landmarks:0,roadSegments:0,crosswalks:0};
     const xs=map.xs, zs=map.ys, lastX=xs.length-1, lastZ=zs.length-1, RH=map.roadHalf||82, SH=map.sidewalkHalf||94;
     const shore=map.h-65;
     function rect(x,z,w,d,y,col) { if(w<=0||d<=0)return;mesh.quad([x,y,z],[x,y,z+d],[x+w,y,z+d],[x+w,y,z],col); }
@@ -354,6 +354,30 @@
       if((i+j)%4===0)shelter((xs[i]+xs[i+1])*.5,z-3);
     }
     for(let i=0;i<xs.length;i++)for(let j=0;j<zs.length-1;j++)lamp(xs[i]-89,(zs[j]+zs[j+1])*.5,0);
+    // Route stops are in forward curb lanes. Paint is flush with the road;
+    // poles stay behind the lane edge and shelters only occupy clear dry land.
+    for(const stop of map.busStops||[]){
+      const dx=Math.cos(stop.a),dz=Math.sin(stop.a),nx=-dz,nz=dx;
+      const p=(along,out,y=0)=>[stop.x+dx*along+nx*out,y,stop.y+dz*along+nz*out];
+      const half=(stop.length||132)/2;
+      function stopLine(a,b,c,d,width,col){const u=p(a,b,.09),v=p(c,d,.09);line(u[0],u[2],v[0],v[2],width,.09,col);}
+      stopLine(-half,-14,half,-14,1.7,'#e8c879');
+      for(const s of [-half,half])stopLine(s,-14,s,14,1.7,'#e8c879');
+      // A simple yellow bus pictogram reads without texture text or extra assets.
+      const plate=[p(-13,-6,.095),p(-13,6,.095),p(13,6,.095),p(13,-6,.095)];mesh.quad(...plate,'#e8c879');
+      mesh.quad(p(-9,-3,.1),p(-9,3,.1),p(7,3,.1),p(7,-3,.1),C.asphalt);
+      const pole=p(-half-7,30);box(pole[0],16,pole[2],1.6,32,1.6,C.metal);box(pole[0],28,pole[2],8,9,1.3,'#b65043',stop.a);
+      streetSign(pole[0],pole[2],35,'509  '+stop.place.toUpperCase(),'#9a4b43');
+      const center=p(0,55),yaw=stop.a,corners=[[-24,-10],[24,-10],[24,10],[-24,10]].map(([a,b])=>({x:center[0]+dx*a+nx*b,y:center[2]+dz*a+nz*b}));
+      const clear=corners.every(q=>!root.TaxiEngine3D.isRoad(map,q.x,q.y)&&![...map.buildings,...(map.landmarkColliders||[])].some(b=>q.x>b.x-4&&q.x<b.x+b.w+4&&q.y>b.y-4&&q.y<b.y+b.h+4));
+      if(clear){
+        box(center[0],24,center[2],46,2,18,C.ink,yaw);
+        for(const along of [-21,21])for(const side of [-7,7]){const x=center[0]+dx*along+nx*side,z=center[2]+dz*along+nz*side;box(x,12,z,1.3,24,1.3,C.metal);}
+        box(center[0]+nx*7,13,center[2]+nz*7,40,19,.8,'#8fb8bb',yaw);
+        bench(center[0],center[2],yaw);stats.shelters++;
+      }
+      stats.busStops++;
+    }
     // Street names at twelve alternating junctions; billboard labels are parent-rendered.
     for(const n of map.nodes){
       if((n.i+n.j)%3!==0)continue;

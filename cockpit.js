@@ -213,8 +213,9 @@
   }
 
   function drawWheel(ctx, w, h, state) {
-    const r = Math.min(h * 0.132, w * 0.174);
-    const cx = w * 0.268, cy = h * 0.852;
+    const bus=state.vehicleType==='bus';
+    const r = Math.min(h * (bus?.146:.132), w * .174);
+    const cx = w * (bus?.248:.268), cy = h * (bus?.85:.852);
     const angle = clamp(number(state.steer, 0), -1, 1) * (100 * Math.PI / 180);
     const cosine = Math.cos(angle), sine = Math.sin(angle);
     // Forearms remain attached to the seated driver. Only the grips and wheel rotate.
@@ -260,6 +261,56 @@
     ctx.restore();
   }
 
+  function drawBusCockpit(ctx,w,h,state,rear){
+    const unit=Math.min(w/1280,h/720);
+    if(rear){
+      // A bus has a passenger cabin behind the driver, so the rear glance shows its aisle.
+      ctx.fillStyle='#9faaa3';ctx.fillRect(0,0,w,h);
+      polygon(ctx,[[w*.12,h],[w*.44,h*.26],[w*.56,h*.26],[w*.88,h]],'#414e49');
+      polygon(ctx,[[0,0],[w,0],[w*.67,h*.24],[w*.33,h*.24]],'#e3e3d1');
+      box(ctx,w*.39,h*.15,w*.22,h*.21,h*.015,'#8ba9ad','#586f6c',4*unit);
+      for(let i=4;i>=0;i--){
+        const t=i/5,ys=h*(.38+(1-t)*.52),scale=1-t*.7,ww=w*.14*scale,hh=h*.19*scale;
+        for(const side of [-1,1]){
+          const xx=w*.5+side*w*(.1+(1-t)*.20)-ww/2;
+          box(ctx,xx,ys-hh,ww,hh,8*unit*scale,'#456a74','#244852',3*unit*scale);
+          box(ctx,xx+ww*.09,ys-hh*.89,ww*.82,hh*.58,5*unit*scale,'#668891');
+          polygon(ctx,[[xx,ys],[xx+ww,ys],[xx+ww*1.09,ys+hh*.27],[xx-ww*.09,ys+hh*.27]],'#4c737b');
+        }
+      }
+      for(const side of [-1,1]){
+        ctx.beginPath();ctx.moveTo(w*(side<0?.24:.76),h);ctx.lineTo(w*(side<0?.41:.59),h*.22);ctx.strokeStyle='#d0b259';ctx.lineWidth=7*unit;ctx.stroke();
+      }
+      label(ctx,'PASSENGER CABIN',w*.5,h*.95,12*unit,'#eef0d9','center',700);
+      return;
+    }
+    // Broad upright windshield, low flat cowl and a driver console: no taxi bonnet.
+    ctx.fillStyle='#253831';ctx.fillRect(0,0,w,h*.017);
+    polygon(ctx,[[0,0],[w*.024,0],[w*.025,h*.80],[0,h]],'#47534a');
+    polygon(ctx,[[w,0],[w*.978,0],[w*.954,h*.80],[w,h]],'#47534a');
+    ctx.beginPath();ctx.moveTo(w*.52,0);ctx.lineTo(w*.51,h*.752);ctx.strokeStyle='#34483e';ctx.lineWidth=Math.max(3,w*.005);ctx.stroke();
+    ctx.beginPath();ctx.moveTo(0,h*.758);ctx.quadraticCurveTo(w*.42,h*.78,w,h*.76);ctx.lineTo(w,h);ctx.lineTo(0,h);ctx.closePath();ctx.fillStyle='#37413a';ctx.fill();
+    ctx.beginPath();ctx.moveTo(0,h*.76);ctx.quadraticCurveTo(w*.46,h*.784,w,h*.764);ctx.strokeStyle='#6d796a';ctx.lineWidth=h*.018;ctx.stroke();
+    // Rubber demister grille and small switches remain below the driver's road sightline.
+    for(let x=.04;x<.92;x+=.023){ctx.fillStyle='#202e28';ctx.fillRect(w*x,h*.786,w*.013,h*.009);}
+    box(ctx,w*.393,h*.81,w*.205,h*.108,8*unit,'#152c24','#6e7e67',2*unit);
+    label(ctx,String(Math.round(Math.abs(number(state.speed,0))*.9)).padStart(2,'0'),w*.456,h*.856,31*unit,'#e4ead0','center',700);
+    label(ctx,'km/h',w*.504,h*.863,10*unit,'#aabcaa','left',500);
+    label(ctx,state.reverse?'R':'D',w*.556,h*.851,18*unit,state.reverse?'#ecc184':'#d6e5c4','center',700);
+    label(ctx,'BUS',w*.415,h*.899,8*unit,'#b7c6ae');
+    box(ctx,w*.455,h*.895,w*.111,h*.006,2*unit,'#425640');
+    box(ctx,w*.455,h*.895,w*.111*clamp(number(state.health,100)/100,0,1),h*.006,2*unit,'#acc280');
+    box(ctx,w*.685,h*.814,w*.267,h*.128,5*unit,'#12291f','#63755e',2*unit);
+    label(ctx,(state.routeId||'509')+'  HARBOUR LOOP',w*.706,h*.841,11*unit,'#e8d190');
+    label(ctx,number(state.passengers,0)+' / '+number(state.capacity,36)+' RIDERS',w*.706,h*.881,19*unit,'#e2ebcf');
+    label(ctx,number(state.stops,0)+' STOPS · LAP '+(number(state.laps,0)+1),w*.706,h*.916,9*unit,'#b9caae');
+    box(ctx,w*.616,h*.862,w*.045,h*.064,4*unit,state.doorsOpen?'#b8cd86':'#354d3c','#829272',1);
+    label(ctx,state.doorsOpen?'OPEN':'DOOR',w*.638,h*.894,8*unit,state.doorsOpen?'#223e2c':'#c2d4ba','center');
+    box(ctx,w*.433,h*.95,w*.15,h*.033,4*unit,'#213629','#657559',1);
+    label(ctx,String(state.clock||'4:00 PM'),w*.508,h*.967,13*unit,'#dee5c7','center');
+    drawWheel(ctx,w,h,state);
+  }
+
   function draw(ctx, width, height, state) {
     const w = number(width, 0), h = number(height, 0);
     if (!ctx || w <= 0 || h <= 0) return { mirror: null };
@@ -270,7 +321,8 @@
     ctx.globalCompositeOperation = 'source-over';
     ctx.lineJoin = 'round';
     ctx.lineCap = 'round';
-    if(Math.abs(number(state.look,0))>.8&&!rear){drawSideWindow(ctx,w,h,state);ctx.restore();return {mirror:null};}
+    if(Math.abs(number(state.look,0))>.8&&!rear){drawSideWindow(ctx,w,h,state);if(state.vehicleType==='bus'){ctx.beginPath();ctx.moveTo(w*.89,0);ctx.lineTo(w*.89,h*.94);ctx.strokeStyle='#c5ac5d';ctx.lineWidth=Math.max(3,w*.007);ctx.stroke();}ctx.restore();return {mirror:null};}
+    if(state.vehicleType==='bus'){drawBusCockpit(ctx,w,h,state,rear);const mirror=rear?null:drawMirror(ctx,w,h);ctx.restore();return {mirror};}
     drawPillars(ctx, w, h);
     if (!rear) drawHood(ctx, w, h);
     drawDashboard(ctx, w, h, state, rear);

@@ -1,13 +1,23 @@
-# Toronto Taxi · Driver’s Seat
+# Toronto Taxi: Driver’s Seat
 
-Play at https://greenkeewi.github.io/taxi/ . The original 2D game remains at https://greenkeewi.github.io/night-shift-taxi/ .
+A lightweight, keyboard-driven 3D Toronto-inspired driving game.
 
-A static first-person taxi game with Toronto-inspired 3D streets, taller buildings, modeled vehicles, denser nearby traffic, cockpit steering and animated hands. No installation, backend, dependencies or account is needed.
+Play at https://greenkeewi.github.io/taxi/ once GitHub Pages is enabled.
 
-Enter starts; arrows/WASD drive; Space brakes; S/down brakes then reverses; Shift gives precise parking control. Q/E look sideways; C looks behind. Esc/P pauses; Tab shows the map; F1 opens help; H sounds the horn; M toggles sound; L toggles low power. Title-screen menus select time and traffic.
+This independent version preserves the original 2D game at https://greenkeewi.github.io/night-shift-taxi/.
 
-WebGL is the primary renderer. Browsers without it use a perspective-projected software 3D fallback. The cloud-browser environment disables WebGL, so native GPU visuals are not yet verified.
+## Controls
 
-The taxi-depth-5b source passed 17 runtime, 14 engine, 4 traffic and 12 audio checks. The unchanged original 2D game passed 33 regressions. A physical-input first fare with normal dense traffic completed for $79 and full health, without collisions, red-light fines or missed fares. These are automated checks, not a retention study or an old-hardware benchmark.
+- Enter to start; arrow keys navigate menus.
+- WASD or arrow keys drive. Down/S brakes, then reverses. Space is the handbrake.
+- Q/E look through the side windows.
+- Escape pauses; F1 opens help.
+- Choose a taxi or bus, time of day, and traffic level from the keyboard menu.
 
-Serve this folder with any static web server. All gameplay assets are generated in code.
+## Build
+
+Static HTML, CSS, and JavaScript; no backend, dependencies, or build step. Version: transit-6.
+
+The city and vehicles use 3D world geometry. The primary renderer uses WebGL, with a bounded perspective software renderer when WebGL is unavailable. Native WebGL visuals have not yet been verified in the cloud test browser, which disables WebGL.
+
+The transit update has passed integration, physical-input taxi fare, full bus-loop, and Canvas screenshot checks. Public browser gameplay and final presentation checks remain pending until Pages is enabled.
