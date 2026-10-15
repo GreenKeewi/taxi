@@ -8,6 +8,9 @@ const PLACES=['Queen West Records','Graffiti Alley Café','Queen Street Books','
 const STREETS=['Queen Street West','Richmond Street West','King Street West','Front Street West','Queens Quay West','Lake Shore Boulevard','Harbour Street'];
 const AVENUES=['Bathurst Street','Spadina Avenue','Blue Jays Way','Simcoe Street','York Street','Bay Street','Yonge Street','Church Street'];
 const START_MINUTES=16*60+15;
+// World geometry uses ten units per metre: a 44-unit taxi is 4.4 m long.
+const UNITS_PER_METRE=10,PHYSICS_STEP=1/120,MAX_FRAME_DT=.1;
+const speedToKmh=speed=>speed/UNITS_PER_METRE*3.6,kmhToSpeed=kmh=>kmh/3.6*UNITS_PER_METRE;
 const ROAD_HALF=82,SIDEWALK_HALF=94,LANES=[20,56],JUNCTION_ENTRY=118,JUNCTION_EXIT=118;
 function lanePoint(a,b,t,lane=1){const angle=Math.atan2(b.y-a.y,b.x-a.x),offset=LANES[lane];return{x:a.x+Math.cos(angle)*t-Math.sin(angle)*offset,y:a.y+Math.sin(angle)*t+Math.cos(angle)*offset};}
 function nodeNeighbors(map,n){return [[n.i-1,n.j],[n.i+1,n.j],[n.i,n.j-1],[n.i,n.j+1]].filter(([i,j])=>i>=0&&i<map.xs.length&&j>=0&&j<map.ys.length).map(([i,j])=>map.nodes[j*map.xs.length+i]);}
@@ -87,6 +90,9 @@ function roadRoute(map,from,to){
  return points;
 }
 function route(map,from,to){if(!hasSurfaceNavigation(map,from))return roadRoute(map,from,to);
+ if(Roads&&Roads.surfaceRouteToGrid&&from.y>map.ys[map.ys.length-1]+(map.roadHalf||82)){
+  const prefix=Roads.surfaceRouteToGrid(map,from,to);if(prefix&&prefix.length>1){const last=prefix[prefix.length-1];if(last.y<=map.ys[map.ys.length-1]+(map.roadHalf||82))return prefix.concat(route(map,last,to).filter((q,i)=>i>0||dist(q,last)>.5));}
+ }
  if(to.type==='bus'){const dx=from.x-to.x,dy=from.y-to.y,along=dx*Math.cos(to.a)+dy*Math.sin(to.a),across=-dx*Math.sin(to.a)+dy*Math.cos(to.a);if(along>=-130&&along<=22&&Math.abs(across)<28&&(!Number.isFinite(from.a)||Math.abs(angleDiff(from.a,to.a))<.60)){const stopAlong=Math.max(0,along);return[{x:from.x,y:from.y},{x:to.x+Math.cos(to.a)*stopAlong,y:to.y+Math.sin(to.a)*stopAlong}];}}
 
  const cols=map.xs.length,targetRow=to.row===undefined?map.ys.reduce((best,y,j)=>Math.abs(y-to.y)<Math.abs(map.ys[best]-to.y)?j:best,0):to.row,targetCol=to.col===undefined?clamp(map.xs.findIndex(x=>x>to.x)-1,0,cols-2):to.col,goalFrom=to.edgeFrom===undefined?targetRow*cols+targetCol:to.edgeFrom,goalTo=to.edgeTo===undefined?goalFrom+1:to.edgeTo,goalA=map.nodes[goalFrom],goalB=map.nodes[goalTo],goalAngle=Math.atan2(goalB.y-goalA.y,goalB.x-goalA.x),goalAccess=(to.x-goalA.x)*Math.cos(goalAngle)+(to.y-goalA.y)*Math.sin(goalAngle);
@@ -111,12 +117,25 @@ function rushHour(time,startMinutes=START_MINUTES){const minute=(startMinutes+ti
 const TRAFFIC_PRESETS={light:{initial:16,min:16,max:16},normal:{initial:48,min:48,max:48},rush:{initial:60,min:60,max:60},gridlock:{initial:64,min:64,max:64}};
 function trafficLimit(time,difficulty,preset='normal',startMinutes=START_MINUTES){const p=TRAFFIC_PRESETS[preset]||TRAFFIC_PRESETS.normal;return Math.min(p.max,p.min+Math.floor(Math.max(0,difficulty-1)*.8)+Math.round(rushHour(time,startMinutes)*(p.max-p.min)));}
 function carHit(a,b){if(Math.abs((a.height||0)-(b.height||0))>10)return false;const al=(a.length||44)/2,aw=(a.width||22)/2,bl=(b.length||44)/2,bw=(b.width||22)/2,dx=b.x-a.x,dy=b.y-a.y;if(Math.abs(dx)>al+aw+bl+bw||Math.abs(dy)>al+aw+bl+bw)return false;for(const q of [a.a,a.a+PI/2,b.a,b.a+PI/2]){const d=Math.abs(dx*Math.cos(q)+dy*Math.sin(q)),ra=al*Math.abs(Math.cos(a.a-q))+aw*Math.abs(Math.sin(a.a-q)),rb=bl*Math.abs(Math.cos(b.a-q))+bw*Math.abs(Math.sin(b.a-q));if(d>=ra+rb)return false;}return true;}
-function buildingHit(car,b){return carHit(car,{x:b.x+b.w/2,y:b.y+b.h/2,a:0,length:b.w,width:b.h,height:b.height||0});}
-const VEHICLES={taxi:{length:44,width:22,acceleration:100,braking:225,reverseAcceleration:80,maxStreet:67,maxHighway:125,reverseSpeed:52,turnBase:32,turnSpeed:.40},bus:{length:82,width:25,acceleration:57,braking:145,reverseAcceleration:42,maxStreet:61,maxHighway:95,reverseSpeed:26,turnBase:60,turnSpeed:.22}};
+function buildingHit(car,b){
+ const base=car.height||0,roof=base+(car.kind==='bus'?32:15);
+ if(Number.isFinite(b.minHeight)||Number.isFinite(b.maxHeight)){
+  if(base>=(Number.isFinite(b.maxHeight)?b.maxHeight:Infinity)||roof<=(Number.isFinite(b.minHeight)?b.minHeight:-Infinity))return false;
+  return carHit(car,{x:b.x+b.w/2,y:b.y+b.h/2,a:0,length:b.w,width:b.h,height:base});
+ }
+ return carHit(car,{x:b.x+b.w/2,y:b.y+b.h/2,a:0,length:b.w,width:b.h,height:b.height||0});
+}
+const VEHICLES={
+ taxi:{length:44,width:22,wheelbase:27,acceleration:34,braking:72,reverseAcceleration:18,maxStreet:kmhToSpeed(60),maxHighway:kmhToSpeed(120),reverseSpeed:kmhToSpeed(14),turnBase:32,turnSpeed:.40,grip:6.3,yawResponse:.10},
+ bus:{length:82,width:25,wheelbase:49,acceleration:21,braking:54,reverseAcceleration:12,maxStreet:kmhToSpeed(55),maxHighway:kmhToSpeed(95),reverseSpeed:kmhToSpeed(9),turnBase:60,turnSpeed:.22,grip:4.2,yawResponse:.13}
+};
+function approach(value,target,amount){return value+clamp(target-value,-amount,amount);}
+function damp(value,target,dt,response){return value+(target-value)*(1-Math.exp(-dt/response));}
+
 class Game{
  constructor(seed=8427,options={}){this.seed=seed;this.options={...options};this.vehicleType=options.vehicle==='bus'?'bus':'taxi';this.vehicle=VEHICLES[this.vehicleType];this.startMinutes=Number.isFinite(options.startMinutes)?((options.startMinutes%1440)+1440)%1440:START_MINUTES;this.trafficPreset=Object.hasOwn(TRAFFIC_PRESETS,options.traffic)?options.traffic:'normal';this.map=makeMap(seed);this.rand=rng(seed^9384);this.reset();}
  reset(){this.time=0;this.completed=0;this.cash=0;this.health=100;this.reputation=3;this.combo=0;this.penalties=0;this.mode='title';this.events=[];this.traffic=[];this.trafficId=0;this.junctions={};this.collisionCooldown=0;this.signalCooldown={};this.redStopState={};this.pendingRightTurns=[];this.parkHold=0;this.reverseMeters=0;this.lastTarget=-1;this.lastDrive='forward';this.difficulty=1;this.stats={collisions:0,redLights:0,rightOnRed:0,pickups:0,deliveries:0,missed:0};const b=this.vehicleType==='bus'?this.map.busStops[0]:this.map.bays[11];this.car={x:b.x-180,y:this.vehicleType==='bus'?b.y-9:b.roadY+56,a:0,speed:0,steer:0,kind:this.vehicleType,length:this.vehicle.length,width:this.vehicle.width};if(this.vehicleType==='bus'){const from=this.map.nodes[b.edgeFrom],to=this.map.nodes[b.edgeTo],along=(b.x-from.x)*Math.cos(b.a)+(b.y-from.y)*Math.sin(b.a),spawn=lanePoint(from,to,Math.max(134,along-100),1);this.car.x=spawn.x;this.car.y=spawn.y;this.car.a=b.a;this.resetBus();}else{this.bus=null;this.newJob(true);}this.sampleCarRoad();for(let attempts=0;this.traffic.length<TRAFFIC_PRESETS[this.trafficPreset].initial&&attempts<1500;attempts++)this.spawnTraffic();}
- sampleCarRoad(){const c=this.car;if(Roads&&Roads.sampleRoad){const sample=Roads.sampleRoad(this.map,c.x,c.y,c.roadSample);c.roadSample=sample;c.height=sample.height;c.roadLayer=sample.layer;c.roadPitch=Math.atan(sample.gradient.x*Math.cos(c.a)+sample.gradient.z*Math.sin(c.a));}else{c.height=0;c.roadPitch=0;c.roadLayer='ground';}}
+ sampleCarRoad(){const c=this.car;c.speedKmh=Math.abs(speedToKmh(c.speed));c.forwardSpeedKmh=speedToKmh(c.speed);for(const key of ['lateralAccelerationMps2','longitudinalAccelerationMps2','yawRate','steerAngle','engineLoad','tireSlip'])if(!Number.isFinite(c[key]))c[key]=0;if(!Number.isFinite(c.engineRpm))c.engineRpm=this.vehicleType==='bus'?650:780;if(!Number.isFinite(c.gear))c.gear=1;if(Roads&&Roads.sampleRoad){const sample=Roads.sampleRoad(this.map,c.x,c.y,c.roadSample);c.roadSample=sample;c.height=sample.height;c.roadLayer=sample.layer;c.roadPitch=Math.atan(sample.gradient.x*Math.cos(c.a)+sample.gradient.z*Math.sin(c.a));}else{c.height=0;c.roadPitch=0;c.roadLayer='ground';}}
  start(){this.mode='playing';if(this.vehicleType==='bus')this.note('ROUTE 509 IN SERVICE','Pull forward into the marked curb stop. Hold still while passengers board.','good');else this.note('DISPATCH ONLINE','First fare is just ahead. Pull into the glowing bay.','good');}
  setVehicle(vehicle){this.vehicleType=vehicle==='bus'?'bus':'taxi';this.vehicle=VEHICLES[this.vehicleType];this.reset();}
  note(title,text,tone='info'){this.events.unshift({title,text,tone,time:this.time});this.events=this.events.slice(0,5);}
@@ -125,19 +144,38 @@ class Game{
  newBusStop(first=false){const b=this.target(),seconds=first?170:Math.max(160,dist(this.car,b)/28+100);this.job={stage:'bus',pickup:b,dropoff:b,person:'Route '+this.bus.routeId,fare:0,timeLeft:seconds,total:seconds};this.parkHold=0;this.bus.approachMeters=0;this.bus.doorsOpen=false;this.lastTarget=b.id;}
  completeBusStop(){const b=this.bus,stop=this.target(),alighted=Math.min(b.passengers,b.completedStops===0?0:2+Math.floor(this.rand()*7)),waiting=stop.waiting+Math.floor(this.rand()*4),boarded=Math.min(waiting,b.capacity-b.passengers+alighted);b.passengers+=boarded-alighted;b.boarded+=boarded;b.alighted+=alighted;b.completedStops++;this.completed=b.completedStops;this.stats.pickups+=boarded;this.stats.deliveries+=alighted;this.cash+=boarded*3;this.health=Math.min(100,this.health+3);b.stopIndex++;if(b.stopIndex>=b.stops.length){b.stopIndex=0;b.laps++;this.cash+=25;this.note('ROUTE LAP COMPLETE · +$25',b.completedStops+' stops served. Continue the Harbour Loop.','good');}else this.note('STOP SERVED · +$'+boarded*3,boarded+' boarded · '+alighted+' alighted · '+b.passengers+' on board.','good');this.newBusStop();}
  newJob(first=false){const m=this.map;let pick=first?m.bays[11]:m.bays[Math.floor(this.rand()*m.bays.length)];if(!first&&pick.id===this.lastTarget)pick=m.bays[(pick.id+7)%m.bays.length];let choices=m.bays.filter(b=>dist(b,pick)>600);let drop=first?m.bays[17]:choices[Math.floor(this.rand()*choices.length)];this.job={stage:'pickup',pickup:pick,dropoff:drop,person:PEOPLE[Math.floor(this.rand()*PEOPLE.length)],fare:Math.round(28+dist(pick,drop)*.045),timeLeft:first?105:Math.max(55,dist(this.car,pick)/45+45-this.difficulty*1.2),total:0};this.job.total=this.job.timeLeft;this.parkHold=0;this.reverseMeters=0;this.lastTarget=pick.id;}
- spawnTraffic(){const m=this.map,r=this.rand;if(this.traffic.length>=64)return;if(this.trafficId%5===4){const dir=r()<.5?1:-1,lane=r()<.5?0:1,highwayStart=(m.highwayStart||90)+20,highwayEnd=(m.highwayEnd||m.w-90)-20,x=highwayStart+r()*(highwayEnd-highwayStart),y=m.hy+dir*(lane?53:26);if(dist({x,y},this.car)<110||this.traffic.some(o=>Math.abs(o.x-x)<75&&Math.abs(o.y-y)<23))return;this.traffic.push({id:this.trafficId++,kind:'highway',height:m.highwayHeight||0,x,y,a:dir===1?0:PI,speed:85+r()*35,desired:100+r()*40,dir,lane,color:['#bd7766','#8dbbb5','#b9a7c1','#d4bd81'][Math.floor(r()*4)],merge:null});return;}
- const n=m.nodes[Math.floor(r()*m.nodes.length)],ne=this.neighbors(n),to=ne[Math.floor(r()*ne.length)],L=dist(n,to),u=135+r()*(L-270),a=Math.atan2(to.y-n.y,to.x-n.x),c={id:this.trafficId,kind:'street',height:0,from:n.id,to:to.id,t:u,lane:r()<.5?0:1,a,speed:35+r()*20,desired:50+r()*17,color:['#b98474','#7899b3','#bdc6bd','#a799b6','#639890'][Math.floor(r()*5)],stopped:false};this.planTraffic(c);c.lane=c.requiredLane;c.laneOffset=LANES[c.lane];Object.assign(c,lanePoint(n,to,u,c.lane));if(dist(c,this.car)<170||this.traffic.some(o=>dist(c,o)<70))return;this.trafficId++;this.traffic.push(c);}
+ spawnTraffic(){const m=this.map,r=this.rand;if(this.traffic.length>=64)return;if(this.trafficId%5===4){const dir=r()<.5?1:-1,lane=r()<.5?0:1,highwayStart=(m.highwayStart||90)+20,highwayEnd=(m.highwayEnd||m.w-90)-20,x=highwayStart+r()*(highwayEnd-highwayStart),y=m.hy+dir*(lane?53:26);if(dist({x,y},this.car)<110||this.traffic.some(o=>Math.abs(o.x-x)<75&&Math.abs(o.y-y)<23))return;this.traffic.push({id:this.trafficId++,kind:'highway',height:m.highwayHeight||0,x,y,a:dir===1?0:PI,speed:kmhToSpeed(78+r()*27),desired:kmhToSpeed(90+r()*30),dir,lane,color:['#bd7766','#8dbbb5','#b9a7c1','#d4bd81'][Math.floor(r()*4)],merge:null});return;}
+ const n=m.nodes[Math.floor(r()*m.nodes.length)],ne=this.neighbors(n),to=ne[Math.floor(r()*ne.length)],L=dist(n,to),u=135+r()*(L-270),a=Math.atan2(to.y-n.y,to.x-n.x),c={id:this.trafficId,kind:'street',height:0,from:n.id,to:to.id,t:u,lane:r()<.5?0:1,a,speed:kmhToSpeed(31+r()*18),desired:kmhToSpeed(45+r()*15),color:['#b98474','#7899b3','#bdc6bd','#a799b6','#639890'][Math.floor(r()*5)],stopped:false};this.planTraffic(c);c.lane=c.requiredLane;c.laneOffset=LANES[c.lane];Object.assign(c,lanePoint(n,to,u,c.lane));if(dist(c,this.car)<170||this.traffic.some(o=>dist(c,o)<70))return;this.trafficId++;this.traffic.push(c);}
  neighbors(n){return nodeNeighbors(this.map,n);}
  planTraffic(c){const m=this.map,a=m.nodes[c.from],n=m.nodes[c.to],options=this.neighbors(n).filter(b=>b.id!==a.id),compatible=options.filter(b=>{const turn=turnKind(a,n,b);return !turn||(turn<0?0:1)===c.lane;}),pool=compatible.length?compatible:options,straight=pool.find(b=>turnKind(a,n,b)===0),next=straight&&this.rand()<.56?straight:pool[Math.floor(this.rand()*pool.length)];c.next=next.id;c.turnSign=turnKind(a,n,next);c.requiredLane=c.turnSign===0?c.lane:c.turnSign<0?0:1;}
+ followingSpeed(c,o,along,heading,braking){
+  const gap=Math.max(0,along-(22+(o.length||44)/2+12));
+  const lead=Math.max(0,(o.speed||0)*Math.cos(angleDiff(o.a,heading)));
+  const brakingTarget=Math.sqrt(lead*lead+2*braking*Math.max(0,gap-c.speed*.35));
+  return Math.min(gap*1.25,brakingTarget);
+ }
+ turnConflictsWithPlayer(c,target){
+  const player=this.car;if(!c.turn||Math.abs((c.height||0)-(player.height||0))>10||dist(c,player)>230)return false;
+  // A left-turning driver yields to the whole approaching vehicle, including
+  // a long bus body. Centre-line following alone could cut across its rear.
+  for(let ahead=.2;ahead<=1.6;ahead+=.2){
+   const p=samplePath(c.turn.path,Math.min(c.turn.path.length,c.turn.t+Math.max(c.speed,target)*ahead));
+   const other={...c,...p,length:52,width:28};
+   const predicted={...player,x:player.x+Math.cos(player.a)*player.speed*ahead,y:player.y+Math.sin(player.a)*player.speed*ahead,length:player.length+8,width:player.width+6};
+   if(carHit(other,predicted))return true;
+  }
+  return false;
+ }
  updateTraffic(dt){const m=this.map,rush=rushHour(this.time,this.startMinutes);for(const id in this.junctions)if(!this.traffic.some(c=>c.id===this.junctions[id]&&c.reserved===+id))delete this.junctions[id];
   for(const c of this.traffic){c.height=c.kind==='highway'?(m.highwayHeight||0):0;if(c.kind==='highway'){
    if(!c.merge&&this.rand()<dt*.035){const lane=1-c.lane,targetY=m.hy+c.dir*(lane?53:26);if(!this.traffic.some(o=>o!==c&&o.kind==='highway'&&Math.abs(o.x-c.x)<120+rush*70&&Math.abs(o.y-targetY)<23)&&!(Math.abs(this.car.x-c.x)<130+(this.car.length||44)/2&&Math.abs(this.car.y-targetY)<45&&Math.abs((this.car.height||0)-(m.highwayHeight||0))<10)){c.lane=lane;c.merge=targetY;}}
-   const want=m.hy+c.dir*(c.lane?53:26);c.y+=(want-c.y)*Math.min(1,dt*1.2);if(Math.abs(c.y-want)<1)c.merge=null;let desired=c.desired*(1+Math.min(.28,this.difficulty*.015))*(1-rush*.33);for(const o of [...this.traffic,this.car]){const ahead=(o.x-c.x)*c.dir;if(o!==c&&Math.abs(o.y-c.y)<24&&ahead>0&&ahead<130)desired=Math.min(desired,Math.max(0,(ahead-(22+(o.length||44)/2+9))*1.25));}c.speed+=clamp(desired-c.speed,-110*dt,45*dt);const nx=c.x+c.dir*c.speed*dt,wrapX=c.dir===1?(m.highwayStart||90)+5:(m.highwayEnd||m.w-90)-5;if(nx>(m.highwayEnd||m.w-90)||nx<(m.highwayStart||90)){if(!this.traffic.some(o=>o!==c&&Math.abs(o.x-wrapX)<90&&Math.abs(o.y-c.y)<24)&&Math.hypot(this.car.x-wrapX,this.car.y-c.y)>90)c.x=wrapX;else c.speed=0;}else c.x=nx;continue;}
+   const want=m.hy+c.dir*(c.lane?53:26);c.y+=(want-c.y)*Math.min(1,dt*1.2);if(Math.abs(c.y-want)<1)c.merge=null;let desired=c.desired*(1+Math.min(.28,this.difficulty*.015))*(1-rush*.33);for(const o of [...this.traffic,this.car]){const ahead=(o.x-c.x)*c.dir;if(o!==c&&Math.abs((o.height||0)-(c.height||0))<=10&&Math.abs(o.y-c.y)<24&&ahead>0&&ahead<Math.max(180,c.speed*1.3+c.speed*c.speed/110))desired=Math.min(desired,this.followingSpeed(c,o,ahead,c.a,55));}c.speed+=clamp(desired-c.speed,-75*dt,30*dt);const nx=c.x+c.dir*c.speed*dt,wrapX=c.dir===1?(m.highwayStart||90)+5:(m.highwayEnd||m.w-90)-5;if(nx>(m.highwayEnd||m.w-90)||nx<(m.highwayStart||90)){if(!this.traffic.some(o=>o!==c&&Math.abs(o.x-wrapX)<90&&Math.abs(o.y-c.y)<24)&&Math.hypot(this.car.x-wrapX,this.car.y-c.y)>90)c.x=wrapX;else c.speed=0;}else if(Math.abs((c.height||0)-(this.car.height||0))<=10&&carHit({...c,x:nx},this.car))c.speed=0;else c.x=nx;continue;}
    if(c.lane===undefined)c.lane=0;if(c.laneOffset===undefined)c.laneOffset=LANES[c.lane];if(c.next===undefined)this.planTraffic(c);
-   let target=Math.min(67,c.desired*(1+Math.min(.3,this.difficulty*.015))*(1-rush*.2));
+   let target=Math.min(kmhToSpeed(60),c.desired*(1+Math.min(.3,this.difficulty*.015))*(1-rush*.2));
    if(c.turn){
-    target=Math.min(target,c.turnSign===0?62:42);const look=22+(this.car.length||44)/2+28+c.speed*.7;for(const o of [this.car,...this.traffic]){if(o===c)continue;const rx=o.x-c.x,ry=o.y-c.y,along=rx*Math.cos(c.a)+ry*Math.sin(c.a),across=Math.abs(-rx*Math.sin(c.a)+ry*Math.cos(c.a));if(along>0&&along<look&&across<23)target=Math.min(target,Math.max(0,(along-(22+(o.length||44)/2+8))*1.4));}
-    c.speed+=clamp(target-c.speed,-100*dt,40*dt);c.turn.t+=c.speed*dt;const pos=samplePath(c.turn.path,c.turn.t);c.x=pos.x;c.y=pos.y;c.a=pos.a;if(c.turn.t>=c.turn.path.length){const oldTo=c.to;c.from=oldTo;c.to=c.next;c.t=JUNCTION_EXIT;c.turn=null;delete this.junctions[c.reserved];c.reserved=undefined;c.laneOffset=LANES[c.lane];this.planTraffic(c);}c.stopped=c.speed<3;continue;
+    target=Math.min(target,c.turnSign===0?kmhToSpeed(48):kmhToSpeed(18));const look=22+(this.car.length||44)/2+28+c.speed*.7+c.speed*c.speed/100;for(const o of [this.car,...this.traffic]){if(o===c||Math.abs((o.height||0)-(c.height||0))>10)continue;const rx=o.x-c.x,ry=o.y-c.y,along=rx*Math.cos(c.a)+ry*Math.sin(c.a),across=Math.abs(-rx*Math.sin(c.a)+ry*Math.cos(c.a));if(along>0&&along<look&&across<((c.width||22)+(o.width||22))/2+3)target=Math.min(target,this.followingSpeed(c,o,along,c.a,45));}
+    if(this.turnConflictsWithPlayer(c,target))target=0;
+    c.speed+=clamp(target-c.speed,-65*dt,28*dt);c.turn.t+=c.speed*dt;const pos=samplePath(c.turn.path,c.turn.t);c.x=pos.x;c.y=pos.y;c.a=pos.a;if(c.turn.t>=c.turn.path.length){const oldTo=c.to;c.from=oldTo;c.to=c.next;c.t=JUNCTION_EXIT;c.turn=null;delete this.junctions[c.reserved];c.reserved=undefined;c.laneOffset=LANES[c.lane];this.planTraffic(c);}c.stopped=c.speed<3;continue;
    }
    const n=m.nodes[c.from],to=m.nodes[c.to],L=dist(n,to),a=Math.atan2(to.y-n.y,to.x-n.x),left=L-c.t,stop=L-JUNCTION_ENTRY,s=signal(m,to,this.time),green=(Math.abs(to.x-n.x)>1?s.horizontal:s.vertical)==='green';
    if(c.requiredLane!==c.lane&&left>160&&dist(this.car,lanePoint(n,to,c.t,c.requiredLane))>100&&!this.traffic.some(o=>o!==c&&o.kind==='street'&&o.from===c.from&&o.to===c.to&&o.lane===c.requiredLane&&Math.abs(o.t-c.t)<90)){c.lane=c.requiredLane;}
@@ -148,9 +186,9 @@ class Game{
     this.junctions[c.to]=c.id;c.reserved=c.to;
    }
    if(c.reserved===c.to&&!green){delete this.junctions[c.to];c.reserved=undefined;}
-   if(c.reserved!==c.to)target=Math.min(target,Math.max(0,(stop-c.t)*1.25));else if(c.turnSign)target=Math.min(target,42);
-   const look=22+(this.car.length||44)/2+30+c.speed*.8;for(const o of [this.car,...this.traffic]){if(o===c)continue;const rx=o.x-c.x,ry=o.y-c.y,along=rx*Math.cos(a)+ry*Math.sin(a),across=Math.abs(-rx*Math.sin(a)+ry*Math.cos(a));if(along>0&&along<look&&across<24)target=Math.min(target,Math.max(0,(along-(22+(o.length||44)/2+9))*1.35));}
-   c.speed+=clamp(target-c.speed,-105*dt,42*dt);c.stopped=c.speed<3;let advance=c.speed*dt;if(c.reserved!==c.to&&c.t+advance>stop){advance=Math.max(0,stop-c.t);c.speed=0;}c.t+=advance;
+   if(c.reserved!==c.to)target=Math.min(target,Math.max(0,(stop-c.t)*1.25));else if(c.turnSign)target=Math.min(target,kmhToSpeed(18));
+   const look=22+(this.car.length||44)/2+30+c.speed*.8+c.speed*c.speed/100;for(const o of [this.car,...this.traffic]){if(o===c||Math.abs((o.height||0)-(c.height||0))>10)continue;const rx=o.x-c.x,ry=o.y-c.y,along=rx*Math.cos(a)+ry*Math.sin(a),across=Math.abs(-rx*Math.sin(a)+ry*Math.cos(a));if(along>0&&along<look&&across<((c.width||22)+(o.width||22))/2+3)target=Math.min(target,this.followingSpeed(c,o,along,a,45));}
+   c.speed+=clamp(target-c.speed,-70*dt,28*dt);c.stopped=c.speed<3;let advance=c.speed*dt;if(c.reserved!==c.to&&c.t+advance>stop){advance=Math.max(0,stop-c.t);c.speed=0;}c.t+=advance;
    if(c.t>=stop&&c.reserved===c.to){c.t=stop;c.laneOffset=LANES[c.lane];c.turn={path:preparePath(curvePoints(n,to,next,c.lane,c.lane)),t:0};}
    const pos=lanePoint(n,to,c.t,c.lane),delta=c.laneOffset-LANES[c.lane];c.x=pos.x-Math.sin(a)*delta;c.y=pos.y+Math.cos(a)*delta;c.a=a;
    c.stalled=c.speed<2?(c.stalled||0)+dt:0;
@@ -158,19 +196,69 @@ class Game{
    if(c.stalled>40&&dist(c,this.car)>900){const safeT=135,p=lanePoint(n,to,safeT,c.lane);if(!this.traffic.some(o=>o!==c&&dist(o,p)<95)){c.t=safeT;c.x=p.x;c.y=p.y;c.speed=20;c.stalled=0;if(c.reserved!==undefined){delete this.junctions[c.reserved];c.reserved=undefined;}}}
   }
  }
- update(dt,input={}){if(this.mode!=='playing')return;dt=Math.min(dt,.05);this.time+=dt;this.difficulty=1+this.completed*.62+this.time/160;this.collisionCooldown=Math.max(0,this.collisionCooldown-dt);if(this.traffic.length<trafficLimit(this.time,this.difficulty,this.trafficPreset,this.startMinutes)&&this.rand()<dt*(1.5+rushHour(this.time,this.startMinutes)*2))this.spawnTraffic();this.updateTraffic(dt);if(this.traffic.length>trafficLimit(this.time,this.difficulty,this.trafficPreset,this.startMinutes)&&this.rand()<dt*.7){const k=this.traffic.findIndex(c=>dist(c,this.car)>800);if(k>=0)this.traffic.splice(k,1);}
-  const c=this.car,m=this.map,ox=c.x,oy=c.y,oa=c.a,oldHeight=c.height||0,road=isRoad(m,c.x,c.y),v=this.vehicle,mergeLane=c.roadSample&&c.roadSample.layer==='ramp'&&m.roadProfiles&&c.roadSample.distanceAlong>=m.roadProfiles[c.roadSample.rampIndex].turnEnd,max=c.roadLayer==='highway'||mergeLane||(!Roads&&Math.abs(c.y-m.hy)<77)?v.maxHighway:v.maxStreet,accel=road?v.acceleration:v.acceleration*.5;
-  if(input.up)c.speed+=accel*dt;else if(input.down)c.speed-=(c.speed>4?v.braking:v.reverseAcceleration)*dt;else c.speed*=Math.exp(-dt*(input.brake?8:1.4));
-  if(input.brake)c.speed*=Math.exp(-dt*6);c.speed=clamp(c.speed,road?-v.reverseSpeed:-Math.min(30,v.reverseSpeed),road?max:35);
-  // Keyboard steering ramps progressively; releasing a key centers the wheel quickly.
-  const steer=(input.right?1:0)-(input.left?1:0),steerRate=steer?(Math.sign(c.steer)&&Math.sign(c.steer)!==steer?3.6:1.8):3.6;c.steer+=clamp(steer-c.steer,-steerRate*dt,steerRate*dt);if(Math.abs(c.speed)>1)c.a+=c.steer*c.speed/(v.turnBase+Math.abs(c.speed)*v.turnSpeed)*dt;c.a=angleDiff(c.a,0);c.x+=Math.cos(c.a)*c.speed*dt;c.y+=Math.sin(c.a)*c.speed*dt;
-  const extentX=Math.abs(Math.cos(c.a))*c.length/2+Math.abs(Math.sin(c.a))*c.width/2,extentY=Math.abs(Math.sin(c.a))*c.length/2+Math.abs(Math.cos(c.a))*c.width/2;let blocked=c.x-extentX<43||c.y-extentY<63||c.x+extentX>m.w-43||c.y+extentY>m.h-43,hitKind='kerb';let candidateRoad=null;if(Roads&&Roads.sampleRoad){candidateRoad=Roads.sampleRoad(m,c.x,c.y,c.roadSample);if(Math.abs(candidateRoad.height-oldHeight)>2||(oldHeight>2&&!candidateRoad.onRoad)){blocked=true;hitKind='barrier';}if(!blocked&&candidateRoad.height>2){const cs=Math.cos(c.a),sn=Math.sin(c.a);for(const dx of [-c.length/2,c.length/2])for(const dy of [-c.width/2,c.width/2]){const corner=Roads.sampleRoad(m,c.x+cs*dx-sn*dy,c.y+sn*dx+cs*dy,candidateRoad);if(!corner.onRoad||Math.abs(corner.height-candidateRoad.height)>6){blocked=true;hitKind='barrier';}}}if(!blocked)c.height=candidateRoad.height;}if(!blocked&&m.highwayHeight&&c.height>m.highwayHeight-3&&buildingHit(c,{x:m.highwayStart,y:m.hy-2.75,w:m.highwayEnd-m.highwayStart,h:5.5,height:m.highwayHeight})){blocked=true;hitKind='median barrier';}for(const b of [...m.buildings,...m.landmarkColliders])if(buildingHit(c,b)){blocked=true;hitKind='building';break;}
+ update(dt,input={}){
+  if(this.mode!=='playing'||!Number.isFinite(dt)||dt<=0)return;
+  // Consume the whole render frame. The old .05 clamp silently slowed simulation
+  // on low-FPS devices; short collision steps also prevent high-speed tunnelling.
+  let remaining=Math.min(dt,MAX_FRAME_DT);
+  while(remaining>1e-9&&this.mode==='playing'){const step=Math.min(PHYSICS_STEP,remaining);this.stepPhysics(step,input);remaining-=step;}
+ }
+ stepPhysics(dt,input){this.time+=dt;this.difficulty=1+this.completed*.62+this.time/160;this.collisionCooldown=Math.max(0,this.collisionCooldown-dt);if(this.traffic.length<trafficLimit(this.time,this.difficulty,this.trafficPreset,this.startMinutes)&&this.rand()<dt*(1.5+rushHour(this.time,this.startMinutes)*2))this.spawnTraffic();this.updateTraffic(dt);if(this.traffic.length>trafficLimit(this.time,this.difficulty,this.trafficPreset,this.startMinutes)&&this.rand()<dt*.7){const k=this.traffic.findIndex(c=>dist(c,this.car)>800);if(k>=0)this.traffic.splice(k,1);}
+  const c=this.car,m=this.map,ox=c.x,oy=c.y,oa=c.a,oldSpeed=c.speed,oldHeight=c.height||0,road=isRoad(m,c.x,c.y),v=this.vehicle,mergeLane=c.roadSample&&c.roadSample.layer==='ramp'&&m.roadProfiles&&c.roadSample.distanceAlong>=m.roadProfiles[c.roadSample.rampIndex].turnEnd,max=c.roadLayer==='highway'||mergeLane||(!Roads&&Math.abs(c.y-m.hy)<77)?v.maxHighway:v.maxStreet;
+  const throttle=!!input.up&&!input.brake,reverse=!!input.down&&!input.up&&!input.brake;
+  c.throttle=damp(c.throttle||0,throttle||reverse?1:0,dt,.12);
+  const braking=!!input.brake||(reverse&&c.speed>1)||(throttle&&c.speed<-1);
+  c.brake=damp(c.brake||0,braking?1:0,dt,.055);
+  const speedMps=Math.abs(c.speed)/UNITS_PER_METRE,limit=road?max:kmhToSpeed(12);
+  if(braking)c.speed=approach(c.speed,0,v.braking*dt*(input.brake?1.15:1));
+  else if(throttle)c.speed+=v.acceleration*c.throttle*(road?1:.55)*(.65+.35*(1-clamp(c.speed/max,0,1)))*dt;
+  else if(reverse)c.speed-=v.reverseAcceleration*c.throttle*dt;
+  else c.speed=approach(c.speed,0,(3.5+speedMps*.20+speedMps*speedMps*.012)*dt);
+  // Limit throttle at the chosen cruising speed; reduce an existing overspeed
+  // progressively when leaving the highway rather than snapping the car slower.
+  if(oldSpeed<=limit)c.speed=Math.min(c.speed,limit);else c.speed=Math.min(c.speed,approach(oldSpeed,limit,v.braking*.4*dt));
+  c.speed=Math.max(c.speed,-v.reverseSpeed);if(Math.abs(c.speed)<.025)c.speed=0;
+  const steer=(input.right?1:0)-(input.left?1:0),steerRate=steer?(Math.sign(c.steer)&&Math.sign(c.steer)!==steer?3.6:1.8):3.6;
+  c.steer=approach(c.steer||0,steer,steerRate*dt);
+  // Bicycle-like steering preserves close parking control. Speed-sensitive
+  // understeer and the tyre-grip ceiling make motorway corrections progressive.
+  const meanSpeed=(oldSpeed+c.speed)*.5,mps=meanSpeed/UNITS_PER_METRE;
+  const understeer=1+Math.pow(Math.abs(mps)/18,2)*.55;
+  c.steerAngle=Math.atan(v.wheelbase/(v.turnBase+Math.abs(meanSpeed)*v.turnSpeed))*c.steer/understeer;
+  const requestedYaw=meanSpeed/v.wheelbase*Math.tan(c.steerAngle),grip=v.grip*(road?1:.65),maxYaw=grip/Math.max(1,Math.abs(mps));
+  const desiredYaw=clamp(requestedYaw,-maxYaw,maxYaw);
+  c.yawRate=damp(c.yawRate||0,Math.abs(meanSpeed)>.1?desiredYaw:0,dt,v.yawResponse);
+  if(c.speed===0)c.yawRate=0;
+  const headingStep=c.yawRate*dt,travelHeading=c.a+headingStep*.5;
+  c.a=angleDiff(c.a+headingStep,0);c.x+=Math.cos(travelHeading)*meanSpeed*dt;c.y+=Math.sin(travelHeading)*meanSpeed*dt;
+  const extentX=Math.abs(Math.cos(c.a))*c.length/2+Math.abs(Math.sin(c.a))*c.width/2,extentY=Math.abs(Math.sin(c.a))*c.length/2+Math.abs(Math.cos(c.a))*c.width/2;let blocked=c.x-extentX<43||c.y-extentY<63||c.x+extentX>m.w-43||c.y+extentY>m.h-43,hitKind='kerb';let candidateRoad=null;if(Roads&&Roads.sampleRoad){candidateRoad=Roads.sampleRoad(m,c.x,c.y,c.roadSample);if(Math.abs(candidateRoad.height-oldHeight)>2||(oldHeight>2&&!candidateRoad.onRoad)){blocked=true;hitKind='barrier';}if(!blocked&&candidateRoad.height>2){const cs=Math.cos(c.a),sn=Math.sin(c.a);for(const dx of [-c.length/2,c.length/2])for(const dy of [-c.width/2,c.width/2]){const corner=Roads.sampleRoad(m,c.x+cs*dx-sn*dy,c.y+sn*dx+cs*dy,candidateRoad);if(!corner.onRoad||Math.abs(corner.height-(candidateRoad.height+candidateRoad.gradient.x*(cs*dx-sn*dy)+candidateRoad.gradient.z*(sn*dx+cs*dy)))>6){blocked=true;hitKind='barrier';}}}if(!blocked)c.height=candidateRoad.height;}if(!blocked&&m.highwayHeight&&c.height>m.highwayHeight-3&&buildingHit(c,{x:m.highwayStart,y:m.hy-2.75,w:m.highwayEnd-m.highwayStart,h:5.5,height:m.highwayHeight})){blocked=true;hitKind='median barrier';}for(const b of [...m.buildings,...m.landmarkColliders,...(m.groundColliders||[])])if(buildingHit(c,b)){blocked=true;hitKind=b.kind||'building';break;}
   if(!blocked)for(const b of m.parked)if(carHit(c,b)){blocked=true;hitKind='parked car';break;}
   if(!blocked)for(const b of this.traffic)if(carHit(c,b)){blocked=true;hitKind='traffic';break;}
-  if(blocked){c.x=ox;c.y=oy;c.a=oa;c.height=oldHeight;const severity=Math.max(3,Math.abs(c.speed)*.12);if(this.collisionCooldown<=0&&Math.abs(c.speed)>13){this.health=Math.max(0,this.health-severity);this.cash-=3;this.combo=0;this.stats.collisions++;this.note('EASY ON THE FENDERS',`${hitKind==='traffic'?'Traffic collision':'Watch that '+hitKind}. $3 repair charge.`,'bad');this.collisionCooldown=1.2;}c.speed*=-.25;}
+  if(blocked){c.x=ox;c.y=oy;c.a=oa;c.height=oldHeight;const severity=Math.max(3,Math.abs(speedToKmh(c.speed))*.14);if(this.collisionCooldown<=0&&Math.abs(c.speed)>13){this.health=Math.max(0,this.health-severity);this.cash-=3;this.combo=0;this.stats.collisions++;this.note('EASY ON THE FENDERS',`${hitKind==='traffic'?'Traffic collision':'Watch that '+hitKind}. $3 repair charge.`,'bad');this.collisionCooldown=1.2;}c.speed*=-.12;c.yawRate=0;}
+  // Expose measured, signed SI telemetry; camera/audio can filter this without
+  // inferring lateral movement from keyboard state or adding artificial shake.
+  const actualYaw=angleDiff(c.a,oa)/dt;
+  c.speedKmh=Math.abs(speedToKmh(c.speed));c.forwardSpeedKmh=speedToKmh(c.speed);
+  c.lateralAccelerationMps2=blocked?0:meanSpeed/UNITS_PER_METRE*actualYaw;
+  c.longitudinalAccelerationMps2=(c.speed-oldSpeed)/UNITS_PER_METRE/dt;
+  c.tireSlip=clamp((Math.abs(requestedYaw*mps)/grip-.66)/.85,0,1);
+  this.updatePowertrain(dt,throttle,reverse,braking);
   this.sampleCarRoad();this.checkSignals(ox,oy,dt);this.checkParking(dt);
   this.job.timeLeft-=dt;if(this.vehicleType==='bus'&&this.job.timeLeft<=0){this.reputation--;this.combo=0;this.stats.missed++;this.note('SERVICE DELAY','This stop is still waiting. Keep the route moving.','bad');this.job.timeLeft=150;this.job.total=150;}else if(this.job.timeLeft<=0){this.reputation--;this.combo=0;this.stats.missed++;this.note('FARE MISSED','Dispatch found another cab. Keep the next rider waiting less.','bad');this.newJob();}
   if(this.health<=0||this.reputation<=0){this.mode='gameover';this.note('SHIFT OVER',this.health<=0?'The cab needs a proper repair.':'Dispatch has ended your shift.','bad');}
+ }
+ updatePowertrain(dt,throttle,reverse,braking){
+  const c=this.car,bus=this.vehicleType==='bus',speed=c.speedKmh||0;
+  const up=bus?[16,31,49,69,90]:[20,39,62,88,115],down=bus?[10,25,42,61,81]:[13,31,53,78,104];
+  let gear=Number.isFinite(c.gear)&&c.gear>0?c.gear:1;
+  if(c.speed<-.3)gear=-1;else if(gear<1)gear=1;
+  if(gear>0){if(gear<=up.length&&speed>up[gear-1])gear++;else if(gear>1&&speed<down[gear-2])gear--;}
+  if(c.gear!==undefined&&gear!==c.gear)c.gearShift=.17;else c.gearShift=Math.max(0,(c.gearShift||0)-dt);
+  c.gear=gear;const ratios=bus?[105,72,52,39,31,25]:[158,99,69,50,38,31],idle=bus?650:780;
+  const load=braking?0:(throttle||reverse?c.throttle:Math.min(.22,speed/400));
+  c.engineLoad=damp(c.engineLoad||0,load,dt,.1);
+  const rpm=clamp(idle+speed*ratios[Math.max(0,Math.abs(gear)-1)]+c.engineLoad*(bus?260:400),idle,bus?3400:5200)*(c.gearShift>0?.88:1);
+  c.engineRpm=damp(c.engineRpm||idle,rpm,dt,.075);
  }
  // A red-right permission is earned at the line, then validated by the actual exit.
  // Straight crossings are never excused merely because the wheel was turned.
@@ -207,5 +295,5 @@ class Game{
  checkBusStop(dt){const c=this.car,b=this.target(),d=dist(c,b),angle=Math.abs(angleDiff(c.a,b.a));if(d<160&&c.speed>2&&angle<.45)this.bus.approachMeters+=c.speed*dt;if(d<100&&c.speed<-2)this.bus.approachMeters=0;const p=this.busParkingStatus();this.bus.doorsOpen=p.ready;if(p.ready)this.parkHold+=dt;else this.parkHold=Math.max(0,this.parkHold-dt*2);if(this.parkHold>=2.6)this.completeBusStop();}
  recover(){if(this.mode!=='playing')return;const n=this.map.nodes[nearestNode(this.map,this.car)];this.car={x:n.x+(n.i===this.map.xs.length-1?-110:110),y:n.y+(n.i===this.map.xs.length-1?-56:56),a:n.i===this.map.xs.length-1?Math.PI:0,speed:0,steer:0,kind:this.vehicleType,length:this.vehicle.length,width:this.vehicle.width};for(const offset of [0,65,130,-65]){const candidate={...this.car,x:this.car.x+offset};if(isRoad(this.map,candidate.x,candidate.y)&&!this.traffic.some(o=>carHit(candidate,o))){this.car=candidate;break;}}this.reverseMeters=0;if(this.bus)this.bus.approachMeters=0;this.cash-=15;this.job.timeLeft=Math.max(2,this.job.timeLeft-10);this.health=Math.max(1,this.health-5);this.parkHold=0;this.sampleCarRoad();this.note('ROADSIDE ASSIST','$15 and 10 seconds. Back on the road.','bad');}
 }
-return {Game,makeMap,VEHICLES,isRoad,signal,route,hasSurfaceNavigation,hasNavigation,nearestNode,carHit,buildingHit,angleDiff,dist,clamp,rng,rushHour,trafficLimit,START_MINUTES,TRAFFIC_PRESETS,STREETS,AVENUES,ROAD_HALF,SIDEWALK_HALF,LANES};
+return {Game,makeMap,VEHICLES,UNITS_PER_METRE,PHYSICS_STEP,MAX_FRAME_DT,speedToKmh,kmhToSpeed,isRoad,signal,route,hasSurfaceNavigation,hasNavigation,nearestNode,carHit,buildingHit,angleDiff,dist,clamp,rng,rushHour,trafficLimit,START_MINUTES,TRAFFIC_PRESETS,STREETS,AVENUES,ROAD_HALF,SIDEWALK_HALF,LANES};
 });

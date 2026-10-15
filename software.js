@@ -140,7 +140,7 @@
       // Return the exact WebGL projection for labels and other parent-rendered overlays.
       const projection = T.perspective(fov, w / h, near, 4500);
       if (camera.mirror) projection[0] *= -1;
-      const matrix = T.multiply(projection, T.view(camera.eye, camera.yaw, camera.pitch || 0));
+      const matrix = T.multiply(projection, T.view(camera.eye, camera.yaw, camera.pitch || 0, camera.roll || 0));
       const ctx = this.ctx;
       ctx.save(); ctx.setTransform(1, 0, 0, 1, 0, 0);
       ctx.beginPath(); ctx.rect(x, y, w, h); ctx.clip();
@@ -149,7 +149,7 @@
       this._reserve(total);
       const q = this._queue, ground = this._ground, objects = this._objects;
       const eye = camera.eye, cyaw = Math.cos(camera.yaw), syaw = Math.sin(camera.yaw);
-      const cp = Math.cos(camera.pitch || 0), sp = Math.sin(camera.pitch || 0);
+      const cp = Math.cos(camera.pitch || 0), sp = Math.sin(camera.pitch || 0), cr=Math.cos(camera.roll||0), sr=Math.sin(camera.roll||0);
       const tanY = Math.tan(fov / 2), tanX = tanY * w / h, focal = h / (2 * tanY), horizontalSign = camera.mirror ? -1 : 1;
       const sxNorm = Math.sqrt(1 + tanX * tanX), syNorm = Math.sqrt(1 + tanY * tanY);
       let count = 0, ng = 0, no = 0, hiddenSupports = 0;
@@ -162,7 +162,7 @@
           // Solid volumes have consistent inward winding. Skip their rear-facing walls.
           if(data[d+19]&&data[d+16]*dx+data[d+17]*dy+data[d+18]*dz<0)continue;
           const horizontal = dx * cyaw + dz * syaw;
-          const depth = horizontal * cp + dy * sp, right = -dx * syaw + dz * cyaw, up = dy * cp - horizontal * sp;
+          const depth = horizontal * cp + dy * sp, rawRight = -dx * syaw + dz * cyaw, rawUp = dy * cp - horizontal * sp, right=rawRight*cr+rawUp*sr, up=rawUp*cr-rawRight*sr;
           const radius = data[d + 12], flat = data[d + 14] === 1;
           if (depth + radius < near || depth - radius > far || Math.abs(right) - radius * sxNorm > depth * tanX || Math.abs(up) - radius * syNorm > depth * tanY) continue;
           // Subpixel details have no readable shape, especially in the small mirror.
@@ -174,7 +174,7 @@
           let input = this._clipA, output = this._clipB, n = vertexCount, clipMask = 0, outsideMask = 63;
           for (let v = 0; v < vertexCount; v++) {
             const k = d + (v===3?20:v * 3), a = data[k] - eye[0], b = data[k + 1] - eye[1], c = data[k + 2] - eye[2], forward = a * cyaw + c * syaw;
-            const rx = -a * syaw + c * cyaw, uy = b * cp - forward * sp, fz = forward * cp + b * sp;
+            const rawX=-a*syaw+c*cyaw, rawY=b*cp-forward*sp, rx=rawX*cr+rawY*sr, uy=rawY*cr-rawX*sr, fz=forward*cp+b*sp;
             input[v * 3] = rx; input[v * 3 + 1] = uy; input[v * 3 + 2] = fz;
             const mask = (fz < near ? 1 : 0) | (fz > far ? 2 : 0) | (rx < -fz * tanX ? 4 : 0) | (rx > fz * tanX ? 8 : 0) | (uy < -fz * tanY ? 16 : 0) | (uy > fz * tanY ? 32 : 0);
             clipMask |= mask; outsideMask &= mask;

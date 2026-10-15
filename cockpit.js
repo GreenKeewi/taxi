@@ -140,8 +140,8 @@
   function drawInstruments(ctx, w, h, state, rear) {
     const unit = Math.min(w / 1280, h / 720);
     const health = clamp(number(state.health, 100), 0, 100);
-    // Physics units are quarter-metres; convert world units/second to km/h.
-    const speed = Math.round(Math.abs(number(state.speed, 0)) * .9);
+    // World scale is ten units per metre; the gauge uses actual distance per second.
+    const speed = Math.round(number(state.speedKmh, Math.abs(number(state.speed, 0)) * .36));
     const y = rear ? h * 0.9 : h * 0.796;
     const x = w * 0.383, iw = w * 0.152, ih = h * 0.101;
     // Inset instrument binnacle beside the wheel stays readable at every steering angle.
@@ -294,7 +294,7 @@
     // Rubber demister grille and small switches remain below the driver's road sightline.
     for(let x=.04;x<.92;x+=.023){ctx.fillStyle='#202e28';ctx.fillRect(w*x,h*.786,w*.013,h*.009);}
     box(ctx,w*.393,h*.81,w*.205,h*.108,8*unit,'#152c24','#6e7e67',2*unit);
-    label(ctx,String(Math.round(Math.abs(number(state.speed,0))*.9)).padStart(2,'0'),w*.456,h*.856,31*unit,'#e4ead0','center',700);
+    label(ctx,String(Math.round(number(state.speedKmh,Math.abs(number(state.speed,0))*.36))).padStart(2,'0'),w*.456,h*.856,31*unit,'#e4ead0','center',700);
     label(ctx,'km/h',w*.504,h*.863,10*unit,'#aabcaa','left',500);
     label(ctx,state.reverse?'R':'D',w*.556,h*.851,18*unit,state.reverse?'#ecc184':'#d6e5c4','center',700);
     label(ctx,'BUS',w*.415,h*.899,8*unit,'#b7c6ae');
