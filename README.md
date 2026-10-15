@@ -8,6 +8,6 @@ Enter starts; arrows/WASD drive; Space brakes; S/down brakes then reverses; Shif
 
 WebGL is the primary renderer. Browsers without it use a perspective-projected software 3D fallback. The cloud-browser environment disables WebGL, so native GPU visuals are not yet verified.
 
-The taxi-depth-5 source passed 17 runtime, 14 engine, 4 traffic and 12 audio checks. The unchanged original 2D game passed 33 regressions. A physical-input first fare with normal dense traffic completed for $79 and full health, without collisions, red-light fines or missed fares. These are automated checks, not a retention study or an old-hardware benchmark.
+The taxi-depth-5a source passed 17 runtime, 14 engine, 4 traffic and 12 audio checks. The unchanged original 2D game passed 33 regressions. A physical-input first fare with normal dense traffic completed for $79 and full health, without collisions, red-light fines or missed fares. These are automated checks, not a retention study or an old-hardware benchmark.
 
 Serve this folder with any static web server. All gameplay assets are generated in code.
