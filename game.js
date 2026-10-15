@@ -131,7 +131,11 @@ function vehicleShape(color,style,lod,stopped){
 }
 // One road sample drives the body and camera; vehicle motion never adds shake.
 function roadSample(x,z,previous){
- const roads=window.TaxiRoads;if(roads?.sampleRoad){const p=roads.sampleRoad(game.map,x,z,previous?.roadSample||previous?.roadState||previous?.road||previous);if(p&&Number.isFinite(p.height))return p;}
+ const roads=window.TaxiRoads;if(roads?.sampleRoad){let history=previous?.roadSample||previous?.roadState||previous?.road||previous;
+  // Navigation waypoints carry roadLayer, while physical samples carry layer.
+  // A waypoint is not the car's last position: keep its layer along long lines.
+  if(history&&!history.layer){const layer=history.roadLayer||(history.height>=game.map.highwayHeight-.5?'highway':history.height>0?'ramp':'ground');history={...history,layer,x:undefined,z:undefined};if(layer==='ramp'&&!Number.isInteger(history.rampIndex))history=undefined;}
+  const p=roads.sampleRoad(game.map,x,z,history);if(p&&Number.isFinite(p.height))return p;}
  return{height:0,gradient:{x:0,z:0},layer:'surface'};
 }
 function roadPitch(sample,yaw){const gradient=sample.gradient;if(gradient)return Math.atan((gradient.x||0)*Math.cos(yaw)+(gradient.z||0)*Math.sin(yaw));if(sample.forward&&sample.grade)return Math.atan(sample.grade*((sample.forward.x||0)*Math.cos(yaw)+(sample.forward.z||0)*Math.sin(yaw)));return 0;}
@@ -142,11 +146,12 @@ function roadLine(mesh,a,b,lineWidth,lift,color){
  for(let i=0;i<count;i++){const t=i/count,u=(i+1)/count,x0=a.x+dx*t,z0=a.y+dz*t,x1=a.x+dx*u,z1=a.y+dz*u;mesh.quad(raisedPoint(x0+nx,z0+nz,lift,a),raisedPoint(x1+nx,z1+nz,lift,b),raisedPoint(x1-nx,z1-nz,lift,b),raisedPoint(x0-nx,z0-nz,lift,a),color);}
 }
 function vehicle(mesh,c){
+ const firstTriangle=mesh.data.length/18;
  const distance=E.dist(c,game.car),lod=distance<330?0:distance<800?1:2,style=c.id===undefined?Math.abs(Math.round(c.x*7+c.y*11))%3:c.id%9===0?2:c.id%3===0?1:0;
  const cs=Math.cos(c.a),sn=Math.sin(c.a),road=roadSample(c.x,c.y,c),base=Number.isFinite(c.height)?c.height:road.height,pitch=Number.isFinite(c.roadPitch)?c.roadPitch:roadPitch(road,c.a),cp=Math.cos(pitch),sp=Math.sin(pitch),data=vehicleShape(c.color||'#ddd0a2',style,lod,!!c.stopped),out=mesh.data;
  if(Math.abs(pitch)<.001)mesh.box(c.x,base+.2,c.y,47,.15,25,'#43534d',c.a);
  else{const p=(x,z)=>[c.x+x*cs-z*sn,base+x*sp+.2,c.y+x*sn+z*cs];mesh.quad(p(-23.5,-12.5),p(23.5,-12.5),p(23.5,12.5),p(-23.5,12.5),'#43534d');}
- for(let i=0;i<data.length;i+=6){const x=data[i]*cp-data[i+1]*sp,y=base+data[i]*sp+data[i+1]*cp;out.push(c.x+x*cs-data[i+2]*sn,y,c.y+x*sn+data[i+2]*cs,data[i+3],data[i+4],data[i+5]);}mesh.cull.push(...data.cull);
+ for(let i=0;i<data.length;i+=6){const x=data[i]*cp-data[i+1]*sp,y=base+data[i]*sp+data[i+1]*cp;out.push(c.x+x*cs-data[i+2]*sn,y,c.y+x*sn+data[i+2]*cs,data[i+3],data[i+4],data[i+5]);}mesh.cull.push(...data.cull);if(mesh.underRoad&&base<(game.map.highwayHeight||0)-10)for(let i=firstTriangle;i<mesh.data.length/18;i++)mesh.underRoad[i]=1;
 }
 function navigationMesh(mesh){
  const target=game.target(),bus=game.vehicleType==='bus',color=bus?'#8be1ac':game.job.stage==='pickup'?'#56c9d9':'#ecc260';let total=0;
@@ -157,7 +162,7 @@ function navigationMesh(mesh){
  const marker=p(bus?24:-42,halfWidth+10),base=roadSample(marker.x,marker.y).height;mesh.cylinder(marker.x,base+5,marker.y,2.7,9,color,6);mesh.cylinder(marker.x,base+12,marker.y,3,4,'#d7aa80',8);
 }
 function render(car,now){
- const dynamic=new T.Mesh(),t=mode==='playing'?accumulator*60:1;for(const v of game.map.parked)if(E.dist(v,car)<1350)vehicle(dynamic,v);for(const v of game.traffic){if(E.dist(v,car)>1500)continue;const prev=previousTraffic.get(v.id),c=prev&&E.dist(prev,v)<200?{...v,...lerpPose(prev,v,t)}:v;vehicle(dynamic,c);}signalLights(dynamic,game.map,game.time);navigationMesh(dynamic);const aircraft=window.TaxiAircraft?TaxiAircraft.updateMesh(dynamic,game.map,game.time,{eye:[car.x,car.height||0,car.y]}):null;renderer.upload(renderer.dynamic,dynamic);renderer.calls=0;
+ const dynamic=new T.Mesh();dynamic.roadMap=game.map;dynamic.underRoad=[];const t=mode==='playing'?accumulator*60:1;for(const v of game.map.parked)if(E.dist(v,car)<1350)vehicle(dynamic,v);for(const v of game.traffic){if(E.dist(v,car)>1500)continue;const prev=previousTraffic.get(v.id),c=prev&&E.dist(prev,v)<200?{...v,...lerpPose(prev,v,t)}:v;vehicle(dynamic,c);}signalLights(dynamic,game.map,game.time);navigationMesh(dynamic);const aircraft=window.TaxiAircraft?TaxiAircraft.updateMesh(dynamic,game.map,game.time,{eye:[car.x,car.height||0,car.y]}):null;renderer.upload(renderer.dynamic,dynamic);renderer.calls=0;
  const bus=game.vehicleType==='bus',forward=bus?27:6,side=bus?6:4.5,eyeHeight=bus?29:16.5,road=roadSample(car.x,car.y,car),base=Number.isFinite(car.height)?car.height:road.height,cs=Math.cos(car.a),sn=Math.sin(car.a),grade=Number.isFinite(car.roadPitch)?car.roadPitch:roadPitch(road,car.a),delta=cameraTime?Math.min(.1,(now-cameraTime)/1000):1;
  cameraTime=now;cameraPitch+=(grade-cameraPitch)*(1-Math.exp(-delta*10));
  const kmh=E.speedToKmh?E.speedToKmh(Math.abs(car.speed)):Math.abs(car.speed)*.36,force=clamp((car.lateralAccelerationMps2||0)/9.81,-.85,.85),longitudinal=clamp((car.longitudinalAccelerationMps2||0)/9.81,-.65,.5);
@@ -211,7 +216,7 @@ function drawMinimap(car){
  line(route,'#173c35',5);line(route,bus?'#97e8b1':game.job.stage==='pickup'?'#66d7e3':'#f0ca76',2.5);
  const target=at(game.target()),tx=clamp(target.x,x+9,x+w-9),ty=clamp(target.y,y+9,y+h-28);g.fillStyle='#fff0ae';g.beginPath();g.arc(tx,ty,3.5,0,PI*2);g.fill();g.strokeStyle='#1c352e';g.lineWidth=1.5;g.stroke();
  g.fillStyle='#ffe293';g.strokeStyle='#233d32';g.lineWidth=1.5;g.beginPath();g.moveTo(cx,cy-7);g.lineTo(cx-5,cy+5);g.lineTo(cx,cy+2.5);g.lineTo(cx+5,cy+5);g.closePath();g.fill();g.stroke();g.restore();
- g.save();g.fillStyle='#1b302cf5';g.fillRect(x+1,y+h-18,w-2,17);g.font='9px Arial';g.fillStyle='#c4d5c6';g.textAlign='left';g.fillText(car.roadLayer==='highway'?'GARDINER · UPPER':car.roadLayer==='ramp'?'CONNECTING RAMP':'LOCAL ROADS',x+7,y+h-6);g.textAlign='right';g.fillStyle='#e4d8a7';g.fillText('TAB ↗',x+w-7,y+h-6);g.restore();
+ g.save();g.fillStyle='#1b302cf5';g.fillRect(x+1,y+h-18,w-2,17);g.font='9px Arial';g.fillStyle='#c4d5c6';g.textAlign='left';g.fillText(car.roadLayer==='highway'?'GARDINER · UPPER':car.roadLayer==='ramp'?'CONNECTING RAMP':m.waterfront&&Math.abs(car.y-m.hy)<100?'LAKE SHORE · LOWER':'LOCAL ROADS',x+7,y+h-6);g.textAlign='right';g.fillStyle='#e4d8a7';g.fillText('TAB ↗',x+w-7,y+h-6);g.restore();
  window.__taxi3d.minimap={x,y,w,h,heading:car.a,rangeMetres:range/10,routePoints:route.length,layer:car.roadLayer};
 }
 function drawMap(){

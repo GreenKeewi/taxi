@@ -10,8 +10,10 @@
   // Exact sightline checks for bridge supports only. The general scene still
   // uses the inexpensive painter; these bounded road triangles prevent a pier
   // from painting through the deck without hiding it when viewed underneath.
+  const roadOccluderCache=new WeakMap();
   function roadOccluders(map) {
     if (!map || !map.roadProfiles) return null;
+    if(roadOccluderCache.has(map))return roadOccluderCache.get(map);
     const triangles=[];
     const tri=(a,b,c)=>{const ux=b[0]-a[0],uz=b[2]-a[2],vx=c[0]-a[0],vz=c[2]-a[2],det=ux*vz-uz*vx;if(Math.abs(det)<1e-8)return;
       const gy=((b[1]-a[1])*vz-(c[1]-a[1])*uz)/det,gz=(ux*(c[1]-a[1])-vx*(b[1]-a[1]))/det;
@@ -21,7 +23,7 @@
       const a=p.points[i-1],b=p.points[i],la=edge(a,a.halfWidth),lb=edge(b,b.halfWidth),ra=edge(a,-a.halfWidth),rb=edge(b,-b.halfWidth),ma=edge(a,0),mb=edge(b,0);
       tri(la,lb,mb);tri(la,mb,ma);tri(ma,mb,rb);tri(ma,rb,ra);
     }
-    return {map,triangles};
+    const result={map,triangles};roadOccluderCache.set(map,result);return result;
   }
   function roadBlocksPoint(roads,eye,x,y,z) {
     const dx=x-eye[0],dy=y-eye[1],dz=z-eye[2],m=roads.map;

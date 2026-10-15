@@ -41,9 +41,9 @@
     enrich(map);
     const mesh=new root.Taxi3D.Mesh(), signs=[], r=random((map.seed||8427)^0x51C170);
     mesh.underRoad=[];mesh.roadMap=map;
-    const stats={seed:map.seed||8427,buildings:0,skyscrapers:0,tallestBuilding:0,backgroundBuildings:0,trees:0,lamps:0,shelters:0,landmarks:0,roadSegments:0,crosswalks:0,elevatedRoads:0,ramps:0,bridgePiers:0,busStops:0};
+    const stats={seed:map.seed||8427,buildings:0,skyscrapers:0,tallestBuilding:0,backgroundBuildings:0,trees:0,lamps:0,shelters:0,landmarks:0,roadSegments:0,crosswalks:0,elevatedRoads:0,ramps:0,bridgePiers:0,busStops:0,waterfrontStreets:0,waterfrontPiers:0};
     const xs=map.xs, zs=map.ys, lastX=xs.length-1, lastZ=zs.length-1, RH=map.roadHalf||82, SH=map.sidewalkHalf||94;
-    const shore=map.h-65;
+    const shore=map.waterfront?map.waterfront.shoreZ:map.h-65;
     function rect(x,z,w,d,y,col) { if(w<=0||d<=0)return;mesh.quad([x,y,z],[x,y,z+d],[x+w,y,z+d],[x+w,y,z],col); }
     function box(x,y,z,w,h,d,col,yaw) { mesh.box(x,y,z,w,h,d,col,yaw||0); }
     function line(ax,az,bx,bz,w,y,col) { mesh.line(ax,az,bx,bz,w,y,col); }
@@ -148,6 +148,54 @@
       let from=120;
       for(const z of zs){if(z-RH>from){rect(x-RH,from,RH*2,z-RH-from,0,C.asphalt);stats.roadSegments++;}from=z+RH;}
     }
+    // Lake Shore and the six avenue extensions form an independent ground
+    // network. All road slabs stay below the elevated deck and its approach.
+    if(map.waterfront){
+      const lake=map.waterfront.lakeShoreZ;
+      rect(map.waterfront.minX,lake-RH,map.waterfront.maxX-map.waterfront.minX,RH*2,0,C.asphalt);
+      stats.roadSegments++;stats.waterfrontStreets++;
+      for(const road of map.groundRoads||[]){
+        if(road.gridCol===undefined)continue;
+        const x=road.x1,begin=zs[lastZ]+RH,end=lake-RH;
+        rect(x-RH,begin,RH*2,end-begin,0,C.asphalt);
+        for(const side of [-1,1]){
+          rect(x+(side<0?-SH:RH),begin,SH-RH,end-begin,.4,C.paving);
+          curbRun(x+side*RH,begin,x+side*RH,end);
+        }
+        marks(x,zs[lastZ]+130,x,lake-130);
+        // Existing grid junctions previously ended here, so their south mouths
+        // get the missing crosswalk. Lake Shore junctions are clearly marked.
+        crosswalk({x,y:zs[lastZ]},'S');
+        for(const dir of ['N','E','W'])crosswalk({x,y:lake},dir);
+        streetSign(x-98,lake-99,32,'LAKE SHORE BLVD',C.ink);
+        streetSign(x+98,lake+98,32,road.name.replace('Street','St').replace('Avenue','Ave'),C.ink);
+        for(let z=begin+115;z<end-60;z+=185){lamp(x-89,z,0);tree(x+109,z+52,.65);}
+        stats.roadSegments++;stats.waterfrontStreets++;
+      }
+      // Markings break for every avenue junction. Paving on the far side is a
+      // continuous waterfront promenade, with a visible kerb and open views.
+      const junctions=(map.groundRoads||[]).filter(g=>g.gridCol!==undefined).map(g=>g.x1);
+      let begin=map.waterfront.minX;
+      for(const x of [...junctions,map.waterfront.maxX+RH]){
+        const end=x-RH;
+        if(end>begin){
+          rect(begin,lake-SH,end-begin,SH-RH,.4,C.paving);curbRun(begin,lake-RH,end,lake-RH);
+          if(end-begin>80)marks(begin+6,lake,end-6,lake);
+        }
+        begin=x+RH;
+      }
+      rect(map.waterfront.minX,lake+RH,map.waterfront.maxX-map.waterfront.minX,22,.4,C.paving);
+      curbRun(map.waterfront.minX,lake+RH,map.waterfront.maxX,lake+RH);
+      rect(map.waterfront.minX,lake+112,map.waterfront.maxX-map.waterfront.minX,117,-.14,'#a0bc83');
+      rect(map.waterfront.minX,shore-54,map.waterfront.maxX-map.waterfront.minX,54,.35,'#c9c9b2');
+      // A low concrete quay and regularly spaced rail posts provide scale and
+      // an honest near-field speed cue without narrowing drivable lanes.
+      box(map.w/2,3,shore,map.w-86,6,8,'#a8b6ab');
+      line(43,shore,map.w-43,shore,1.8,12,C.metal);
+      for(let x=52;x<map.w-43;x+=42)box(x,6,shore,1.4,12,1.4,C.metal);
+      for(let x=xs[0]+135;x<xs[lastX]-80;x+=210){tree(x,lake+166,.95);bench(x+45,shore-25);lamp(x+95,shore-41,-Math.PI/2);}
+      streetSign(map.w*.44,shore-26,24,'WATERFRONT PROMENADE','#537970');
+    }
     // Pavement at the outer road sides, with a distinct pale kerb.
     let edgeStart=120;
     for(const edgeEnd of [...xs.map(x=>x-RH),xs[lastX]+100]){
@@ -213,9 +261,10 @@
       for(let i=first;i<mesh.cull.length;i++)mesh.underRoad[i]=1;
     }
     function highwayPier(x){
-      // Twin columns leave a broad, readable opening below the road.
-      for(const dz of [-53,53])supportBox(x,(H-8)/2-.35,map.hy+dz,10,H-8.7,13,concrete);
-      supportBox(x,H-7,map.hy,16,5,149,'#95a5a5');stats.bridgePiers++;
+      // Outboard piers clear all Lake Shore lanes and their pavements. Their
+      // shared collision records are generated in roads.js before rendering.
+      for(const dz of [-108,108])supportBox(x,(H-8)/2-.35,map.hy+dz,10,H-8.7,13,concrete);
+      supportBox(x,H-7,map.hy,16,5,228,'#95a5a5');stats.bridgePiers++;stats.waterfrontPiers++;
     }
     for(let x=HX;x<HE;x+=80){
       const end=Math.min(HE,x+80),mid=(x+end)/2;
@@ -232,7 +281,7 @@
     }
     supportQuad([HX,H-5,map.hy-76],[HX,H-5,map.hy+76],[HX,H,map.hy+76],[HX,H,map.hy-76],concrete);
     supportQuad([HE,H-5,map.hy+76],[HE,H-5,map.hy-76],[HE,H,map.hy-76],[HE,H,map.hy+76],concrete);
-    for(let x=HX+110;x<HE-70;x+=260)highwayPier(x);
+    for(const pier of map.highwayPiers||[])highwayPier(pier.x);
     for(const off of [-72,72]){
       for(let x=HX;x<HE;x+=20){const end=Math.min(HE,x+20);if(!highwayEntryAt((x+end)/2,map.hy+off))elevatedLine(x,map.hy+off,H+.055,end,map.hy+off,H+.055,1.7,C.white);}
     }
@@ -263,8 +312,8 @@
         const q=roads.pointAt(profile,s);
         for(const side of [-1,1]){const x=q.x+q.nx*side*(q.halfWidth-2),z=q.z+q.nz*side*(q.halfWidth-2);if(!(x>=HX&&x<=HE&&Math.abs(z-map.hy)<78&&q.height>H-.04))box(x,q.height+3,z,1.5,6,1.5,post);}
       }
-      for(let s=370;s<profile.turnEnd+profile.acceleration;s+=220){
-        const q=roads.pointAt(profile,s);if(q.height<12)continue;
+      for(const pier of (map.rampPiers||[]).filter(p=>p.rampIndex===profile.index)){
+        const q=roads.pointAt(profile,pier.s);
         // Keep pillars under the centre of this independent narrow ramp deck.
         supportBox(q.x,(q.height-7)/2-.35,q.z,8,q.height-7.7,9,concrete);
         supportBox(q.x,q.height-6,q.z,12,3,65,'#97a7a7',Math.atan2(q.dz,q.dx));stats.bridgePiers++;
