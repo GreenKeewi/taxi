@@ -1,0 +1,101 @@
+{
+  "seed": 8427,
+  "dt": 0.008333333333333333,
+  "environment": "Node deterministic engine fixtures; not a physical-device benchmark",
+  "passed": 11,
+  "failed": 0,
+  "results": [
+    {
+      "name": "red platoon stops and drains",
+      "ok": true,
+      "cars": 4,
+      "stopped": [
+        {
+          "id": 100,
+          "t": 462
+        },
+        {
+          "id": 101,
+          "t": 405.9999968166911
+        },
+        {
+          "id": 102,
+          "t": 349.99994601133403
+        },
+        {
+          "id": 103,
+          "t": 293.99953934569214
+        }
+      ],
+      "elapsedMs": 290.85553999999996
+    },
+    {
+      "name": "save and restore preserve queued vehicle identities and poses",
+      "ok": true,
+      "cars": 4,
+      "elapsedMs": 187.915035
+    },
+    {
+      "name": "receiving lane spillback persists beyond 40 seconds and drains",
+      "ok": true,
+      "upstreamCars": 3,
+      "receivingCars": 7,
+      "heldSeconds": 46,
+      "saveRestore": "queued IDs and poses preserved",
+      "elapsedMs": 822.4202270000001
+    },
+    {
+      "name": "parallel lanes and opposing straight movements share a green",
+      "ok": true,
+      "maximumSimultaneousCrossings": 4,
+      "elapsedMs": 81.29973500000006
+    },
+    {
+      "name": "conflicting left turn and straight traffic clear without hull overlaps",
+      "ok": true,
+      "cars": 2,
+      "elapsedMs": 93.75850300000002
+    },
+    {
+      "name": "taxi blocks receiving lane, release restores flow",
+      "ok": true,
+      "vehicle": "taxi",
+      "length": 44,
+      "elapsedMs": 74.88864200000012
+    },
+    {
+      "name": "bus blocks receiving lane, release restores flow",
+      "ok": true,
+      "vehicle": "bus",
+      "length": 82,
+      "elapsedMs": 82.72461599999997
+    },
+    {
+      "name": "transverse bus body blocks receiving lane before junction entry",
+      "ok": true,
+      "vehicle": "bus",
+      "angle": 1.5707963267948966,
+      "elapsedMs": 60.63191600000005
+    },
+    {
+      "name": "removed receiving car leaves no stale lane or spatial occupancy",
+      "ok": true,
+      "removedId": 101,
+      "elapsedMs": 51.709413999999924
+    },
+    {
+      "name": "grade-separated player does not block street receiving lane",
+      "ok": true,
+      "playerHeight": 65,
+      "trafficHeight": 0,
+      "elapsedMs": 49.50390700000003
+    },
+    {
+      "name": "traffic array reversal preserves deterministic crossing decisions",
+      "ok": true,
+      "cars": 4,
+      "tolerance": 0.000001,
+      "elapsedMs": 110.01798699999995
+    }
+  ]
+}

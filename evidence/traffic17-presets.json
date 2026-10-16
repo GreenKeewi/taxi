@@ -1,0 +1,1259 @@
+{
+  "method": "native keyboard setting changes; original fresh-start view; normal animation/director; no placement; cloud Canvas; CPU throttle is synthetic",
+  "results": [
+    {
+      "preset": "normal",
+      "rate": 1,
+      "wallMs": 6035,
+      "fps": 28.334714167357085,
+      "callbackMeanMs": 19.30267379675957,
+      "callbackP95Ms": 27.199999999254942,
+      "drawGapP95Ms": 45.90000000037253,
+      "mode": "playing",
+      "cars": 96,
+      "density": {
+        "target": 96,
+        "nearby": 25,
+        "close": 4,
+        "movingNearby": 13,
+        "queuedNearby": 15,
+        "stoppedNearby": 12,
+        "spawned": 2,
+        "relocated": 17,
+        "lastMoves": [
+          {
+            "from": {
+              "x": 28572.381497537717,
+              "y": 1940
+            },
+            "to": {
+              "x": 912.6537026269361,
+              "y": 706
+            },
+            "time": 0,
+            "initial": true,
+            "hiddenFrom": true,
+            "hiddenTo": true
+          },
+          {
+            "from": {
+              "x": 28380,
+              "y": 2218.1562014552765
+            },
+            "to": {
+              "x": 1633,
+              "y": 804.1645982463378
+            },
+            "time": 0,
+            "initial": true,
+            "hiddenFrom": true,
+            "hiddenTo": true
+          },
+          {
+            "from": {
+              "x": 28380,
+              "y": 1194.4499168451875
+            },
+            "to": {
+              "x": 1059.26894427347,
+              "y": 670
+            },
+            "time": 0,
+            "initial": true,
+            "hiddenFrom": true,
+            "hiddenTo": true
+          },
+          {
+            "from": {
+              "x": 27800,
+              "y": 2193.043389120139
+            },
+            "to": {
+              "x": 686,
+              "y": 1374.0672857735772
+            },
+            "time": 0,
+            "initial": true,
+            "hiddenFrom": true,
+            "hiddenTo": true
+          },
+          {
+            "from": {
+              "x": 27466.932782314252,
+              "y": 820
+            },
+            "to": {
+              "x": 491.5786210298538,
+              "y": 2038
+            },
+            "time": 0,
+            "initial": true,
+            "hiddenFrom": true,
+            "hiddenTo": true
+          },
+          {
+            "from": {
+              "x": 27180,
+              "y": 1063.0622089025564
+            },
+            "to": {
+              "x": 798,
+              "y": 1801.3823522161692
+            },
+            "time": 0,
+            "initial": true,
+            "hiddenFrom": true,
+            "hiddenTo": true
+          },
+          {
+            "from": {
+              "x": 27054.856104131322,
+              "y": 200.00000000000003
+            },
+            "to": {
+              "x": 505.24195632571355,
+              "y": 2074
+            },
+            "time": 0,
+            "initial": true,
+            "hiddenFrom": true,
+            "hiddenTo": true
+          },
+          {
+            "from": {
+              "x": 26970.867010864895,
+              "y": 3016
+            },
+            "to": {
+              "x": 1422.1351890973747,
+              "y": 1109
+            },
+            "time": 0,
+            "initial": true,
+            "hiddenFrom": true,
+            "hiddenTo": true
+          },
+          {
+            "from": {
+              "x": 26676,
+              "y": 573.5290687647648
+            },
+            "to": {
+              "x": 1191,
+              "y": 837.5167810909916
+            },
+            "time": 0,
+            "initial": true,
+            "hiddenFrom": true,
+            "hiddenTo": true
+          },
+          {
+            "from": {
+              "x": 26600,
+              "y": 2820.8711504703388
+            },
+            "to": {
+              "x": 924.7169742910191,
+              "y": 594
+            },
+            "time": 0,
+            "initial": true,
+            "hiddenFrom": true,
+            "hiddenTo": true
+          },
+          {
+            "from": {
+              "x": 26600,
+              "y": 2608.969938158989
+            },
+            "to": {
+              "x": 686,
+              "y": 365.46823564590886
+            },
+            "time": 0,
+            "initial": true,
+            "hiddenFrom": true,
+            "hiddenTo": true
+          },
+          {
+            "from": {
+              "x": 16376,
+              "y": 1104.5877574034967
+            },
+            "to": {
+              "x": 1372.521404792089,
+              "y": 706
+            },
+            "time": 0,
+            "initial": true,
+            "hiddenFrom": true,
+            "hiddenTo": true
+          }
+        ]
+      },
+      "stats": {
+        "collisions": 0,
+        "redLights": 0,
+        "rightOnRed": 0,
+        "pickups": 0,
+        "deliveries": 0,
+        "missed": 0
+      },
+      "time": 7.8333333333335124,
+      "render": {
+        "drawMs": 18.024090909170496,
+        "simulationMs": 4.11909090899439,
+        "totalFrameMs": 22.148181818180124,
+        "visibleChunks": 40,
+        "totalChunks": 1932,
+        "dynamicVertices": 26571
+      },
+      "errors": []
+    },
+    {
+      "preset": "rush",
+      "rate": 1,
+      "wallMs": 6027,
+      "fps": 27.874564459930312,
+      "callbackMeanMs": 16.97136363638565,
+      "callbackP95Ms": 27.40000000037253,
+      "drawGapP95Ms": 47.09999999962747,
+      "mode": "playing",
+      "cars": 160,
+      "density": {
+        "target": 160,
+        "nearby": 44,
+        "close": 6,
+        "movingNearby": 21,
+        "queuedNearby": 30,
+        "stoppedNearby": 22,
+        "spawned": 2,
+        "relocated": 30,
+        "lastMoves": [
+          {
+            "from": {
+              "x": 27488.542668798473,
+              "y": 2940
+            },
+            "to": {
+              "x": 908.7762974204961,
+              "y": 1998
+            },
+            "time": 0,
+            "initial": true,
+            "hiddenFrom": true,
+            "hiddenTo": true
+          },
+          {
+            "from": {
+              "x": 27466.932782314252,
+              "y": 820
+            },
+            "to": {
+              "x": 798,
+              "y": 961.4537596595474
+            },
+            "time": 0,
+            "initial": true,
+            "hiddenFrom": true,
+            "hiddenTo": true
+          },
+          {
+            "from": {
+              "x": 27376.525182416663,
+              "y": 3016
+            },
+            "to": {
+              "x": 1267,
+              "y": 479.82993189804256
+            },
+            "time": 0,
+            "initial": true,
+            "hiddenFrom": true,
+            "hiddenTo": true
+          },
+          {
+            "from": {
+              "x": 27180,
+              "y": 1664.1960149095394
+            },
+            "to": {
+              "x": 1508.1298940945417,
+              "y": 1185
+            },
+            "time": 0,
+            "initial": true,
+            "hiddenFrom": true,
+            "hiddenTo": true
+          },
+          {
+            "from": {
+              "x": 27180,
+              "y": 1063.0622089025564
+            },
+            "to": {
+              "x": 686,
+              "y": 1853.1304026599973
+            },
+            "time": 0,
+            "initial": true,
+            "hiddenFrom": true,
+            "hiddenTo": true
+          },
+          {
+            "from": {
+              "x": 27054.856104131322,
+              "y": 200.00000000000003
+            },
+            "to": {
+              "x": 1231,
+              "y": 1757.6950812749565
+            },
+            "time": 0,
+            "initial": true,
+            "hiddenFrom": true,
+            "hiddenTo": true
+          },
+          {
+            "from": {
+              "x": 26970.867010864895,
+              "y": 3016
+            },
+            "to": {
+              "x": 1231,
+              "y": 814.508583440911
+            },
+            "time": 0,
+            "initial": true,
+            "hiddenFrom": true,
+            "hiddenTo": true
+          },
+          {
+            "from": {
+              "x": 26792.765013368335,
+              "y": 820
+            },
+            "to": {
+              "x": 1386.903184609022,
+              "y": 1962
+            },
+            "time": 0,
+            "initial": true,
+            "hiddenFrom": true,
+            "hiddenTo": true
+          },
+          {
+            "from": {
+              "x": 26676,
+              "y": 573.5290687647648
+            },
+            "to": {
+              "x": 1026.2955432315357,
+              "y": 594
+            },
+            "time": 0,
+            "initial": true,
+            "hiddenFrom": true,
+            "hiddenTo": true
+          },
+          {
+            "from": {
+              "x": 26600,
+              "y": 2820.8711504703388
+            },
+            "to": {
+              "x": 1669,
+              "y": 815.9768733396195
+            },
+            "time": 0,
+            "initial": true,
+            "hiddenFrom": true,
+            "hiddenTo": true
+          },
+          {
+            "from": {
+              "x": 26600,
+              "y": 2608.969938158989
+            },
+            "to": {
+              "x": 379.66128538316116,
+              "y": 706
+            },
+            "time": 0,
+            "initial": true,
+            "hiddenFrom": true,
+            "hiddenTo": true
+          },
+          {
+            "from": {
+              "x": 26564,
+              "y": 1673.7264492362738
+            },
+            "to": {
+              "x": 403.88506215717643,
+              "y": 276
+            },
+            "time": 0,
+            "initial": true,
+            "hiddenFrom": true,
+            "hiddenTo": true
+          }
+        ]
+      },
+      "stats": {
+        "collisions": 0,
+        "redLights": 0,
+        "rightOnRed": 0,
+        "pickups": 0,
+        "deliveries": 0,
+        "missed": 0
+      },
+      "time": 7.78333333333351,
+      "render": {
+        "drawMs": 18.29521739133026,
+        "simulationMs": 5.179130434771271,
+        "totalFrameMs": 23.47869565220469,
+        "visibleChunks": 40,
+        "totalChunks": 1932,
+        "dynamicVertices": 32553
+      },
+      "errors": []
+    },
+    {
+      "preset": "gridlock",
+      "rate": 1,
+      "wallMs": 6059,
+      "fps": 25.25169169830005,
+      "callbackMeanMs": 26.85490196077701,
+      "callbackP95Ms": 36.40000000037253,
+      "drawGapP95Ms": 48.600000001490116,
+      "mode": "playing",
+      "cars": 224,
+      "density": {
+        "target": 224,
+        "nearby": 54,
+        "close": 9,
+        "movingNearby": 29,
+        "queuedNearby": 35,
+        "stoppedNearby": 23,
+        "spawned": 2,
+        "relocated": 42,
+        "lastMoves": [
+          {
+            "from": {
+              "x": 27376.525182416663,
+              "y": 3016
+            },
+            "to": {
+              "x": 762,
+              "y": 1741.244072300382
+            },
+            "time": 0,
+            "initial": true,
+            "hiddenFrom": true,
+            "hiddenTo": true
+          },
+          {
+            "from": {
+              "x": 27256,
+              "y": 2628.352640499361
+            },
+            "to": {
+              "x": 1155,
+              "y": 802.5887285524514
+            },
+            "time": 0,
+            "initial": true,
+            "hiddenFrom": true,
+            "hiddenTo": true
+          },
+          {
+            "from": {
+              "x": 27180,
+              "y": 1664.1960149095394
+            },
+            "to": {
+              "x": 798,
+              "y": 384.48103406559676
+            },
+            "time": 0,
+            "initial": true,
+            "hiddenFrom": true,
+            "hiddenTo": true
+          },
+          {
+            "from": {
+              "x": 27180,
+              "y": 1063.0622089025564
+            },
+            "to": {
+              "x": 919.7953163089696,
+              "y": 200.00000000000003
+            },
+            "time": 0,
+            "initial": true,
+            "hiddenFrom": true,
+            "hiddenTo": true
+          },
+          {
+            "from": {
+              "x": 27144,
+              "y": 2200.424874899909
+            },
+            "to": {
+              "x": 200.00000000000003,
+              "y": 1818.610943743959
+            },
+            "time": 0,
+            "initial": true,
+            "hiddenFrom": true,
+            "hiddenTo": true
+          },
+          {
+            "from": {
+              "x": 27054.856104131322,
+              "y": 200.00000000000003
+            },
+            "to": {
+              "x": 1522.9215347273275,
+              "y": 1530
+            },
+            "time": 0,
+            "initial": true,
+            "hiddenFrom": true,
+            "hiddenTo": true
+          },
+          {
+            "from": {
+              "x": 26970.867010864895,
+              "y": 3016
+            },
+            "to": {
+              "x": 1745,
+              "y": 892.4068209219258
+            },
+            "time": 0,
+            "initial": true,
+            "hiddenFrom": true,
+            "hiddenTo": true
+          },
+          {
+            "from": {
+              "x": 26831.711342807394,
+              "y": 1980
+            },
+            "to": {
+              "x": 762,
+              "y": 1861.6315060090274
+            },
+            "time": 0,
+            "initial": true,
+            "hiddenFrom": true,
+            "hiddenTo": true
+          },
+          {
+            "from": {
+              "x": 26792.765013368335,
+              "y": 820
+            },
+            "to": {
+              "x": 966.8367627258413,
+              "y": 240
+            },
+            "time": 0,
+            "initial": true,
+            "hiddenFrom": true,
+            "hiddenTo": true
+          },
+          {
+            "from": {
+              "x": 26676,
+              "y": 573.5290687647648
+            },
+            "to": {
+              "x": 798,
+              "y": 486.50037093181163
+            },
+            "time": 0,
+            "initial": true,
+            "hiddenFrom": true,
+            "hiddenTo": true
+          },
+          {
+            "from": {
+              "x": 16376,
+              "y": 1084.0818782438837
+            },
+            "to": {
+              "x": 416.8327019922435,
+              "y": 670
+            },
+            "time": 4.049999999999991,
+            "initial": false,
+            "hiddenFrom": true,
+            "hiddenTo": true
+          },
+          {
+            "from": {
+              "x": 16108.093888888889,
+              "y": 2904
+            },
+            "to": {
+              "x": 164.00000000000003,
+              "y": 463.700912700966
+            },
+            "time": 6.066666666666758,
+            "initial": false,
+            "hiddenFrom": true,
+            "hiddenTo": true
+          }
+        ]
+      },
+      "stats": {
+        "collisions": 0,
+        "redLights": 0,
+        "rightOnRed": 0,
+        "pickups": 0,
+        "deliveries": 0,
+        "missed": 0
+      },
+      "time": 7.7333333333335075,
+      "render": {
+        "drawMs": 19.179425837284924,
+        "simulationMs": 8.048325358849892,
+        "totalFrameMs": 27.231100478436815,
+        "visibleChunks": 40,
+        "totalChunks": 1932,
+        "dynamicVertices": 40413
+      },
+      "errors": []
+    },
+    {
+      "preset": "normal",
+      "rate": 4,
+      "wallMs": 6762,
+      "fps": 4.140786749482402,
+      "callbackMeanMs": 179.81785714293696,
+      "callbackP95Ms": 238.90000000037253,
+      "drawGapP95Ms": 311.40000000037253,
+      "mode": "playing",
+      "cars": 96,
+      "density": {
+        "target": 96,
+        "nearby": 25,
+        "close": 4,
+        "movingNearby": 13,
+        "queuedNearby": 14,
+        "stoppedNearby": 11,
+        "spawned": 2,
+        "relocated": 17,
+        "lastMoves": [
+          {
+            "from": {
+              "x": 28572.381497537717,
+              "y": 1940
+            },
+            "to": {
+              "x": 912.6537026269361,
+              "y": 706
+            },
+            "time": 0,
+            "initial": true,
+            "hiddenFrom": true,
+            "hiddenTo": true
+          },
+          {
+            "from": {
+              "x": 28380,
+              "y": 2218.1562014552765
+            },
+            "to": {
+              "x": 1633,
+              "y": 804.1645982463378
+            },
+            "time": 0,
+            "initial": true,
+            "hiddenFrom": true,
+            "hiddenTo": true
+          },
+          {
+            "from": {
+              "x": 28380,
+              "y": 1194.4499168451875
+            },
+            "to": {
+              "x": 1059.26894427347,
+              "y": 670
+            },
+            "time": 0,
+            "initial": true,
+            "hiddenFrom": true,
+            "hiddenTo": true
+          },
+          {
+            "from": {
+              "x": 27800,
+              "y": 2193.043389120139
+            },
+            "to": {
+              "x": 686,
+              "y": 1374.0672857735772
+            },
+            "time": 0,
+            "initial": true,
+            "hiddenFrom": true,
+            "hiddenTo": true
+          },
+          {
+            "from": {
+              "x": 27466.932782314252,
+              "y": 820
+            },
+            "to": {
+              "x": 491.5786210298538,
+              "y": 2038
+            },
+            "time": 0,
+            "initial": true,
+            "hiddenFrom": true,
+            "hiddenTo": true
+          },
+          {
+            "from": {
+              "x": 27180,
+              "y": 1063.0622089025564
+            },
+            "to": {
+              "x": 798,
+              "y": 1801.3823522161692
+            },
+            "time": 0,
+            "initial": true,
+            "hiddenFrom": true,
+            "hiddenTo": true
+          },
+          {
+            "from": {
+              "x": 27054.856104131322,
+              "y": 200.00000000000003
+            },
+            "to": {
+              "x": 505.24195632571355,
+              "y": 2074
+            },
+            "time": 0,
+            "initial": true,
+            "hiddenFrom": true,
+            "hiddenTo": true
+          },
+          {
+            "from": {
+              "x": 26970.867010864895,
+              "y": 3016
+            },
+            "to": {
+              "x": 1422.1351890973747,
+              "y": 1109
+            },
+            "time": 0,
+            "initial": true,
+            "hiddenFrom": true,
+            "hiddenTo": true
+          },
+          {
+            "from": {
+              "x": 26676,
+              "y": 573.5290687647648
+            },
+            "to": {
+              "x": 1191,
+              "y": 837.5167810909916
+            },
+            "time": 0,
+            "initial": true,
+            "hiddenFrom": true,
+            "hiddenTo": true
+          },
+          {
+            "from": {
+              "x": 26600,
+              "y": 2820.8711504703388
+            },
+            "to": {
+              "x": 924.7169742910191,
+              "y": 594
+            },
+            "time": 0,
+            "initial": true,
+            "hiddenFrom": true,
+            "hiddenTo": true
+          },
+          {
+            "from": {
+              "x": 26600,
+              "y": 2608.969938158989
+            },
+            "to": {
+              "x": 686,
+              "y": 365.46823564590886
+            },
+            "time": 0,
+            "initial": true,
+            "hiddenFrom": true,
+            "hiddenTo": true
+          },
+          {
+            "from": {
+              "x": 16376,
+              "y": 1104.5877574034967
+            },
+            "to": {
+              "x": 1372.521404792089,
+              "y": 706
+            },
+            "time": 0,
+            "initial": true,
+            "hiddenFrom": true,
+            "hiddenTo": true
+          }
+        ]
+      },
+      "stats": {
+        "collisions": 0,
+        "redLights": 0,
+        "rightOnRed": 0,
+        "pickups": 0,
+        "deliveries": 0,
+        "missed": 0
+      },
+      "time": 8.316666666666835,
+      "render": {
+        "drawMs": 64.85454545453699,
+        "simulationMs": 80.82272727283734,
+        "totalFrameMs": 145.6840909091671,
+        "visibleChunks": 40,
+        "totalChunks": 1932,
+        "dynamicVertices": 26571
+      },
+      "errors": []
+    },
+    {
+      "preset": "rush",
+      "rate": 4,
+      "wallMs": 6768,
+      "fps": 2.955082742316785,
+      "callbackMeanMs": 279.7449999999255,
+      "callbackP95Ms": 343.5,
+      "drawGapP95Ms": 387.59999999962747,
+      "mode": "playing",
+      "cars": 160,
+      "density": {
+        "target": 160,
+        "nearby": 43,
+        "close": 6,
+        "movingNearby": 15,
+        "queuedNearby": 26,
+        "stoppedNearby": 24,
+        "spawned": 2,
+        "relocated": 30,
+        "lastMoves": [
+          {
+            "from": {
+              "x": 27488.542668798473,
+              "y": 2940
+            },
+            "to": {
+              "x": 908.7762974204961,
+              "y": 1998
+            },
+            "time": 0,
+            "initial": true,
+            "hiddenFrom": true,
+            "hiddenTo": true
+          },
+          {
+            "from": {
+              "x": 27466.932782314252,
+              "y": 820
+            },
+            "to": {
+              "x": 798,
+              "y": 961.4537596595474
+            },
+            "time": 0,
+            "initial": true,
+            "hiddenFrom": true,
+            "hiddenTo": true
+          },
+          {
+            "from": {
+              "x": 27376.525182416663,
+              "y": 3016
+            },
+            "to": {
+              "x": 1267,
+              "y": 479.82993189804256
+            },
+            "time": 0,
+            "initial": true,
+            "hiddenFrom": true,
+            "hiddenTo": true
+          },
+          {
+            "from": {
+              "x": 27180,
+              "y": 1664.1960149095394
+            },
+            "to": {
+              "x": 1508.1298940945417,
+              "y": 1185
+            },
+            "time": 0,
+            "initial": true,
+            "hiddenFrom": true,
+            "hiddenTo": true
+          },
+          {
+            "from": {
+              "x": 27180,
+              "y": 1063.0622089025564
+            },
+            "to": {
+              "x": 686,
+              "y": 1853.1304026599973
+            },
+            "time": 0,
+            "initial": true,
+            "hiddenFrom": true,
+            "hiddenTo": true
+          },
+          {
+            "from": {
+              "x": 27054.856104131322,
+              "y": 200.00000000000003
+            },
+            "to": {
+              "x": 1231,
+              "y": 1757.6950812749565
+            },
+            "time": 0,
+            "initial": true,
+            "hiddenFrom": true,
+            "hiddenTo": true
+          },
+          {
+            "from": {
+              "x": 26970.867010864895,
+              "y": 3016
+            },
+            "to": {
+              "x": 1231,
+              "y": 814.508583440911
+            },
+            "time": 0,
+            "initial": true,
+            "hiddenFrom": true,
+            "hiddenTo": true
+          },
+          {
+            "from": {
+              "x": 26792.765013368335,
+              "y": 820
+            },
+            "to": {
+              "x": 1386.903184609022,
+              "y": 1962
+            },
+            "time": 0,
+            "initial": true,
+            "hiddenFrom": true,
+            "hiddenTo": true
+          },
+          {
+            "from": {
+              "x": 26676,
+              "y": 573.5290687647648
+            },
+            "to": {
+              "x": 1026.2955432315357,
+              "y": 594
+            },
+            "time": 0,
+            "initial": true,
+            "hiddenFrom": true,
+            "hiddenTo": true
+          },
+          {
+            "from": {
+              "x": 26600,
+              "y": 2820.8711504703388
+            },
+            "to": {
+              "x": 1669,
+              "y": 815.9768733396195
+            },
+            "time": 0,
+            "initial": true,
+            "hiddenFrom": true,
+            "hiddenTo": true
+          },
+          {
+            "from": {
+              "x": 26600,
+              "y": 2608.969938158989
+            },
+            "to": {
+              "x": 379.66128538316116,
+              "y": 706
+            },
+            "time": 0,
+            "initial": true,
+            "hiddenFrom": true,
+            "hiddenTo": true
+          },
+          {
+            "from": {
+              "x": 26564,
+              "y": 1673.7264492362738
+            },
+            "to": {
+              "x": 403.88506215717643,
+              "y": 276
+            },
+            "time": 0,
+            "initial": true,
+            "hiddenFrom": true,
+            "hiddenTo": true
+          }
+        ]
+      },
+      "stats": {
+        "collisions": 0,
+        "redLights": 0,
+        "rightOnRed": 0,
+        "pickups": 0,
+        "deliveries": 0,
+        "missed": 0
+      },
+      "time": 8.53333333333349,
+      "render": {
+        "drawMs": 52.27608695646505,
+        "simulationMs": 108.99999999987853,
+        "totalFrameMs": 161.304347825844,
+        "visibleChunks": 40,
+        "totalChunks": 1932,
+        "dynamicVertices": 32553
+      },
+      "errors": []
+    },
+    {
+      "preset": "gridlock",
+      "rate": 4,
+      "wallMs": 6717,
+      "fps": 1.6376358493375018,
+      "callbackMeanMs": 547.2181818182157,
+      "callbackP95Ms": 614.1000000014901,
+      "drawGapP95Ms": 690,
+      "mode": "playing",
+      "cars": 224,
+      "density": {
+        "target": 224,
+        "nearby": 55,
+        "close": 11,
+        "movingNearby": 31,
+        "queuedNearby": 35,
+        "stoppedNearby": 24,
+        "spawned": 2,
+        "relocated": 42,
+        "lastMoves": [
+          {
+            "from": {
+              "x": 27376.525182416663,
+              "y": 3016
+            },
+            "to": {
+              "x": 762,
+              "y": 1741.244072300382
+            },
+            "time": 0,
+            "initial": true,
+            "hiddenFrom": true,
+            "hiddenTo": true
+          },
+          {
+            "from": {
+              "x": 27256,
+              "y": 2628.352640499361
+            },
+            "to": {
+              "x": 1155,
+              "y": 802.5887285524514
+            },
+            "time": 0,
+            "initial": true,
+            "hiddenFrom": true,
+            "hiddenTo": true
+          },
+          {
+            "from": {
+              "x": 27180,
+              "y": 1664.1960149095394
+            },
+            "to": {
+              "x": 798,
+              "y": 384.48103406559676
+            },
+            "time": 0,
+            "initial": true,
+            "hiddenFrom": true,
+            "hiddenTo": true
+          },
+          {
+            "from": {
+              "x": 27180,
+              "y": 1063.0622089025564
+            },
+            "to": {
+              "x": 919.7953163089696,
+              "y": 200.00000000000003
+            },
+            "time": 0,
+            "initial": true,
+            "hiddenFrom": true,
+            "hiddenTo": true
+          },
+          {
+            "from": {
+              "x": 27144,
+              "y": 2200.424874899909
+            },
+            "to": {
+              "x": 200.00000000000003,
+              "y": 1818.610943743959
+            },
+            "time": 0,
+            "initial": true,
+            "hiddenFrom": true,
+            "hiddenTo": true
+          },
+          {
+            "from": {
+              "x": 27054.856104131322,
+              "y": 200.00000000000003
+            },
+            "to": {
+              "x": 1522.9215347273275,
+              "y": 1530
+            },
+            "time": 0,
+            "initial": true,
+            "hiddenFrom": true,
+            "hiddenTo": true
+          },
+          {
+            "from": {
+              "x": 26970.867010864895,
+              "y": 3016
+            },
+            "to": {
+              "x": 1745,
+              "y": 892.4068209219258
+            },
+            "time": 0,
+            "initial": true,
+            "hiddenFrom": true,
+            "hiddenTo": true
+          },
+          {
+            "from": {
+              "x": 26831.711342807394,
+              "y": 1980
+            },
+            "to": {
+              "x": 762,
+              "y": 1861.6315060090274
+            },
+            "time": 0,
+            "initial": true,
+            "hiddenFrom": true,
+            "hiddenTo": true
+          },
+          {
+            "from": {
+              "x": 26792.765013368335,
+              "y": 820
+            },
+            "to": {
+              "x": 966.8367627258413,
+              "y": 240
+            },
+            "time": 0,
+            "initial": true,
+            "hiddenFrom": true,
+            "hiddenTo": true
+          },
+          {
+            "from": {
+              "x": 26676,
+              "y": 573.5290687647648
+            },
+            "to": {
+              "x": 798,
+              "y": 486.50037093181163
+            },
+            "time": 0,
+            "initial": true,
+            "hiddenFrom": true,
+            "hiddenTo": true
+          },
+          {
+            "from": {
+              "x": 16376,
+              "y": 1084.0818782438837
+            },
+            "to": {
+              "x": 416.8327019922435,
+              "y": 670
+            },
+            "time": 4.049999999999991,
+            "initial": false,
+            "hiddenFrom": true,
+            "hiddenTo": true
+          },
+          {
+            "from": {
+              "x": 16108.093888888889,
+              "y": 2904
+            },
+            "to": {
+              "x": 164.00000000000003,
+              "y": 463.700912700966
+            },
+            "time": 6.066666666666758,
+            "initial": false,
+            "hiddenFrom": true,
+            "hiddenTo": true
+          }
+        ]
+      },
+      "stats": {
+        "collisions": 0,
+        "redLights": 0,
+        "rightOnRed": 0,
+        "pickups": 0,
+        "deliveries": 0,
+        "missed": 0
+      },
+      "time": 6.816666666666795,
+      "render": {
+        "drawMs": 47.34736842088597,
+        "simulationMs": 155.02368421063414,
+        "totalFrameMs": 202.3736842104577,
+        "visibleChunks": 40,
+        "totalChunks": 1932,
+        "dynamicVertices": 39525
+      },
+      "errors": []
+    }
+  ]
+}

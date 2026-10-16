@@ -1,0 +1,7 @@
+{
+  "baseline": "7508658c544a18365c779d9b37d508f1e877e667",
+  "carPairs": 100000,
+  "obstacles": 100000,
+  "differences": 0,
+  "method": "seeded rotated taxi/bus/box poses; reused mutable objects also verify cache invalidation; original exact chamfered SAT is reference"
+}

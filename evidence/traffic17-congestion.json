@@ -1,0 +1,2633 @@
+{
+  "scope": "fixed initial vehicle population, real signals and following, sixty simulated seconds, no director/render, one-second exact hull overlap audits; longest wait measured only while queueing",
+  "results": [
+    {
+      "seed": 8427,
+      "preset": "normal",
+      "cars": 96,
+      "crossings": 439,
+      "maxQueued": 53,
+      "maxStopped": 40,
+      "maxWaitSeconds": 24.283333333331957,
+      "final": {
+        "second": 60,
+        "queued": 41,
+        "stopped": 28,
+        "maxWaitSeconds": 8.033333333332877,
+        "crossings": 439
+      },
+      "samples": [
+        {
+          "second": 1,
+          "queued": 48,
+          "stopped": 12,
+          "maxWaitSeconds": 0.9916666666666656,
+          "crossings": 0
+        },
+        {
+          "second": 2,
+          "queued": 53,
+          "stopped": 31,
+          "maxWaitSeconds": 1.991666666666662,
+          "crossings": 0
+        },
+        {
+          "second": 3,
+          "queued": 43,
+          "stopped": 40,
+          "maxWaitSeconds": 2.9916666666666587,
+          "crossings": 4
+        },
+        {
+          "second": 4,
+          "queued": 39,
+          "stopped": 34,
+          "maxWaitSeconds": 3.991666666666655,
+          "crossings": 17
+        },
+        {
+          "second": 5,
+          "queued": 38,
+          "stopped": 32,
+          "maxWaitSeconds": 4.991666666666704,
+          "crossings": 25
+        },
+        {
+          "second": 6,
+          "queued": 35,
+          "stopped": 28,
+          "maxWaitSeconds": 5.991666666666754,
+          "crossings": 26
+        },
+        {
+          "second": 7,
+          "queued": 37,
+          "stopped": 33,
+          "maxWaitSeconds": 6.991666666666804,
+          "crossings": 33
+        },
+        {
+          "second": 8,
+          "queued": 35,
+          "stopped": 28,
+          "maxWaitSeconds": 7.991666666666853,
+          "crossings": 44
+        },
+        {
+          "second": 9,
+          "queued": 29,
+          "stopped": 24,
+          "maxWaitSeconds": 8.991666666666797,
+          "crossings": 53
+        },
+        {
+          "second": 10,
+          "queued": 28,
+          "stopped": 21,
+          "maxWaitSeconds": 8.99166666666674,
+          "crossings": 59
+        },
+        {
+          "second": 11,
+          "queued": 31,
+          "stopped": 22,
+          "maxWaitSeconds": 9.991666666666683,
+          "crossings": 65
+        },
+        {
+          "second": 12,
+          "queued": 29,
+          "stopped": 22,
+          "maxWaitSeconds": 10.991666666666626,
+          "crossings": 75
+        },
+        {
+          "second": 13,
+          "queued": 33,
+          "stopped": 20,
+          "maxWaitSeconds": 11.99166666666657,
+          "crossings": 85
+        },
+        {
+          "second": 14,
+          "queued": 30,
+          "stopped": 25,
+          "maxWaitSeconds": 10.316666666666523,
+          "crossings": 93
+        },
+        {
+          "second": 15,
+          "queued": 32,
+          "stopped": 22,
+          "maxWaitSeconds": 7.433333333332956,
+          "crossings": 102
+        },
+        {
+          "second": 16,
+          "queued": 33,
+          "stopped": 25,
+          "maxWaitSeconds": 8.4333333333329,
+          "crossings": 108
+        },
+        {
+          "second": 17,
+          "queued": 34,
+          "stopped": 21,
+          "maxWaitSeconds": 9.433333333332843,
+          "crossings": 120
+        },
+        {
+          "second": 18,
+          "queued": 34,
+          "stopped": 23,
+          "maxWaitSeconds": 8.858333333332832,
+          "crossings": 128
+        },
+        {
+          "second": 19,
+          "queued": 36,
+          "stopped": 23,
+          "maxWaitSeconds": 9.041666666666154,
+          "crossings": 133
+        },
+        {
+          "second": 20,
+          "queued": 38,
+          "stopped": 25,
+          "maxWaitSeconds": 8.641666666666177,
+          "crossings": 138
+        },
+        {
+          "second": 21,
+          "queued": 35,
+          "stopped": 29,
+          "maxWaitSeconds": 9.64166666666612,
+          "crossings": 144
+        },
+        {
+          "second": 22,
+          "queued": 32,
+          "stopped": 28,
+          "maxWaitSeconds": 10.641666666666064,
+          "crossings": 152
+        },
+        {
+          "second": 23,
+          "queued": 33,
+          "stopped": 28,
+          "maxWaitSeconds": 10.208333333332755,
+          "crossings": 166
+        },
+        {
+          "second": 24,
+          "queued": 36,
+          "stopped": 28,
+          "maxWaitSeconds": 9.549999999999459,
+          "crossings": 174
+        },
+        {
+          "second": 25,
+          "queued": 36,
+          "stopped": 24,
+          "maxWaitSeconds": 10.549999999999402,
+          "crossings": 178
+        },
+        {
+          "second": 26,
+          "queued": 36,
+          "stopped": 27,
+          "maxWaitSeconds": 10.799999999999388,
+          "crossings": 185
+        },
+        {
+          "second": 27,
+          "queued": 34,
+          "stopped": 25,
+          "maxWaitSeconds": 11.799999999999331,
+          "crossings": 192
+        },
+        {
+          "second": 28,
+          "queued": 34,
+          "stopped": 28,
+          "maxWaitSeconds": 12.799999999999274,
+          "crossings": 202
+        },
+        {
+          "second": 29,
+          "queued": 37,
+          "stopped": 26,
+          "maxWaitSeconds": 13.799999999999217,
+          "crossings": 210
+        },
+        {
+          "second": 30,
+          "queued": 41,
+          "stopped": 29,
+          "maxWaitSeconds": 14.79999999999916,
+          "crossings": 220
+        },
+        {
+          "second": 31,
+          "queued": 36,
+          "stopped": 28,
+          "maxWaitSeconds": 15.799999999999104,
+          "crossings": 225
+        },
+        {
+          "second": 32,
+          "queued": 38,
+          "stopped": 29,
+          "maxWaitSeconds": 12.983333333332595,
+          "crossings": 233
+        },
+        {
+          "second": 33,
+          "queued": 35,
+          "stopped": 26,
+          "maxWaitSeconds": 13.983333333332542,
+          "crossings": 241
+        },
+        {
+          "second": 34,
+          "queued": 36,
+          "stopped": 28,
+          "maxWaitSeconds": 14.983333333332485,
+          "crossings": 247
+        },
+        {
+          "second": 35,
+          "queued": 36,
+          "stopped": 30,
+          "maxWaitSeconds": 15.983333333332428,
+          "crossings": 254
+        },
+        {
+          "second": 36,
+          "queued": 37,
+          "stopped": 32,
+          "maxWaitSeconds": 16.98333333333237,
+          "crossings": 259
+        },
+        {
+          "second": 37,
+          "queued": 35,
+          "stopped": 30,
+          "maxWaitSeconds": 17.983333333332315,
+          "crossings": 274
+        },
+        {
+          "second": 38,
+          "queued": 37,
+          "stopped": 24,
+          "maxWaitSeconds": 10.283333333332752,
+          "crossings": 277
+        },
+        {
+          "second": 39,
+          "queued": 38,
+          "stopped": 25,
+          "maxWaitSeconds": 11.283333333332696,
+          "crossings": 286
+        },
+        {
+          "second": 40,
+          "queued": 40,
+          "stopped": 29,
+          "maxWaitSeconds": 12.283333333332639,
+          "crossings": 290
+        },
+        {
+          "second": 41,
+          "queued": 43,
+          "stopped": 31,
+          "maxWaitSeconds": 13.283333333332582,
+          "crossings": 296
+        },
+        {
+          "second": 42,
+          "queued": 39,
+          "stopped": 30,
+          "maxWaitSeconds": 14.283333333332525,
+          "crossings": 307
+        },
+        {
+          "second": 43,
+          "queued": 39,
+          "stopped": 34,
+          "maxWaitSeconds": 15.283333333332468,
+          "crossings": 313
+        },
+        {
+          "second": 44,
+          "queued": 40,
+          "stopped": 32,
+          "maxWaitSeconds": 16.28333333333241,
+          "crossings": 319
+        },
+        {
+          "second": 45,
+          "queued": 39,
+          "stopped": 29,
+          "maxWaitSeconds": 17.283333333332354,
+          "crossings": 322
+        },
+        {
+          "second": 46,
+          "queued": 39,
+          "stopped": 32,
+          "maxWaitSeconds": 18.283333333332298,
+          "crossings": 335
+        },
+        {
+          "second": 47,
+          "queued": 39,
+          "stopped": 31,
+          "maxWaitSeconds": 19.28333333333224,
+          "crossings": 338
+        },
+        {
+          "second": 48,
+          "queued": 37,
+          "stopped": 28,
+          "maxWaitSeconds": 20.283333333332184,
+          "crossings": 346
+        },
+        {
+          "second": 49,
+          "queued": 40,
+          "stopped": 28,
+          "maxWaitSeconds": 21.283333333332127,
+          "crossings": 355
+        },
+        {
+          "second": 50,
+          "queued": 38,
+          "stopped": 29,
+          "maxWaitSeconds": 22.28333333333207,
+          "crossings": 357
+        },
+        {
+          "second": 51,
+          "queued": 30,
+          "stopped": 22,
+          "maxWaitSeconds": 23.283333333332013,
+          "crossings": 364
+        },
+        {
+          "second": 52,
+          "queued": 31,
+          "stopped": 24,
+          "maxWaitSeconds": 24.283333333331957,
+          "crossings": 376
+        },
+        {
+          "second": 53,
+          "queued": 29,
+          "stopped": 24,
+          "maxWaitSeconds": 16.999999999999034,
+          "crossings": 381
+        },
+        {
+          "second": 54,
+          "queued": 27,
+          "stopped": 20,
+          "maxWaitSeconds": 17.999999999998977,
+          "crossings": 387
+        },
+        {
+          "second": 55,
+          "queued": 26,
+          "stopped": 20,
+          "maxWaitSeconds": 18.99999999999892,
+          "crossings": 402
+        },
+        {
+          "second": 56,
+          "queued": 32,
+          "stopped": 22,
+          "maxWaitSeconds": 19.999999999998863,
+          "crossings": 408
+        },
+        {
+          "second": 57,
+          "queued": 37,
+          "stopped": 26,
+          "maxWaitSeconds": 20.999999999998806,
+          "crossings": 413
+        },
+        {
+          "second": 58,
+          "queued": 32,
+          "stopped": 27,
+          "maxWaitSeconds": 10.341666666666079,
+          "crossings": 425
+        },
+        {
+          "second": 59,
+          "queued": 31,
+          "stopped": 23,
+          "maxWaitSeconds": 7.0333333333329335,
+          "crossings": 435
+        },
+        {
+          "second": 60,
+          "queued": 41,
+          "stopped": 28,
+          "maxWaitSeconds": 8.033333333332877,
+          "crossings": 439
+        }
+      ]
+    },
+    {
+      "seed": 8427,
+      "preset": "rush",
+      "cars": 160,
+      "crossings": 683,
+      "maxQueued": 87,
+      "maxStopped": 72,
+      "maxWaitSeconds": 38.54166666666448,
+      "final": {
+        "second": 60,
+        "queued": 75,
+        "stopped": 58,
+        "maxWaitSeconds": 38.54166666666448,
+        "crossings": 683
+      },
+      "samples": [
+        {
+          "second": 1,
+          "queued": 80,
+          "stopped": 22,
+          "maxWaitSeconds": 0.9916666666666656,
+          "crossings": 0
+        },
+        {
+          "second": 2,
+          "queued": 87,
+          "stopped": 56,
+          "maxWaitSeconds": 1.991666666666662,
+          "crossings": 1
+        },
+        {
+          "second": 3,
+          "queued": 77,
+          "stopped": 72,
+          "maxWaitSeconds": 2.9916666666666587,
+          "crossings": 11
+        },
+        {
+          "second": 4,
+          "queued": 72,
+          "stopped": 62,
+          "maxWaitSeconds": 3.991666666666655,
+          "crossings": 30
+        },
+        {
+          "second": 5,
+          "queued": 69,
+          "stopped": 57,
+          "maxWaitSeconds": 4.991666666666704,
+          "crossings": 43
+        },
+        {
+          "second": 6,
+          "queued": 70,
+          "stopped": 55,
+          "maxWaitSeconds": 5.991666666666754,
+          "crossings": 44
+        },
+        {
+          "second": 7,
+          "queued": 69,
+          "stopped": 61,
+          "maxWaitSeconds": 6.991666666666804,
+          "crossings": 51
+        },
+        {
+          "second": 8,
+          "queued": 65,
+          "stopped": 55,
+          "maxWaitSeconds": 7.991666666666853,
+          "crossings": 68
+        },
+        {
+          "second": 9,
+          "queued": 50,
+          "stopped": 46,
+          "maxWaitSeconds": 8.991666666666797,
+          "crossings": 83
+        },
+        {
+          "second": 10,
+          "queued": 46,
+          "stopped": 35,
+          "maxWaitSeconds": 9.491666666666738,
+          "crossings": 93
+        },
+        {
+          "second": 11,
+          "queued": 48,
+          "stopped": 35,
+          "maxWaitSeconds": 10.491666666666681,
+          "crossings": 105
+        },
+        {
+          "second": 12,
+          "queued": 47,
+          "stopped": 35,
+          "maxWaitSeconds": 11.491666666666625,
+          "crossings": 117
+        },
+        {
+          "second": 13,
+          "queued": 55,
+          "stopped": 37,
+          "maxWaitSeconds": 12.491666666666568,
+          "crossings": 135
+        },
+        {
+          "second": 14,
+          "queued": 55,
+          "stopped": 40,
+          "maxWaitSeconds": 13.49166666666651,
+          "crossings": 152
+        },
+        {
+          "second": 15,
+          "queued": 63,
+          "stopped": 41,
+          "maxWaitSeconds": 14.491666666666454,
+          "crossings": 168
+        },
+        {
+          "second": 16,
+          "queued": 59,
+          "stopped": 43,
+          "maxWaitSeconds": 15.491666666666397,
+          "crossings": 176
+        },
+        {
+          "second": 17,
+          "queued": 67,
+          "stopped": 46,
+          "maxWaitSeconds": 16.491666666666344,
+          "crossings": 194
+        },
+        {
+          "second": 18,
+          "queued": 69,
+          "stopped": 50,
+          "maxWaitSeconds": 17.491666666666287,
+          "crossings": 208
+        },
+        {
+          "second": 19,
+          "queued": 72,
+          "stopped": 53,
+          "maxWaitSeconds": 18.49166666666623,
+          "crossings": 213
+        },
+        {
+          "second": 20,
+          "queued": 75,
+          "stopped": 55,
+          "maxWaitSeconds": 19.491666666666173,
+          "crossings": 224
+        },
+        {
+          "second": 21,
+          "queued": 66,
+          "stopped": 57,
+          "maxWaitSeconds": 20.491666666666116,
+          "crossings": 234
+        },
+        {
+          "second": 22,
+          "queued": 66,
+          "stopped": 56,
+          "maxWaitSeconds": 21.49166666666606,
+          "crossings": 241
+        },
+        {
+          "second": 23,
+          "queued": 61,
+          "stopped": 51,
+          "maxWaitSeconds": 22.491666666666003,
+          "crossings": 259
+        },
+        {
+          "second": 24,
+          "queued": 56,
+          "stopped": 48,
+          "maxWaitSeconds": 23.491666666665946,
+          "crossings": 268
+        },
+        {
+          "second": 25,
+          "queued": 54,
+          "stopped": 41,
+          "maxWaitSeconds": 24.49166666666589,
+          "crossings": 276
+        },
+        {
+          "second": 26,
+          "queued": 55,
+          "stopped": 45,
+          "maxWaitSeconds": 25.491666666665832,
+          "crossings": 290
+        },
+        {
+          "second": 27,
+          "queued": 52,
+          "stopped": 42,
+          "maxWaitSeconds": 26.491666666665775,
+          "crossings": 308
+        },
+        {
+          "second": 28,
+          "queued": 56,
+          "stopped": 42,
+          "maxWaitSeconds": 25.80833333333239,
+          "crossings": 319
+        },
+        {
+          "second": 29,
+          "queued": 64,
+          "stopped": 45,
+          "maxWaitSeconds": 26.80833333333233,
+          "crossings": 333
+        },
+        {
+          "second": 30,
+          "queued": 66,
+          "stopped": 50,
+          "maxWaitSeconds": 27.808333333332275,
+          "crossings": 344
+        },
+        {
+          "second": 31,
+          "queued": 63,
+          "stopped": 48,
+          "maxWaitSeconds": 28.808333333332218,
+          "crossings": 357
+        },
+        {
+          "second": 32,
+          "queued": 68,
+          "stopped": 50,
+          "maxWaitSeconds": 29.80833333333216,
+          "crossings": 370
+        },
+        {
+          "second": 33,
+          "queued": 62,
+          "stopped": 49,
+          "maxWaitSeconds": 30.808333333332108,
+          "crossings": 378
+        },
+        {
+          "second": 34,
+          "queued": 67,
+          "stopped": 51,
+          "maxWaitSeconds": 31.80833333333205,
+          "crossings": 389
+        },
+        {
+          "second": 35,
+          "queued": 64,
+          "stopped": 56,
+          "maxWaitSeconds": 32.808333333331994,
+          "crossings": 404
+        },
+        {
+          "second": 36,
+          "queued": 67,
+          "stopped": 58,
+          "maxWaitSeconds": 33.80833333333194,
+          "crossings": 414
+        },
+        {
+          "second": 37,
+          "queued": 66,
+          "stopped": 57,
+          "maxWaitSeconds": 34.80833333333188,
+          "crossings": 431
+        },
+        {
+          "second": 38,
+          "queued": 68,
+          "stopped": 56,
+          "maxWaitSeconds": 35.808333333331824,
+          "crossings": 439
+        },
+        {
+          "second": 39,
+          "queued": 67,
+          "stopped": 51,
+          "maxWaitSeconds": 17.541666666665673,
+          "crossings": 450
+        },
+        {
+          "second": 40,
+          "queued": 64,
+          "stopped": 51,
+          "maxWaitSeconds": 18.541666666665616,
+          "crossings": 457
+        },
+        {
+          "second": 41,
+          "queued": 66,
+          "stopped": 46,
+          "maxWaitSeconds": 19.54166666666556,
+          "crossings": 471
+        },
+        {
+          "second": 42,
+          "queued": 63,
+          "stopped": 51,
+          "maxWaitSeconds": 20.541666666665503,
+          "crossings": 484
+        },
+        {
+          "second": 43,
+          "queued": 65,
+          "stopped": 48,
+          "maxWaitSeconds": 21.541666666665446,
+          "crossings": 493
+        },
+        {
+          "second": 44,
+          "queued": 70,
+          "stopped": 54,
+          "maxWaitSeconds": 22.54166666666539,
+          "crossings": 509
+        },
+        {
+          "second": 45,
+          "queued": 68,
+          "stopped": 54,
+          "maxWaitSeconds": 23.541666666665332,
+          "crossings": 518
+        },
+        {
+          "second": 46,
+          "queued": 75,
+          "stopped": 57,
+          "maxWaitSeconds": 24.541666666665275,
+          "crossings": 530
+        },
+        {
+          "second": 47,
+          "queued": 80,
+          "stopped": 59,
+          "maxWaitSeconds": 25.54166666666522,
+          "crossings": 541
+        },
+        {
+          "second": 48,
+          "queued": 78,
+          "stopped": 62,
+          "maxWaitSeconds": 26.54166666666516,
+          "crossings": 548
+        },
+        {
+          "second": 49,
+          "queued": 74,
+          "stopped": 59,
+          "maxWaitSeconds": 27.541666666665105,
+          "crossings": 558
+        },
+        {
+          "second": 50,
+          "queued": 76,
+          "stopped": 61,
+          "maxWaitSeconds": 28.541666666665048,
+          "crossings": 566
+        },
+        {
+          "second": 51,
+          "queued": 64,
+          "stopped": 55,
+          "maxWaitSeconds": 29.54166666666499,
+          "crossings": 578
+        },
+        {
+          "second": 52,
+          "queued": 68,
+          "stopped": 49,
+          "maxWaitSeconds": 30.541666666664934,
+          "crossings": 586
+        },
+        {
+          "second": 53,
+          "queued": 66,
+          "stopped": 49,
+          "maxWaitSeconds": 31.541666666664877,
+          "crossings": 602
+        },
+        {
+          "second": 54,
+          "queued": 62,
+          "stopped": 46,
+          "maxWaitSeconds": 32.541666666664824,
+          "crossings": 610
+        },
+        {
+          "second": 55,
+          "queued": 60,
+          "stopped": 43,
+          "maxWaitSeconds": 33.54166666666477,
+          "crossings": 625
+        },
+        {
+          "second": 56,
+          "queued": 67,
+          "stopped": 45,
+          "maxWaitSeconds": 34.54166666666471,
+          "crossings": 634
+        },
+        {
+          "second": 57,
+          "queued": 69,
+          "stopped": 52,
+          "maxWaitSeconds": 35.54166666666465,
+          "crossings": 650
+        },
+        {
+          "second": 58,
+          "queued": 68,
+          "stopped": 54,
+          "maxWaitSeconds": 36.5416666666646,
+          "crossings": 657
+        },
+        {
+          "second": 59,
+          "queued": 77,
+          "stopped": 52,
+          "maxWaitSeconds": 37.54166666666454,
+          "crossings": 674
+        },
+        {
+          "second": 60,
+          "queued": 75,
+          "stopped": 58,
+          "maxWaitSeconds": 38.54166666666448,
+          "crossings": 683
+        }
+      ]
+    },
+    {
+      "seed": 8427,
+      "preset": "gridlock",
+      "cars": 224,
+      "crossings": 911,
+      "maxQueued": 123,
+      "maxStopped": 102,
+      "maxWaitSeconds": 38.54166666666448,
+      "final": {
+        "second": 60,
+        "queued": 101,
+        "stopped": 74,
+        "maxWaitSeconds": 38.54166666666448,
+        "crossings": 911
+      },
+      "samples": [
+        {
+          "second": 1,
+          "queued": 112,
+          "stopped": 30,
+          "maxWaitSeconds": 0.9916666666666656,
+          "crossings": 0
+        },
+        {
+          "second": 2,
+          "queued": 123,
+          "stopped": 79,
+          "maxWaitSeconds": 1.991666666666662,
+          "crossings": 1
+        },
+        {
+          "second": 3,
+          "queued": 109,
+          "stopped": 102,
+          "maxWaitSeconds": 2.9916666666666587,
+          "crossings": 14
+        },
+        {
+          "second": 4,
+          "queued": 99,
+          "stopped": 91,
+          "maxWaitSeconds": 3.991666666666655,
+          "crossings": 37
+        },
+        {
+          "second": 5,
+          "queued": 98,
+          "stopped": 84,
+          "maxWaitSeconds": 4.991666666666704,
+          "crossings": 55
+        },
+        {
+          "second": 6,
+          "queued": 98,
+          "stopped": 80,
+          "maxWaitSeconds": 5.991666666666754,
+          "crossings": 61
+        },
+        {
+          "second": 7,
+          "queued": 96,
+          "stopped": 83,
+          "maxWaitSeconds": 6.991666666666804,
+          "crossings": 70
+        },
+        {
+          "second": 8,
+          "queued": 84,
+          "stopped": 72,
+          "maxWaitSeconds": 7.991666666666853,
+          "crossings": 94
+        },
+        {
+          "second": 9,
+          "queued": 71,
+          "stopped": 57,
+          "maxWaitSeconds": 8.991666666666797,
+          "crossings": 112
+        },
+        {
+          "second": 10,
+          "queued": 62,
+          "stopped": 44,
+          "maxWaitSeconds": 9.99166666666674,
+          "crossings": 131
+        },
+        {
+          "second": 11,
+          "queued": 70,
+          "stopped": 45,
+          "maxWaitSeconds": 10.991666666666683,
+          "crossings": 147
+        },
+        {
+          "second": 12,
+          "queued": 69,
+          "stopped": 48,
+          "maxWaitSeconds": 11.491666666666625,
+          "crossings": 165
+        },
+        {
+          "second": 13,
+          "queued": 74,
+          "stopped": 52,
+          "maxWaitSeconds": 12.491666666666568,
+          "crossings": 187
+        },
+        {
+          "second": 14,
+          "queued": 80,
+          "stopped": 55,
+          "maxWaitSeconds": 13.49166666666651,
+          "crossings": 219
+        },
+        {
+          "second": 15,
+          "queued": 88,
+          "stopped": 58,
+          "maxWaitSeconds": 14.491666666666454,
+          "crossings": 238
+        },
+        {
+          "second": 16,
+          "queued": 93,
+          "stopped": 60,
+          "maxWaitSeconds": 15.491666666666397,
+          "crossings": 253
+        },
+        {
+          "second": 17,
+          "queued": 96,
+          "stopped": 66,
+          "maxWaitSeconds": 16.491666666666344,
+          "crossings": 271
+        },
+        {
+          "second": 18,
+          "queued": 100,
+          "stopped": 71,
+          "maxWaitSeconds": 17.491666666666287,
+          "crossings": 288
+        },
+        {
+          "second": 19,
+          "queued": 99,
+          "stopped": 72,
+          "maxWaitSeconds": 18.49166666666623,
+          "crossings": 302
+        },
+        {
+          "second": 20,
+          "queued": 107,
+          "stopped": 77,
+          "maxWaitSeconds": 19.491666666666173,
+          "crossings": 312
+        },
+        {
+          "second": 21,
+          "queued": 101,
+          "stopped": 85,
+          "maxWaitSeconds": 20.491666666666116,
+          "crossings": 329
+        },
+        {
+          "second": 22,
+          "queued": 100,
+          "stopped": 83,
+          "maxWaitSeconds": 21.49166666666606,
+          "crossings": 342
+        },
+        {
+          "second": 23,
+          "queued": 103,
+          "stopped": 78,
+          "maxWaitSeconds": 22.491666666666003,
+          "crossings": 358
+        },
+        {
+          "second": 24,
+          "queued": 96,
+          "stopped": 72,
+          "maxWaitSeconds": 23.491666666665946,
+          "crossings": 373
+        },
+        {
+          "second": 25,
+          "queued": 88,
+          "stopped": 63,
+          "maxWaitSeconds": 24.49166666666589,
+          "crossings": 385
+        },
+        {
+          "second": 26,
+          "queued": 88,
+          "stopped": 65,
+          "maxWaitSeconds": 25.491666666665832,
+          "crossings": 396
+        },
+        {
+          "second": 27,
+          "queued": 86,
+          "stopped": 60,
+          "maxWaitSeconds": 26.491666666665775,
+          "crossings": 420
+        },
+        {
+          "second": 28,
+          "queued": 86,
+          "stopped": 58,
+          "maxWaitSeconds": 25.80833333333239,
+          "crossings": 436
+        },
+        {
+          "second": 29,
+          "queued": 97,
+          "stopped": 61,
+          "maxWaitSeconds": 26.80833333333233,
+          "crossings": 458
+        },
+        {
+          "second": 30,
+          "queued": 105,
+          "stopped": 69,
+          "maxWaitSeconds": 27.808333333332275,
+          "crossings": 473
+        },
+        {
+          "second": 31,
+          "queued": 99,
+          "stopped": 68,
+          "maxWaitSeconds": 28.808333333332218,
+          "crossings": 486
+        },
+        {
+          "second": 32,
+          "queued": 104,
+          "stopped": 74,
+          "maxWaitSeconds": 29.80833333333216,
+          "crossings": 502
+        },
+        {
+          "second": 33,
+          "queued": 96,
+          "stopped": 66,
+          "maxWaitSeconds": 30.808333333332108,
+          "crossings": 518
+        },
+        {
+          "second": 34,
+          "queued": 103,
+          "stopped": 73,
+          "maxWaitSeconds": 31.80833333333205,
+          "crossings": 526
+        },
+        {
+          "second": 35,
+          "queued": 107,
+          "stopped": 82,
+          "maxWaitSeconds": 32.808333333331994,
+          "crossings": 544
+        },
+        {
+          "second": 36,
+          "queued": 101,
+          "stopped": 78,
+          "maxWaitSeconds": 33.80833333333194,
+          "crossings": 559
+        },
+        {
+          "second": 37,
+          "queued": 108,
+          "stopped": 86,
+          "maxWaitSeconds": 34.80833333333188,
+          "crossings": 577
+        },
+        {
+          "second": 38,
+          "queued": 100,
+          "stopped": 80,
+          "maxWaitSeconds": 35.808333333331824,
+          "crossings": 587
+        },
+        {
+          "second": 39,
+          "queued": 99,
+          "stopped": 73,
+          "maxWaitSeconds": 17.541666666665673,
+          "crossings": 595
+        },
+        {
+          "second": 40,
+          "queued": 93,
+          "stopped": 73,
+          "maxWaitSeconds": 18.541666666665616,
+          "crossings": 608
+        },
+        {
+          "second": 41,
+          "queued": 94,
+          "stopped": 69,
+          "maxWaitSeconds": 19.54166666666556,
+          "crossings": 628
+        },
+        {
+          "second": 42,
+          "queued": 98,
+          "stopped": 67,
+          "maxWaitSeconds": 20.541666666665503,
+          "crossings": 649
+        },
+        {
+          "second": 43,
+          "queued": 99,
+          "stopped": 63,
+          "maxWaitSeconds": 21.541666666665446,
+          "crossings": 663
+        },
+        {
+          "second": 44,
+          "queued": 108,
+          "stopped": 69,
+          "maxWaitSeconds": 22.54166666666539,
+          "crossings": 676
+        },
+        {
+          "second": 45,
+          "queued": 106,
+          "stopped": 79,
+          "maxWaitSeconds": 23.541666666665332,
+          "crossings": 691
+        },
+        {
+          "second": 46,
+          "queued": 104,
+          "stopped": 72,
+          "maxWaitSeconds": 24.541666666665275,
+          "crossings": 707
+        },
+        {
+          "second": 47,
+          "queued": 102,
+          "stopped": 74,
+          "maxWaitSeconds": 25.54166666666522,
+          "crossings": 723
+        },
+        {
+          "second": 48,
+          "queued": 107,
+          "stopped": 78,
+          "maxWaitSeconds": 26.54166666666516,
+          "crossings": 733
+        },
+        {
+          "second": 49,
+          "queued": 103,
+          "stopped": 77,
+          "maxWaitSeconds": 27.541666666665105,
+          "crossings": 742
+        },
+        {
+          "second": 50,
+          "queued": 102,
+          "stopped": 75,
+          "maxWaitSeconds": 28.541666666665048,
+          "crossings": 757
+        },
+        {
+          "second": 51,
+          "queued": 101,
+          "stopped": 74,
+          "maxWaitSeconds": 29.54166666666499,
+          "crossings": 772
+        },
+        {
+          "second": 52,
+          "queued": 102,
+          "stopped": 80,
+          "maxWaitSeconds": 30.541666666664934,
+          "crossings": 790
+        },
+        {
+          "second": 53,
+          "queued": 96,
+          "stopped": 66,
+          "maxWaitSeconds": 31.541666666664877,
+          "crossings": 804
+        },
+        {
+          "second": 54,
+          "queued": 96,
+          "stopped": 69,
+          "maxWaitSeconds": 32.541666666664824,
+          "crossings": 817
+        },
+        {
+          "second": 55,
+          "queued": 96,
+          "stopped": 63,
+          "maxWaitSeconds": 33.54166666666477,
+          "crossings": 832
+        },
+        {
+          "second": 56,
+          "queued": 97,
+          "stopped": 61,
+          "maxWaitSeconds": 34.54166666666471,
+          "crossings": 842
+        },
+        {
+          "second": 57,
+          "queued": 98,
+          "stopped": 68,
+          "maxWaitSeconds": 35.54166666666465,
+          "crossings": 865
+        },
+        {
+          "second": 58,
+          "queued": 97,
+          "stopped": 66,
+          "maxWaitSeconds": 36.5416666666646,
+          "crossings": 877
+        },
+        {
+          "second": 59,
+          "queued": 99,
+          "stopped": 74,
+          "maxWaitSeconds": 37.54166666666454,
+          "crossings": 897
+        },
+        {
+          "second": 60,
+          "queued": 101,
+          "stopped": 74,
+          "maxWaitSeconds": 38.54166666666448,
+          "crossings": 911
+        }
+      ]
+    },
+    {
+      "seed": 1729,
+      "preset": "normal",
+      "cars": 96,
+      "crossings": 425,
+      "maxQueued": 48,
+      "maxStopped": 39,
+      "maxWaitSeconds": 51.25833333333043,
+      "final": {
+        "second": 60,
+        "queued": 46,
+        "stopped": 35,
+        "maxWaitSeconds": 51.25833333333043,
+        "crossings": 425
+      },
+      "samples": [
+        {
+          "second": 1,
+          "queued": 45,
+          "stopped": 9,
+          "maxWaitSeconds": 0.9916666666666656,
+          "crossings": 0
+        },
+        {
+          "second": 2,
+          "queued": 45,
+          "stopped": 28,
+          "maxWaitSeconds": 1.991666666666662,
+          "crossings": 0
+        },
+        {
+          "second": 3,
+          "queued": 36,
+          "stopped": 35,
+          "maxWaitSeconds": 2.9916666666666587,
+          "crossings": 10
+        },
+        {
+          "second": 4,
+          "queued": 36,
+          "stopped": 31,
+          "maxWaitSeconds": 3.991666666666655,
+          "crossings": 19
+        },
+        {
+          "second": 5,
+          "queued": 36,
+          "stopped": 29,
+          "maxWaitSeconds": 4.991666666666704,
+          "crossings": 27
+        },
+        {
+          "second": 6,
+          "queued": 42,
+          "stopped": 35,
+          "maxWaitSeconds": 5.991666666666754,
+          "crossings": 28
+        },
+        {
+          "second": 7,
+          "queued": 36,
+          "stopped": 33,
+          "maxWaitSeconds": 6.991666666666804,
+          "crossings": 42
+        },
+        {
+          "second": 8,
+          "queued": 34,
+          "stopped": 29,
+          "maxWaitSeconds": 7.991666666666853,
+          "crossings": 50
+        },
+        {
+          "second": 9,
+          "queued": 32,
+          "stopped": 24,
+          "maxWaitSeconds": 8.991666666666797,
+          "crossings": 58
+        },
+        {
+          "second": 10,
+          "queued": 31,
+          "stopped": 19,
+          "maxWaitSeconds": 6.450000000000083,
+          "crossings": 63
+        },
+        {
+          "second": 11,
+          "queued": 31,
+          "stopped": 24,
+          "maxWaitSeconds": 7.450000000000026,
+          "crossings": 72
+        },
+        {
+          "second": 12,
+          "queued": 35,
+          "stopped": 27,
+          "maxWaitSeconds": 8.449999999999969,
+          "crossings": 79
+        },
+        {
+          "second": 13,
+          "queued": 37,
+          "stopped": 26,
+          "maxWaitSeconds": 9.449999999999912,
+          "crossings": 91
+        },
+        {
+          "second": 14,
+          "queued": 36,
+          "stopped": 25,
+          "maxWaitSeconds": 9.358333333333158,
+          "crossings": 98
+        },
+        {
+          "second": 15,
+          "queued": 40,
+          "stopped": 29,
+          "maxWaitSeconds": 9.674999999999734,
+          "crossings": 103
+        },
+        {
+          "second": 16,
+          "queued": 43,
+          "stopped": 29,
+          "maxWaitSeconds": 10.674999999999677,
+          "crossings": 110
+        },
+        {
+          "second": 17,
+          "queued": 39,
+          "stopped": 35,
+          "maxWaitSeconds": 10.116666666666212,
+          "crossings": 120
+        },
+        {
+          "second": 18,
+          "queued": 40,
+          "stopped": 33,
+          "maxWaitSeconds": 11.116666666666156,
+          "crossings": 126
+        },
+        {
+          "second": 19,
+          "queued": 44,
+          "stopped": 31,
+          "maxWaitSeconds": 10.258333333332752,
+          "crossings": 131
+        },
+        {
+          "second": 20,
+          "queued": 38,
+          "stopped": 33,
+          "maxWaitSeconds": 8.391666666666191,
+          "crossings": 135
+        },
+        {
+          "second": 21,
+          "queued": 36,
+          "stopped": 30,
+          "maxWaitSeconds": 12.258333333332638,
+          "crossings": 142
+        },
+        {
+          "second": 22,
+          "queued": 31,
+          "stopped": 28,
+          "maxWaitSeconds": 13.258333333332581,
+          "crossings": 148
+        },
+        {
+          "second": 23,
+          "queued": 33,
+          "stopped": 27,
+          "maxWaitSeconds": 14.258333333332525,
+          "crossings": 157
+        },
+        {
+          "second": 24,
+          "queued": 36,
+          "stopped": 26,
+          "maxWaitSeconds": 15.258333333332468,
+          "crossings": 163
+        },
+        {
+          "second": 25,
+          "queued": 33,
+          "stopped": 25,
+          "maxWaitSeconds": 16.25833333333241,
+          "crossings": 174
+        },
+        {
+          "second": 26,
+          "queued": 30,
+          "stopped": 22,
+          "maxWaitSeconds": 17.258333333332352,
+          "crossings": 180
+        },
+        {
+          "second": 27,
+          "queued": 31,
+          "stopped": 25,
+          "maxWaitSeconds": 18.258333333332295,
+          "crossings": 187
+        },
+        {
+          "second": 28,
+          "queued": 32,
+          "stopped": 24,
+          "maxWaitSeconds": 19.25833333333224,
+          "crossings": 194
+        },
+        {
+          "second": 29,
+          "queued": 39,
+          "stopped": 29,
+          "maxWaitSeconds": 20.258333333332182,
+          "crossings": 201
+        },
+        {
+          "second": 30,
+          "queued": 40,
+          "stopped": 32,
+          "maxWaitSeconds": 21.258333333332125,
+          "crossings": 215
+        },
+        {
+          "second": 31,
+          "queued": 42,
+          "stopped": 30,
+          "maxWaitSeconds": 22.258333333332068,
+          "crossings": 221
+        },
+        {
+          "second": 32,
+          "queued": 40,
+          "stopped": 33,
+          "maxWaitSeconds": 23.25833333333201,
+          "crossings": 228
+        },
+        {
+          "second": 33,
+          "queued": 48,
+          "stopped": 34,
+          "maxWaitSeconds": 24.25833333333196,
+          "crossings": 229
+        },
+        {
+          "second": 34,
+          "queued": 43,
+          "stopped": 39,
+          "maxWaitSeconds": 25.258333333331905,
+          "crossings": 237
+        },
+        {
+          "second": 35,
+          "queued": 38,
+          "stopped": 35,
+          "maxWaitSeconds": 26.258333333331848,
+          "crossings": 244
+        },
+        {
+          "second": 36,
+          "queued": 36,
+          "stopped": 31,
+          "maxWaitSeconds": 27.25833333333179,
+          "crossings": 253
+        },
+        {
+          "second": 37,
+          "queued": 41,
+          "stopped": 28,
+          "maxWaitSeconds": 28.258333333331734,
+          "crossings": 258
+        },
+        {
+          "second": 38,
+          "queued": 36,
+          "stopped": 27,
+          "maxWaitSeconds": 29.258333333331677,
+          "crossings": 260
+        },
+        {
+          "second": 39,
+          "queued": 40,
+          "stopped": 28,
+          "maxWaitSeconds": 30.25833333333162,
+          "crossings": 265
+        },
+        {
+          "second": 40,
+          "queued": 38,
+          "stopped": 32,
+          "maxWaitSeconds": 31.258333333331564,
+          "crossings": 274
+        },
+        {
+          "second": 41,
+          "queued": 37,
+          "stopped": 32,
+          "maxWaitSeconds": 32.25833333333151,
+          "crossings": 282
+        },
+        {
+          "second": 42,
+          "queued": 36,
+          "stopped": 24,
+          "maxWaitSeconds": 33.25833333333145,
+          "crossings": 293
+        },
+        {
+          "second": 43,
+          "queued": 36,
+          "stopped": 23,
+          "maxWaitSeconds": 34.25833333333139,
+          "crossings": 296
+        },
+        {
+          "second": 44,
+          "queued": 36,
+          "stopped": 24,
+          "maxWaitSeconds": 35.258333333331336,
+          "crossings": 301
+        },
+        {
+          "second": 45,
+          "queued": 33,
+          "stopped": 24,
+          "maxWaitSeconds": 36.25833333333128,
+          "crossings": 307
+        },
+        {
+          "second": 46,
+          "queued": 34,
+          "stopped": 24,
+          "maxWaitSeconds": 37.25833333333122,
+          "crossings": 320
+        },
+        {
+          "second": 47,
+          "queued": 34,
+          "stopped": 24,
+          "maxWaitSeconds": 38.258333333331166,
+          "crossings": 330
+        },
+        {
+          "second": 48,
+          "queued": 42,
+          "stopped": 25,
+          "maxWaitSeconds": 39.25833333333111,
+          "crossings": 335
+        },
+        {
+          "second": 49,
+          "queued": 39,
+          "stopped": 27,
+          "maxWaitSeconds": 40.25833333333105,
+          "crossings": 339
+        },
+        {
+          "second": 50,
+          "queued": 37,
+          "stopped": 27,
+          "maxWaitSeconds": 41.258333333330995,
+          "crossings": 346
+        },
+        {
+          "second": 51,
+          "queued": 32,
+          "stopped": 24,
+          "maxWaitSeconds": 42.25833333333094,
+          "crossings": 356
+        },
+        {
+          "second": 52,
+          "queued": 33,
+          "stopped": 21,
+          "maxWaitSeconds": 43.25833333333088,
+          "crossings": 362
+        },
+        {
+          "second": 53,
+          "queued": 36,
+          "stopped": 24,
+          "maxWaitSeconds": 44.258333333330825,
+          "crossings": 372
+        },
+        {
+          "second": 54,
+          "queued": 38,
+          "stopped": 27,
+          "maxWaitSeconds": 45.25833333333077,
+          "crossings": 379
+        },
+        {
+          "second": 55,
+          "queued": 32,
+          "stopped": 24,
+          "maxWaitSeconds": 46.25833333333071,
+          "crossings": 388
+        },
+        {
+          "second": 56,
+          "queued": 39,
+          "stopped": 25,
+          "maxWaitSeconds": 47.258333333330654,
+          "crossings": 394
+        },
+        {
+          "second": 57,
+          "queued": 38,
+          "stopped": 29,
+          "maxWaitSeconds": 48.2583333333306,
+          "crossings": 402
+        },
+        {
+          "second": 58,
+          "queued": 44,
+          "stopped": 30,
+          "maxWaitSeconds": 49.25833333333054,
+          "crossings": 409
+        },
+        {
+          "second": 59,
+          "queued": 45,
+          "stopped": 34,
+          "maxWaitSeconds": 50.258333333330484,
+          "crossings": 420
+        },
+        {
+          "second": 60,
+          "queued": 46,
+          "stopped": 35,
+          "maxWaitSeconds": 51.25833333333043,
+          "crossings": 425
+        }
+      ]
+    },
+    {
+      "seed": 1729,
+      "preset": "rush",
+      "cars": 160,
+      "crossings": 687,
+      "maxQueued": 80,
+      "maxStopped": 66,
+      "maxWaitSeconds": 51.25833333333043,
+      "final": {
+        "second": 60,
+        "queued": 74,
+        "stopped": 58,
+        "maxWaitSeconds": 51.25833333333043,
+        "crossings": 687
+      },
+      "samples": [
+        {
+          "second": 1,
+          "queued": 76,
+          "stopped": 19,
+          "maxWaitSeconds": 0.9916666666666656,
+          "crossings": 0
+        },
+        {
+          "second": 2,
+          "queued": 80,
+          "stopped": 50,
+          "maxWaitSeconds": 1.991666666666662,
+          "crossings": 0
+        },
+        {
+          "second": 3,
+          "queued": 67,
+          "stopped": 63,
+          "maxWaitSeconds": 2.9916666666666587,
+          "crossings": 12
+        },
+        {
+          "second": 4,
+          "queued": 61,
+          "stopped": 54,
+          "maxWaitSeconds": 3.991666666666655,
+          "crossings": 27
+        },
+        {
+          "second": 5,
+          "queued": 59,
+          "stopped": 46,
+          "maxWaitSeconds": 4.991666666666704,
+          "crossings": 39
+        },
+        {
+          "second": 6,
+          "queued": 63,
+          "stopped": 50,
+          "maxWaitSeconds": 5.991666666666754,
+          "crossings": 43
+        },
+        {
+          "second": 7,
+          "queued": 55,
+          "stopped": 48,
+          "maxWaitSeconds": 6.991666666666804,
+          "crossings": 62
+        },
+        {
+          "second": 8,
+          "queued": 54,
+          "stopped": 43,
+          "maxWaitSeconds": 7.991666666666853,
+          "crossings": 77
+        },
+        {
+          "second": 9,
+          "queued": 53,
+          "stopped": 40,
+          "maxWaitSeconds": 8.991666666666797,
+          "crossings": 90
+        },
+        {
+          "second": 10,
+          "queued": 52,
+          "stopped": 34,
+          "maxWaitSeconds": 9.99166666666674,
+          "crossings": 101
+        },
+        {
+          "second": 11,
+          "queued": 57,
+          "stopped": 41,
+          "maxWaitSeconds": 10.991666666666683,
+          "crossings": 112
+        },
+        {
+          "second": 12,
+          "queued": 54,
+          "stopped": 45,
+          "maxWaitSeconds": 11.458333333333291,
+          "crossings": 126
+        },
+        {
+          "second": 13,
+          "queued": 60,
+          "stopped": 43,
+          "maxWaitSeconds": 9.449999999999912,
+          "crossings": 144
+        },
+        {
+          "second": 14,
+          "queued": 60,
+          "stopped": 46,
+          "maxWaitSeconds": 9.358333333333158,
+          "crossings": 156
+        },
+        {
+          "second": 15,
+          "queued": 70,
+          "stopped": 55,
+          "maxWaitSeconds": 9.674999999999734,
+          "crossings": 165
+        },
+        {
+          "second": 16,
+          "queued": 75,
+          "stopped": 58,
+          "maxWaitSeconds": 10.674999999999677,
+          "crossings": 172
+        },
+        {
+          "second": 17,
+          "queued": 68,
+          "stopped": 61,
+          "maxWaitSeconds": 10.116666666666212,
+          "crossings": 188
+        },
+        {
+          "second": 18,
+          "queued": 62,
+          "stopped": 54,
+          "maxWaitSeconds": 11.116666666666156,
+          "crossings": 198
+        },
+        {
+          "second": 19,
+          "queued": 66,
+          "stopped": 49,
+          "maxWaitSeconds": 10.258333333332752,
+          "crossings": 207
+        },
+        {
+          "second": 20,
+          "queued": 59,
+          "stopped": 47,
+          "maxWaitSeconds": 8.391666666666191,
+          "crossings": 213
+        },
+        {
+          "second": 21,
+          "queued": 53,
+          "stopped": 45,
+          "maxWaitSeconds": 12.258333333332638,
+          "crossings": 227
+        },
+        {
+          "second": 22,
+          "queued": 54,
+          "stopped": 42,
+          "maxWaitSeconds": 13.258333333332581,
+          "crossings": 242
+        },
+        {
+          "second": 23,
+          "queued": 56,
+          "stopped": 42,
+          "maxWaitSeconds": 14.258333333332525,
+          "crossings": 251
+        },
+        {
+          "second": 24,
+          "queued": 56,
+          "stopped": 40,
+          "maxWaitSeconds": 15.258333333332468,
+          "crossings": 266
+        },
+        {
+          "second": 25,
+          "queued": 50,
+          "stopped": 39,
+          "maxWaitSeconds": 16.25833333333241,
+          "crossings": 286
+        },
+        {
+          "second": 26,
+          "queued": 54,
+          "stopped": 44,
+          "maxWaitSeconds": 17.258333333332352,
+          "crossings": 295
+        },
+        {
+          "second": 27,
+          "queued": 60,
+          "stopped": 44,
+          "maxWaitSeconds": 18.258333333332295,
+          "crossings": 305
+        },
+        {
+          "second": 28,
+          "queued": 61,
+          "stopped": 49,
+          "maxWaitSeconds": 19.25833333333224,
+          "crossings": 321
+        },
+        {
+          "second": 29,
+          "queued": 70,
+          "stopped": 55,
+          "maxWaitSeconds": 20.258333333332182,
+          "crossings": 333
+        },
+        {
+          "second": 30,
+          "queued": 73,
+          "stopped": 59,
+          "maxWaitSeconds": 21.258333333332125,
+          "crossings": 350
+        },
+        {
+          "second": 31,
+          "queued": 76,
+          "stopped": 56,
+          "maxWaitSeconds": 22.258333333332068,
+          "crossings": 356
+        },
+        {
+          "second": 32,
+          "queued": 67,
+          "stopped": 60,
+          "maxWaitSeconds": 23.25833333333201,
+          "crossings": 366
+        },
+        {
+          "second": 33,
+          "queued": 68,
+          "stopped": 58,
+          "maxWaitSeconds": 24.25833333333196,
+          "crossings": 372
+        },
+        {
+          "second": 34,
+          "queued": 68,
+          "stopped": 61,
+          "maxWaitSeconds": 25.258333333331905,
+          "crossings": 382
+        },
+        {
+          "second": 35,
+          "queued": 59,
+          "stopped": 54,
+          "maxWaitSeconds": 26.258333333331848,
+          "crossings": 396
+        },
+        {
+          "second": 36,
+          "queued": 61,
+          "stopped": 47,
+          "maxWaitSeconds": 27.25833333333179,
+          "crossings": 408
+        },
+        {
+          "second": 37,
+          "queued": 61,
+          "stopped": 46,
+          "maxWaitSeconds": 28.258333333331734,
+          "crossings": 419
+        },
+        {
+          "second": 38,
+          "queued": 59,
+          "stopped": 43,
+          "maxWaitSeconds": 29.258333333331677,
+          "crossings": 428
+        },
+        {
+          "second": 39,
+          "queued": 60,
+          "stopped": 41,
+          "maxWaitSeconds": 30.25833333333162,
+          "crossings": 436
+        },
+        {
+          "second": 40,
+          "queued": 54,
+          "stopped": 48,
+          "maxWaitSeconds": 31.258333333331564,
+          "crossings": 454
+        },
+        {
+          "second": 41,
+          "queued": 59,
+          "stopped": 46,
+          "maxWaitSeconds": 32.25833333333151,
+          "crossings": 463
+        },
+        {
+          "second": 42,
+          "queued": 53,
+          "stopped": 41,
+          "maxWaitSeconds": 33.25833333333145,
+          "crossings": 482
+        },
+        {
+          "second": 43,
+          "queued": 65,
+          "stopped": 48,
+          "maxWaitSeconds": 34.25833333333139,
+          "crossings": 489
+        },
+        {
+          "second": 44,
+          "queued": 72,
+          "stopped": 52,
+          "maxWaitSeconds": 35.258333333331336,
+          "crossings": 502
+        },
+        {
+          "second": 45,
+          "queued": 65,
+          "stopped": 50,
+          "maxWaitSeconds": 36.25833333333128,
+          "crossings": 515
+        },
+        {
+          "second": 46,
+          "queued": 63,
+          "stopped": 51,
+          "maxWaitSeconds": 37.25833333333122,
+          "crossings": 527
+        },
+        {
+          "second": 47,
+          "queued": 70,
+          "stopped": 53,
+          "maxWaitSeconds": 38.258333333331166,
+          "crossings": 544
+        },
+        {
+          "second": 48,
+          "queued": 75,
+          "stopped": 59,
+          "maxWaitSeconds": 39.25833333333111,
+          "crossings": 552
+        },
+        {
+          "second": 49,
+          "queued": 65,
+          "stopped": 57,
+          "maxWaitSeconds": 40.25833333333105,
+          "crossings": 563
+        },
+        {
+          "second": 50,
+          "queued": 70,
+          "stopped": 53,
+          "maxWaitSeconds": 41.258333333330995,
+          "crossings": 572
+        },
+        {
+          "second": 51,
+          "queued": 68,
+          "stopped": 56,
+          "maxWaitSeconds": 42.25833333333094,
+          "crossings": 582
+        },
+        {
+          "second": 52,
+          "queued": 70,
+          "stopped": 59,
+          "maxWaitSeconds": 43.25833333333088,
+          "crossings": 594
+        },
+        {
+          "second": 53,
+          "queued": 72,
+          "stopped": 66,
+          "maxWaitSeconds": 44.258333333330825,
+          "crossings": 608
+        },
+        {
+          "second": 54,
+          "queued": 70,
+          "stopped": 57,
+          "maxWaitSeconds": 45.25833333333077,
+          "crossings": 616
+        },
+        {
+          "second": 55,
+          "queued": 61,
+          "stopped": 52,
+          "maxWaitSeconds": 46.25833333333071,
+          "crossings": 628
+        },
+        {
+          "second": 56,
+          "queued": 65,
+          "stopped": 50,
+          "maxWaitSeconds": 47.258333333330654,
+          "crossings": 638
+        },
+        {
+          "second": 57,
+          "queued": 73,
+          "stopped": 54,
+          "maxWaitSeconds": 48.2583333333306,
+          "crossings": 648
+        },
+        {
+          "second": 58,
+          "queued": 72,
+          "stopped": 57,
+          "maxWaitSeconds": 49.25833333333054,
+          "crossings": 662
+        },
+        {
+          "second": 59,
+          "queued": 69,
+          "stopped": 57,
+          "maxWaitSeconds": 50.258333333330484,
+          "crossings": 675
+        },
+        {
+          "second": 60,
+          "queued": 74,
+          "stopped": 58,
+          "maxWaitSeconds": 51.25833333333043,
+          "crossings": 687
+        }
+      ]
+    },
+    {
+      "seed": 1729,
+      "preset": "gridlock",
+      "cars": 224,
+      "crossings": 905,
+      "maxQueued": 120,
+      "maxStopped": 95,
+      "maxWaitSeconds": 59.9916666666639,
+      "final": {
+        "second": 60,
+        "queued": 100,
+        "stopped": 71,
+        "maxWaitSeconds": 59.9916666666639,
+        "crossings": 905
+      },
+      "samples": [
+        {
+          "second": 1,
+          "queued": 111,
+          "stopped": 31,
+          "maxWaitSeconds": 0.9916666666666656,
+          "crossings": 0
+        },
+        {
+          "second": 2,
+          "queued": 120,
+          "stopped": 68,
+          "maxWaitSeconds": 1.991666666666662,
+          "crossings": 0
+        },
+        {
+          "second": 3,
+          "queued": 103,
+          "stopped": 95,
+          "maxWaitSeconds": 2.9916666666666587,
+          "crossings": 15
+        },
+        {
+          "second": 4,
+          "queued": 96,
+          "stopped": 85,
+          "maxWaitSeconds": 3.991666666666655,
+          "crossings": 37
+        },
+        {
+          "second": 5,
+          "queued": 91,
+          "stopped": 76,
+          "maxWaitSeconds": 4.991666666666704,
+          "crossings": 50
+        },
+        {
+          "second": 6,
+          "queued": 98,
+          "stopped": 77,
+          "maxWaitSeconds": 5.991666666666754,
+          "crossings": 57
+        },
+        {
+          "second": 7,
+          "queued": 85,
+          "stopped": 72,
+          "maxWaitSeconds": 6.991666666666804,
+          "crossings": 79
+        },
+        {
+          "second": 8,
+          "queued": 77,
+          "stopped": 65,
+          "maxWaitSeconds": 7.991666666666853,
+          "crossings": 99
+        },
+        {
+          "second": 9,
+          "queued": 77,
+          "stopped": 55,
+          "maxWaitSeconds": 8.991666666666797,
+          "crossings": 115
+        },
+        {
+          "second": 10,
+          "queued": 74,
+          "stopped": 49,
+          "maxWaitSeconds": 9.99166666666674,
+          "crossings": 131
+        },
+        {
+          "second": 11,
+          "queued": 80,
+          "stopped": 56,
+          "maxWaitSeconds": 10.991666666666683,
+          "crossings": 153
+        },
+        {
+          "second": 12,
+          "queued": 86,
+          "stopped": 59,
+          "maxWaitSeconds": 11.991666666666626,
+          "crossings": 173
+        },
+        {
+          "second": 13,
+          "queued": 89,
+          "stopped": 60,
+          "maxWaitSeconds": 12.99166666666657,
+          "crossings": 192
+        },
+        {
+          "second": 14,
+          "queued": 92,
+          "stopped": 66,
+          "maxWaitSeconds": 13.991666666666513,
+          "crossings": 211
+        },
+        {
+          "second": 15,
+          "queued": 97,
+          "stopped": 76,
+          "maxWaitSeconds": 14.991666666666456,
+          "crossings": 224
+        },
+        {
+          "second": 16,
+          "queued": 102,
+          "stopped": 77,
+          "maxWaitSeconds": 15.991666666666399,
+          "crossings": 235
+        },
+        {
+          "second": 17,
+          "queued": 102,
+          "stopped": 85,
+          "maxWaitSeconds": 16.991666666666344,
+          "crossings": 260
+        },
+        {
+          "second": 18,
+          "queued": 97,
+          "stopped": 80,
+          "maxWaitSeconds": 17.991666666666287,
+          "crossings": 272
+        },
+        {
+          "second": 19,
+          "queued": 104,
+          "stopped": 77,
+          "maxWaitSeconds": 18.99166666666623,
+          "crossings": 286
+        },
+        {
+          "second": 20,
+          "queued": 97,
+          "stopped": 75,
+          "maxWaitSeconds": 19.991666666666173,
+          "crossings": 294
+        },
+        {
+          "second": 21,
+          "queued": 97,
+          "stopped": 77,
+          "maxWaitSeconds": 20.991666666666116,
+          "crossings": 307
+        },
+        {
+          "second": 22,
+          "queued": 92,
+          "stopped": 74,
+          "maxWaitSeconds": 21.99166666666606,
+          "crossings": 322
+        },
+        {
+          "second": 23,
+          "queued": 90,
+          "stopped": 72,
+          "maxWaitSeconds": 22.991666666666003,
+          "crossings": 340
+        },
+        {
+          "second": 24,
+          "queued": 91,
+          "stopped": 64,
+          "maxWaitSeconds": 23.991666666665946,
+          "crossings": 358
+        },
+        {
+          "second": 25,
+          "queued": 90,
+          "stopped": 62,
+          "maxWaitSeconds": 24.99166666666589,
+          "crossings": 379
+        },
+        {
+          "second": 26,
+          "queued": 90,
+          "stopped": 63,
+          "maxWaitSeconds": 25.991666666665832,
+          "crossings": 390
+        },
+        {
+          "second": 27,
+          "queued": 87,
+          "stopped": 62,
+          "maxWaitSeconds": 26.991666666665775,
+          "crossings": 396
+        },
+        {
+          "second": 28,
+          "queued": 80,
+          "stopped": 58,
+          "maxWaitSeconds": 27.99166666666572,
+          "crossings": 418
+        },
+        {
+          "second": 29,
+          "queued": 87,
+          "stopped": 65,
+          "maxWaitSeconds": 28.99166666666566,
+          "crossings": 438
+        },
+        {
+          "second": 30,
+          "queued": 91,
+          "stopped": 73,
+          "maxWaitSeconds": 29.991666666665605,
+          "crossings": 461
+        },
+        {
+          "second": 31,
+          "queued": 102,
+          "stopped": 75,
+          "maxWaitSeconds": 30.991666666665548,
+          "crossings": 476
+        },
+        {
+          "second": 32,
+          "queued": 100,
+          "stopped": 77,
+          "maxWaitSeconds": 31.99166666666549,
+          "crossings": 492
+        },
+        {
+          "second": 33,
+          "queued": 108,
+          "stopped": 77,
+          "maxWaitSeconds": 32.99166666666544,
+          "crossings": 503
+        },
+        {
+          "second": 34,
+          "queued": 110,
+          "stopped": 87,
+          "maxWaitSeconds": 33.99166666666538,
+          "crossings": 518
+        },
+        {
+          "second": 35,
+          "queued": 105,
+          "stopped": 91,
+          "maxWaitSeconds": 34.991666666665324,
+          "crossings": 529
+        },
+        {
+          "second": 36,
+          "queued": 107,
+          "stopped": 87,
+          "maxWaitSeconds": 35.99166666666527,
+          "crossings": 546
+        },
+        {
+          "second": 37,
+          "queued": 108,
+          "stopped": 85,
+          "maxWaitSeconds": 36.99166666666521,
+          "crossings": 558
+        },
+        {
+          "second": 38,
+          "queued": 106,
+          "stopped": 83,
+          "maxWaitSeconds": 37.991666666665154,
+          "crossings": 567
+        },
+        {
+          "second": 39,
+          "queued": 106,
+          "stopped": 80,
+          "maxWaitSeconds": 38.9916666666651,
+          "crossings": 580
+        },
+        {
+          "second": 40,
+          "queued": 95,
+          "stopped": 78,
+          "maxWaitSeconds": 39.99166666666504,
+          "crossings": 597
+        },
+        {
+          "second": 41,
+          "queued": 95,
+          "stopped": 71,
+          "maxWaitSeconds": 40.99166666666498,
+          "crossings": 607
+        },
+        {
+          "second": 42,
+          "queued": 88,
+          "stopped": 62,
+          "maxWaitSeconds": 41.991666666664926,
+          "crossings": 625
+        },
+        {
+          "second": 43,
+          "queued": 91,
+          "stopped": 64,
+          "maxWaitSeconds": 42.99166666666487,
+          "crossings": 636
+        },
+        {
+          "second": 44,
+          "queued": 93,
+          "stopped": 68,
+          "maxWaitSeconds": 43.99166666666481,
+          "crossings": 654
+        },
+        {
+          "second": 45,
+          "queued": 92,
+          "stopped": 68,
+          "maxWaitSeconds": 44.991666666664756,
+          "crossings": 673
+        },
+        {
+          "second": 46,
+          "queued": 88,
+          "stopped": 66,
+          "maxWaitSeconds": 45.9916666666647,
+          "crossings": 690
+        },
+        {
+          "second": 47,
+          "queued": 92,
+          "stopped": 63,
+          "maxWaitSeconds": 46.99166666666464,
+          "crossings": 710
+        },
+        {
+          "second": 48,
+          "queued": 100,
+          "stopped": 70,
+          "maxWaitSeconds": 47.991666666664585,
+          "crossings": 722
+        },
+        {
+          "second": 49,
+          "queued": 100,
+          "stopped": 76,
+          "maxWaitSeconds": 48.99166666666453,
+          "crossings": 732
+        },
+        {
+          "second": 50,
+          "queued": 96,
+          "stopped": 71,
+          "maxWaitSeconds": 49.99166666666447,
+          "crossings": 752
+        },
+        {
+          "second": 51,
+          "queued": 98,
+          "stopped": 75,
+          "maxWaitSeconds": 50.991666666664415,
+          "crossings": 771
+        },
+        {
+          "second": 52,
+          "queued": 106,
+          "stopped": 73,
+          "maxWaitSeconds": 51.99166666666436,
+          "crossings": 784
+        },
+        {
+          "second": 53,
+          "queued": 104,
+          "stopped": 79,
+          "maxWaitSeconds": 52.9916666666643,
+          "crossings": 797
+        },
+        {
+          "second": 54,
+          "queued": 98,
+          "stopped": 72,
+          "maxWaitSeconds": 53.991666666664244,
+          "crossings": 813
+        },
+        {
+          "second": 55,
+          "queued": 95,
+          "stopped": 69,
+          "maxWaitSeconds": 54.99166666666419,
+          "crossings": 822
+        },
+        {
+          "second": 56,
+          "queued": 94,
+          "stopped": 65,
+          "maxWaitSeconds": 55.99166666666413,
+          "crossings": 835
+        },
+        {
+          "second": 57,
+          "queued": 94,
+          "stopped": 67,
+          "maxWaitSeconds": 56.991666666664074,
+          "crossings": 851
+        },
+        {
+          "second": 58,
+          "queued": 90,
+          "stopped": 67,
+          "maxWaitSeconds": 57.99166666666402,
+          "crossings": 872
+        },
+        {
+          "second": 59,
+          "queued": 96,
+          "stopped": 63,
+          "maxWaitSeconds": 58.99166666666396,
+          "crossings": 889
+        },
+        {
+          "second": 60,
+          "queued": 100,
+          "stopped": 71,
+          "maxWaitSeconds": 59.9916666666639,
+          "crossings": 905
+        }
+      ]
+    }
+  ]
+}

@@ -17,6 +17,7 @@ Three distinct, connected centres: Toronto's original 8×7 downtown/waterfront g
 - GPS uses directed street lanes, proper ramp entry/exit, and the correct deck. Missing an exit sends you to another interchange to return. End-of-corridor turning areas have a median opening; slow down to turn.
 - Gardiner/Lakeshore Expressway crosses above Lake Shore Boulevard. Eastbound ramps cross beneath the expressway before climbing alongside it, with clear space for buses and no piers in their path.
 - City meshes are split into spatial cells. Each view submits nearby cells within its viewing cone; distant cities are not drawn. The software renderer also indexes bridge-occlusion tests spatially.
+- Normal, High and Gridlock create increasing traffic demand and physical queues. Cars wait for space beyond a junction; compatible movements can share a green. Queued cars persist when off-screen and after save/resume. The High setting keeps the older `rush` save identifier.
 - Shifts save in this browser every eight seconds and on pause/map/exit. Use **Continue saved shift** after reloading. Each Pages link has its own browser save. Restart starts fresh.
 
 ## Controls
@@ -27,10 +28,12 @@ Choose taxi/bus, dispatch/service, start time (12-hour display), and traffic lev
 
 ## Build and validation
 
-Static HTML/CSS/JavaScript, no backend, dependencies, or build step. Release `highway-14`. Serve with `python3 -m http.server 8080`.
+Static HTML/CSS/JavaScript, no backend, dependencies, or build step. Release `traffic-17`. Serve with `python3 -m http.server 8080`.
 
 Engine tests: `node tests-region.cjs`, `node physical-regression.cjs`, `node physics-checks.cjs`, `node journey-polish.cjs`, `node highway14-regression.cjs`, `node terminal14-regression.cjs`, `node mesh14-regression.cjs`. `node keyboard-ramps.cjs` and `node keyboard-highway14.cjs` exercise real browser keyboard input (set `TAXI_URL` for the local server). `node keyboard-navigation.cjs` checks native menu/link focus and activation alongside arrow controls. `node keyboard-pickup.cjs` drives the opening pickup using real browser keyboard events with normal traffic. Browser regression: `node browser-regression.cjs` (requires Playwright and `/usr/bin/chromium`; uses port 8080 for this game and 8081 for the previous revision when comparing performance). The `?test` URL enables placement helpers solely for reproducible regression.
 
 See [evidence/REPORT.md](evidence/REPORT.md) for the measured results, test boundaries, screenshots and publishing evidence. Cloud Chromium testing covers WebGL through SwiftShader and the Canvas2D fallback; it does not constitute physical Chromebook validation.
 
 The highway repair evidence is in [evidence/HIGHWAY14.md](evidence/HIGHWAY14.md), including all 24 taxi/bus ramp keyboard cases, high-speed collector transfer, precise hull and Canvas surface tests.
+
+The GPS transfer evidence is in [evidence/GPS15.md](evidence/GPS15.md). [Street-16](evidence/STREET16.md) removes floating ground-street labels. [Traffic-17](evidence/TRAFFIC17.md) records queue tests, larger demand budgets, full-callback CPU profiles and known low-end limits. Traffic checks: `node traffic17-regression.cjs`, `node collision17-regression.cjs`, `node traffic17-profile.cjs`, `node traffic17-congestion.cjs`.
