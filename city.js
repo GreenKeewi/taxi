@@ -120,12 +120,14 @@
       stats.crosswalks++;
     }
     // A quiet warm-grey ground plane and a long blue horizon prevent visible world edges.
+    if(!map.regionTileGround){
     rect(-1800,-1500,map.w+3600,shore+1500,-.7,C.ground);
     rect(-6000,shore, map.w+12000,11000,-1.1,C.water);
     rect(-500,shore-10,map.w+1000,10,-.08,'#b7c7bb');
     for(let k=0;k<50;k++){
       const x=-500+r()*(map.w+1000),z=shore+75+r()*2600;
       rect(x,z,45+r()*200,1.2+r()*2.2,-1.04,k%3?C.waterLight:'#5da7b8');
+    }
     }
     // Block paving stays below the curb and never replaces a drivable road or bay.
     for(let j=0;j<lastZ;j++)for(let i=0;i<lastX;i++){
@@ -286,7 +288,7 @@
       for(let x=HX;x<HE;x+=20){const end=Math.min(HE,x+20);if(!highwayEntryAt((x+end)/2,map.hy+off))elevatedLine(x,map.hy+off,H+.055,end,map.hy+off,H+.055,1.7,C.white);}
     }
     for(const off of [-39.5,39.5])for(let x=HX+5;x<HE-4;x+=59)elevatedLine(x,map.hy+off,H+.065,Math.min(x+33,HE-4),map.hy+off,H+.065,1.8,C.white);
-    for(let x=HX;x<HE;x+=26){const w=Math.min(23,HE-x);box(x+w/2,H+2.1,map.hy,w,4.2,5.5,C.curb);}
+    for(let x=HX+(map.terminalWest?150:0);x<HE-(map.terminalEast?150:0);x+=26){const w=Math.min(23,HE-x);box(x+w/2,H+2.1,map.hy,w,4.2,5.5,C.curb);}
     stats.elevatedRoads++;
     if(roads)for(const profile of map.roadProfiles){
       const points=profile.points,half=profile.halfWidth;
@@ -396,7 +398,7 @@
     function building(b,idx){
       const col=materials[(b.color||0)%materials.length];
       const downtown=1-Math.min(1,Math.hypot((b.x-xs[2])/1800,(b.y-zs[2])/1600));
-      const height=b.urban?250+r()*270:90+r()*170+downtown*210;
+      const height=b.regional?b.visualHeight:b.urban?250+r()*270:90+r()*170+downtown*210;
       const tall=height>245,style=(idx+b.roof)%3;
       if(tall){
         const podium=30+(idx%3)*8,tw=Math.min(b.w*.78,85+(idx%3)*16),td=Math.max(24,b.h*.82);
@@ -428,11 +430,11 @@
     }
     map.buildings.forEach(building);
     // A second skyline layer gives strong parallax beyond the playable street walls.
-    for(let i=0;i<xs.length*3;i++){
+    for(let i=0;i<(map.theme?0:xs.length*3);i++){
       const x=125+i*(map.w-100)/(xs.length*3),w=66+r()*74,h=190+r()*350;
       facade(x,-180,w,145,h,'#99b0b7','#729fae',i%2===0,0,1);stats.backgroundBuildings++;
     }
-    for(const side of [-1,1])for(let i=0;i<zs.length*2;i++){
+    for(const side of [-1,1])for(let i=0;i<(map.theme?0:zs.length*2);i++){
       const x=side<0?-170:map.w-18,z=160+i*(shore-210)/(zs.length*2),w=140,h=160+r()*300;
       facade(x,z,w,120,h,'#9eafb0','#6d969f',false);stats.backgroundBuildings++;
     }
@@ -510,7 +512,7 @@
       const plate=[p(-13,-6,.095),p(-13,6,.095),p(13,6,.095),p(13,-6,.095)];mesh.quad(...plate,'#e8c879');
       mesh.quad(p(-9,-3,.1),p(-9,3,.1),p(7,3,.1),p(7,-3,.1),C.asphalt);
       const pole=p(-half-7,30);box(pole[0],16,pole[2],1.6,32,1.6,C.metal);box(pole[0],28,pole[2],8,9,1.3,'#b65043',stop.a);
-      streetSign(pole[0],pole[2],35,'509  '+stop.place.toUpperCase(),'#9a4b43');
+      streetSign(pole[0],pole[2],35,(stop.routeId||'509')+'  '+stop.place.toUpperCase(),'#9a4b43');
       const center=p(0,55),yaw=stop.a,corners=[[-24,-10],[24,-10],[24,10],[-24,10]].map(([a,b])=>({x:center[0]+dx*a+nx*b,y:center[2]+dz*a+nz*b}));
       const clear=corners.every(q=>!roads.isRoad(map,q.x,q.y)&&![...map.buildings,...(map.landmarkColliders||[])].some(b=>q.x>b.x-4&&q.x<b.x+b.w+4&&q.y>b.y-4&&q.y<b.y+b.h+4));
       if(clear){

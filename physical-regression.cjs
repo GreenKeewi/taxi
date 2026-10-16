@@ -1,0 +1,15 @@
+const assert=require('node:assert/strict'),E=require('./engine3d.js'),R=require('./roads.js'),{g,drive}=require('./drive-test.cjs');
+const results=[];
+for(const vehicle of ['taxi','bus'])for(const ai of [0,1,2])for(const bi of [0,1,2]){
+ if(ai===bi)continue;g.options.busRoute=vehicle==='bus'?'900':'509';g.setVehicle(vehicle);g.start();g.spawnTraffic=()=>{};g.traffic=[];const a=g.map.districts[ai].bays[10],b=g.map.districts[bi].bays[15];Object.assign(g.car,{x:a.x,y:a.roadY+56,a:0,speed:0});delete g.car.roadSample;g.sampleCarRoad();g.job.timeLeft=10000;
+ const result=drive(E.route(g.map,g.car,b),900);const summary={vehicle,from:a.city,to:b.city,ok:result.ok,seconds:result.time,collisions:g.stats.collisions};results.push(summary);console.log(JSON.stringify(summary));if(!result.ok){console.log(JSON.stringify(result,null,2));process.exitCode=1;break;}
+}
+// Every actual bus stop can serve passengers after a forward physical approach.
+for(const service of ['509','900']){g.options.busRoute=service;g.setVehicle('bus');g.start();g.traffic=[];let total=0;
+ for(let i=0;i<g.bus.stops.length;i++){const stop=g.target();Object.assign(g.car,{x:stop.x-Math.cos(stop.a)*30,y:stop.y-Math.sin(stop.a)*30,a:stop.a,speed:14,steer:0});delete g.car.roadSample;g.sampleCarRoad();for(let j=0;j<300;j++){const remaining=(stop.x-g.car.x)*Math.cos(stop.a)+(stop.y-g.car.y)*Math.sin(stop.a);g.update(1/60,{up:remaining>10&&g.car.speed<12,brake:remaining<=10});if(g.bus.completedStops>total){total++;break;}}assert.equal(g.bus.completedStops,i+1,service+' stop '+i);}
+ assert.equal(g.bus.laps,1);assert(g.bus.boarded>0);assert(g.bus.alighted>0);results.push({service,stops:g.bus.completedStops,laps:g.bus.laps,boarded:g.bus.boarded,alighted:g.bus.alighted});console.log(JSON.stringify(results.at(-1)));}
+// Pickup and regional delivery require the unchanged held parking state.
+g.setVehicle('taxi');g.start();g.traffic=[];let pick=g.target();Object.assign(g.car,{x:pick.x,y:pick.y,a:pick.a,speed:0});delete g.car.roadSample;g.sampleCarRoad();for(let i=0;i<90;i++)g.update(1/60,{brake:true});assert.equal(g.job.stage,'dropoff');const drop=g.job.dropoff;Object.assign(g.car,{x:drop.x,y:drop.y,a:drop.a,speed:0});g.reverseMeters=20;delete g.car.roadSample;g.sampleCarRoad();for(let i=0;i<90;i++)g.update(1/60,{brake:true});assert.equal(g.completed,1);assert(g.cash>0);
+// Save preserves a moving ramp placement and passenger/job state exactly.
+const p=g.map.roadProfiles[4],q=R.pointAt(p,p.total*.6);Object.assign(g.car,{x:q.x,y:q.z,a:Math.atan2(q.dz,q.dx),height:q.height,speed:50,roadSample:{x:q.x,z:q.z,layer:'ramp',rampIndex:p.index,height:q.height}});g.sampleCarRoad();const data=g.snapshot(),copy=new E.Game(data.seed,data.options).restore(data);assert.equal(copy.car.height,g.car.height);assert.equal(copy.job.dropoff.id,g.job.dropoff.id);assert.equal(copy.cash,g.cash);assert.equal(copy.car.speed,g.car.speed);
+console.log('PASS continuous drives, physical bus approaches, controlled fare states and save restore');require('node:fs').writeFileSync(__dirname+'/evidence/physical-results.json',JSON.stringify(results,null,2));

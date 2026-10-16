@@ -1,0 +1,112 @@
+[
+  {
+    "vehicle": "taxi",
+    "from": "Toronto",
+    "to": "Pickering",
+    "ok": true,
+    "seconds": 212.01666666666668,
+    "collisions": 0
+  },
+  {
+    "vehicle": "taxi",
+    "from": "Toronto",
+    "to": "Oshawa",
+    "ok": true,
+    "seconds": 261.25,
+    "collisions": 0
+  },
+  {
+    "vehicle": "taxi",
+    "from": "Pickering",
+    "to": "Toronto",
+    "ok": true,
+    "seconds": 184.11666666666667,
+    "collisions": 0
+  },
+  {
+    "vehicle": "taxi",
+    "from": "Pickering",
+    "to": "Oshawa",
+    "ok": true,
+    "seconds": 210.41666666666666,
+    "collisions": 0
+  },
+  {
+    "vehicle": "taxi",
+    "from": "Oshawa",
+    "to": "Toronto",
+    "ok": true,
+    "seconds": 233.16666666666666,
+    "collisions": 0
+  },
+  {
+    "vehicle": "taxi",
+    "from": "Oshawa",
+    "to": "Pickering",
+    "ok": true,
+    "seconds": 179.93333333333334,
+    "collisions": 0
+  },
+  {
+    "vehicle": "bus",
+    "from": "Toronto",
+    "to": "Pickering",
+    "ok": true,
+    "seconds": 221.53333333333333,
+    "collisions": 0
+  },
+  {
+    "vehicle": "bus",
+    "from": "Toronto",
+    "to": "Oshawa",
+    "ok": true,
+    "seconds": 272.9166666666667,
+    "collisions": 0
+  },
+  {
+    "vehicle": "bus",
+    "from": "Pickering",
+    "to": "Toronto",
+    "ok": true,
+    "seconds": 190.21666666666667,
+    "collisions": 0
+  },
+  {
+    "vehicle": "bus",
+    "from": "Pickering",
+    "to": "Oshawa",
+    "ok": true,
+    "seconds": 219.7,
+    "collisions": 0
+  },
+  {
+    "vehicle": "bus",
+    "from": "Oshawa",
+    "to": "Toronto",
+    "ok": true,
+    "seconds": 241.8,
+    "collisions": 0
+  },
+  {
+    "vehicle": "bus",
+    "from": "Oshawa",
+    "to": "Pickering",
+    "ok": true,
+    "seconds": 186.48333333333332,
+    "collisions": 0
+  },
+  {
+    "service": "509",
+    "stops": 10,
+    "laps": 1,
+    "boarded": 77,
+    "alighted": 41
+  },
+  {
+    "service": "900",
+    "stops": 6,
+    "laps": 1,
+    "boarded": 55,
+    "alighted": 19
+  }
+]

@@ -1,0 +1,12 @@
+[
+  { vehicle: 'taxi', underpasses: '3 passed at ground height' },
+  { vehicle: 'taxi', mapEdge: 'contained' },
+  { vehicle: 'bus', underpasses: '3 passed at ground height' },
+  { vehicle: 'bus', mapEdge: 'contained' },
+  { highwayFollowing: 'stop and resume, no overlap' },
+  { debt: 'red light -$12, assist -$15' },
+  {
+    rightOnRed: 'full stop and right exit accepted; straight crossing fined'
+  },
+  { seeds: '1, 42, 8427, 12345, 999999' }
+]

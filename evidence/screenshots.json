@@ -1,0 +1,654 @@
+[
+  {
+    "scene": "ramp-ascent",
+    "state": {
+      "render": {
+        "width": 1280,
+        "height": 800,
+        "scale": 1,
+        "staticVertices": 679314,
+        "submittedStaticVertices": 103872,
+        "visibleChunks": 54,
+        "totalChunks": 1764,
+        "dynamicVertices": 6594,
+        "drawCalls": 80,
+        "fps": 9,
+        "frameMs": 7.771428571437442,
+        "camera": {
+          "eye": [
+            1267.300918301276,
+            66.40532425222659,
+            3883.5
+          ],
+          "yaw": 0,
+          "pitch": 0.024894789252905697,
+          "roll": 0,
+          "fov": 1.2566370614359172
+        },
+        "car": {
+          "x": 1261.300918301276,
+          "y": 3888,
+          "a": 0,
+          "speed": 0,
+          "steer": 0,
+          "kind": "taxi",
+          "length": 44,
+          "width": 22,
+          "speedKmh": 0,
+          "forwardSpeedKmh": 0,
+          "lateralAccelerationMps2": 0,
+          "longitudinalAccelerationMps2": 0,
+          "yawRate": 0,
+          "steerAngle": 0,
+          "engineLoad": 0,
+          "tireSlip": 0,
+          "engineRpm": 780,
+          "gear": 1,
+          "roadSample": {
+            "x": 1261.300918301276,
+            "z": 3888,
+            "height": 49.40676665657351,
+            "grade": 0.08338128153058956,
+            "pitch": 0.08318884921948741,
+            "forward": {
+              "x": 0.996541802710986,
+              "y": 0.08309293260884597,
+              "z": 0
+            },
+            "gradient": {
+              "x": 0.08338128153058956,
+              "z": 0
+            },
+            "layer": "ramp",
+            "rampIndex": 0,
+            "rampKind": "entry",
+            "travelDir": 1,
+            "distanceAlong": 1900,
+            "lateralDistance": 0,
+            "onRoad": true
+          },
+          "height": 49.40676665657351,
+          "roadLayer": "ramp",
+          "roadPitch": 0.08318884921948741,
+          "throttle": 0,
+          "brake": 0,
+          "gearShift": 0
+        },
+        "wheel": 0,
+        "mirror": {
+          "x": 539.8399999999999,
+          "y": 34.4,
+          "w": 200.32000000000002,
+          "h": 48.8
+        },
+        "software": false,
+        "roadHeight": 49.40676665657351,
+        "roadPitch": 0.08318884921948741,
+        "cockpit": {
+          "vehicleType": "taxi",
+          "steer": 0,
+          "speed": 0,
+          "speedKmh": 0,
+          "health": 100,
+          "cash": 0,
+          "fares": 0,
+          "reverse": false,
+          "look": 0,
+          "brake": false,
+          "clock": "4:00 PM",
+          "lowPower": false,
+          "passengers": 0,
+          "capacity": 0,
+          "stops": 0,
+          "stopIndex": 0,
+          "totalStops": 0,
+          "laps": 0,
+          "doorsOpen": false,
+          "routeName": "",
+          "routeId": "",
+          "nextStop": "Oshawa University House"
+        },
+        "airportVertices": 2997,
+        "aircraft": {
+          "visible": true,
+          "vertices": 1560,
+          "pose": {
+            "x": 674.284,
+            "y": 12.5,
+            "z": 4515,
+            "yaw": 0,
+            "pitch": 0,
+            "roll": 0,
+            "gear": 1,
+            "altitude": 0,
+            "phase": "ground-roll",
+            "time": 1.3999999999999975,
+            "cycle": 118.20713633111154
+          }
+        }
+      },
+      "city": "Toronto",
+      "time": 1.3999999999999975
+    }
+  },
+  {
+    "scene": "lakeshore-expressway",
+    "state": {
+      "render": {
+        "width": 1280,
+        "height": 800,
+        "scale": 1,
+        "staticVertices": 679314,
+        "submittedStaticVertices": 9177,
+        "visibleChunks": 47,
+        "totalChunks": 1764,
+        "dynamicVertices": 1182,
+        "drawCalls": 68,
+        "fps": 8,
+        "frameMs": 5.958333333339801,
+        "camera": {
+          "eye": [
+            10006,
+            81.5,
+            3828.5
+          ],
+          "yaw": 0,
+          "pitch": -0.03499620628864399,
+          "roll": 0,
+          "fov": 1.2566370614359172
+        },
+        "car": {
+          "x": 10000,
+          "y": 3833,
+          "a": 0,
+          "speed": 0,
+          "steer": 0,
+          "kind": "taxi",
+          "length": 44,
+          "width": 22,
+          "speedKmh": 0,
+          "forwardSpeedKmh": 0,
+          "lateralAccelerationMps2": 0,
+          "longitudinalAccelerationMps2": 0,
+          "yawRate": 0,
+          "steerAngle": 0,
+          "engineLoad": 0,
+          "tireSlip": 0,
+          "engineRpm": 780,
+          "gear": 1,
+          "roadSample": {
+            "x": 10000,
+            "z": 3833,
+            "height": 65,
+            "grade": 0,
+            "pitch": 0,
+            "forward": {
+              "x": 1,
+              "y": 0,
+              "z": 0
+            },
+            "gradient": {
+              "x": 0,
+              "z": 0
+            },
+            "layer": "highway",
+            "rampIndex": null,
+            "distanceAlong": 9650,
+            "lateralDistance": 53,
+            "onRoad": true
+          },
+          "height": 65,
+          "roadLayer": "highway",
+          "roadPitch": 0,
+          "throttle": 0,
+          "brake": 0,
+          "gearShift": 0
+        },
+        "wheel": 0,
+        "mirror": {
+          "x": 539.8399999999999,
+          "y": 34.4,
+          "w": 200.32000000000002,
+          "h": 48.8
+        },
+        "software": false,
+        "roadHeight": 65,
+        "roadPitch": 0,
+        "cockpit": {
+          "vehicleType": "taxi",
+          "steer": 0,
+          "speed": 0,
+          "speedKmh": 0,
+          "health": 100,
+          "cash": 0,
+          "fares": 0,
+          "reverse": false,
+          "look": 0,
+          "brake": false,
+          "clock": "4:00 PM",
+          "lowPower": false,
+          "passengers": 0,
+          "capacity": 0,
+          "stops": 0,
+          "stopIndex": 0,
+          "totalStops": 0,
+          "laps": 0,
+          "doorsOpen": false,
+          "routeName": "",
+          "routeId": "",
+          "nextStop": "Oshawa University House"
+        },
+        "airportVertices": 2997,
+        "aircraft": {
+          "visible": false,
+          "vertices": 0,
+          "pose": {
+            "x": 705.5159999999998,
+            "y": 12.5,
+            "z": 4515,
+            "yaw": 0,
+            "pitch": 0,
+            "roll": 0,
+            "gear": 1,
+            "altitude": 0,
+            "phase": "ground-roll",
+            "time": 2.4666666666666606,
+            "cycle": 118.20713633111154
+          }
+        }
+      },
+      "city": "Pickering",
+      "time": 2.4666666666666606
+    }
+  },
+  {
+    "scene": "pickering",
+    "state": {
+      "render": {
+        "width": 1280,
+        "height": 800,
+        "scale": 1,
+        "staticVertices": 679314,
+        "submittedStaticVertices": 72606,
+        "visibleChunks": 55,
+        "totalChunks": 1764,
+        "dynamicVertices": 13023,
+        "drawCalls": 77,
+        "fps": 12,
+        "frameMs": 5.686274509808487,
+        "camera": {
+          "eye": [
+            14116,
+            16.5,
+            1431.5
+          ],
+          "yaw": 0,
+          "pitch": -0.034999999936575175,
+          "roll": 0,
+          "fov": 1.2566370614359172
+        },
+        "car": {
+          "x": 14110,
+          "y": 1436,
+          "a": 0,
+          "speed": 0,
+          "steer": 0,
+          "kind": "taxi",
+          "length": 44,
+          "width": 22,
+          "speedKmh": 0,
+          "forwardSpeedKmh": 0,
+          "lateralAccelerationMps2": 0,
+          "longitudinalAccelerationMps2": 0,
+          "yawRate": 0,
+          "steerAngle": 0,
+          "engineLoad": 0,
+          "tireSlip": 0,
+          "engineRpm": 780,
+          "gear": 1,
+          "height": 0,
+          "roadLayer": "ground",
+          "roadPitch": 0,
+          "throttle": 0,
+          "brake": 0,
+          "gearShift": 0,
+          "roadSample": {
+            "x": 14110,
+            "z": 1436,
+            "height": 0,
+            "grade": 0,
+            "pitch": 0,
+            "forward": {
+              "x": 1,
+              "y": 0,
+              "z": 0
+            },
+            "gradient": {
+              "x": 0,
+              "z": 0
+            },
+            "layer": "ground",
+            "rampIndex": null,
+            "distanceAlong": 0,
+            "lateralDistance": 0,
+            "onRoad": true
+          }
+        },
+        "wheel": 0,
+        "mirror": {
+          "x": 539.8399999999999,
+          "y": 34.4,
+          "w": 200.32000000000002,
+          "h": 48.8
+        },
+        "software": false,
+        "roadHeight": 0,
+        "roadPitch": 0,
+        "cockpit": {
+          "vehicleType": "taxi",
+          "steer": 0,
+          "speed": 0,
+          "speedKmh": 0,
+          "health": 100,
+          "cash": 0,
+          "fares": 0,
+          "reverse": false,
+          "look": 0,
+          "brake": false,
+          "clock": "4:01 PM",
+          "lowPower": false,
+          "passengers": 0,
+          "capacity": 0,
+          "stops": 0,
+          "stopIndex": 0,
+          "totalStops": 0,
+          "laps": 0,
+          "doorsOpen": false,
+          "routeName": "",
+          "routeId": "",
+          "nextStop": "Oshawa University House"
+        },
+        "airportVertices": 2997,
+        "aircraft": {
+          "visible": false,
+          "vertices": 0,
+          "pose": {
+            "x": 747.807333333333,
+            "y": 12.5,
+            "z": 4515,
+            "yaw": 0,
+            "pitch": 0,
+            "roll": 0,
+            "gear": 1,
+            "altitude": 0,
+            "phase": "ground-roll",
+            "time": 3.683333333333323,
+            "cycle": 118.20713633111154
+          }
+        }
+      },
+      "city": "Pickering",
+      "time": 3.683333333333323
+    }
+  },
+  {
+    "scene": "oshawa",
+    "state": {
+      "render": {
+        "width": 1280,
+        "height": 800,
+        "scale": 1,
+        "staticVertices": 679314,
+        "submittedStaticVertices": 68265,
+        "visibleChunks": 53,
+        "totalChunks": 1764,
+        "dynamicVertices": 12591,
+        "drawCalls": 75,
+        "fps": 13,
+        "frameMs": 5.762686567169045,
+        "camera": {
+          "eye": [
+            27386,
+            16.5,
+            1431.5
+          ],
+          "yaw": 0,
+          "pitch": -0.03499999999999925,
+          "roll": 0,
+          "fov": 1.2566370614359172
+        },
+        "car": {
+          "x": 27380,
+          "y": 1436,
+          "a": 0,
+          "speed": 0,
+          "steer": 0,
+          "kind": "taxi",
+          "length": 44,
+          "width": 22,
+          "speedKmh": 0,
+          "forwardSpeedKmh": 0,
+          "lateralAccelerationMps2": 0,
+          "longitudinalAccelerationMps2": 0,
+          "yawRate": 0,
+          "steerAngle": 0,
+          "engineLoad": 0,
+          "tireSlip": 0,
+          "engineRpm": 780,
+          "gear": 1,
+          "height": 0,
+          "roadLayer": "ground",
+          "roadPitch": 0,
+          "throttle": 0,
+          "brake": 0,
+          "gearShift": 0,
+          "roadSample": {
+            "x": 27380,
+            "z": 1436,
+            "height": 0,
+            "grade": 0,
+            "pitch": 0,
+            "forward": {
+              "x": 1,
+              "y": 0,
+              "z": 0
+            },
+            "gradient": {
+              "x": 0,
+              "z": 0
+            },
+            "layer": "ground",
+            "rampIndex": null,
+            "distanceAlong": 0,
+            "lateralDistance": 0,
+            "onRoad": true
+          }
+        },
+        "wheel": 0,
+        "mirror": {
+          "x": 539.8399999999999,
+          "y": 34.4,
+          "w": 200.32000000000002,
+          "h": 48.8
+        },
+        "software": false,
+        "roadHeight": 0,
+        "roadPitch": 0,
+        "cockpit": {
+          "vehicleType": "taxi",
+          "steer": 0,
+          "speed": 0,
+          "speedKmh": 0,
+          "health": 100,
+          "cash": 0,
+          "fares": 0,
+          "reverse": false,
+          "look": 0,
+          "brake": false,
+          "clock": "4:01 PM",
+          "lowPower": false,
+          "passengers": 0,
+          "capacity": 0,
+          "stops": 0,
+          "stopIndex": 0,
+          "totalStops": 0,
+          "laps": 0,
+          "doorsOpen": false,
+          "routeName": "",
+          "routeId": "",
+          "nextStop": "Oshawa University House"
+        },
+        "airportVertices": 2997,
+        "aircraft": {
+          "visible": false,
+          "vertices": 0,
+          "pose": {
+            "x": 795.7560000000013,
+            "y": 12.5,
+            "z": 4515,
+            "yaw": 0,
+            "pitch": 0,
+            "roll": 0,
+            "gear": 1,
+            "altitude": 0,
+            "phase": "ground-roll",
+            "time": 4.866666666666698,
+            "cycle": 118.20713633111154
+          }
+        }
+      },
+      "city": "Oshawa",
+      "time": 4.866666666666698
+    }
+  },
+  {
+    "scene": "underpass",
+    "state": {
+      "render": {
+        "width": 1280,
+        "height": 800,
+        "scale": 1,
+        "staticVertices": 679314,
+        "submittedStaticVertices": 46473,
+        "visibleChunks": 52,
+        "totalChunks": 1764,
+        "dynamicVertices": 8400,
+        "drawCalls": 75,
+        "fps": 14,
+        "frameMs": 6.090361445783133,
+        "camera": {
+          "eye": [
+            1159.5,
+            16.5,
+            3616
+          ],
+          "yaw": 1.5707963267948966,
+          "pitch": -0.035,
+          "roll": 0,
+          "fov": 1.2566370614359172
+        },
+        "car": {
+          "x": 1155,
+          "y": 3610,
+          "a": 1.5707963267948966,
+          "speed": 0,
+          "steer": 0,
+          "kind": "taxi",
+          "length": 44,
+          "width": 22,
+          "speedKmh": 0,
+          "forwardSpeedKmh": 0,
+          "lateralAccelerationMps2": 0,
+          "longitudinalAccelerationMps2": 0,
+          "yawRate": 0,
+          "steerAngle": 0,
+          "engineLoad": 0,
+          "tireSlip": 0,
+          "engineRpm": 780,
+          "gear": 1,
+          "height": 0,
+          "roadLayer": "ground",
+          "roadPitch": 0,
+          "throttle": 0,
+          "brake": 0,
+          "gearShift": 0,
+          "roadSample": {
+            "x": 1155,
+            "z": 3610,
+            "height": 0,
+            "grade": 0,
+            "pitch": 0,
+            "forward": {
+              "x": 1,
+              "y": 0,
+              "z": 0
+            },
+            "gradient": {
+              "x": 0,
+              "z": 0
+            },
+            "layer": "ground",
+            "rampIndex": null,
+            "distanceAlong": 0,
+            "lateralDistance": 0,
+            "onRoad": true
+          }
+        },
+        "wheel": 0,
+        "mirror": {
+          "x": 539.8399999999999,
+          "y": 34.4,
+          "w": 200.32000000000002,
+          "h": 48.8
+        },
+        "software": false,
+        "roadHeight": 0,
+        "roadPitch": 0,
+        "cockpit": {
+          "vehicleType": "taxi",
+          "steer": 0,
+          "speed": 0,
+          "speedKmh": 0,
+          "health": 100,
+          "cash": 0,
+          "fares": 0,
+          "reverse": false,
+          "look": 0,
+          "brake": false,
+          "clock": "4:02 PM",
+          "lowPower": false,
+          "passengers": 0,
+          "capacity": 0,
+          "stops": 0,
+          "stopIndex": 0,
+          "totalStops": 0,
+          "laps": 0,
+          "doorsOpen": false,
+          "routeName": "",
+          "routeId": "",
+          "nextStop": "Oshawa University House"
+        },
+        "airportVertices": 2997,
+        "aircraft": {
+          "visible": true,
+          "vertices": 1560,
+          "pose": {
+            "x": 854.5293333333381,
+            "y": 12.5,
+            "z": 4515,
+            "yaw": 0,
+            "pitch": 0,
+            "roll": 0,
+            "gear": 1,
+            "altitude": 0,
+            "phase": "ground-roll",
+            "time": 6.133333333333428,
+            "cycle": 118.20713633111154
+          }
+        }
+      },
+      "city": "Toronto",
+      "time": 6.133333333333428
+    }
+  }
+]

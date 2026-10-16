@@ -4,7 +4,7 @@
 (function(root,factory){const api=factory();if(typeof module==='object'&&module.exports)module.exports=api;if(root)root.TaxiRoads=api;})(typeof globalThis!=='undefined'?globalThis:this,function(){
   'use strict';
   const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
-  const VERSION=3,RAMP_HALF=37,HIGHWAY_HALF=76;
+  const VERSION=4,RAMP_HALF=37,HIGHWAY_HALF=76;
   function smooth(t){t=clamp(t,0,1);return t*t*t*(10+t*(-15+6*t));}
   function smoothSlope(t){if(t<=0||t>=1)return 0;return 30*t*t*(1-t)*(1-t);}
   function configure(map){
@@ -13,7 +13,7 @@
     map.hy=Math.max(map.hy||0,z0+820);map.h=Math.max(map.h||0,map.hy+240);
     map.highwayHeight=65;map.highwayStart=map.xs[0]+130;map.highwayEnd=map.xs[map.xs.length-1]-130;
     map.highwayHalf=HIGHWAY_HALF;map.rampHalf=RAMP_HALF;
-    const radius=250,acceleration=430,taper=360,profiles=[];
+    const radius=250,acceleration=1300,taper=360,profiles=[];
     for(let index=0;index<4;index++){
       const east=index%2===1,kind=index<2?'entry':'exit',travelDir=kind==='entry'?1:-1;
       const dir=east?-1:1,side=dir*travelDir,x0=map.xs[east?map.xs.length-1:0]+(kind==='entry'?-38:38);
@@ -22,7 +22,10 @@
       const laneZ=map.hy+side*53,accelZ=map.hy+side*108;
       const curveStartZ=accelZ-radius,straight=Math.max(1,curveStartZ-z0),arc=radius*Math.PI/2;
       const turnEnd=straight+arc,total=turnEnd+acceleration+taper;
-      const riseStart=110,riseEnd=turnEnd-(side===1?160:50);
+      // Eastbound slip roads cross beneath both carriageways, then climb
+      // along the outboard acceleration lane. Intermediate interchanges must
+      // never cut through the expressway median at deck height.
+      const riseStart=side===1?turnEnd+40:110,riseEnd=side===1?turnEnd+acceleration-40:turnEnd-50;
       const profile={index,kind,travelDir,dir,side,x0,z0,radius,straight,arc,turnEnd,acceleration,taper,total,riseStart,riseEnd,laneZ,accelZ,halfWidth:RAMP_HALF,height:map.highwayHeight,points:[]};
       // Explicit transition vertices prevent any segment from straddling joins.
       const joins=[0,riseStart,straight,turnEnd,riseEnd,turnEnd+acceleration,total].sort((a,b)=>a-b);
@@ -55,6 +58,9 @@
     for(let i=0;i<map.xs.length-1;i++)for(const fraction of [.35,.65]){
       const x=map.xs[i]+(map.xs[i+1]-map.xs[i])*fraction;
       if(x<map.highwayStart+10||x>map.highwayEnd-10)continue;
+      // A slip road can now pass under the continuous regional viaduct.
+      // Omit piers beside its envelope, including a full bus body.
+      if(profiles.some(p=>[-108,108].some(off=>{const hit=project(p,x,map.hy+off),q=pointAt(p,hit.s);return hit.distance<q.halfWidth+24&&q.height<map.highwayHeight-1;})))continue;
       map.highwayPiers.push({x,z:map.hy,offset:108,width:10,depth:13,height:map.highwayHeight-8.7});
       for(const side of [-1,1])map.groundColliders.push({x:x-5,y:map.hy+side*108-6.5,w:10,h:13,height:0,minHeight:0,maxHeight:map.highwayHeight-8.7,kind:'bridge pier'});
     }
@@ -99,9 +105,10 @@
       z>=Math.min(g.z1,g.z2)&&z<=Math.max(g.z1,g.z2)&&Math.abs(x-g.x1)<=h;
   }
   function isSurfaceStreet(map,x,z){
+    if(map.regional)return map.districts.some(d=>isSurfaceStreet(d,x,z));
     const half=map.roadHalf||82,lastZ=map.ys[map.ys.length-1];
     return (z>120&&z<lastZ+half&&map.xs.some(v=>Math.abs(x-v)<half))||
-      (x>120&&x<map.xs[map.xs.length-1]+100&&map.ys.some(v=>Math.abs(z-v)<half))||
+      (x>(map.minStreetX||120)&&x<map.xs[map.xs.length-1]+100&&map.ys.some(v=>Math.abs(z-v)<half))||
       (map.bays||[]).some(b=>Math.abs(x-b.x)<126&&z>b.roadY&&z<b.roadY+180)||
       (map.groundRoads||[]).some(g=>groundRoadContains(g,x,z));
   }

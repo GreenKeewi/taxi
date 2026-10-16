@@ -23,18 +23,32 @@
       const a=p.points[i-1],b=p.points[i],la=edge(a,a.halfWidth),lb=edge(b,b.halfWidth),ra=edge(a,-a.halfWidth),rb=edge(b,-b.halfWidth),ma=edge(a,0),mb=edge(b,0);
       tri(la,lb,mb);tri(la,mb,ma);tri(ma,mb,rb);tri(ma,rb,ra);
     }
-    const result={map,triangles};roadOccluderCache.set(map,result);return result;
+    const cells=new Map(),cellSize=200;for(const [id,q]of triangles.entries()){q.id=id;for(let x=Math.floor(q.minX/cellSize);x<=Math.floor(q.maxX/cellSize);x++)for(let z=Math.floor(q.minZ/cellSize);z<=Math.floor(q.maxZ/cellSize);z++){const key=x+','+z;if(!cells.has(key))cells.set(key,[]);cells.get(key).push(q);}}
+    const result={map,triangles,cells,cellSize,seen:new Uint32Array(triangles.length),stamp:0};roadOccluderCache.set(map,result);return result;
   }
   function roadBlocksPoint(roads,eye,x,y,z) {
     const dx=x-eye[0],dy=y-eye[1],dz=z-eye[2],m=roads.map;
     if(Math.abs(dy)>1e-8){const t=(m.highwayHeight-eye[1])/dy;if(t>.0001&&t<1.00001){const px=eye[0]+dx*t,pz=eye[2]+dz*t;if(px>=m.highwayStart&&px<=m.highwayEnd&&Math.abs(pz-m.hy)<=m.highwayHalf)return true;}}
     const minX=Math.min(x,eye[0]),maxX=Math.max(x,eye[0]),minZ=Math.min(z,eye[2]),maxZ=Math.max(z,eye[2]);
-    for(const q of roads.triangles){
-      if(maxX<q.minX||minX>q.maxX||maxZ<q.minZ||minZ>q.maxZ)continue;
-      const den=dy-q.gx*dx-q.gz*dz;if(Math.abs(den)<1e-8)continue;
-      const t=(q.gx*eye[0]+q.gz*eye[2]+q.offset-eye[1])/den;if(t<=.0001||t>=1.00001)continue;
+    // Walk only the cells crossed by this sightline. A long regional map must
+    // not multiply every support test by every ramp in distant cities.
+    const size=roads.cellSize,seen=roads.seen,stamp=++roads.stamp;
+    if(stamp===0xffffffff){seen.fill(0);roads.stamp=1;}
+    function blocks(q){
+      if(maxX<q.minX||minX>q.maxX||maxZ<q.minZ||minZ>q.maxZ)return false;
+      const den=dy-q.gx*dx-q.gz*dz;if(Math.abs(den)<1e-8)return false;
+      const t=(q.gx*eye[0]+q.gz*eye[2]+q.offset-eye[1])/den;if(t<=.0001||t>=1.00001)return false;
       const px=eye[0]+dx*t-q.x,pz=eye[2]+dz*t-q.z,u=(px*q.vz-pz*q.vx)/q.det,v=(q.ux*pz-q.uz*px)/q.det;
       if(u>=-.00001&&v>=-.00001&&u+v<=1.00001)return true;
+      return false;
+    }
+    let ix=Math.floor(eye[0]/size),iz=Math.floor(eye[2]/size),endX=Math.floor(x/size),endZ=Math.floor(z/size),stepX=Math.sign(dx),stepZ=Math.sign(dz);
+    const deltaX=stepX?size/Math.abs(dx):Infinity,deltaZ=stepZ?size/Math.abs(dz):Infinity;
+    let nextX=stepX?((stepX>0?(ix+1)*size:ix*size)-eye[0])/dx:Infinity,nextZ=stepZ?((stepZ>0?(iz+1)*size:iz*size)-eye[2])/dz:Infinity;
+    for(let steps=0;steps<120;steps++){
+      const cell=roads.cells.get(ix+','+iz);if(cell)for(const q of cell){if(seen[q.id]===stamp)continue;seen[q.id]=stamp;if(blocks(q))return true;}
+      if(ix===endX&&iz===endZ)break;
+      if(nextX<nextZ){ix+=stepX;nextX+=deltaX;}else{iz+=stepZ;nextZ+=deltaZ;}
     }
     return false;
   }

@@ -1,0 +1,3096 @@
+{
+  "state": {
+    "mode": "playing",
+    "seed": 8427,
+    "vehicleType": "taxi",
+    "selectedVehicle": "taxi",
+    "selectedService": "509",
+    "dispatch": "regional",
+    "city": "Pickering",
+    "mapSize": {
+      "cols": 8,
+      "rows": 7,
+      "width": 29800,
+      "height": 4165
+    },
+    "bus": null,
+    "route": [
+      {
+        "x": 8935.132672612326,
+        "y": 3833,
+        "a": 0,
+        "speed": 333.33333333333337,
+        "steer": 0,
+        "kind": "taxi",
+        "length": 44,
+        "width": 22,
+        "speedKmh": 120.00000000000001,
+        "forwardSpeedKmh": 120.00000000000001,
+        "lateralAccelerationMps2": 0,
+        "longitudinalAccelerationMps2": 0,
+        "yawRate": 0,
+        "steerAngle": 0,
+        "engineLoad": 0.9999999999999986,
+        "tireSlip": 0,
+        "engineRpm": 4899.999999999995,
+        "gear": 6,
+        "roadSample": {
+          "x": 8935.132672612326,
+          "z": 3833,
+          "height": 65,
+          "grade": 0,
+          "pitch": 0,
+          "forward": {
+            "x": 1,
+            "y": 0,
+            "z": 0
+          },
+          "gradient": {
+            "x": 0,
+            "z": 0
+          },
+          "layer": "highway",
+          "rampIndex": null,
+          "distanceAlong": 8585.132672612326,
+          "lateralDistance": 53,
+          "onRoad": true
+        },
+        "height": 65,
+        "roadLayer": "highway",
+        "roadPitch": 0,
+        "throttle": 0.9999999999999992,
+        "brake": 0,
+        "gearShift": 0
+      },
+      {
+        "x": 9035.132672612326,
+        "y": 3833,
+        "height": 65,
+        "roadLayer": "highway"
+      },
+      {
+        "x": 9215.132672612326,
+        "y": 3833,
+        "height": 65,
+        "roadLayer": "highway"
+      },
+      {
+        "x": 9395.132672612326,
+        "y": 3833,
+        "height": 65,
+        "roadLayer": "highway"
+      },
+      {
+        "x": 9575.132672612326,
+        "y": 3833,
+        "height": 65,
+        "roadLayer": "highway"
+      },
+      {
+        "x": 9755.132672612326,
+        "y": 3833,
+        "height": 65,
+        "roadLayer": "highway"
+      },
+      {
+        "x": 9935.132672612326,
+        "y": 3833,
+        "height": 65,
+        "roadLayer": "highway"
+      },
+      {
+        "x": 10115.132672612326,
+        "y": 3833,
+        "height": 65,
+        "roadLayer": "highway"
+      },
+      {
+        "x": 10295.132672612326,
+        "y": 3833,
+        "height": 65,
+        "roadLayer": "highway"
+      },
+      {
+        "x": 10475.132672612326,
+        "y": 3833,
+        "height": 65,
+        "roadLayer": "highway"
+      },
+      {
+        "x": 10655.132672612326,
+        "y": 3833,
+        "height": 65,
+        "roadLayer": "highway"
+      },
+      {
+        "x": 10835.132672612326,
+        "y": 3833,
+        "height": 65,
+        "roadLayer": "highway"
+      },
+      {
+        "x": 11015.132672612326,
+        "y": 3833,
+        "height": 65,
+        "roadLayer": "highway"
+      },
+      {
+        "x": 11195.132672612326,
+        "y": 3833,
+        "height": 65,
+        "roadLayer": "highway"
+      },
+      {
+        "x": 11375.132672612326,
+        "y": 3833,
+        "height": 65,
+        "roadLayer": "highway"
+      },
+      {
+        "x": 11555.132672612326,
+        "y": 3833,
+        "height": 65,
+        "roadLayer": "highway"
+      },
+      {
+        "x": 11735.132672612326,
+        "y": 3833,
+        "height": 65,
+        "roadLayer": "highway"
+      },
+      {
+        "x": 11915.132672612326,
+        "y": 3833,
+        "height": 65,
+        "roadLayer": "highway"
+      },
+      {
+        "x": 12095.132672612326,
+        "y": 3833,
+        "height": 65,
+        "roadLayer": "highway"
+      },
+      {
+        "x": 12275.132672612326,
+        "y": 3833,
+        "height": 65,
+        "roadLayer": "highway"
+      },
+      {
+        "x": 12455.132672612326,
+        "y": 3833,
+        "height": 65,
+        "roadLayer": "highway"
+      },
+      {
+        "x": 12635.132672612326,
+        "y": 3833,
+        "height": 65,
+        "roadLayer": "highway"
+      },
+      {
+        "x": 12815.132672612326,
+        "y": 3833,
+        "height": 65,
+        "roadLayer": "highway"
+      },
+      {
+        "x": 12995.132672612326,
+        "y": 3833,
+        "height": 65,
+        "roadLayer": "highway"
+      },
+      {
+        "x": 13175.132672612326,
+        "y": 3833,
+        "height": 65,
+        "roadLayer": "highway"
+      },
+      {
+        "x": 13355.132672612326,
+        "y": 3833,
+        "height": 65,
+        "roadLayer": "highway"
+      },
+      {
+        "x": 13535.132672612326,
+        "y": 3833,
+        "height": 65,
+        "roadLayer": "highway"
+      },
+      {
+        "x": 13715.132672612326,
+        "y": 3833,
+        "height": 65,
+        "roadLayer": "highway"
+      },
+      {
+        "x": 13895.132672612326,
+        "y": 3833,
+        "height": 65,
+        "roadLayer": "highway"
+      },
+      {
+        "x": 14075.132672612326,
+        "y": 3833,
+        "height": 65,
+        "roadLayer": "highway"
+      },
+      {
+        "x": 14255.132672612326,
+        "y": 3833,
+        "height": 65,
+        "roadLayer": "highway"
+      },
+      {
+        "x": 14435.132672612326,
+        "y": 3833,
+        "height": 65,
+        "roadLayer": "highway"
+      },
+      {
+        "x": 14615.132672612326,
+        "y": 3833,
+        "height": 65,
+        "roadLayer": "highway"
+      },
+      {
+        "x": 14795.132672612326,
+        "y": 3833,
+        "height": 65,
+        "roadLayer": "highway"
+      },
+      {
+        "x": 14975.132672612326,
+        "y": 3833,
+        "height": 65,
+        "roadLayer": "highway"
+      },
+      {
+        "x": 15155.132672612326,
+        "y": 3833,
+        "height": 65,
+        "roadLayer": "highway"
+      },
+      {
+        "x": 15335.132672612326,
+        "y": 3833,
+        "height": 65,
+        "roadLayer": "highway"
+      },
+      {
+        "x": 15515.132672612326,
+        "y": 3833,
+        "height": 65,
+        "roadLayer": "highway"
+      },
+      {
+        "x": 15695.132672612326,
+        "y": 3833,
+        "height": 65,
+        "roadLayer": "highway"
+      },
+      {
+        "x": 15875.132672612326,
+        "y": 3833,
+        "height": 65,
+        "roadLayer": "highway"
+      },
+      {
+        "x": 16055.132672612326,
+        "y": 3833,
+        "height": 65,
+        "roadLayer": "highway"
+      },
+      {
+        "x": 16235.132672612326,
+        "y": 3833,
+        "height": 65,
+        "roadLayer": "highway"
+      },
+      {
+        "x": 16415.132672612326,
+        "y": 3833,
+        "height": 65,
+        "roadLayer": "highway"
+      },
+      {
+        "x": 16595.132672612326,
+        "y": 3833,
+        "height": 65,
+        "roadLayer": "highway"
+      },
+      {
+        "x": 16775.132672612326,
+        "y": 3833,
+        "height": 65,
+        "roadLayer": "highway"
+      },
+      {
+        "x": 16955.132672612326,
+        "y": 3833,
+        "height": 65,
+        "roadLayer": "highway"
+      },
+      {
+        "x": 17135.132672612326,
+        "y": 3833,
+        "height": 65,
+        "roadLayer": "highway"
+      },
+      {
+        "x": 17315.132672612326,
+        "y": 3833,
+        "height": 65,
+        "roadLayer": "highway"
+      },
+      {
+        "x": 17495.132672612326,
+        "y": 3833,
+        "height": 65,
+        "roadLayer": "highway"
+      },
+      {
+        "x": 17675.132672612326,
+        "y": 3833,
+        "height": 65,
+        "roadLayer": "highway"
+      },
+      {
+        "x": 17855.132672612326,
+        "y": 3833,
+        "height": 65,
+        "roadLayer": "highway"
+      },
+      {
+        "x": 18035.132672612326,
+        "y": 3833,
+        "height": 65,
+        "roadLayer": "highway"
+      },
+      {
+        "x": 18215.132672612326,
+        "y": 3833,
+        "height": 65,
+        "roadLayer": "highway"
+      },
+      {
+        "x": 18395.132672612326,
+        "y": 3833,
+        "height": 65,
+        "roadLayer": "highway"
+      },
+      {
+        "x": 18575.132672612326,
+        "y": 3833,
+        "height": 65,
+        "roadLayer": "highway"
+      },
+      {
+        "x": 18755.132672612326,
+        "y": 3833,
+        "height": 65,
+        "roadLayer": "highway"
+      },
+      {
+        "x": 18935.132672612326,
+        "y": 3833,
+        "height": 65,
+        "roadLayer": "highway"
+      },
+      {
+        "x": 19115.132672612326,
+        "y": 3833,
+        "height": 65,
+        "roadLayer": "highway"
+      },
+      {
+        "x": 19295.132672612326,
+        "y": 3833,
+        "height": 65,
+        "roadLayer": "highway"
+      },
+      {
+        "x": 19475.132672612326,
+        "y": 3833,
+        "height": 65,
+        "roadLayer": "highway"
+      },
+      {
+        "x": 19655.132672612326,
+        "y": 3833,
+        "height": 65,
+        "roadLayer": "highway"
+      },
+      {
+        "x": 19835.132672612326,
+        "y": 3833,
+        "height": 65,
+        "roadLayer": "highway"
+      },
+      {
+        "x": 20015.132672612326,
+        "y": 3833,
+        "height": 65,
+        "roadLayer": "highway"
+      },
+      {
+        "x": 20195.132672612326,
+        "y": 3833,
+        "height": 65,
+        "roadLayer": "highway"
+      },
+      {
+        "x": 20375.132672612326,
+        "y": 3833,
+        "height": 65,
+        "roadLayer": "highway"
+      },
+      {
+        "x": 20555.132672612326,
+        "y": 3833,
+        "height": 65,
+        "roadLayer": "highway"
+      },
+      {
+        "x": 20735.132672612326,
+        "y": 3833,
+        "height": 65,
+        "roadLayer": "highway"
+      },
+      {
+        "x": 20915.132672612326,
+        "y": 3833,
+        "height": 65,
+        "roadLayer": "highway"
+      },
+      {
+        "x": 21095.132672612326,
+        "y": 3833,
+        "height": 65,
+        "roadLayer": "highway"
+      },
+      {
+        "x": 21275.132672612326,
+        "y": 3833,
+        "height": 65,
+        "roadLayer": "highway"
+      },
+      {
+        "x": 21455.132672612326,
+        "y": 3833,
+        "height": 65,
+        "roadLayer": "highway"
+      },
+      {
+        "x": 21635.132672612326,
+        "y": 3833,
+        "height": 65,
+        "roadLayer": "highway"
+      },
+      {
+        "x": 21815.132672612326,
+        "y": 3833,
+        "height": 65,
+        "roadLayer": "highway"
+      },
+      {
+        "x": 21995.132672612326,
+        "y": 3833,
+        "height": 65,
+        "roadLayer": "highway"
+      },
+      {
+        "x": 22175.132672612326,
+        "y": 3833,
+        "height": 65,
+        "roadLayer": "highway"
+      },
+      {
+        "x": 22355.132672612326,
+        "y": 3833,
+        "height": 65,
+        "roadLayer": "highway"
+      },
+      {
+        "x": 22535.132672612326,
+        "y": 3833,
+        "height": 65,
+        "roadLayer": "highway"
+      },
+      {
+        "x": 22715.132672612326,
+        "y": 3833,
+        "height": 65,
+        "roadLayer": "highway"
+      },
+      {
+        "x": 22895.132672612326,
+        "y": 3833,
+        "height": 65,
+        "roadLayer": "highway"
+      },
+      {
+        "x": 23075.132672612326,
+        "y": 3833,
+        "height": 65,
+        "roadLayer": "highway"
+      },
+      {
+        "x": 23255.132672612326,
+        "y": 3833,
+        "height": 65,
+        "roadLayer": "highway"
+      },
+      {
+        "x": 23435.132672612326,
+        "y": 3833,
+        "height": 65,
+        "roadLayer": "highway"
+      },
+      {
+        "x": 23615.132672612326,
+        "y": 3833,
+        "height": 65,
+        "roadLayer": "highway"
+      },
+      {
+        "x": 23795.132672612326,
+        "y": 3833,
+        "height": 65,
+        "roadLayer": "highway"
+      },
+      {
+        "x": 23975.132672612326,
+        "y": 3833,
+        "height": 65,
+        "roadLayer": "highway"
+      },
+      {
+        "x": 24155.132672612326,
+        "y": 3833,
+        "height": 65,
+        "roadLayer": "highway"
+      },
+      {
+        "x": 24335.132672612326,
+        "y": 3833,
+        "height": 65,
+        "roadLayer": "highway"
+      },
+      {
+        "x": 24515.132672612326,
+        "y": 3833,
+        "height": 65,
+        "roadLayer": "highway"
+      },
+      {
+        "x": 24695.132672612326,
+        "y": 3833,
+        "height": 65,
+        "roadLayer": "highway"
+      },
+      {
+        "x": 24875.132672612326,
+        "y": 3833,
+        "height": 65,
+        "roadLayer": "highway"
+      },
+      {
+        "x": 25055.132672612326,
+        "y": 3833,
+        "height": 65,
+        "roadLayer": "highway"
+      },
+      {
+        "x": 25235.132672612326,
+        "y": 3833,
+        "height": 65,
+        "roadLayer": "highway"
+      },
+      {
+        "x": 25415.132672612326,
+        "y": 3833,
+        "height": 65,
+        "roadLayer": "highway"
+      },
+      {
+        "x": 25595.132672612326,
+        "y": 3833,
+        "height": 65,
+        "roadLayer": "highway"
+      },
+      {
+        "x": 25775.132672612326,
+        "y": 3833,
+        "height": 65,
+        "roadLayer": "highway"
+      },
+      {
+        "x": 25955.132672612326,
+        "y": 3833,
+        "height": 65,
+        "roadLayer": "highway"
+      },
+      {
+        "x": 26135.132672612326,
+        "y": 3833,
+        "height": 65,
+        "roadLayer": "highway"
+      },
+      {
+        "x": 26315.132672612326,
+        "y": 3833,
+        "height": 65,
+        "roadLayer": "highway"
+      },
+      {
+        "x": 26495.132672612326,
+        "y": 3833,
+        "height": 65,
+        "roadLayer": "highway"
+      },
+      {
+        "x": 26675.132672612326,
+        "y": 3833,
+        "height": 65,
+        "roadLayer": "highway"
+      },
+      {
+        "x": 26855.132672612326,
+        "y": 3833,
+        "height": 65,
+        "roadLayer": "highway"
+      },
+      {
+        "x": 27035.132672612326,
+        "y": 3833,
+        "height": 65,
+        "roadLayer": "highway"
+      },
+      {
+        "x": 27215.132672612326,
+        "y": 3833,
+        "height": 65,
+        "roadLayer": "highway"
+      },
+      {
+        "x": 27395.132672612326,
+        "y": 3833,
+        "height": 65,
+        "roadLayer": "highway"
+      },
+      {
+        "x": 27575.132672612326,
+        "y": 3833,
+        "height": 65,
+        "roadLayer": "highway"
+      },
+      {
+        "x": 27648,
+        "y": 3833,
+        "height": 65,
+        "roadLayer": "highway"
+      },
+      {
+        "x": 27666,
+        "y": 3833.063696875,
+        "height": 65,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 27684,
+        "y": 3833.4708,
+        "height": 65,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 27702,
+        "y": 3834.463653125,
+        "height": 65,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 27720,
+        "y": 3836.1856,
+        "height": 65,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 27738,
+        "y": 3838.693359375,
+        "height": 65,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 27756,
+        "y": 3841.9694,
+        "height": 65,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 27774,
+        "y": 3845.934315625,
+        "height": 65,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 27792,
+        "y": 3850.4592,
+        "height": 65,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 27810,
+        "y": 3855.378021875,
+        "height": 65,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 27828,
+        "y": 3860.5,
+        "height": 65,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 27846,
+        "y": 3865.621978125,
+        "height": 65,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 27864,
+        "y": 3870.5408,
+        "height": 65,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 27882,
+        "y": 3875.065684375,
+        "height": 65,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 27900,
+        "y": 3879.0306,
+        "height": 65,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 27918,
+        "y": 3882.306640625,
+        "height": 65,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 27936,
+        "y": 3884.8144,
+        "height": 65,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 27954,
+        "y": 3886.536346875,
+        "height": 65,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 27972,
+        "y": 3887.5292,
+        "height": 65,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 27990,
+        "y": 3887.936303125,
+        "height": 65,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 28008,
+        "y": 3888,
+        "height": 65,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 28026,
+        "y": 3888,
+        "height": 65,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 28044,
+        "y": 3888,
+        "height": 65,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 28062,
+        "y": 3888,
+        "height": 64.99903458901149,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 28080,
+        "y": 3888,
+        "height": 64.98872703506379,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 28098,
+        "y": 3888,
+        "height": 64.95796068493554,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 28116,
+        "y": 3888,
+        "height": 64.8966465288917,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 28134,
+        "y": 3888,
+        "height": 64.79571350321345,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 28152,
+        "y": 3888,
+        "height": 64.6470757705049,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 28170,
+        "y": 3888,
+        "height": 64.44359999999999,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 28188,
+        "y": 3888,
+        "height": 64.17907264786848,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 28206,
+        "y": 3888,
+        "height": 63.848167237523164,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 28224,
+        "y": 3888,
+        "height": 63.446411639925955,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 28242,
+        "y": 3888,
+        "height": 62.97015535389518,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 28260,
+        "y": 3888,
+        "height": 62.416536786411555,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 28278,
+        "y": 3888,
+        "height": 61.783450532925045,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 28296,
+        "y": 3888,
+        "height": 61.069514657661784,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 28314,
+        "y": 3888,
+        "height": 60.27403797392998,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 28332,
+        "y": 3888,
+        "height": 59.396987324427315,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 28350,
+        "y": 3888,
+        "height": 58.43895486154702,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 28368,
+        "y": 3888,
+        "height": 57.40112532768481,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 28386,
+        "y": 3888,
+        "height": 56.28524333554524,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 28404,
+        "y": 3888,
+        "height": 55.09358064844853,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 28422,
+        "y": 3888,
+        "height": 53.828903460637115,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 28440,
+        "y": 3888,
+        "height": 52.49443967758225,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 28458,
+        "y": 3888,
+        "height": 51.09384619629065,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 28476,
+        "y": 3888,
+        "height": 49.63117618561109,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 28494,
+        "y": 3888,
+        "height": 48.11084636654099,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 28512,
+        "y": 3888,
+        "height": 46.537604292533125,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 28530,
+        "y": 3888,
+        "height": 44.9164956298022,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 28548,
+        "y": 3888,
+        "height": 43.25283143763141,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 28566,
+        "y": 3888,
+        "height": 41.55215544867914,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 28584,
+        "y": 3888,
+        "height": 39.82021134928556,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 28602,
+        "y": 3888,
+        "height": 38.0629100597792,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 28620,
+        "y": 3888,
+        "height": 36.28629701478362,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 28638,
+        "y": 3888,
+        "height": 34.49651944352406,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 28656,
+        "y": 3888,
+        "height": 32.69979365013391,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 28674,
+        "y": 3888,
+        "height": 30.90237229396154,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 28692,
+        "y": 3888,
+        "height": 29.11051166987671,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 28710,
+        "y": 3888,
+        "height": 27.330438988577335,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 28728,
+        "y": 3888,
+        "height": 25.568319656896055,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 28746,
+        "y": 3888,
+        "height": 23.830224558106842,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 28764,
+        "y": 3888,
+        "height": 22.122097332231633,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 28782,
+        "y": 3888,
+        "height": 20.449721656346917,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 28800,
+        "y": 3888,
+        "height": 18.81868852489043,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 28818,
+        "y": 3888,
+        "height": 17.234363529967677,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 28836,
+        "y": 3888,
+        "height": 15.70185414165862,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 28854,
+        "y": 3888,
+        "height": 14.225976988324273,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 28872,
+        "y": 3888,
+        "height": 12.811225136913313,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 28890,
+        "y": 3888,
+        "height": 11.461735373268699,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 28908,
+        "y": 3888,
+        "height": 10.181255482434322,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 28926,
+        "y": 3888,
+        "height": 8.973111528961576,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 28944,
+        "y": 3888,
+        "height": 7.840175137215996,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 28962,
+        "y": 3888,
+        "height": 6.784830771683901,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 28980,
+        "y": 3888,
+        "height": 5.808943017278975,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 28998,
+        "y": 3888,
+        "height": 4.913823859648896,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 29016,
+        "y": 3888,
+        "height": 4.100199965481971,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 29034,
+        "y": 3888,
+        "height": 3.3681799628137377,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 29052,
+        "y": 3888,
+        "height": 2.7172217213335865,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 29070,
+        "y": 3888,
+        "height": 2.146099632691383,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 29088,
+        "y": 3888,
+        "height": 1.6528718908040776,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 29106,
+        "y": 3888,
+        "height": 1.234847772162336,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 29124,
+        "y": 3888,
+        "height": 0.8885549161371475,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 29142,
+        "y": 3888,
+        "height": 0.6097066052864468,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 29160,
+        "y": 3888,
+        "height": 0.3931690456617332,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 29178,
+        "y": 3888,
+        "height": 0.2329286471146882,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 29196,
+        "y": 3888,
+        "height": 0.12205930360379356,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 29214,
+        "y": 3888,
+        "height": 0.052689673500949885,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 29232,
+        "y": 3888,
+        "height": 0.01597045989809515,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 29250,
+        "y": 3888,
+        "height": 0.002041690913822745,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 29268,
+        "y": 3888,
+        "height": 0,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 29286,
+        "y": 3888,
+        "height": 0,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 29304,
+        "y": 3888,
+        "height": 0,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 29321.99268381394,
+        "y": 3887.6081024319587,
+        "height": 0,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 29339.912690221536,
+        "y": 3885.954794676014,
+        "height": 0,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 29357.667332698766,
+        "y": 3883.0166444603105,
+        "height": 0,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 29375.16461093346,
+        "y": 3878.808876576751,
+        "height": 0,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 29392.313858213427,
+        "y": 3873.3532946724267,
+        "height": 0,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 29409.026211239663,
+        "y": 3866.6781682683304,
+        "height": 0,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 29425.21507059473,
+        "y": 3858.8180862734584,
+        "height": 0,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 29440.79654948022,
+        "y": 3849.813777753354,
+        "height": 0,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 29455.6899083981,
+        "y": 3839.711900881829,
+        "height": 0,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 29469.817973523473,
+        "y": 3828.564801169462,
+        "height": 0,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 29483.107536600895,
+        "y": 3816.430240221679,
+        "height": 0,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 29495.48973429205,
+        "y": 3803.371096431926,
+        "height": 0,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 29506.90040500909,
+        "y": 3789.4550391608655,
+        "height": 0,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 29517.280421384676,
+        "y": 3774.754178089933,
+        "height": 0,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 29526.57599665581,
+        "y": 3759.3446895662064,
+        "height": 0,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 29534.738963374028,
+        "y": 3743.3064218747904,
+        "height": 0,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 29541.727022997566,
+        "y": 3726.7224814840956,
+        "height": 0,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 29547.503965072305,
+        "y": 3709.6788024079888,
+        "height": 0,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 29552.039854865692,
+        "y": 3692.263700916281,
+        "height": 0,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 29555.31118848135,
+        "y": 3674.567417900933,
+        "height": 0,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 29557.301014650664,
+        "y": 3656.6816512693304,
+        "height": 0,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 29557.999022570195,
+        "y": 3638.6990807876527,
+        "height": 0,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 29558,
+        "y": 3620.699081698724,
+        "height": 0,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 29558,
+        "y": 3602.699081698724,
+        "height": 0,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 29558,
+        "y": 3584.699081698724,
+        "height": 0,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 29558,
+        "y": 3566.699081698724,
+        "height": 0,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 29558,
+        "y": 3548.699081698724,
+        "height": 0,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 29558,
+        "y": 3530.699081698724,
+        "height": 0,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 29558,
+        "y": 3512.699081698724,
+        "height": 0,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 29558,
+        "y": 3494.699081698724,
+        "height": 0,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 29558,
+        "y": 3476.699081698724,
+        "height": 0,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 29558,
+        "y": 3458.699081698724,
+        "height": 0,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 29558,
+        "y": 3440.699081698724,
+        "height": 0,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 29558,
+        "y": 3422.699081698724,
+        "height": 0,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 29558,
+        "y": 3404.699081698724,
+        "height": 0,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 29558,
+        "y": 3386.699081698724,
+        "height": 0,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 29558,
+        "y": 3368.699081698724,
+        "height": 0,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 29558,
+        "y": 3350.699081698724,
+        "height": 0,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 29558,
+        "y": 3332.699081698724,
+        "height": 0,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 29558,
+        "y": 3314.699081698724,
+        "height": 0,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 29558,
+        "y": 3296.699081698724,
+        "height": 0,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 29558,
+        "y": 3278.699081698724,
+        "height": 0,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 29558,
+        "y": 3260.699081698724,
+        "height": 0,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 29558,
+        "y": 3242.699081698724,
+        "height": 0,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 29558,
+        "y": 3224.699081698724,
+        "height": 0,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 29558,
+        "y": 3206.699081698724,
+        "height": 0,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 29558,
+        "y": 3188.699081698724,
+        "height": 0,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 29558,
+        "y": 3170.699081698724,
+        "height": 0,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 29558,
+        "y": 3152.699081698724,
+        "height": 0,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 29558,
+        "y": 3134.699081698724,
+        "height": 0,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 29558,
+        "y": 3116.699081698724,
+        "height": 0,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 29558,
+        "y": 3098.699081698724,
+        "height": 0,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 29558,
+        "y": 3080.699081698724,
+        "height": 0,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 29558,
+        "y": 3062.699081698724,
+        "height": 0,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 29558,
+        "y": 3044.699081698724,
+        "height": 0,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 29558,
+        "y": 3026.699081698724,
+        "height": 0,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 29558,
+        "y": 3008.699081698724,
+        "height": 0,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 29558,
+        "y": 2990.699081698724,
+        "height": 0,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 29558,
+        "y": 2972.699081698724,
+        "height": 0,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 29558,
+        "y": 2960,
+        "height": 0,
+        "roadLayer": "ramp",
+        "rampIndex": 11
+      },
+      {
+        "x": 29576,
+        "y": 2824,
+        "a": -1.5707963267948966,
+        "height": 0,
+        "roadLayer": "ground"
+      },
+      {
+        "x": 29576,
+        "y": 2578
+      },
+      {
+        "x": 29576,
+        "y": 2564.982167352537
+      },
+      {
+        "x": 29575.999999999993,
+        "y": 2551.931412894375
+      },
+      {
+        "x": 29576.000000000007,
+        "y": 2538.851851851852
+      },
+      {
+        "x": 29575.999999999996,
+        "y": 2525.7475994513034
+      },
+      {
+        "x": 29576,
+        "y": 2512.622770919067
+      },
+      {
+        "x": 29576.000000000007,
+        "y": 2499.4814814814818
+      },
+      {
+        "x": 29576.000000000004,
+        "y": 2486.3278463648835
+      },
+      {
+        "x": 29576,
+        "y": 2473.1659807956107
+      },
+      {
+        "x": 29576,
+        "y": 2460
+      },
+      {
+        "x": 29576,
+        "y": 2446.8340192043897
+      },
+      {
+        "x": 29576,
+        "y": 2433.6721536351165
+      },
+      {
+        "x": 29576,
+        "y": 2420.5185185185182
+      },
+      {
+        "x": 29576,
+        "y": 2407.377229080933
+      },
+      {
+        "x": 29576,
+        "y": 2394.252400548697
+      },
+      {
+        "x": 29576,
+        "y": 2381.1481481481483
+      },
+      {
+        "x": 29576,
+        "y": 2368.0685871056244
+      },
+      {
+        "x": 29576,
+        "y": 2355.017832647462
+      },
+      {
+        "x": 29576,
+        "y": 2342
+      },
+      {
+        "x": 29576,
+        "y": 2078
+      },
+      {
+        "x": 29576,
+        "y": 2064.982167352538
+      },
+      {
+        "x": 29575.999999999993,
+        "y": 2051.9314128943756
+      },
+      {
+        "x": 29576.000000000007,
+        "y": 2038.851851851852
+      },
+      {
+        "x": 29575.999999999996,
+        "y": 2025.7475994513036
+      },
+      {
+        "x": 29576,
+        "y": 2012.622770919067
+      },
+      {
+        "x": 29576.000000000007,
+        "y": 1999.4814814814818
+      },
+      {
+        "x": 29576.000000000004,
+        "y": 1986.3278463648835
+      },
+      {
+        "x": 29576,
+        "y": 1973.1659807956105
+      },
+      {
+        "x": 29576,
+        "y": 1960
+      },
+      {
+        "x": 29576,
+        "y": 1946.8340192043895
+      },
+      {
+        "x": 29576,
+        "y": 1933.6721536351165
+      },
+      {
+        "x": 29576,
+        "y": 1920.5185185185182
+      },
+      {
+        "x": 29576,
+        "y": 1907.3772290809327
+      },
+      {
+        "x": 29576,
+        "y": 1894.252400548697
+      },
+      {
+        "x": 29576,
+        "y": 1881.148148148148
+      },
+      {
+        "x": 29576,
+        "y": 1868.0685871056244
+      },
+      {
+        "x": 29576,
+        "y": 1855.0178326474622
+      },
+      {
+        "x": 29576,
+        "y": 1842
+      },
+      {
+        "x": 29576,
+        "y": 1498
+      },
+      {
+        "x": 29575.679012345678,
+        "y": 1484.9821673525373
+      },
+      {
+        "x": 29574.765432098764,
+        "y": 1471.9314128943759
+      },
+      {
+        "x": 29573.33333333334,
+        "y": 1458.8518518518522
+      },
+      {
+        "x": 29571.45679012346,
+        "y": 1445.7475994513031
+      },
+      {
+        "x": 29569.209876543213,
+        "y": 1432.622770919067
+      },
+      {
+        "x": 29566.66666666667,
+        "y": 1419.4814814814818
+      },
+      {
+        "x": 29563.901234567904,
+        "y": 1406.3278463648835
+      },
+      {
+        "x": 29560.98765432099,
+        "y": 1393.1659807956105
+      },
+      {
+        "x": 29558,
+        "y": 1380
+      },
+      {
+        "x": 29555.012345679013,
+        "y": 1366.8340192043895
+      },
+      {
+        "x": 29552.0987654321,
+        "y": 1353.6721536351165
+      },
+      {
+        "x": 29549.333333333332,
+        "y": 1340.5185185185185
+      },
+      {
+        "x": 29546.79012345679,
+        "y": 1327.377229080933
+      },
+      {
+        "x": 29544.543209876545,
+        "y": 1314.2524005486969
+      },
+      {
+        "x": 29542.666666666668,
+        "y": 1301.1481481481483
+      },
+      {
+        "x": 29541.234567901236,
+        "y": 1288.0685871056241
+      },
+      {
+        "x": 29540.320987654322,
+        "y": 1275.0178326474625
+      },
+      {
+        "x": 29540,
+        "y": 1262
+      },
+      {
+        "x": 29540,
+        "y": 918
+      },
+      {
+        "x": 29539.679012345678,
+        "y": 900.9876543209875
+      },
+      {
+        "x": 29538.69135802469,
+        "y": 884.6419753086419
+      },
+      {
+        "x": 29537,
+        "y": 869
+      },
+      {
+        "x": 29534.567901234568,
+        "y": 854.0987654320988
+      },
+      {
+        "x": 29531.358024691355,
+        "y": 839.9753086419753
+      },
+      {
+        "x": 29527.333333333336,
+        "y": 826.6666666666669
+      },
+      {
+        "x": 29522.456790123462,
+        "y": 814.2098765432099
+      },
+      {
+        "x": 29516.69135802469,
+        "y": 802.641975308642
+      },
+      {
+        "x": 29510,
+        "y": 792
+      },
+      {
+        "x": 29502.345679012345,
+        "y": 782.320987654321
+      },
+      {
+        "x": 29493.69135802469,
+        "y": 773.641975308642
+      },
+      {
+        "x": 29484,
+        "y": 766
+      },
+      {
+        "x": 29473.234567901236,
+        "y": 759.4320987654321
+      },
+      {
+        "x": 29461.358024691355,
+        "y": 753.9753086419753
+      },
+      {
+        "x": 29448.333333333336,
+        "y": 749.6666666666667
+      },
+      {
+        "x": 29434.123456790127,
+        "y": 746.5432098765433
+      },
+      {
+        "x": 29418.69135802469,
+        "y": 744.6419753086419
+      },
+      {
+        "x": 29402,
+        "y": 744
+      },
+      {
+        "x": 29058,
+        "y": 744
+      },
+      {
+        "x": 29044.982167352533,
+        "y": 743.9999999999999
+      },
+      {
+        "x": 29031.931412894373,
+        "y": 744
+      },
+      {
+        "x": 29018.851851851858,
+        "y": 744
+      },
+      {
+        "x": 29005.7475994513,
+        "y": 744
+      },
+      {
+        "x": 28992.622770919068,
+        "y": 743.9999999999999
+      },
+      {
+        "x": 28979.481481481485,
+        "y": 744.0000000000001
+      },
+      {
+        "x": 28966.327846364886,
+        "y": 744
+      },
+      {
+        "x": 28953.16598079561,
+        "y": 744
+      },
+      {
+        "x": 28940,
+        "y": 744
+      },
+      {
+        "x": 28926.83401920439,
+        "y": 744
+      },
+      {
+        "x": 28913.672153635118,
+        "y": 744
+      },
+      {
+        "x": 28900.51851851852,
+        "y": 744
+      },
+      {
+        "x": 28887.37722908093,
+        "y": 744
+      },
+      {
+        "x": 28874.2524005487,
+        "y": 744
+      },
+      {
+        "x": 28861.148148148153,
+        "y": 744
+      },
+      {
+        "x": 28848.068587105627,
+        "y": 744.0000000000001
+      },
+      {
+        "x": 28835.017832647463,
+        "y": 743.9999999999999
+      },
+      {
+        "x": 28822,
+        "y": 744
+      },
+      {
+        "x": 28478,
+        "y": 744
+      },
+      {
+        "x": 28464.982167352533,
+        "y": 743.9999999999999
+      },
+      {
+        "x": 28451.931412894373,
+        "y": 744
+      },
+      {
+        "x": 28438.851851851858,
+        "y": 744
+      },
+      {
+        "x": 28425.747599451308,
+        "y": 744
+      },
+      {
+        "x": 28412.622770919068,
+        "y": 743.9999999999999
+      },
+      {
+        "x": 28399.481481481485,
+        "y": 744.0000000000001
+      },
+      {
+        "x": 28386.327846364886,
+        "y": 744
+      },
+      {
+        "x": 28373.16598079561,
+        "y": 744
+      },
+      {
+        "x": 28360,
+        "y": 744
+      },
+      {
+        "x": 28346.83401920439,
+        "y": 744
+      },
+      {
+        "x": 28333.672153635114,
+        "y": 744
+      },
+      {
+        "x": 28320.51851851852,
+        "y": 744
+      },
+      {
+        "x": 28307.377229080936,
+        "y": 744
+      },
+      {
+        "x": 28294.2524005487,
+        "y": 744
+      },
+      {
+        "x": 28281.14814814815,
+        "y": 744
+      },
+      {
+        "x": 28268.068587105627,
+        "y": 744.0000000000001
+      },
+      {
+        "x": 28255.017832647463,
+        "y": 743.9999999999999
+      },
+      {
+        "x": 28242,
+        "y": 744
+      },
+      {
+        "x": 27898,
+        "y": 744
+      },
+      {
+        "x": 27881.98628257887,
+        "y": 744.3566529492455
+      },
+      {
+        "x": 27868.48285322359,
+        "y": 745.2976680384088
+      },
+      {
+        "x": 27857.296296296296,
+        "y": 746.6296296296297
+      },
+      {
+        "x": 27848.233196159126,
+        "y": 748.1591220850479
+      },
+      {
+        "x": 27841.10013717421,
+        "y": 749.6927297668037
+      },
+      {
+        "x": 27835.703703703708,
+        "y": 751.0370370370371
+      },
+      {
+        "x": 27831.85048010974,
+        "y": 751.9986282578875
+      },
+      {
+        "x": 27829.347050754463,
+        "y": 752.3840877914953
+      },
+      {
+        "x": 27828,
+        "y": 752
+      },
+      {
+        "x": 27827.61591220851,
+        "y": 750.6529492455419
+      },
+      {
+        "x": 27828.001371742113,
+        "y": 748.1495198902606
+      },
+      {
+        "x": 27828.962962962964,
+        "y": 744.2962962962963
+      },
+      {
+        "x": 27830.307270233196,
+        "y": 738.8998628257888
+      },
+      {
+        "x": 27831.840877914954,
+        "y": 731.766803840878
+      },
+      {
+        "x": 27833.370370370372,
+        "y": 722.7037037037037
+      },
+      {
+        "x": 27834.70233196159,
+        "y": 711.5171467764061
+      },
+      {
+        "x": 27835.64334705075,
+        "y": 698.0137174211249
+      },
+      {
+        "x": 27836,
+        "y": 682
+      },
+      {
+        "x": 27836,
+        "y": 338
+      },
+      {
+        "x": 27835.64334705075,
+        "y": 321.98628257887515
+      },
+      {
+        "x": 27834.70233196159,
+        "y": 308.4828532235939
+      },
+      {
+        "x": 27833.370370370372,
+        "y": 297.29629629629636
+      },
+      {
+        "x": 27831.840877914954,
+        "y": 288.2331961591221
+      },
+      {
+        "x": 27830.307270233192,
+        "y": 281.1001371742112
+      },
+      {
+        "x": 27828.962962962967,
+        "y": 275.70370370370375
+      },
+      {
+        "x": 27828.001371742117,
+        "y": 271.8504801097394
+      },
+      {
+        "x": 27827.615912208505,
+        "y": 269.34705075445817
+      },
+      {
+        "x": 27828,
+        "y": 268
+      },
+      {
+        "x": 27829.34705075446,
+        "y": 267.6159122085048
+      },
+      {
+        "x": 27831.850480109737,
+        "y": 268.0013717421125
+      },
+      {
+        "x": 27835.703703703704,
+        "y": 268.96296296296293
+      },
+      {
+        "x": 27841.100137174213,
+        "y": 270.30727023319616
+      },
+      {
+        "x": 27848.233196159123,
+        "y": 271.840877914952
+      },
+      {
+        "x": 27857.2962962963,
+        "y": 273.3703703703704
+      },
+      {
+        "x": 27868.482853223595,
+        "y": 274.70233196159126
+      },
+      {
+        "x": 27881.986282578877,
+        "y": 275.6433470507544
+      },
+      {
+        "x": 27898,
+        "y": 276
+      },
+      {
+        "x": 28005,
+        "y": 276
+      },
+      {
+        "x": 28044,
+        "y": 296
+      },
+      {
+        "x": 28070,
+        "y": 331
+      }
+    ],
+    "startMinutes": 960,
+    "trafficPreset": "normal",
+    "time": 8.30000000000017,
+    "car": {
+      "x": 9095.608733798503,
+      "y": 3833,
+      "a": 0,
+      "speed": 327.9109841977366,
+      "steer": 0,
+      "kind": "taxi",
+      "length": 44,
+      "width": 22,
+      "speedKmh": 118.04795431118518,
+      "forwardSpeedKmh": 118.04795431118518,
+      "lateralAccelerationMps2": 0,
+      "longitudinalAccelerationMps2": -2.2980198663835836,
+      "yawRate": 0,
+      "steerAngle": 0,
+      "engineLoad": 0.29563813493423596,
+      "tireSlip": 0,
+      "engineRpm": 4621.6472247334605,
+      "gear": 6,
+      "roadSample": {
+        "x": 9095.608733798503,
+        "z": 3833,
+        "height": 65,
+        "grade": 0,
+        "pitch": 0,
+        "forward": {
+          "x": 1,
+          "y": 0,
+          "z": 0
+        },
+        "gradient": {
+          "x": 0,
+          "z": 0
+        },
+        "layer": "highway",
+        "rampIndex": null,
+        "distanceAlong": 8745.608733798503,
+        "lateralDistance": 53,
+        "onRoad": true
+      },
+      "height": 65,
+      "roadLayer": "highway",
+      "roadPitch": 0,
+      "throttle": 0.14306668275440806,
+      "brake": 0,
+      "gearShift": 0
+    },
+    "job": {
+      "stage": "dropoff",
+      "pickup": {
+        "id": 11,
+        "x": 976.5,
+        "y": 1240,
+        "a": 0,
+        "type": "parallel",
+        "street": "King Street West",
+        "place": "Rogers Centre",
+        "node": 17,
+        "col": 1,
+        "row": 2,
+        "roadY": 1129,
+        "city": "Toronto",
+        "districtId": "toronto"
+      },
+      "dropoff": {
+        "id": 81,
+        "x": 28070,
+        "y": 331,
+        "a": 0,
+        "type": "parallel",
+        "street": "King Street",
+        "place": "Oshawa University House",
+        "city": "Oshawa",
+        "node": 94,
+        "col": 2,
+        "row": 0,
+        "roadY": 220,
+        "districtId": "oshawa"
+      },
+      "timeLeft": 991.7500000000075
+    },
+    "target": {
+      "id": 81,
+      "x": 28070,
+      "y": 331,
+      "a": 0,
+      "type": "parallel",
+      "street": "King Street",
+      "place": "Oshawa University House",
+      "city": "Oshawa",
+      "node": 94,
+      "col": 2,
+      "row": 0,
+      "roadY": 220,
+      "districtId": "oshawa"
+    },
+    "cash": 0,
+    "health": 100,
+    "completed": 0,
+    "reputation": 3,
+    "traffic": 48,
+    "trafficDensity": {
+      "target": 48,
+      "nearby": 2,
+      "close": 1,
+      "movingNearby": 2,
+      "spawned": 2,
+      "relocated": 25,
+      "lastMoves": [
+        {
+          "from": {
+            "x": 28960,
+            "y": 1775.3161015501246
+          },
+          "to": {
+            "x": 400.3714075963944,
+            "y": 1606
+          },
+          "time": 0,
+          "initial": true,
+          "hiddenFrom": true,
+          "hiddenTo": true
+        },
+        {
+          "from": {
+            "x": 28791.310346790124,
+            "y": 1940
+          },
+          "to": {
+            "x": 240.00000000000003,
+            "y": 1278.767613002332
+          },
+          "time": 0,
+          "initial": true,
+          "hiddenFrom": true,
+          "hiddenTo": true
+        },
+        {
+          "from": {
+            "x": 28617.233161474578,
+            "y": 856
+          },
+          "to": {
+            "x": 586.9715049834922,
+            "y": 706
+          },
+          "time": 0,
+          "initial": true,
+          "hiddenFrom": true,
+          "hiddenTo": true
+        },
+        {
+          "from": {
+            "x": 28572.381497537717,
+            "y": 1940
+          },
+          "to": {
+            "x": 1231,
+            "y": 1810.8698326395825
+          },
+          "time": 0,
+          "initial": true,
+          "hiddenFrom": true,
+          "hiddenTo": true
+        },
+        {
+          "from": {
+            "x": 27054.856104131322,
+            "y": 200.00000000000003
+          },
+          "to": {
+            "x": 762,
+            "y": 1789.7238945998251
+          },
+          "time": 0,
+          "initial": true,
+          "hiddenFrom": true,
+          "hiddenTo": true
+        },
+        {
+          "from": {
+            "x": 26600,
+            "y": 2820.8711504703388
+          },
+          "to": {
+            "x": 276,
+            "y": 1388.150348675903
+          },
+          "time": 0,
+          "initial": true,
+          "hiddenFrom": true,
+          "hiddenTo": true
+        },
+        {
+          "from": {
+            "x": 16376,
+            "y": 1104.5877574034967
+          },
+          "to": {
+            "x": 1503.2277892790735,
+            "y": 1109
+          },
+          "time": 0,
+          "initial": true,
+          "hiddenFrom": true,
+          "hiddenTo": true
+        },
+        {
+          "from": {
+            "x": 16340,
+            "y": 1712.973066738341
+          },
+          "to": {
+            "x": 762,
+            "y": 410.7394727631472
+          },
+          "time": 0,
+          "initial": true,
+          "hiddenFrom": true,
+          "hiddenTo": true
+        }
+      ]
+    },
+    "stats": {
+      "collisions": 0,
+      "redLights": 0,
+      "rightOnRed": 0,
+      "pickups": 0,
+      "deliveries": 0,
+      "missed": 0
+    },
+    "parking": {
+      "near": false,
+      "inside": false,
+      "aligned": true,
+      "stopped": false,
+      "reverse": true,
+      "ready": false,
+      "progress": 0
+    },
+    "software": false,
+    "lowPower": false,
+    "soundOn": true,
+    "menuIndex": 0
+  },
+  "render": {
+    "width": 1280,
+    "height": 800,
+    "scale": 1,
+    "staticVertices": 679314,
+    "submittedStaticVertices": 9183,
+    "visibleChunks": 49,
+    "totalChunks": 1764,
+    "dynamicVertices": 1860,
+    "drawCalls": 69,
+    "fps": 17,
+    "frameMs": 3.9926470588183935,
+    "camera": {
+      "eye": [
+        9101.488429539231,
+        81.5,
+        3828.5
+      ],
+      "yaw": 0,
+      "pitch": -0.03342017225672527,
+      "roll": 0,
+      "fov": 1.3597308030991675
+    },
+    "car": {
+      "x": 9095.488429539231,
+      "y": 3833,
+      "a": 0,
+      "speed": 327.9109841977366,
+      "steer": 0,
+      "kind": "taxi",
+      "length": 44,
+      "width": 22,
+      "speedKmh": 118.04795431118518,
+      "forwardSpeedKmh": 118.04795431118518,
+      "lateralAccelerationMps2": 0,
+      "longitudinalAccelerationMps2": -2.2980198663835836,
+      "yawRate": 0,
+      "steerAngle": 0,
+      "engineLoad": 0.29563813493423596,
+      "tireSlip": 0,
+      "engineRpm": 4621.6472247334605,
+      "gear": 6,
+      "roadSample": {
+        "x": 9095.608733798503,
+        "z": 3833,
+        "height": 65,
+        "grade": 0,
+        "pitch": 0,
+        "forward": {
+          "x": 1,
+          "y": 0,
+          "z": 0
+        },
+        "gradient": {
+          "x": 0,
+          "z": 0
+        },
+        "layer": "highway",
+        "rampIndex": null,
+        "distanceAlong": 8745.608733798503,
+        "lateralDistance": 53,
+        "onRoad": true
+      },
+      "height": 65,
+      "roadLayer": "highway",
+      "roadPitch": 0,
+      "throttle": 0.14306668275440806,
+      "brake": 0,
+      "gearShift": 0
+    },
+    "wheel": 0,
+    "mirror": {
+      "x": 539.8399999999999,
+      "y": 34.4,
+      "w": 200.32000000000002,
+      "h": 48.8
+    },
+    "software": false,
+    "roadHeight": 65,
+    "roadPitch": 0,
+    "cockpit": {
+      "vehicleType": "taxi",
+      "steer": 0,
+      "speed": 327.9109841977366,
+      "speedKmh": 118.04795431118518,
+      "health": 100,
+      "cash": 0,
+      "fares": 0,
+      "reverse": false,
+      "look": 0,
+      "brake": false,
+      "clock": "4:03 PM",
+      "lowPower": false,
+      "passengers": 0,
+      "capacity": 0,
+      "stops": 0,
+      "stopIndex": 0,
+      "totalStops": 0,
+      "laps": 0,
+      "doorsOpen": false,
+      "routeName": "",
+      "routeId": "",
+      "nextStop": "Oshawa University House"
+    },
+    "airportVertices": 2997,
+    "aircraft": {
+      "visible": false,
+      "vertices": 0,
+      "pose": {
+        "x": 972.9160000000102,
+        "y": 12.5,
+        "z": 4515,
+        "yaw": 0,
+        "pitch": 0,
+        "roll": 0,
+        "gear": 1,
+        "altitude": 0,
+        "phase": "ground-roll",
+        "time": 8.30000000000017,
+        "cycle": 118.20713633111154
+      }
+    }
+  },
+  "cars": [
+    {
+      "x": 10375.788647230578,
+      "y": 3833,
+      "speed": 282.6478727929376,
+      "kind": "highway",
+      "height": 65
+    },
+    {
+      "x": 8617.93526746393,
+      "y": 3727,
+      "speed": 308.8266282889563,
+      "kind": "highway",
+      "height": 65
+    },
+    {
+      "x": 8256.013631612228,
+      "y": 3754,
+      "speed": 308.25199353749224,
+      "kind": "highway",
+      "height": 65
+    },
+    {
+      "x": 10795.168960217463,
+      "y": 3833,
+      "speed": 247.090845377469,
+      "kind": "highway",
+      "height": 65
+    },
+    {
+      "x": 10941.32094768898,
+      "y": 3806,
+      "speed": 295.210166025032,
+      "kind": "highway",
+      "height": 65
+    },
+    {
+      "x": 5473.682718622897,
+      "y": 3754,
+      "speed": 308.3935941126037,
+      "kind": "highway",
+      "height": 65
+    },
+    {
+      "x": 6687.468922053907,
+      "y": 3806,
+      "speed": 157.99315341837212,
+      "kind": "highway",
+      "height": 65
+    },
+    {
+      "x": 6403.256379693103,
+      "y": 3833,
+      "speed": 255.54412737348682,
+      "kind": "highway",
+      "height": 65
+    },
+    {
+      "x": 6881.971015713897,
+      "y": 3806,
+      "speed": 254.6141897926209,
+      "kind": "highway",
+      "height": 65
+    },
+    {
+      "x": 7004.853761719083,
+      "y": 3833,
+      "speed": 305.2012876230381,
+      "kind": "highway",
+      "height": 65
+    },
+    {
+      "x": 11031.247271117209,
+      "y": 3833,
+      "speed": 305.7734315640381,
+      "kind": "highway",
+      "height": 65
+    },
+    {
+      "x": 6695.318579411344,
+      "y": 3833,
+      "speed": 221.92090524832827,
+      "kind": "highway",
+      "height": 65
+    },
+    {
+      "x": 2673.1871352857215,
+      "y": 313.5343545124496,
+      "speed": 50,
+      "kind": "street",
+      "height": 0
+    },
+    {
+      "x": 9409.548225096934,
+      "y": 3727,
+      "speed": 279.65891518829204,
+      "kind": "highway",
+      "height": 65
+    },
+    {
+      "x": 198.32560741612443,
+      "y": 2823.8043055555554,
+      "speed": 79.9166666666667,
+      "kind": "street",
+      "height": 0
+    },
+    {
+      "x": 1314.65,
+      "y": 2486,
+      "speed": 28.233333333333356,
+      "kind": "street",
+      "height": 0
+    },
+    {
+      "x": 239.99999999999997,
+      "y": 1158.6249999999998,
+      "speed": 70.23333333333352,
+      "kind": "street",
+      "height": 0
+    },
+    {
+      "x": 164,
+      "y": 1614.7000000000005,
+      "speed": 101.03333333333364,
+      "kind": "street",
+      "height": 0
+    },
+    {
+      "x": 4599.012963359632,
+      "y": 3754,
+      "speed": 327.132894274121,
+      "kind": "highway",
+      "height": 65
+    },
+    {
+      "x": 623.9782701760944,
+      "y": 1606,
+      "speed": 0.027448198617605613,
+      "kind": "street",
+      "height": 0
+    },
+    {
+      "x": 16300,
+      "y": 1842,
+      "speed": 0,
+      "kind": "street",
+      "height": 0
+    },
+    {
+      "x": 14118,
+      "y": 1940,
+      "speed": 0,
+      "kind": "street",
+      "height": 0
+    },
+    {
+      "x": 2597.9999999999995,
+      "y": 600.2062071671547,
+      "speed": 65.70853077509143,
+      "kind": "street",
+      "height": 0
+    },
+    {
+      "x": 23091.63353159446,
+      "y": 3833,
+      "speed": 254.03287298734156,
+      "kind": "highway",
+      "height": 65
+    },
+    {
+      "x": 338,
+      "y": 199.43601716328712,
+      "speed": 0,
+      "kind": "street",
+      "height": 0
+    },
+    {
+      "x": 15876.704427083334,
+      "y": 2904,
+      "speed": 67.78645833333326,
+      "kind": "street",
+      "height": 0
+    },
+    {
+      "x": 15622,
+      "y": 240,
+      "speed": 0,
+      "kind": "street",
+      "height": 0
+    },
+    {
+      "x": 10648.129202441212,
+      "y": 3806,
+      "speed": 299.61062557612877,
+      "kind": "highway",
+      "height": 65
+    },
+    {
+      "x": 833.7444444444441,
+      "y": 2904.0000000000005,
+      "speed": 48.600000000000556,
+      "kind": "street",
+      "height": 0
+    },
+    {
+      "x": 2114,
+      "y": 2842,
+      "speed": 0,
+      "kind": "street",
+      "height": 0
+    },
+    {
+      "x": 760.8906309657161,
+      "y": 310.0971007286807,
+      "speed": 39.44353754693223,
+      "kind": "street",
+      "height": 0
+    },
+    {
+      "x": 13538,
+      "y": 2404,
+      "speed": 0,
+      "kind": "street",
+      "height": 0
+    },
+    {
+      "x": 28163.88347286401,
+      "y": 3754,
+      "speed": 262.66196655302383,
+      "kind": "highway",
+      "height": 65
+    },
+    {
+      "x": 1219.0843048479678,
+      "y": 258.42031217703385,
+      "speed": 50,
+      "kind": "street",
+      "height": 0
+    },
+    {
+      "x": 1093,
+      "y": 706,
+      "speed": 0,
+      "kind": "street",
+      "height": 0
+    },
+    {
+      "x": 1093,
+      "y": 1606,
+      "speed": 0,
+      "kind": "street",
+      "height": 0
+    },
+    {
+      "x": 3393.4449490624834,
+      "y": 2526,
+      "speed": 96.46971768954747,
+      "kind": "street",
+      "height": 0
+    },
+    {
+      "x": 27191.27207990947,
+      "y": 3833,
+      "speed": 306.9658618817213,
+      "kind": "highway",
+      "height": 65
+    },
+    {
+      "x": 861.1484798117306,
+      "y": 1109,
+      "speed": 1.4507113411332995,
+      "kind": "street",
+      "height": 0
+    },
+    {
+      "x": 860,
+      "y": 2940,
+      "speed": 0,
+      "kind": "street",
+      "height": 0
+    },
+    {
+      "x": 276,
+      "y": 1247.004621332848,
+      "speed": 0.005837473071181876,
+      "kind": "street",
+      "height": 0
+    },
+    {
+      "x": 1745.0000000000002,
+      "y": 1200.1412760416667,
+      "speed": 133.33333333333331,
+      "kind": "street",
+      "height": 0
+    },
+    {
+      "x": 4120.865633607799,
+      "y": 3754,
+      "speed": 270.4169927249932,
+      "kind": "highway",
+      "height": 65
+    },
+    {
+      "x": 13538,
+      "y": 2904,
+      "speed": 0,
+      "kind": "street",
+      "height": 0
+    },
+    {
+      "x": 1155,
+      "y": 2841.8269413087887,
+      "speed": 0.21860045205627898,
+      "kind": "street",
+      "height": 0
+    },
+    {
+      "x": 762,
+      "y": 1354.4248856916006,
+      "speed": 132.75351622677232,
+      "kind": "street",
+      "height": 0
+    },
+    {
+      "x": 722.1485543655808,
+      "y": 1241.089484503856,
+      "speed": 50,
+      "kind": "street",
+      "height": 0
+    },
+    {
+      "x": 338,
+      "y": 1073,
+      "speed": 0,
+      "kind": "street",
+      "height": 0
+    }
+  ]
+}

@@ -18,3 +18,5 @@
 #handbook,#unsupported{backdrop-filter:none;background:#101c18cf}
 #handbook .panel{box-shadow:none;border-radius:0;border:0;background:#1b2b23}
 @media(max-height:580px){#menu h1{margin-bottom:15px}#menu .menu-keys{margin:12px 0 8px}#menu-buttons button{padding-top:9px;padding-bottom:9px}}
+
+#menu .region-tagline{margin:-17px 0 22px;font-size:11px;line-height:1.7;color:#c8d7c6;letter-spacing:.6px}#menu:not([data-mode="title"]) .region-tagline{display:none}

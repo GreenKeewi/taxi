@@ -1,23 +1,30 @@
-# Toronto Taxi: Driver’s Seat
+# Toronto Taxi: GTA Lakeshore
 
-A lightweight, keyboard-driven 3D Toronto-inspired driving game.
+A lightweight, keyboard-driven 3D driving game. Play at https://greenkeewi.github.io/taxi/ or the identical 3D mirror at https://greenkeewi.github.io/night-shift-taxi/3d/.
 
-Play at https://greenkeewi.github.io/taxi/ once GitHub Pages is enabled.
+The original 2D game remains at https://greenkeewi.github.io/night-shift-taxi/.
 
-This independent version preserves the original 2D game at https://greenkeewi.github.io/night-shift-taxi/.
+## The regional expansion
+
+Three distinct, connected centres: Toronto's original 8×7 downtown/waterfront grid, a greener 6×6 Pickering-inspired town, and a lower industrial 6×6 Oshawa-inspired town. There are 128 junctions, 109 taxi destinations, twelve slip roads, and a continuous four-lane expressway across a 2.98 km wide world. Two greenbelt stretches each provide about a kilometre of uninterrupted highway driving. These are compressed, fictional places, not exact real street geometry.
+
+- **Regional dispatch** mixes intercity and local fares. **Intercity** always sends the rider to another city; **Local** stays in the current city. Pickups stay nearby. Fares and trip allowances account for the routed journey.
+- **509 Harbour Loop** retains its ten Toronto stops. **900 Lakeshore Intercity** serves six stops, travelling Toronto → Pickering → Oshawa and back.
+- GPS uses directed street lanes, proper ramp entry/exit, and the correct deck. Missing an exit sends you to another interchange to return. End-of-corridor turning areas have a median opening; slow down to turn.
+- Gardiner/Lakeshore Expressway crosses above Lake Shore Boulevard. Eastbound ramps cross beneath the expressway before climbing alongside it, with clear space for buses and no piers in their path.
+- City meshes are split into spatial cells. Each view submits nearby cells within its viewing cone; distant cities are not drawn. The software renderer also indexes bridge-occlusion tests spatially.
+- Shifts save in this browser every eight seconds and on pause/map/exit. Use **Continue saved shift** after reloading. Each Pages link has its own browser save. Restart starts fresh.
 
 ## Controls
 
-- Enter to start; arrow keys navigate menus.
-- WASD or arrow keys drive. Down/S brakes, then reverses. Space is the handbrake.
-- Q/E look through the side windows.
-- Escape pauses; F1 opens help.
-- Choose a taxi or bus, time of day, and traffic level from the keyboard menu.
+Enter starts/confirms; arrows select menu rows, and left/right changes a setting. WASD or arrows drive; S/down brakes, then reverses. Space brakes. Q/E look left/right; C looks behind. Shift plus the pedals gives fine parking control. Escape/P pauses; F1 opens help; Tab opens the regional map; H sounds the horn; R calls roadside assist ($15); L toggles low power; M toggles sound.
 
-## Build
+Choose taxi/bus, dispatch/service, start time (12-hour display), and traffic level with the keyboard. Fines and assist can leave the balance below zero. Low power limits rendering to 30 FPS and reduces resolution/draw distance; it is not a guarantee of 30 FPS on every device.
 
-Static HTML, CSS, and JavaScript; no backend, dependencies, or build step. Version: highway-air-7.
+## Build and validation
 
-The city and vehicles use 3D world geometry. The primary renderer uses WebGL, with a bounded perspective software renderer when WebGL is unavailable. Native WebGL visuals have not yet been verified in the cloud test browser, which disables WebGL.
+Static HTML/CSS/JavaScript, no backend, dependencies, or build step. Release `regional-11`. Serve with `python3 -m http.server 8080`.
 
-The city includes elevated highways, rising and descending ramps, and an island runway with a taking-off aircraft. The update has passed integration, physical-input taxi fare and full bus-loop, highway round trips, road and aircraft geometry, and Canvas screenshot checks. Public browser gameplay and final presentation checks remain pending until Pages is enabled.
+Engine tests: `node tests-region.cjs`, `node physical-regression.cjs`, `node physics-checks.cjs`. Browser regression: `node browser-regression.cjs` (requires Playwright and `/usr/bin/chromium`; uses port 8080 for this game and 8081 for the previous revision when comparing performance). The `?test` URL enables placement helpers solely for reproducible regression.
+
+See [evidence/REPORT.md](evidence/REPORT.md) for the measured results, test boundaries, screenshots and publishing evidence. Cloud Chromium testing covers WebGL through SwiftShader and the Canvas2D fallback; it does not constitute physical Chromebook validation.

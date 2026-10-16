@@ -1,0 +1,146 @@
+{
+  "keyboardFlows": "passed",
+  "errors": [],
+  "measurements": [
+    {
+      "url": "http://localhost:8080/",
+      "low": false,
+      "software": false,
+      "fps": 12,
+      "frameMs": 5.023913043477755,
+      "staticVertices": 679314,
+      "submittedStaticVertices": 125868,
+      "visibleChunks": 55,
+      "totalChunks": 1764,
+      "scale": 1,
+      "traffic": 48,
+      "map": {
+        "cols": 8,
+        "rows": 7,
+        "width": 29800,
+        "height": 4165
+      }
+    },
+    {
+      "url": "http://localhost:8080/",
+      "low": true,
+      "software": false,
+      "fps": 13,
+      "frameMs": 5.368518518531885,
+      "staticVertices": 679314,
+      "submittedStaticVertices": 105135,
+      "visibleChunks": 40,
+      "totalChunks": 1764,
+      "scale": 0.703125,
+      "traffic": 48,
+      "map": {
+        "cols": 8,
+        "rows": 7,
+        "width": 29800,
+        "height": 4165
+      }
+    },
+    {
+      "url": "http://localhost:8080/",
+      "low": false,
+      "software": true,
+      "fps": 30,
+      "frameMs": 13.799290780144815,
+      "staticVertices": 679314,
+      "submittedStaticVertices": 105135,
+      "visibleChunks": 40,
+      "totalChunks": 1764,
+      "scale": 0.703125,
+      "traffic": 48,
+      "map": {
+        "cols": 8,
+        "rows": 7,
+        "width": 29800,
+        "height": 4165
+      }
+    },
+    {
+      "url": "http://localhost:8080/",
+      "low": true,
+      "software": true,
+      "fps": 30,
+      "frameMs": 13.974637681150984,
+      "staticVertices": 679314,
+      "submittedStaticVertices": 105135,
+      "visibleChunks": 40,
+      "totalChunks": 1764,
+      "scale": 0.703125,
+      "traffic": 48,
+      "map": {
+        "cols": 8,
+        "rows": 7,
+        "width": 29800,
+        "height": 4165
+      }
+    },
+    {
+      "url": "http://localhost:8081/",
+      "low": false,
+      "software": false,
+      "fps": 6,
+      "frameMs": 6.982608695656223,
+      "staticVertices": 252240,
+      "scale": 1,
+      "traffic": 48,
+      "map": {
+        "cols": 8,
+        "rows": 7,
+        "width": 3797,
+        "height": 4165
+      }
+    },
+    {
+      "url": "http://localhost:8081/",
+      "low": true,
+      "software": false,
+      "fps": 6,
+      "frameMs": 6.773076923062595,
+      "staticVertices": 252240,
+      "scale": 0.703125,
+      "traffic": 48,
+      "map": {
+        "cols": 8,
+        "rows": 7,
+        "width": 3797,
+        "height": 4165
+      }
+    },
+    {
+      "url": "http://localhost:8081/",
+      "low": false,
+      "software": true,
+      "fps": 29,
+      "frameMs": 18.271223021584074,
+      "staticVertices": 252240,
+      "scale": 0.703125,
+      "traffic": 48,
+      "map": {
+        "cols": 8,
+        "rows": 7,
+        "width": 3797,
+        "height": 4165
+      }
+    },
+    {
+      "url": "http://localhost:8081/",
+      "low": true,
+      "software": true,
+      "fps": 30,
+      "frameMs": 19.08507462686324,
+      "staticVertices": 252240,
+      "scale": 0.703125,
+      "traffic": 48,
+      "map": {
+        "cols": 8,
+        "rows": 7,
+        "width": 3797,
+        "height": 4165
+      }
+    }
+  ]
+}
