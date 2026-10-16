@@ -1,0 +1,49 @@
+{
+  "fixture": "same64 cars/32 queued; junction18 baseline; stopped lane-leader bottlenecks; director paused via explicit test network wrapper; player stationary; full RAF callback, separate traffic/render/upload; shared cloud machine",
+  "results": [
+    {
+      "release": "before",
+      "rate": 4,
+      "cameraMode": "stationary",
+      "wallMs": 6734,
+      "cars": 64,
+      "stopped": 42,
+      "fps": 3.267003267003267,
+      "callbackMeanMs": 224.03181818212298,
+      "callbackP95Ms": 270.5,
+      "drawGapP95Ms": 352.19999999925494,
+      "trafficCpuMs": 2186.5,
+      "trafficCalls": 796,
+      "mainMeanMs": 64.55909090844744,
+      "mirrorMeanMs": 7.5409090908413585,
+      "uploadMeanMs": 8.781818181276321,
+      "uploadCpuMs": 193.19999998807907,
+      "uploadPerFrameMs": 8.781818181276321,
+      "visibleChunks": 40,
+      "submittedStaticVertices": 105135,
+      "errors": []
+    },
+    {
+      "release": "after",
+      "rate": 4,
+      "cameraMode": "stationary",
+      "wallMs": 6760,
+      "cars": 64,
+      "stopped": 41,
+      "fps": 4.289940828402367,
+      "callbackMeanMs": 154.8068965518012,
+      "callbackP95Ms": 190.19999999925494,
+      "drawGapP95Ms": 284.5999999977648,
+      "trafficCpuMs": 1837.100000038743,
+      "trafficCalls": 804,
+      "mainMeanMs": 51.117241379002046,
+      "mirrorMeanMs": 5.134482758440848,
+      "uploadMeanMs": 0.1693670885708136,
+      "uploadCpuMs": 133.79999997094274,
+      "uploadPerFrameMs": 4.6137931024463015,
+      "visibleChunks": 40,
+      "submittedStaticVertices": 105135,
+      "errors": []
+    }
+  ]
+}

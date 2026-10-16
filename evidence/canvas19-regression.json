@@ -1,0 +1,197 @@
+{
+  "exactPixelScenarios": 15,
+  "results": [
+    {
+      "scenario": "front",
+      "layer": "world-and-mirror",
+      "differingChannels": 0,
+      "maxDelta": 0
+    },
+    {
+      "scenario": "front",
+      "layer": "cockpit-overlay",
+      "differingChannels": 0,
+      "maxDelta": 0
+    },
+    {
+      "scenario": "left",
+      "layer": "world-and-mirror",
+      "differingChannels": 0,
+      "maxDelta": 0
+    },
+    {
+      "scenario": "left",
+      "layer": "cockpit-overlay",
+      "differingChannels": 0,
+      "maxDelta": 0
+    },
+    {
+      "scenario": "right",
+      "layer": "world-and-mirror",
+      "differingChannels": 0,
+      "maxDelta": 0
+    },
+    {
+      "scenario": "right",
+      "layer": "cockpit-overlay",
+      "differingChannels": 0,
+      "maxDelta": 0
+    },
+    {
+      "scenario": "rear",
+      "layer": "world-and-mirror",
+      "differingChannels": 0,
+      "maxDelta": 0
+    },
+    {
+      "scenario": "rear",
+      "layer": "cockpit-overlay",
+      "differingChannels": 0,
+      "maxDelta": 0
+    },
+    {
+      "scenario": "brakes",
+      "layer": "world-and-mirror",
+      "differingChannels": 0,
+      "maxDelta": 0
+    },
+    {
+      "scenario": "brakes",
+      "layer": "cockpit-overlay",
+      "differingChannels": 0,
+      "maxDelta": 0
+    },
+    {
+      "scenario": "color",
+      "layer": "world-and-mirror",
+      "differingChannels": 0,
+      "maxDelta": 0
+    },
+    {
+      "scenario": "color",
+      "layer": "cockpit-overlay",
+      "differingChannels": 0,
+      "maxDelta": 0
+    },
+    {
+      "scenario": "lod329",
+      "layer": "world-and-mirror",
+      "differingChannels": 0,
+      "maxDelta": 0
+    },
+    {
+      "scenario": "lod329",
+      "layer": "cockpit-overlay",
+      "differingChannels": 0,
+      "maxDelta": 0
+    },
+    {
+      "scenario": "lod331",
+      "layer": "world-and-mirror",
+      "differingChannels": 0,
+      "maxDelta": 0
+    },
+    {
+      "scenario": "lod331",
+      "layer": "cockpit-overlay",
+      "differingChannels": 0,
+      "maxDelta": 0
+    },
+    {
+      "scenario": "lod799",
+      "layer": "world-and-mirror",
+      "differingChannels": 0,
+      "maxDelta": 0
+    },
+    {
+      "scenario": "lod799",
+      "layer": "cockpit-overlay",
+      "differingChannels": 0,
+      "maxDelta": 0
+    },
+    {
+      "scenario": "lod801",
+      "layer": "world-and-mirror",
+      "differingChannels": 0,
+      "maxDelta": 0
+    },
+    {
+      "scenario": "lod801",
+      "layer": "cockpit-overlay",
+      "differingChannels": 0,
+      "maxDelta": 0
+    },
+    {
+      "scenario": "underpass",
+      "layer": "world-and-mirror",
+      "differingChannels": 0,
+      "maxDelta": 0
+    },
+    {
+      "scenario": "underpass",
+      "layer": "cockpit-overlay",
+      "differingChannels": 0,
+      "maxDelta": 0
+    },
+    {
+      "scenario": "deck",
+      "layer": "world-and-mirror",
+      "differingChannels": 0,
+      "maxDelta": 0
+    },
+    {
+      "scenario": "deck",
+      "layer": "cockpit-overlay",
+      "differingChannels": 0,
+      "maxDelta": 0
+    },
+    {
+      "scenario": "ramp",
+      "layer": "world-and-mirror",
+      "differingChannels": 0,
+      "maxDelta": 0
+    },
+    {
+      "scenario": "ramp",
+      "layer": "cockpit-overlay",
+      "differingChannels": 0,
+      "maxDelta": 0
+    },
+    {
+      "scenario": "resize",
+      "layer": "world-and-mirror",
+      "differingChannels": 0,
+      "maxDelta": 0
+    },
+    {
+      "scenario": "resize",
+      "layer": "cockpit-overlay",
+      "differingChannels": 0,
+      "maxDelta": 0
+    },
+    {
+      "scenario": "front-return",
+      "layer": "world-and-mirror",
+      "differingChannels": 0,
+      "maxDelta": 0
+    },
+    {
+      "scenario": "front-return",
+      "layer": "cockpit-overlay",
+      "differingChannels": 0,
+      "maxDelta": 0
+    },
+    {
+      "scenario": "180-view cache bound",
+      "triangles": 188,
+      "groundTriangles": 108,
+      "objectTriangles": 80,
+      "hiddenSupports": 35,
+      "mirror": true,
+      "cachedCapacity": 65536,
+      "projectionCacheHits": 24,
+      "projectionCacheEntries": 256,
+      "projectionCacheBytes": 2527744
+    }
+  ]
+}

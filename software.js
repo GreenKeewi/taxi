@@ -3,7 +3,7 @@
 (function (root) {
   'use strict';
   const T = root.Taxi3D;
-  const CACHE = 24, DRAW = 28, SKY = [176, 209, 219], FOG_STEPS = 24;
+  const CACHE = 24, DRAW = 28, SKY = [176, 209, 219], FOG_STEPS = 24, PROJECTED_LIMIT=128;
   const samePoint = (a, i, j) => a[i] === a[j] && a[i + 1] === a[j + 1] && a[i + 2] === a[j + 2];
   function capacity(n) { let p = 64; while (p < n) p *= 2; return p; }
 
@@ -66,6 +66,7 @@
       this.far = 1600; this.mirrorFar = 850;
       this.gl = { deleteBuffer(b) { if (b) { b.data = null; b.count = 0; b.triangles = 0; b.capacity = 0; } } };
       this._palette = []; this._colors = new Map();
+      this._projected = {main:new Map(),mirror:new Map()};this._projectionCacheBytes=0;this._viewKeys={main:null,mirror:null};
       this._queue = new Float32Array(0); this._ground = new Uint32Array(0); this._objects = new Uint32Array(0);
       this._clipA = new Float64Array(48); this._clipB = new Float64Array(48);
       this._depthOrder = (a, b) => this._queue[b * DRAW] - this._queue[a * DRAW] || a - b;
@@ -93,6 +94,7 @@
     }
 
     upload(b, mesh) {
+      b.version=(b.version||0)+1;
       const src = mesh.data, n = Math.floor(src.length / 18);
       if (!b.data || b.capacity < n) { b.capacity = capacity(n); b.data = new Float32Array(b.capacity * CACHE); }
       const dst = b.data; b.count = n * 3; b.triangles = n;
@@ -135,6 +137,12 @@
         for(let k=0;k<3;k++)dst[d+20+k]=src[s+30+k];
         dst[d+23]=4;dst[e+23]=-1;dst[d+15]*=2; t++;
       }
+      b.groupBounds=null;
+      if(mesh.groupBounds&&n){
+        let minX=Infinity,minY=Infinity,minZ=Infinity,maxX=-Infinity,maxY=-Infinity,maxZ=-Infinity;
+        for(let t=0;t<n;t++){const d=t*CACHE,r=dst[d+12];minX=Math.min(minX,dst[d+9]-r);maxX=Math.max(maxX,dst[d+9]+r);minY=Math.min(minY,dst[d+10]-r);maxY=Math.max(maxY,dst[d+10]+r);minZ=Math.min(minZ,dst[d+11]-r);maxZ=Math.max(maxZ,dst[d+11]+r);}
+        b.groupBounds={x:(minX+maxX)/2,y:(minY+maxY)/2,z:(minZ+maxZ)/2,radius:Math.hypot(maxX-minX,maxY-minY,maxZ-minZ)/2+.001};
+      }
     }
 
     resize(w, h, scale = 1) {
@@ -148,6 +156,8 @@
       const c = capacity(n);
       this._queue = new Float32Array(c * DRAW); this._ground = new Uint32Array(c); this._objects = new Uint32Array(c);
     }
+
+    clearProjectionCache(){this._projected.main.clear();this._projected.mirror.clear();this._projectionCacheBytes=0;this._viewKeys.main=this._viewKeys.mirror=null;}
 
     scene(camera, buffers, rect) {
       const scale = this.scale, x = rect ? Math.round(rect.x * scale) : 0, y = rect ? Math.round(rect.y * scale) : 0;
@@ -169,10 +179,20 @@
       const cp = Math.cos(camera.pitch || 0), sp = Math.sin(camera.pitch || 0), cr=Math.cos(camera.roll||0), sr=Math.sin(camera.roll||0);
       const tanY = Math.tan(fov / 2), tanX = tanY * w / h, focal = h / (2 * tanY), horizontalSign = camera.mirror ? -1 : 1;
       const sxNorm = Math.sqrt(1 + tanX * tanX), syNorm = Math.sqrt(1 + tanY * tanY);
-      let count = 0, ng = 0, no = 0, hiddenSupports = 0;
+      const viewKey=[x,y,w,h,...eye,camera.yaw,camera.pitch||0,camera.roll||0,fov,far,!!camera.mirror].join(':'),viewSlot=rect?'mirror':'main',viewCache=this._projected[viewSlot];
+      // A moving camera projects directly; populate reusable faces only after
+      // the exact view repeats, avoiding cache-copy work throughout a drive.
+      const stableView=this._viewKeys[viewSlot]===viewKey;this._viewKeys[viewSlot]=viewKey;
+      let count = 0, ng = 0, no = 0, hiddenSupports = 0, projectionCacheHits=0;
       for (const b of buffers) {
         if (!b.data || !b.triangles) continue;
+        if(b.groupBounds){const bound=b.groupBounds,dx=bound.x-eye[0],dy=bound.y-eye[1],dz=bound.z-eye[2],horizontal=dx*cyaw+dz*syaw,depth=horizontal*cp+dy*sp,rawRight=-dx*syaw+dz*cyaw,rawUp=dy*cp-horizontal*sp,right=rawRight*cr+rawUp*sr,up=rawUp*cr-rawRight*sr,radius=bound.radius;if(depth+radius<near||depth-radius>far||Math.abs(right)-radius*sxNorm>depth*tanX||Math.abs(up)-radius*syNorm>depth*tanY)continue;}
         this.calls++;
+        let cached;const cacheable=stableView&&(!b.dynamic||b.projectCache);
+        if(cacheable){cached=viewCache.get(b);
+          if(cached&&cached.key===viewKey&&cached.version===b.version){projectionCacheHits++;viewCache.delete(b);viewCache.set(b,cached);q.set(cached.data.subarray(0,cached.count*DRAW),count*DRAW);for(let i=0;i<cached.ng;i++)ground[ng++]=count+cached.ground[i];for(let i=0;i<cached.no;i++)objects[no++]=count+cached.objects[i];count+=cached.count;hiddenSupports+=cached.hidden;continue;}
+        }
+        const firstCount=count,firstGround=ng,firstObject=no,firstHidden=hiddenSupports;
         const data = b.data;
         for (let t = 0; t < b.triangles; t++) {
           const d = t * CACHE;if(data[d+23]<0)continue;const vertexCount=data[d+23]||3;const dx = data[d + 9] - eye[0], dy = data[d + 10] - eye[1], dz = data[d + 11] - eye[2];
@@ -235,6 +255,15 @@
           if (flat) ground[ng++] = count; else objects[no++] = count;
           count++;
         }
+        if(cacheable){const size=count-firstCount,gc=ng-firstGround,oc=no-firstObject;
+          if(!cached)cached={data:new Float32Array(0),ground:new Uint32Array(0),objects:new Uint32Array(0)};
+          const oldBytes=cached.data.byteLength+cached.ground.byteLength+cached.objects.byteLength;
+          if(cached.data.length<size*DRAW)cached.data=new Float32Array(capacity(size)*DRAW);if(cached.ground.length<gc)cached.ground=new Uint32Array(capacity(gc));if(cached.objects.length<oc)cached.objects=new Uint32Array(capacity(oc));
+          cached.data.set(q.subarray(firstCount*DRAW,count*DRAW));for(let i=0;i<gc;i++)cached.ground[i]=ground[firstGround+i]-firstCount;for(let i=0;i<oc;i++)cached.objects[i]=objects[firstObject+i]-firstCount;
+          cached.key=viewKey;cached.version=b.version;cached.count=size;cached.ng=gc;cached.no=oc;cached.hidden=hiddenSupports-firstHidden;
+          this._projectionCacheBytes+=cached.data.byteLength+cached.ground.byteLength+cached.objects.byteLength-oldBytes;viewCache.delete(b);viewCache.set(b,cached);
+          while(viewCache.size>PROJECTED_LIMIT){const key=viewCache.keys().next().value,old=viewCache.get(key);this._projectionCacheBytes-=old.data.byteLength+old.ground.byteLength+old.objects.byteLength;viewCache.delete(key);}
+        }
       }
       const floors = ground.subarray(0, ng), solids = objects.subarray(0, no);
       floors.sort(this._groundOrder); solids.sort(this._depthOrder);
@@ -250,7 +279,7 @@
       };
       draw(floors); draw(solids); ctx.restore();
       this.trianglesDrawn = count;
-      this.stats = { triangles: count, groundTriangles: ng, objectTriangles: no, hiddenSupports, mirror: !!rect, cachedCapacity: this._ground.length };
+      this.stats = { triangles: count, groundTriangles: ng, objectTriangles: no, hiddenSupports, mirror: !!rect, cachedCapacity: this._ground.length,projectionCacheHits,projectionCacheEntries:this._projected.main.size+this._projected.mirror.size,projectionCacheBytes:this._projectionCacheBytes };
       return matrix;
     }
 
@@ -258,6 +287,7 @@
       this.gl.deleteBuffer(this.dynamic.buffer);
       this._queue = new Float32Array(0); this._ground = new Uint32Array(0); this._objects = new Uint32Array(0);
       this._palette.length = 0; this._colors.clear();
+      this.clearProjectionCache();
     }
   }
   root.TaxiSoftwareRenderer = TaxiSoftwareRenderer;
