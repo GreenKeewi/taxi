@@ -34,7 +34,7 @@ function closeGuide(){$('handbook').hidden=true;if(guideReturn==='playing')resum
 $('close-guide').onclick=closeGuide;
 function toggleMap(){if(mode==='playing')saveShift();if(mode==='map'){$('map-panel').hidden=true;mode=mapReturn;keys.clear();}else if(mode==='playing'){mapReturn=mode;mode='map';keys.clear();$('map-panel').hidden=false;drawMap();}}
 let adaptiveLevel=0,adaptiveSlow=0,adaptiveFast=0,adaptiveFrames=0,adaptiveCost=0,adaptiveGap=0,adaptiveResizePending=false;
-function resize(){width=innerWidth;height=innerHeight;const scale=lowPower?Math.min(1,(software?[800,600,460][adaptiveLevel]:900)/width):Math.min(devicePixelRatio||1,1.5,(software?1000:1600)/width);renderer.resize(width,height,Math.max(software?.35:.5,scale));const dpr=Math.min(devicePixelRatio||1,1.5);overlay.width=Math.round(width*dpr);overlay.height=Math.round(height*dpr);ctx.setTransform(dpr,0,0,dpr,0,0);if(mode==='map')drawMap();}
+function resize(){width=innerWidth;height=innerHeight;const scale=lowPower?Math.min(1,(software?[800,600,460][adaptiveLevel]:900)/width):Math.min(devicePixelRatio||1,1.5,(software?1000:1600)/width);renderer.resize(width,height,Math.max(software&&lowPower?.35:.5,scale));const dpr=Math.min(devicePixelRatio||1,1.5);overlay.width=Math.round(width*dpr);overlay.height=Math.round(height*dpr);ctx.setTransform(dpr,0,0,dpr,0,0);if(mode==='map')drawMap();}
 function note(text){latestEvent={title:text,text:'',tone:'info'};eventUntil=performance.now()+2400;}
 addEventListener('resize',()=>{if(renderer)resize();});
 addEventListener('blur',()=>{keys.clear();if(mode==='playing')showMenu('paused');});

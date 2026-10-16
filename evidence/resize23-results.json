@@ -1,0 +1,36 @@
+{
+  "method": "real browser viewport resize and nativeL; normal render loop; no matching-resolution override",
+  "results": [
+    {
+      "cssWidth": 2560,
+      "fullQuality": {
+        "lowPower": false,
+        "width": 1280,
+        "overlay": 2560,
+        "scale": 0.5
+      },
+      "lowPower": {
+        "lowPower": true,
+        "width": 896,
+        "scale": 0.35
+      },
+      "returnedFullWidth": 1280
+    },
+    {
+      "cssWidth": 3840,
+      "fullQuality": {
+        "lowPower": false,
+        "width": 1920,
+        "overlay": 3840,
+        "scale": 0.5
+      },
+      "lowPower": {
+        "lowPower": true,
+        "width": 1344,
+        "scale": 0.35
+      },
+      "returnedFullWidth": 1920
+    }
+  ],
+  "errors": []
+}
