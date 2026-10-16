@@ -1,0 +1,81 @@
+[
+  {
+    "before": true,
+    "fixture": {
+      "node": {
+        "x": 1211,
+        "y": 650,
+        "i": 2,
+        "j": 1,
+        "id": 10,
+        "districtId": "toronto",
+        "neighborIds": [
+          9,
+          11,
+          2,
+          18
+        ]
+      },
+      "expected": "Richmond St West"
+    },
+    "result": {
+      "labels": [
+        "Richmond St West",
+        "00",
+        "km/h",
+        "D",
+        "CAB",
+        "NET BALANCE",
+        "$0",
+        "0 FARES",
+        "4:00 PM",
+        "ECO",
+        "LOCAL ROADS",
+        "TAB ↗"
+      ],
+      "mode": "playing",
+      "vertices": 740523,
+      "street": "Then Oshawa · $1723 · King Street West"
+    },
+    "errors": []
+  },
+  {
+    "before": false,
+    "fixture": {
+      "node": {
+        "x": 1211,
+        "y": 650,
+        "i": 2,
+        "j": 1,
+        "id": 10,
+        "districtId": "toronto",
+        "neighborIds": [
+          9,
+          11,
+          2,
+          18
+        ]
+      },
+      "expected": "Richmond St West"
+    },
+    "result": {
+      "labels": [
+        "00",
+        "km/h",
+        "D",
+        "CAB",
+        "NET BALANCE",
+        "$0",
+        "0 FARES",
+        "4:00 PM",
+        "ECO",
+        "LOCAL ROADS",
+        "TAB ↗"
+      ],
+      "mode": "playing",
+      "vertices": 740523,
+      "street": "Then Oshawa · $1723 · King Street West"
+    },
+    "errors": []
+  }
+]

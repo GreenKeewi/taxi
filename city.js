@@ -169,8 +169,6 @@
         // get the missing crosswalk. Lake Shore junctions are clearly marked.
         crosswalk({x,y:zs[lastZ]},'S');
         for(const dir of ['N','E','W'])crosswalk({x,y:lake},dir);
-        streetSign(x-98,lake-99,32,'LAKE SHORE BLVD',C.ink);
-        streetSign(x+98,lake+98,32,road.name.replace('Street','St').replace('Avenue','Ave'),C.ink);
         for(let z=begin+115;z<end-60;z+=185){lamp(x-89,z,0);tree(x+109,z+52,.65);}
         stats.roadSegments++;stats.waterfrontStreets++;
       }
@@ -525,12 +523,6 @@
         bench(center[0],center[2],yaw);stats.shelters++;
       }
       stats.busStops++;
-    }
-    // Street names at twelve alternating junctions; billboard labels are parent-rendered.
-    for(const n of map.nodes){
-      if((n.i+n.j)%3!==0)continue;
-      streetSign(n.x-96,n.y-96,32,map.streets[n.j].replace('Street ','St ').replace('Avenue','Ave'),C.ink);
-      if(n.j===0||n.j===3)streetSign(n.x+96,n.y+96,31,map.avenues[n.i].replace('Street','St').replace('Avenue','Ave'),C.ink);
     }
     for(const [idx,text] of [[0,'QUEEN WEST'],[8,'ENTERTAINMENT DISTRICT'],[19,'ST. LAWRENCE'],[20,'HARBOURFRONT']]){
       const b=map.bays[idx];if(b)streetSign(b.x,b.roadY+194,35,text,'#52695f');
