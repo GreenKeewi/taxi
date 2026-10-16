@@ -8,7 +8,7 @@ Painter ordering, clipping, fog, road/deck occlusion, mirror geometry and the We
 
 `node canvas19-regression.cjs` compares the archived junction18 renderer with the changed renderer using frozen animation frames and identical junction18 engine/highway/road scripts. Fifteen scenes compare every pixel channel in the world/mirror canvas and cockpit overlay: front, both side looks, rear, brake lights, color, both LOD boundaries, underpass, deck, ramp, resize, and return to the original view. The third identical frame exercises cache hits. Every scene checks that rendering leaves vehicle state unchanged.
 
-The 180-view traversal warms three frames per view and requires actual cache hits and a full256-entry LRU; final projected arrays occupy2,527,744bytes. Raw results and memory measurements are in `canvas19-regression.json`; matching front/underpass/ramp screenshots are retained.
+The 180-view traversal warms three frames per view and requires actual cache hits and a full 256-entry LRU; final projected arrays occupy 2,527,744 bytes. Raw results and memory measurements are in `canvas19-regression.json`; matching front/underpass/ramp screenshots are retained.
 
 ## Paired browser measurements
 
@@ -29,7 +29,7 @@ Upload work per rendered frame consistently fell. The repeated measurements show
 
 ## Reproduction and scope
 
-Archive taxi commit8f5539a2e0e5b2e6f236d91b57488d04f7a78826 into /workspace/taxi-junction18-baseline. Serve that tree at port8131 and the changed tree at port 8130. Run `node canvas19-regression.cjs` and `node canvas19-browser.cjs`. `CANVAS19_RATES`, `CANVAS19_CAMERAS`, `CANVAS19_RELEASES` and `CANVAS19_TAG` select isolated/reversed repeats and separate result names. The shared fixture is `canvas19-fixture.cjs`.
+Archive taxi commit 8f5539a2e0e5b2e6f236d91b57488d04f7a78826 into /workspace/taxi-junction18-baseline. Serve that tree at port 8131 and the changed tree at port 8130. Run `node canvas19-regression.cjs` and `node canvas19-browser.cjs`. `CANVAS19_RATES`, `CANVAS19_CAMERAS`, `CANVAS19_RELEASES` and `CANVAS19_TAG` select isolated/reversed repeats and separate result names. The shared fixture is `canvas19-fixture.cjs`.
 
 Only `game.js` and `software.js` contain runtime changes. Exploratory CPU profiles and early single-release measurements are preserved outside the repository at `/workspace/canvas19-exploratory`. Final publishing and regression evidence is recorded in FINAL-CORRECTIONS.md.
 
