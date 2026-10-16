@@ -26,7 +26,7 @@
 | Grade separation | Taxi and bus cross below expressway at all three towns, remain at height 0 with no collisions | `physics-checks.json`, `underpass.png` |
 | Traffic/debt/rules | Following stops and resumes without overlap; deck/ground vehicles do not collide; solid regional buildings; negative balance; qualified right-on-red accepted, straight red crossing fined | `physics-checks.cjs` |
 | Map edges/seeds | Vehicles remain within map boundaries; seeds 1, 42, 8427, 12345 and 999999 retain joined highway decks | `physics-checks.json` |
-| GitHub / Pages | Git dry-run confirms write access to both destinations. Public Pages HTTP access from this cloud is currently blocked by Envoy 403; final publishing results are recorded separately | delivery notes |
+| GitHub / Pages | Both exact feature commits pushed; both Pages build/deployment workflows succeeded. Direct public Pages HTTP loads remain blocked by this cloud’s Envoy 403 | delivery notes |
 
 The continuous driving tests use an automated driver sending ordinary digital steering/pedal inputs through the existing physics, with other traffic disabled to isolate road geometry. That driver does not obey signals; red-light behavior is tested separately. Each trip begins with a controlled start placement. Bus-stop tests place the bus shortly before each stop, then use actual forward movement/braking/boarding. Taxi fare-state tests use controlled parking placements. These are not a claim of one uninterrupted human-played traffic session.
 
@@ -53,3 +53,11 @@ The expanded world contains 679,314 static vertices. In the measured starting vi
 - `intercity-bus.png`, `fare-on-board.png` — selected bus service and taxi rider state.
 
 Screenshots use explicit scenario placements; see `capture-evidence.cjs` and `highway-browser.cjs`. Their purpose is visual regression, not proof of the full intercity traversal. Continuous movement evidence is recorded by the physical tests.
+
+## Publishing evidence
+
+- Taxi feature commit: `a250bb03fd979e30c814636812d62b3afa8d9060`, confirmed by `git ls-remote`. [Successful Pages deployment](https://github.com/GreenKeewi/taxi/actions/runs/38849094263).
+- 3D mirror feature commit: `f62bfb5aafca8a1e9f71d4a30da73ca4f84c68cd`, confirmed by `git ls-remote`. [Successful Pages deployment](https://github.com/GreenKeewi/night-shift-taxi/actions/runs/38849121395).
+- Local mirror browser pass: `/3d/` starts, plays, shows the 29,800-unit region and opens its map in Canvas fallback. Original 2D `/` starts and moves with Enter/W; no page errors. All original repository root file hashes match the pre-change snapshot.
+- Moving browser highway sample: 6,500 → 9,095.6 world units, 118.0 km/h, highway layer throughout, zero collisions, four nearby cars at the final capture. See `highway-browser.json`.
+- Public destinations: https://greenkeewi.github.io/taxi/ and https://greenkeewi.github.io/night-shift-taxi/3d/. Direct GET/HEAD attempts, including additional network permission, fail at the cloud proxy with `CONNECT tunnel failed, response 403` / `server: envoy`; the web fetch tool also cannot open either URL. Bypassing the proxy cannot resolve the host here. This blocks a direct live-browser load claim, not the confirmed pushes or successful GitHub deployments.
