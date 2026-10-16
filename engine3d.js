@@ -186,9 +186,16 @@ class Game{
  trafficMovement(c){const cache=this._trafficMovements||(this._trafficMovements=new Map()),key=c.from+':'+c.to+':'+c.next+':'+c.lane;let movement=cache.get(key);if(movement)return movement;const path=preparePath(curvePoints(this.map.nodes[c.from],this.map.nodes[c.to],this.map.nodes[c.next],c.lane,c.lane)),poses=[];for(let t=0;t<path.length;t+=10)poses.push({...samplePath(path,t),length:56,width:30,height:0});poses.push({...samplePath(path,path.length),length:56,width:30,height:0});movement={key,path,poses,from:c.from,to:c.to,next:c.next,lane:c.lane};cache.set(key,movement);return movement;}
  trafficMovementsConflict(a,b){if(a.key===b.key||a.from===b.from&&a.lane===b.lane||a.next===b.next&&a.lane===b.lane)return true;const cache=this._trafficConflicts||(this._trafficConflicts=new Map()),key=[a.key,b.key].sort().join('|');if(cache.has(key))return cache.get(key);const conflict=a.poses.some(p=>b.poses.some(q=>Math.abs(p.x-q.x)<64&&Math.abs(p.y-q.y)<64&&carHit(p,q)));cache.set(key,conflict);return conflict;}
  releaseTraffic(c){if(c.reserved!==undefined){const owners=this.junctions[c.reserved];if(Array.isArray(owners)){const keep=owners.filter(id=>id!==c.id);if(keep.length)this.junctions[c.reserved]=keep;else delete this.junctions[c.reserved];}else if(owners===c.id)delete this.junctions[c.reserved];c.reserved=undefined;}}
- receivingSpace(c,index){const half=(c.length||44)/2,needed=JUNCTION_EXIT+half+12;for(const o of index.lane(c.to,c.next,c.lane)){if(o.id===c.id||o.turn)continue;const offset=o.laneOffset??LANES[o.lane];if(Math.abs(offset-LANES[c.lane])<26&&o.t-(o.length||44)/2<needed)return false;}
-  const node=this.map.nodes[c.to],next=this.map.nodes[c.next],a=Math.atan2(next.y-node.y,next.x-node.x),player=index.player,dx=player.x-node.x,dy=player.y-node.y,along=dx*Math.cos(a)+dy*Math.sin(a),across=-dx*Math.sin(a)+dy*Math.cos(a),relative=angleDiff(player.a||0,a),extentAlong=Math.abs(Math.cos(relative))*(player.length||44)/2+Math.abs(Math.sin(relative))*(player.width||22)/2,extentAcross=Math.abs(Math.sin(relative))*(player.length||44)/2+Math.abs(Math.cos(relative))*(player.width||22)/2;if(Math.abs(player.height||0)<10&&Math.abs(across-LANES[c.lane])<extentAcross+15&&along>JUNCTION_EXIT-half-extentAlong&&along-extentAlong<needed)return false;return true;
+ receivingSpace(c,index){
+  const half=(c.length||44)/2,needed=JUNCTION_EXIT+half+12,node=this.map.nodes[c.to],next=this.map.nodes[c.next],a=Math.atan2(next.y-node.y,next.x-node.x),cs=Math.cos(a),sn=Math.sin(a);
+  // Read current poses as well as the start-of-step lane buckets: an earlier
+  // driver may have merged or completed its crossing during this same step.
+  const center=lanePoint(node,next,JUNCTION_EXIT,c.lane);center.id=c.id;center.height=0;
+  for(const q of index.near(center,134)){const o=q.id==='player'?this.car:index.actual.get(q.id);if(!o||Math.abs(o.height||0)>=10)continue;const dx=o.x-node.x,dy=o.y-node.y,along=dx*cs+dy*sn,across=-dx*sn+dy*cs,relative=angleDiff(o.a||0,a),extentAlong=Math.abs(Math.cos(relative))*(o.length||44)/2+Math.abs(Math.sin(relative))*(o.width||22)/2,extentAcross=Math.abs(Math.sin(relative))*(o.length||44)/2+Math.abs(Math.cos(relative))*(o.width||22)/2;
+   if(Math.abs(across-LANES[c.lane])<extentAcross+(c.width||22)/2+4&&along+extentAlong>JUNCTION_EXIT-half&&along-extentAlong<needed)return false;
+  }return true;
  }
+ entrySpace(c){const player=this.car,node=this.map.nodes[c.to];if(Math.abs(player.height||0)>=10||dist(player,node)>240)return true;return !this.trafficMovement(c).poses.slice(0,7).some(p=>carHit(p,player));}
  admitTraffic(c,index){const owners=this.junctions[c.to]||[],movement=this.trafficMovement(c);for(const id of owners){if(id===c.id)continue;const other=index.actual.get(id);if(other&&this.trafficMovementsConflict(movement,this.trafficMovement(other)))return false;}
   if(c.turnSign<0){const n=this.map.nodes[c.from],to=this.map.nodes[c.to],a=Math.atan2(to.y-n.y,to.x-n.x);for(const o of index.near({x:to.x,y:to.y,height:0},300)){if(o.id===c.id||o.kind!=='street'||o.turn||o.to!==c.to||o.turnSign<0)continue;const from=this.map.nodes[o.from],heading=Math.atan2(to.y-from.y,to.x-from.x);if(Math.abs(angleDiff(a,heading))>PI-.2&&dist(from,to)-o.t<190)return false;}}
   this.junctions[c.to]=[...owners,c.id];c.reserved=c.to;return true;
@@ -207,7 +214,9 @@ class Game{
   return false;
  }
  updateTraffic(dt){const m=this.map;this.traffic.sort((a,b)=>a.id-b.id);const index=(this._trafficIndex||(this._trafficIndex=new TrafficIndex())).reset(this.traffic,this.car,m);this.trafficWork=index.work;
-  for(const id in this.junctions){const owners=Array.isArray(this.junctions[id])?this.junctions[id]:[this.junctions[id]],keep=owners.filter(owner=>index.byId.get(owner)?.reserved===+id);if(keep.length)this.junctions[id]=keep;else delete this.junctions[id];}
+  for(const c of this.traffic)if(c.reserved!==undefined&&(c.kind!=='street'||c.reserved!==c.to||!m.nodes[c.reserved]))this.releaseTraffic(c);
+  for(const id in this.junctions){const owners=Array.isArray(this.junctions[id])?this.junctions[id]:[this.junctions[id]],keep=[...new Set(owners)].filter(owner=>{const c=index.actual.get(owner);return c&&c.kind==='street'&&c.to===+id&&c.reserved===+id;});if(keep.length)this.junctions[id]=keep;else delete this.junctions[id];}
+  for(const c of this.traffic)if(c.kind==='street'){if(c.turn){const owners=this.junctions[c.to]||[];if(!owners.includes(c.id))this.junctions[c.to]=[...owners,c.id];c.reserved=c.to;}else if(c.reserved!==undefined&&!(this.junctions[c.reserved]||[]).includes(c.id))this.releaseTraffic(c);}
   const order=[...this.traffic].sort((a,b)=>(a.waitSince??this.time)-(b.waitSince??this.time)||a.id-b.id);
   for(const c of order){c.height=c.kind==='highway'?(m.highwayHeight||0):0;c.queueing=false;c.queueReason=null;
    if(c.kind==='highway'){
@@ -229,11 +238,12 @@ class Game{
     c.turn.t=nextTurnT;c.x=pos.x;c.y=pos.y;c.a=pos.a;if(c.turn.t>=c.turn.path.length){const oldTo=c.to;c.from=oldTo;c.to=c.next;c.t=JUNCTION_EXIT;c.turn=null;this.releaseTraffic(c);c.laneOffset=LANES[c.lane];this.planTraffic(c);}c.stopped=c.speed<3;c.queueing=c.stopped;c.queueReason=c.stopped?'blocked crossing':null;continue;
    }
    const oldT=c.t,oldLaneOffset=c.laneOffset,n=m.nodes[c.from],to=m.nodes[c.to],L=dist(n,to),a=Math.atan2(to.y-n.y,to.x-n.x),left=L-c.t,stop=L-JUNCTION_ENTRY,s=signal(m,to,this.time),green=(Math.abs(to.x-n.x)>1?s.horizontal:s.vertical)==='green';
-   if(c.requiredLane!==c.lane&&left>190){const want=lanePoint(n,to,c.t,c.requiredLane),safe=!index.near(c,260).some(o=>{const dx=o.x-want.x,dy=o.y-want.y,along=dx*Math.cos(a)+dy*Math.sin(a),across=Math.abs(-dx*Math.sin(a)+dy*Math.cos(a)),closing=along>0?Math.max(0,c.speed-o.speed):Math.max(0,(o.speed||0)-c.speed);return across<28&&Math.abs(along)<75+closing*.9;});if(safe)c.lane=c.requiredLane;}
+   if(c.requiredLane!==c.lane&&(left>190||c.speed<20&&left>=JUNCTION_ENTRY-.01)){const want=lanePoint(n,to,c.t,c.requiredLane),safe=!index.near(c,260).some(o=>{const dx=o.x-want.x,dy=o.y-want.y,along=dx*Math.cos(a)+dy*Math.sin(a),across=Math.abs(-dx*Math.sin(a)+dy*Math.cos(a)),closing=along>0?Math.max(0,c.speed-o.speed):Math.max(0,(o.speed||0)-c.speed);return across<28&&Math.abs(along)<75+closing*.9;});if(safe)c.lane=c.requiredLane;}
    if(c.requiredLane!==c.lane)target=Math.min(target,Math.max(0,(left-185)*.8));c.laneOffset+=(LANES[c.lane]-c.laneOffset)*Math.min(1,dt*1.8);
-   const next=m.nodes[c.next],exitClear=this.receivingSpace(c,index),frontClear=!index.lane(c.from,c.to,c.lane).some(o=>o.id!==c.id&&!o.turn&&Math.abs((o.laneOffset??LANES[o.lane])-c.laneOffset)<26&&o.t>c.t);
-   if(left<150&&c.reserved===undefined&&green&&exitClear&&frontClear&&c.lane===c.requiredLane&&Math.abs(c.laneOffset-LANES[c.lane])<2)this.admitTraffic(c,index);
-   if(c.reserved===c.to&&!green)this.releaseTraffic(c);
+   const next=m.nodes[c.next],exitClear=(left<150||c.reserved!==undefined)?this.receivingSpace(c,index):true,entryClear=(left<150||c.reserved!==undefined)?this.entrySpace(c):true,frontClear=!index.lane(c.from,c.to,c.lane).some(o=>o.id!==c.id&&!o.turn&&Math.abs((o.laneOffset??LANES[o.lane])-c.laneOffset)<26&&o.t>c.t);
+   const ready=green&&exitClear&&entryClear&&frontClear&&c.lane===c.requiredLane&&Math.abs(c.laneOffset-LANES[c.lane])<2&&c.desired>0;
+   if(c.reserved===c.to&&!ready)this.releaseTraffic(c);
+   if(left<150&&c.reserved===undefined&&ready)this.admitTraffic(c,index);
    if(c.reserved!==c.to){target=Math.min(target,Math.max(0,(stop-c.t)*1.25));if(left<230){c.queueReason=!green?'signal':!exitClear?'spillback':'junction';}}
    else if(c.turnSign)target=Math.min(target,kmhToSpeed(18));
    const look=22+(this.car.length||44)/2+30+c.speed*.8+c.speed*c.speed/100,leaders=index.edge(c.from,c.to),cs=Math.cos(a),sn=Math.sin(a);for(let i=0;i<=leaders.length;i++){const o=i===leaders.length?index.player:leaders[i];if(o.id===c.id||Math.abs((o.height||0)-(c.height||0))>10)continue;const rx=o.x-c.x,ry=o.y-c.y,along=rx*cs+ry*sn,across=Math.abs(-rx*sn+ry*cs);if(along>0&&along<look&&across<((c.width||22)+(o.width||22))/2+3){const following=this.followingSpeed(c,o,along,a,45);if(following<target){target=following;c.queueReason='leader';}}}
