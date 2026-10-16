@@ -25,7 +25,7 @@ The controlled case retains the same 64 cars, including 32 initial queued cars b
 
 The actual case uses native pedal events to drive about 160m along the same naturally near-straight highway segment, with 96 cars and the unmodified traffic director running. After one pose/destination setup, there is no placement, manual stepping, traffic removal or altered simulation calls; timing wrappers invoke the original methods. The initial heading follows the segment's tangent; no intersection or exit occurs inside the measurement. The director refreshes traffic during each run. Every completed measured cruise has zero collisions and page errors. Actual end distance varies slightly because observations occur after complete frames. Raw data: `canvas22-driving-release-cruise.json`.
 
-Normal-CPU highway cruising was already near the 30FPS low-power cap. Its p95 rose slightly in the final pair; this is retained in the table. Results vary on the shared machine. Earlier calibration data and the rejected batching experiment are retained outside the repository in `/workspace/canvas22-exploratory`; they are not substituted for the release results.
+Normal-CPU highway cruising was already near the 30FPS low-power cap. Its p95 rose slightly in the final pair; this is retained in the table. Results vary on the shared machine. Earlier calibration data and the rejected batching experiment are retained outside the repository in `/workspace/canvas22-exploratory`; some calibration captures also remain alongside the release artifacts. Only the explicitly named release tables are used for the conclusions.
 
 ## Verification
 
@@ -45,3 +45,5 @@ A bus attempt starting/cruising at 64.8km/h hit the closing separator near stati
 The final throttled city case remains around 5.7FPS and the final highway cruise around 7FPS. Those rates remain too low for comfortable play on an equivalently constrained device. No physical Chromebook validation or 30FPS guarantee is claimed. Full-quality pixels are identical in the tested scenes; low-power pixels intentionally trade distant decoration, resolution and horizon for speed.
 
 Targets remain https://greenkeewi.github.io/taxi/ and https://greenkeewi.github.io/night-shift-taxi/3d/. Final remote SHAs, deployment runs, mirror/source hashes and any public-load blocker are recorded in `/workspace/taxi-canvas22-delivery.json`.
+
+Selected captures: [actual cruise after,4×](canvas22-cruise-release-after-4x.png), [actual cruise before,4×](canvas22-cruise-release-before-4x.png), [lowest-power highway view](canvas22-low-tier2-highway.png), [full-quality underpass](canvas22-after-parity-underpass.png), [ordinary pickup](canvas22-pickup.png).
