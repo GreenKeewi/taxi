@@ -1,0 +1,378 @@
+{
+  "sourceSHA256": {
+    "game.js": "00aaba1ac9908bdd0eec4fcee331dfefbd6187a1627a58310bc3e0e764ee3a26",
+    "software.js": "ab2afdc6ac94952e330a30dc6350a6329eaab79d86f481e7a64c4a848fe2184a",
+    "engine3d.js": "1abfe02d66265d0a940fdc33d82fa4c426de7d52ecafe54930a0d98119b224f7",
+    "highway.js": "6e12bc45e9c82f54b0c592900cbd7887f69079dab05119539674108e905ea47e",
+    "spatial.js": "d26ca959365d700b0291f36afeb43fcb12a506ad9498c84cf77b8d2523654f83",
+    "index.html": "140d21f2328b915cf392b9eb2e986071b5c9f262835bd54165816278d56adc04"
+  },
+  "baselineCommit": "4be684510757463e5f7fe2805e15d3583227ca61",
+  "profiled": "spatial128-final",
+  "unprofiled": "spatial128-reverse",
+  "runs": [
+    {
+      "tag": "spatial128-final",
+      "results": [
+        {
+          "release": "before",
+          "rate": 1,
+          "fps": 29.647715381932333,
+          "callbackMeanMs": 5.443841642244034,
+          "callbackP95Ms": 10.300000000745058,
+          "simulationCpuMs": 1390.2000000290573,
+          "simulationSteps": 1408,
+          "simulationMsPerStep": 0.9873579545660918,
+          "quality": {
+            "adaptiveLevel": 0,
+            "pixels": 800
+          },
+          "collisions": 0,
+          "cars": 96,
+          "spatial": null
+        },
+        {
+          "release": "after",
+          "rate": 1,
+          "fps": 29.236172080772608,
+          "callbackMeanMs": 5.464520958073794,
+          "callbackP95Ms": 10.899999998509884,
+          "simulationCpuMs": 1094.8999999836087,
+          "simulationSteps": 1396,
+          "simulationMsPerStep": 0.7843123209051639,
+          "quality": {
+            "adaptiveLevel": 0,
+            "pixels": 800
+          },
+          "collisions": 0,
+          "cars": 96,
+          "spatial": {
+            "highway": {
+              "queries": 38124,
+              "cacheHits": 37287,
+              "candidates": 393764,
+              "objects": 6900,
+              "cacheEntries": 256
+            },
+            "static": {
+              "queries": 1396,
+              "cacheHits": 1370,
+              "candidates": 149,
+              "objects": 357,
+              "cacheEntries": 26
+            }
+          }
+        },
+        {
+          "release": "before",
+          "rate": 4,
+          "fps": 7.568975339790022,
+          "callbackMeanMs": 100.3139784946557,
+          "callbackP95Ms": 140.20000000298023,
+          "simulationCpuMs": 5798.100000005215,
+          "simulationSteps": 1558,
+          "simulationMsPerStep": 3.721501925548919,
+          "quality": {
+            "adaptiveLevel": 2,
+            "pixels": 460
+          },
+          "collisions": 0,
+          "cars": 96,
+          "spatial": null
+        },
+        {
+          "release": "after",
+          "rate": 4,
+          "fps": 7.711421472024677,
+          "callbackMeanMs": 94.0175824177216,
+          "callbackP95Ms": 183.30000000074506,
+          "simulationCpuMs": 4874.500000011176,
+          "simulationSteps": 1490,
+          "simulationMsPerStep": 3.271476510074615,
+          "quality": {
+            "adaptiveLevel": 2,
+            "pixels": 460
+          },
+          "collisions": 0,
+          "cars": 96,
+          "spatial": {
+            "highway": {
+              "queries": 41579,
+              "cacheHits": 40726,
+              "candidates": 424311,
+              "objects": 6900,
+              "cacheEntries": 256
+            },
+            "static": {
+              "queries": 1490,
+              "cacheHits": 1464,
+              "candidates": 149,
+              "objects": 357,
+              "cacheEntries": 26
+            }
+          }
+        }
+      ]
+    },
+    {
+      "tag": "spatial128-reverse",
+      "results": [
+        {
+          "release": "after",
+          "rate": 4,
+          "fps": 10.434340006786563,
+          "callbackMeanMs": 63.01382113817504,
+          "callbackP95Ms": 105.69999999925494,
+          "simulationCpuMs": 3831.500000067055,
+          "simulationSteps": 1430,
+          "simulationMsPerStep": 2.6793706294175212,
+          "quality": {
+            "adaptiveLevel": 2,
+            "pixels": 460
+          },
+          "collisions": 0,
+          "cars": 96,
+          "spatial": {
+            "highway": {
+              "queries": 38080,
+              "cacheHits": 37344,
+              "candidates": 389784,
+              "objects": 6900,
+              "cacheEntries": 256
+            },
+            "static": {
+              "queries": 1434,
+              "cacheHits": 1407,
+              "candidates": 149,
+              "objects": 357,
+              "cacheEntries": 27
+            }
+          }
+        },
+        {
+          "release": "before",
+          "rate": 4,
+          "fps": 8.061862454754854,
+          "callbackMeanMs": 89.40306122464185,
+          "callbackP95Ms": 174.60000000149012,
+          "simulationCpuMs": 5430.200000010431,
+          "simulationSteps": 1462,
+          "simulationMsPerStep": 3.714227086190445,
+          "quality": {
+            "adaptiveLevel": 2,
+            "pixels": 460
+          },
+          "collisions": 0,
+          "cars": 96,
+          "spatial": null
+        }
+      ]
+    }
+  ],
+  "profiles": {
+    "before": [
+      {
+        "frame": "(program) :-1",
+        "selfMs": 3159.84
+      },
+      {
+        "frame": "updateTraffic engine3d.js?v=canvas-22:217",
+        "selfMs": 1434.312
+      },
+      {
+        "frame": " engine3d.js?v=canvas-22:230",
+        "selfMs": 777.778
+      },
+      {
+        "frame": "stepPhysics engine3d.js?v=canvas-22:266",
+        "selfMs": 680.474
+      },
+      {
+        "frame": " :-1",
+        "selfMs": 444.769
+      },
+      {
+        "frame": "near engine3d.js?v=canvas-22:154",
+        "selfMs": 439.291
+      },
+      {
+        "frame": "collisionShape engine3d.js?v=canvas-22:126",
+        "selfMs": 287.382
+      },
+      {
+        "frame": "scene software.js?v=canvas-22:165",
+        "selfMs": 285.295
+      },
+      {
+        "frame": "buildingHit engine3d.js?v=canvas-22:129",
+        "selfMs": 285.033
+      },
+      {
+        "frame": "reset engine3d.js?v=canvas-22:145",
+        "selfMs": 283.133
+      },
+      {
+        "frame": "draw software.js?v=canvas-22:275",
+        "selfMs": 262.258
+      },
+      {
+        "frame": "fill :-1",
+        "selfMs": 256.063
+      },
+      {
+        "frame": " game.js?v=canvas-22:190",
+        "selfMs": 250.282
+      },
+      {
+        "frame": "(garbage collector) :-1",
+        "selfMs": 196.509
+      },
+      {
+        "frame": "step game.js?v=canvas-22:53",
+        "selfMs": 176.341
+      },
+      {
+        "frame": "sweptClear highway.js?v=canvas-22:45",
+        "selfMs": 167.966
+      },
+      {
+        "frame": "trafficPoseClear engine3d.js?v=canvas-22:204",
+        "selfMs": 164.196
+      },
+      {
+        "frame": "render game.js?v=canvas-22:191",
+        "selfMs": 156.096
+      },
+      {
+        "frame": "bend highway.js?v=canvas-22:4",
+        "selfMs": 127.241
+      },
+      {
+        "frame": "carHit engine3d.js?v=canvas-22:127",
+        "selfMs": 118.237
+      },
+      {
+        "frame": "upload software.js?v=canvas-22:95",
+        "selfMs": 115.897
+      },
+      {
+        "frame": "highway engine3d.js?v=canvas-22:157",
+        "selfMs": 100.887
+      },
+      {
+        "frame": " game.js?v=canvas-22:269",
+        "selfMs": 100.044
+      },
+      {
+        "frame": "lineTo :-1",
+        "selfMs": 92.244
+      },
+      {
+        "frame": "vehicle game.js?v=canvas-22:166",
+        "selfMs": 87.352
+      }
+    ],
+    "after": [
+      {
+        "frame": "(program) :-1",
+        "selfMs": 3269.781
+      },
+      {
+        "frame": "updateTraffic engine3d.js?v=spatial-24:218",
+        "selfMs": 1038.835
+      },
+      {
+        "frame": "stepPhysics engine3d.js?v=spatial-24:267",
+        "selfMs": 675.059
+      },
+      {
+        "frame": " :-1",
+        "selfMs": 519.978
+      },
+      {
+        "frame": "near engine3d.js?v=spatial-24:155",
+        "selfMs": 516.178
+      },
+      {
+        "frame": "reset engine3d.js?v=spatial-24:146",
+        "selfMs": 364.07
+      },
+      {
+        "frame": "scene software.js?v=spatial-24:165",
+        "selfMs": 321.2
+      },
+      {
+        "frame": "collisionShape engine3d.js?v=spatial-24:127",
+        "selfMs": 290.484
+      },
+      {
+        "frame": "draw software.js?v=spatial-24:275",
+        "selfMs": 281.2
+      },
+      {
+        "frame": "fill :-1",
+        "selfMs": 262.003
+      },
+      {
+        "frame": "near spatial.js?v=spatial-24:9",
+        "selfMs": 203.028
+      },
+      {
+        "frame": "buildingHit engine3d.js?v=spatial-24:130",
+        "selfMs": 176.443
+      },
+      {
+        "frame": "sweptClear highway.js?v=spatial-24:46",
+        "selfMs": 176.297
+      },
+      {
+        "frame": " game.js?v=spatial-24:190",
+        "selfMs": 166.221
+      },
+      {
+        "frame": "carHit engine3d.js?v=spatial-24:128",
+        "selfMs": 161.233
+      },
+      {
+        "frame": "step game.js?v=spatial-24:53",
+        "selfMs": 150.542
+      },
+      {
+        "frame": "upload software.js?v=spatial-24:95",
+        "selfMs": 148.125
+      },
+      {
+        "frame": "trafficPoseClear engine3d.js?v=spatial-24:205",
+        "selfMs": 135.258
+      },
+      {
+        "frame": "render game.js?v=spatial-24:191",
+        "selfMs": 134.368
+      },
+      {
+        "frame": "(garbage collector) :-1",
+        "selfMs": 131.778
+      },
+      {
+        "frame": " game.js?v=spatial-24:269",
+        "selfMs": 98.676
+      },
+      {
+        "frame": "highway engine3d.js?v=spatial-24:158",
+        "selfMs": 98.401
+      },
+      {
+        "frame": "lineTo :-1",
+        "selfMs": 96.586
+      },
+      {
+        "frame": "bend highway.js?v=spatial-24:5",
+        "selfMs": 93.235
+      },
+      {
+        "frame": " game.js?v=spatial-24:239",
+        "selfMs": 93.159
+      }
+    ]
+  }
+}

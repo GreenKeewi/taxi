@@ -1,0 +1,490 @@
+{
+  "passed": true,
+  "wallSeconds": 12.539,
+  "simulationSeconds": 9.400000000000107,
+  "normalTraffic": 96,
+  "initialCar": {
+    "x": 796.5,
+    "y": 1185,
+    "a": 0,
+    "speed": 0,
+    "steer": 0,
+    "kind": "taxi",
+    "length": 44,
+    "width": 22,
+    "speedKmh": 0,
+    "forwardSpeedKmh": 0,
+    "lateralAccelerationMps2": 0,
+    "longitudinalAccelerationMps2": 0,
+    "yawRate": 0,
+    "steerAngle": 0,
+    "engineLoad": 0,
+    "tireSlip": 0,
+    "engineRpm": 780,
+    "gear": 1,
+    "roadSample": {
+      "x": 796.5,
+      "z": 1185,
+      "height": 0,
+      "grade": 0,
+      "pitch": 0,
+      "forward": {
+        "x": 1,
+        "y": 0,
+        "z": 0
+      },
+      "gradient": {
+        "x": 0,
+        "z": 0
+      },
+      "layer": "ground",
+      "rampIndex": null,
+      "distanceAlong": 0,
+      "lateralDistance": 0,
+      "onRoad": true
+    },
+    "height": 0,
+    "roadLayer": "ground",
+    "roadPitch": 0,
+    "navigationTransfer": null,
+    "throttle": 0,
+    "brake": 0,
+    "gearShift": 0
+  },
+  "finalCar": {
+    "x": 954.1876215249019,
+    "y": 1240.0177517896414,
+    "a": 0.0008822460750648327,
+    "speed": 0,
+    "steer": 0,
+    "kind": "taxi",
+    "length": 44,
+    "width": 22,
+    "speedKmh": 0,
+    "forwardSpeedKmh": 0,
+    "lateralAccelerationMps2": 0,
+    "longitudinalAccelerationMps2": 0,
+    "yawRate": 0,
+    "steerAngle": 0,
+    "engineLoad": 1.8516587346460728e-7,
+    "tireSlip": 0,
+    "engineRpm": 780.0003159589356,
+    "gear": 1,
+    "roadSample": {
+      "x": 954.1876215249019,
+      "z": 1240.0177517896414,
+      "height": 0,
+      "grade": 0,
+      "pitch": 0,
+      "forward": {
+        "x": 1,
+        "y": 0,
+        "z": 0
+      },
+      "gradient": {
+        "x": 0,
+        "z": 0
+      },
+      "layer": "ground",
+      "rampIndex": null,
+      "distanceAlong": 0,
+      "lateralDistance": 0,
+      "onRoad": true
+    },
+    "height": 0,
+    "roadLayer": "ground",
+    "roadPitch": 0,
+    "navigationTransfer": null,
+    "throttle": 0.000004487005942975569,
+    "brake": 0.9999999999889949,
+    "gearShift": 0
+  },
+  "stats": {
+    "collisions": 0,
+    "redLights": 0,
+    "rightOnRed": 0,
+    "pickups": 1,
+    "deliveries": 0,
+    "missed": 0
+  },
+  "journey": {
+    "length": 37748.42127837378,
+    "highwayLength": 25070.362677634428,
+    "rampLength": 5965.393537529039,
+    "estimatedSeconds": 306.9921765532027,
+    "nextExit": {
+      "city": "Oshawa",
+      "number": 3,
+      "rampIndex": 11,
+      "distance": 30295.972405519497
+    }
+  },
+  "errors": [],
+  "keyEvents": [
+    {
+      "time": 0.2833333333333334,
+      "key": "w",
+      "down": true
+    },
+    {
+      "time": 0.2833333333333334,
+      "key": "d",
+      "down": true
+    },
+    {
+      "time": 0.6000000000000003,
+      "key": "d",
+      "down": false
+    },
+    {
+      "time": 1.1166666666666651,
+      "key": "d",
+      "down": true
+    },
+    {
+      "time": 1.3666666666666643,
+      "key": "w",
+      "down": false
+    },
+    {
+      "time": 1.3666666666666643,
+      "key": "d",
+      "down": false
+    },
+    {
+      "time": 1.3666666666666643,
+      "key": " ",
+      "down": true
+    },
+    {
+      "time": 1.799999999999996,
+      "key": " ",
+      "down": false
+    },
+    {
+      "time": 1.799999999999996,
+      "key": "w",
+      "down": true
+    },
+    {
+      "time": 1.799999999999996,
+      "key": "d",
+      "down": true
+    },
+    {
+      "time": 2.1333333333333284,
+      "key": "d",
+      "down": false
+    },
+    {
+      "time": 2.2166666666666615,
+      "key": "d",
+      "down": true
+    },
+    {
+      "time": 2.3499999999999943,
+      "key": "w",
+      "down": false
+    },
+    {
+      "time": 2.533333333333327,
+      "key": "d",
+      "down": false
+    },
+    {
+      "time": 2.533333333333327,
+      "key": " ",
+      "down": true
+    },
+    {
+      "time": 2.61666666666666,
+      "key": " ",
+      "down": false
+    },
+    {
+      "time": 2.61666666666666,
+      "key": "w",
+      "down": true
+    },
+    {
+      "time": 2.7999999999999927,
+      "key": "d",
+      "down": true
+    },
+    {
+      "time": 2.966666666666659,
+      "key": "w",
+      "down": false
+    },
+    {
+      "time": 3.1999999999999913,
+      "key": "d",
+      "down": false
+    },
+    {
+      "time": 3.3999999999999906,
+      "key": "w",
+      "down": true
+    },
+    {
+      "time": 3.3999999999999906,
+      "key": "d",
+      "down": true
+    },
+    {
+      "time": 3.5666666666666567,
+      "key": "w",
+      "down": false
+    },
+    {
+      "time": 3.7499999999999893,
+      "key": "d",
+      "down": false
+    },
+    {
+      "time": 3.9166666666666554,
+      "key": "d",
+      "down": true
+    },
+    {
+      "time": 4.016666666666656,
+      "key": "w",
+      "down": true
+    },
+    {
+      "time": 4.149999999999996,
+      "key": "d",
+      "down": false
+    },
+    {
+      "time": 4.149999999999996,
+      "key": "w",
+      "down": false
+    },
+    {
+      "time": 4.149999999999996,
+      "key": "a",
+      "down": true
+    },
+    {
+      "time": 4.333333333333338,
+      "key": "a",
+      "down": false
+    },
+    {
+      "time": 4.333333333333338,
+      "key": "d",
+      "down": true
+    },
+    {
+      "time": 4.600000000000018,
+      "key": "d",
+      "down": false
+    },
+    {
+      "time": 4.750000000000026,
+      "key": "d",
+      "down": true
+    },
+    {
+      "time": 4.916666666666701,
+      "key": "d",
+      "down": false
+    },
+    {
+      "time": 4.916666666666701,
+      "key": "w",
+      "down": true
+    },
+    {
+      "time": 5.150000000000046,
+      "key": "w",
+      "down": false
+    },
+    {
+      "time": 5.150000000000046,
+      "key": "d",
+      "down": true
+    },
+    {
+      "time": 5.366666666666723,
+      "key": "d",
+      "down": false
+    },
+    {
+      "time": 5.366666666666723,
+      "key": "a",
+      "down": true
+    },
+    {
+      "time": 5.600000000000068,
+      "key": "a",
+      "down": false
+    },
+    {
+      "time": 5.600000000000068,
+      "key": "w",
+      "down": true
+    },
+    {
+      "time": 5.8166666666667455,
+      "key": "a",
+      "down": true
+    },
+    {
+      "time": 5.98333333333342,
+      "key": "w",
+      "down": false
+    },
+    {
+      "time": 5.98333333333342,
+      "key": " ",
+      "down": true
+    },
+    {
+      "time": 6.300000000000103,
+      "key": "a",
+      "down": false
+    },
+    {
+      "time": 6.300000000000103,
+      "key": " ",
+      "down": false
+    },
+    {
+      "time": 6.300000000000103,
+      "key": "w",
+      "down": true
+    },
+    {
+      "time": 6.300000000000103,
+      "key": "d",
+      "down": true
+    },
+    {
+      "time": 6.500000000000113,
+      "key": "d",
+      "down": false
+    },
+    {
+      "time": 6.500000000000113,
+      "key": "a",
+      "down": true
+    },
+    {
+      "time": 6.800000000000128,
+      "key": "w",
+      "down": false
+    },
+    {
+      "time": 6.800000000000128,
+      "key": "a",
+      "down": false
+    },
+    {
+      "time": 6.98333333333347,
+      "key": " ",
+      "down": true
+    },
+    {
+      "time": 6.98333333333347,
+      "key": "a",
+      "down": true
+    },
+    {
+      "time": 7.11666666666681,
+      "key": " ",
+      "down": false
+    },
+    {
+      "time": 7.11666666666681,
+      "key": "w",
+      "down": true
+    },
+    {
+      "time": 7.233333333333483,
+      "key": "a",
+      "down": false
+    },
+    {
+      "time": 7.233333333333483,
+      "key": "d",
+      "down": true
+    },
+    {
+      "time": 7.366666666666823,
+      "key": "d",
+      "down": false
+    },
+    {
+      "time": 7.366666666666823,
+      "key": "a",
+      "down": true
+    },
+    {
+      "time": 7.5333333333334975,
+      "key": "w",
+      "down": false
+    },
+    {
+      "time": 7.5333333333334975,
+      "key": "a",
+      "down": false
+    },
+    {
+      "time": 7.616666666666835,
+      "key": "a",
+      "down": true
+    },
+    {
+      "time": 7.7666666666668425,
+      "key": "a",
+      "down": false
+    },
+    {
+      "time": 7.7666666666668425,
+      "key": " ",
+      "down": true
+    },
+    {
+      "time": 7.7666666666668425,
+      "key": "d",
+      "down": true
+    },
+    {
+      "time": 7.85000000000018,
+      "key": " ",
+      "down": false
+    },
+    {
+      "time": 7.85000000000018,
+      "key": "d",
+      "down": false
+    },
+    {
+      "time": 7.85000000000018,
+      "key": "w",
+      "down": true
+    },
+    {
+      "time": 7.85000000000018,
+      "key": "a",
+      "down": true
+    },
+    {
+      "time": 8.000000000000187,
+      "key": "w",
+      "down": false
+    },
+    {
+      "time": 8.000000000000187,
+      "key": "a",
+      "down": false
+    },
+    {
+      "time": 8.000000000000187,
+      "key": " ",
+      "down": true
+    }
+  ]
+}

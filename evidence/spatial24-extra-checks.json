@@ -1,0 +1,5 @@
+{
+  "highway14": "PASS shared rail openings, taxi/bus wheel support, all lane seams, exact hull, legal transfers and legacy save migration",
+  "collision17": "PASS 100000 car pairs and 100000 obstacles exactly equal to published SAT",
+  "gps20": "PASS 10 reported-pose routes; 172 live-style reroutes; 56 whole-highway sweeps"
+}

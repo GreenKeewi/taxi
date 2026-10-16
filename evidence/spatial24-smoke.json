@@ -1,0 +1,30 @@
+{
+  "method": "native keyboard; normal animation; no placement or game-state writes",
+  "results": [
+    {
+      "name": "taxi",
+      "url": "http://127.0.0.1:8150/",
+      "status": 200,
+      "vehicle": "taxi",
+      "traffic": 96,
+      "startMinutes": 960,
+      "errors": []
+    },
+    {
+      "name": "mirror-bus",
+      "url": "http://127.0.0.1:8138/3d/",
+      "status": 200,
+      "vehicle": "bus",
+      "traffic": 200,
+      "startMinutes": 1080,
+      "bus": "900",
+      "errors": []
+    },
+    {
+      "name": "original2D-root",
+      "status": 200,
+      "title": "Toronto Taxi · Endless City Driving",
+      "errors": []
+    }
+  ]
+}

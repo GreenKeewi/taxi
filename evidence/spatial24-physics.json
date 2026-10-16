@@ -1,0 +1,77 @@
+{
+  "method": "two independently loaded Game modules; identical inputs;120Hz;exact full snapshots each second; no rendering",
+  "results": [
+    {
+      "seed": 8427,
+      "traffic": "normal",
+      "vehicle": "taxi",
+      "seconds": 15,
+      "comparisons": 15,
+      "cars": 96,
+      "collisions": 1
+    },
+    {
+      "seed": 8427,
+      "traffic": "normal",
+      "vehicle": "bus",
+      "seconds": 15,
+      "comparisons": 15,
+      "cars": 96,
+      "collisions": 2
+    },
+    {
+      "seed": 8427,
+      "traffic": "gridlock",
+      "vehicle": "taxi",
+      "seconds": 15,
+      "comparisons": 15,
+      "cars": 224,
+      "collisions": 1
+    },
+    {
+      "seed": 8427,
+      "traffic": "gridlock",
+      "vehicle": "bus",
+      "seconds": 15,
+      "comparisons": 15,
+      "cars": 224,
+      "collisions": 2
+    },
+    {
+      "seed": 1729,
+      "traffic": "normal",
+      "vehicle": "taxi",
+      "seconds": 15,
+      "comparisons": 15,
+      "cars": 96,
+      "collisions": 1
+    },
+    {
+      "seed": 1729,
+      "traffic": "normal",
+      "vehicle": "bus",
+      "seconds": 15,
+      "comparisons": 15,
+      "cars": 96,
+      "collisions": 1
+    },
+    {
+      "seed": 1729,
+      "traffic": "gridlock",
+      "vehicle": "taxi",
+      "seconds": 15,
+      "comparisons": 15,
+      "cars": 224,
+      "collisions": 1
+    },
+    {
+      "seed": 1729,
+      "traffic": "gridlock",
+      "vehicle": "bus",
+      "seconds": 15,
+      "comparisons": 15,
+      "cars": 224,
+      "collisions": 1
+    }
+  ]
+}

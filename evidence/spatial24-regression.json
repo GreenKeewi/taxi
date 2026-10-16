@@ -1,0 +1,44 @@
+{
+  "method": "brute-force exact contact against all rectangles; includes both bodies,rotation,height,near/far poses; no physical hull changes",
+  "results": [
+    {
+      "key": "highway",
+      "cases": 16000,
+      "hits": 1779,
+      "queries": 16000,
+      "cacheHits": 612,
+      "candidates": 198089,
+      "objects": 6900,
+      "cacheEntries": 256
+    },
+    {
+      "key": "static",
+      "cases": 16000,
+      "hits": 6841,
+      "queries": 16000,
+      "cacheHits": 859,
+      "candidates": 20626,
+      "objects": 349,
+      "cacheEntries": 256
+    },
+    {
+      "scenario": "order,list length,identity and explicit geometry invalidation",
+      "ok": true
+    },
+    {
+      "scenario": "whole-bus contact beyond legacy400unit x-bin boundary",
+      "legacyMissed": true,
+      "newMatchesExact": true,
+      "car": {
+        "x": 19197.08768085657,
+        "y": 3682.851293677363,
+        "a": 0.483175757881254,
+        "length": 82,
+        "width": 25,
+        "height": 65,
+        "kind": "bus"
+      },
+      "kind": "express/collector separator"
+    }
+  ]
+}

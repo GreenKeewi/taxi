@@ -1,6 +1,7 @@
 /* One road model for mesh, support, barrier contacts, traffic and navigation.
    World units = 0.1 m. Express lanes: 22/58; collectors: 116/152. */
 (function(root,factory){const api=factory();if(typeof module==='object'&&module.exports)module.exports=api;if(root)root.TaxiHighway=api;})(typeof globalThis!=='undefined'?globalThis:this,function(){'use strict';
+const Spatial=typeof module==='object'&&module.exports?require('./spatial.js'):globalThis.TaxiSpatial;
 const HALF=174,LANES=[22,58,116,152],clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 function bend(a,x){const t=clamp((x-a.start)/(a.end-a.start),0,1),u=Math.PI*4*t;return{offset:a.amplitude*(Math.cos(u)-1)*.5,slope:-a.amplitude*Math.PI*2/(a.end-a.start)*Math.sin(u)};}
 function widthAt(m,s){const d=Math.min(s-m.highwayStart,m.highwayEnd-s),t=clamp((500-d)/300,0,1);return HALF+26*t*t*(3-2*t);}
@@ -32,7 +33,7 @@ function configure(m,R){
  for(let station=m.highwayStart+300;station<m.highwayEnd-150;station+=550)for(const lateral of[-200,200]){const q=at(m,station,lateral);if(m.groundRoads.some(g=>R.groundRoadContains(g,q.x,q.y,15))||m.roadProfiles.some(p=>{const h=R.project(p,q.x,q.y);return h.distance<44;}))continue;const b={x:q.x-4,y:q.y-5,w:8,h:10,minHeight:0,maxHeight:59,kind:'bridge pier'};m.groundColliders.push(b);m.highwaySupports.push(b);}
  m.sharedHighway=true;return m;
 }
-function collidersNear(m,c){return m.highwayBarrierBins?.get(Math.floor(c.x/400))||[];}
+function collidersNear(m,c){return Spatial.rectanglesNear(m,'highway',[m.highwayBarriers||[]],c);}
 // Transfers must fit one connected opening, including the entire vehicle. Endpoint
 // tests alone can bridge two separate openings across a solid separator.
 function openings(m){const intervals=[{start:m.highwayStart,end:m.highwayStart+500},{start:m.highwayEnd-500,end:m.highwayEnd},...m.highwayTransfers].map(t=>({start:Math.max(m.highwayStart,t.start),end:Math.min(m.highwayEnd,t.end)})).sort((a,b)=>a.start-b.start),out=[];for(const t of intervals){const prev=out.at(-1);if(prev&&t.start<=prev.end)prev.end=Math.max(prev.end,t.end);else out.push({...t});}return out;}

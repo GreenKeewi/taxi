@@ -1,0 +1,105 @@
+{
+  "seed": 8427,
+  "dt": 0.008333333333333333,
+  "scope": "Public-state deterministic junction progress and live admission scenarios; every substep checks exact hull separation and continuous movement",
+  "passed": 14,
+  "failed": 0,
+  "results": [
+    {
+      "name": "taxi adjacent blocker clears after wrong-lane car reaches 185-unit hold",
+      "ok": true,
+      "player": "taxi",
+      "leftAtRelease": 185,
+      "elapsedMs": 217.90952299999998
+    },
+    {
+      "name": "bus adjacent blocker clears after wrong-lane car reaches 185-unit hold",
+      "ok": true,
+      "player": "bus",
+      "leftAtRelease": 185,
+      "elapsedMs": 177.84802399999998
+    },
+    {
+      "name": "taxi arriving in receiving lane revokes unused admission",
+      "ok": true,
+      "player": "taxi",
+      "elapsedMs": 117.27987999999999
+    },
+    {
+      "name": "bus arriving in receiving lane revokes unused admission",
+      "ok": true,
+      "player": "bus",
+      "elapsedMs": 93.05890199999999
+    },
+    {
+      "name": "moving receiving car merges into lane after admission, then queue drains",
+      "ok": true,
+      "receiver": 101,
+      "elapsedMs": 103.43241799999998
+    },
+    {
+      "name": "taxi holds admitted left-turn approach while conflicting straight flow resumes",
+      "ok": true,
+      "player": "taxi",
+      "owner": 100,
+      "challenger": 101,
+      "elapsedMs": 73.1107310000001
+    },
+    {
+      "name": "bus holds admitted left-turn approach while conflicting straight flow resumes",
+      "ok": true,
+      "player": "bus",
+      "owner": 100,
+      "challenger": 101,
+      "elapsedMs": 53.70286900000008
+    },
+    {
+      "name": "existing owner with mismatched reservation does not retain junction ownership",
+      "ok": true,
+      "owner": 100,
+      "elapsedMs": 54.799899000000096
+    },
+    {
+      "name": "live array owner with changed destination releases stale junction",
+      "ok": true,
+      "owner": 100,
+      "legacySave": false,
+      "elapsedMs": 34.87786600000004
+    },
+    {
+      "name": "saved numeric owner with changed destination releases stale junction",
+      "ok": true,
+      "owner": 100,
+      "legacySave": true,
+      "elapsedMs": 74.796292
+    },
+    {
+      "name": "active crossing restores missing ownership before conflicting admission",
+      "ok": true,
+      "crossing": 100,
+      "challenger": 101,
+      "elapsedMs": 140.17667499999993
+    },
+    {
+      "name": "legacy numeric reservation normalizes without losing valid owner",
+      "ok": true,
+      "representation": "legacy numeric",
+      "owner": 100,
+      "elapsedMs": 161.70201599999996
+    },
+    {
+      "name": "duplicate array reservation normalizes without losing valid owner",
+      "ok": true,
+      "representation": "duplicate array",
+      "owner": 100,
+      "elapsedMs": 194.27901399999996
+    },
+    {
+      "name": "orphan and highway owner entries cannot reserve a ground junction",
+      "ok": true,
+      "wrongKind": 100,
+      "orphan": 999999,
+      "elapsedMs": 128.70796199999995
+    }
+  ]
+}

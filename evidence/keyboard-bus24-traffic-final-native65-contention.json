@@ -1,0 +1,750 @@
+{
+  "method": "one initial pose; normal traffic; unmodified live director; trusted CDP key events; normal Canvas animation and 0.5-second UI GPS refresh",
+  "results": [
+    {
+      "vehicle": "bus",
+      "dir": 1,
+      "scenario": "interrupted",
+      "setup": {
+        "station": 5300,
+        "lateral": 98,
+        "time": 0,
+        "initialSpeedKmh": 64.8,
+        "initialTraffic": 96,
+        "earlyControl": [
+          {
+            "time": 0.35000000000000026,
+            "speedKmh": 63.43028501712433,
+            "station": 5362.356490019523,
+            "lateral": 98.05674445688285,
+            "a": -0.03412079484480997,
+            "steer": 0.30000000000000016,
+            "collisions": 0
+          },
+          {
+            "time": 0.6666666666666667,
+            "speedKmh": 62.92021160661409,
+            "station": 5417.693203509759,
+            "lateral": 100.10434516245735,
+            "a": 0.022361195724754663,
+            "steer": 0,
+            "collisions": 0
+          },
+          {
+            "time": 0.7666666666666664,
+            "speedKmh": 63.35662020691621,
+            "station": 5435.195352397362,
+            "lateral": 101.30563349287719,
+            "a": 0.029706033730991826,
+            "steer": 0,
+            "collisions": 0
+          },
+          {
+            "time": 0.8499999999999994,
+            "speedKmh": 63.78390152918626,
+            "station": 5449.87750690682,
+            "lateral": 102.38195527850128,
+            "a": 0.03270742748440909,
+            "steer": 0,
+            "collisions": 0
+          },
+          {
+            "time": 0.9333333333333325,
+            "speedKmh": 64.23786635910066,
+            "station": 5464.660093951432,
+            "lateral": 103.49560604446454,
+            "a": 0.03428841731229036,
+            "steer": 0,
+            "collisions": 0
+          },
+          {
+            "time": 0.9666666666666657,
+            "speedKmh": 64.42351609115136,
+            "station": 5470.6025946217715,
+            "lateral": 103.94790192856107,
+            "a": 0.034686425464026116,
+            "steer": 0,
+            "collisions": 0
+          },
+          {
+            "time": 1.0499999999999987,
+            "speedKmh": 64.89312013840943,
+            "station": 5485.534331425194,
+            "lateral": 105.0904587140248,
+            "a": 0.035330858235481384,
+            "steer": 0,
+            "collisions": 0
+          },
+          {
+            "time": 1.0999999999999985,
+            "speedKmh": 65.17706335894661,
+            "station": 5494.545726222418,
+            "lateral": 105.78221679886543,
+            "a": 0.035559880067313566,
+            "steer": 0,
+            "collisions": 0
+          },
+          {
+            "time": 1.1333333333333317,
+            "speedKmh": 65.36683589133081,
+            "station": 5500.575289446159,
+            "lateral": 106.24544252168397,
+            "a": 0.03567031441488606,
+            "steer": 0,
+            "collisions": 0
+          },
+          {
+            "time": 1.166666666666665,
+            "speedKmh": 65.23388784761661,
+            "station": 5506.607558798988,
+            "lateral": 106.70895833610096,
+            "a": 0.035755771211746806,
+            "steer": 0,
+            "collisions": 0
+          },
+          {
+            "time": 1.2333333333333314,
+            "speedKmh": 64.96883432984376,
+            "station": 5518.635601192109,
+            "lateral": 107.63292490054447,
+            "a": 0.03587307166346087,
+            "steer": 0,
+            "collisions": 0
+          }
+        ],
+        "earlyRightPulseTargetSimMs": 240,
+        "controlledPhaseSimMs": 1200
+      },
+      "sourceSHA256": {
+        "game.js": "00aaba1ac9908bdd0eec4fcee331dfefbd6187a1627a58310bc3e0e764ee3a26",
+        "software.js": "ab2afdc6ac94952e330a30dc6350a6329eaab79d86f481e7a64c4a848fe2184a",
+        "engine3d.js": "1abfe02d66265d0a940fdc33d82fa4c426de7d52ecafe54930a0d98119b224f7",
+        "highway.js": "6e12bc45e9c82f54b0c592900cbd7887f69079dab05119539674108e905ea47e",
+        "spatial.js": "d26ca959365d700b0291f36afeb43fcb12a506ad9498c84cf77b8d2523654f83"
+      },
+      "seconds": 8.950000000000133,
+      "collisions": 0,
+      "endStation": 6900.758717837864,
+      "endLateral": 150.4661739344392,
+      "maxKmh": 65.0029125924102,
+      "plans": [
+        5486
+      ],
+      "traffic": 96,
+      "render": {
+        "adaptiveLevel": 1,
+        "worldPixelWidth": 600,
+        "trafficDensity": {
+          "target": 96,
+          "nearby": 5,
+          "close": 2,
+          "movingNearby": 5,
+          "queuedNearby": 0,
+          "stoppedNearby": 0,
+          "spawned": 2,
+          "relocated": 44,
+          "lastMoves": [
+            {
+              "from": {
+                "x": 28572.381497537717,
+                "y": 1940
+              },
+              "to": {
+                "x": 912.6537026269361,
+                "y": 706
+              },
+              "time": 0,
+              "initial": true,
+              "hiddenFrom": true,
+              "hiddenTo": true
+            },
+            {
+              "from": {
+                "x": 28380,
+                "y": 2218.1562014552765
+              },
+              "to": {
+                "x": 1633,
+                "y": 804.1645982463378
+              },
+              "time": 0,
+              "initial": true,
+              "hiddenFrom": true,
+              "hiddenTo": true
+            },
+            {
+              "from": {
+                "x": 28380,
+                "y": 1194.4499168451875
+              },
+              "to": {
+                "x": 1059.26894427347,
+                "y": 670
+              },
+              "time": 0,
+              "initial": true,
+              "hiddenFrom": true,
+              "hiddenTo": true
+            },
+            {
+              "from": {
+                "x": 27800,
+                "y": 2193.043389120139
+              },
+              "to": {
+                "x": 686,
+                "y": 1374.0672857735772
+              },
+              "time": 0,
+              "initial": true,
+              "hiddenFrom": true,
+              "hiddenTo": true
+            },
+            {
+              "from": {
+                "x": 27466.932782314252,
+                "y": 820
+              },
+              "to": {
+                "x": 491.5786210298538,
+                "y": 2038
+              },
+              "time": 0,
+              "initial": true,
+              "hiddenFrom": true,
+              "hiddenTo": true
+            },
+            {
+              "from": {
+                "x": 27180,
+                "y": 1063.0622089025564
+              },
+              "to": {
+                "x": 798,
+                "y": 1801.3823522161692
+              },
+              "time": 0,
+              "initial": true,
+              "hiddenFrom": true,
+              "hiddenTo": true
+            },
+            {
+              "from": {
+                "x": 27054.856104131322,
+                "y": 200.00000000000003
+              },
+              "to": {
+                "x": 505.24195632571355,
+                "y": 2074
+              },
+              "time": 0,
+              "initial": true,
+              "hiddenFrom": true,
+              "hiddenTo": true
+            },
+            {
+              "from": {
+                "x": 26970.867010864895,
+                "y": 3016
+              },
+              "to": {
+                "x": 1422.1351890973747,
+                "y": 1109
+              },
+              "time": 0,
+              "initial": true,
+              "hiddenFrom": true,
+              "hiddenTo": true
+            },
+            {
+              "from": {
+                "x": 26676,
+                "y": 573.5290687647648
+              },
+              "to": {
+                "x": 1191,
+                "y": 837.5167810909916
+              },
+              "time": 0,
+              "initial": true,
+              "hiddenFrom": true,
+              "hiddenTo": true
+            },
+            {
+              "from": {
+                "x": 26600,
+                "y": 2820.8711504703388
+              },
+              "to": {
+                "x": 924.7169742910191,
+                "y": 594
+              },
+              "time": 0,
+              "initial": true,
+              "hiddenFrom": true,
+              "hiddenTo": true
+            },
+            {
+              "from": {
+                "x": 26600,
+                "y": 2608.969938158989
+              },
+              "to": {
+                "x": 686,
+                "y": 365.46823564590886
+              },
+              "time": 0,
+              "initial": true,
+              "hiddenFrom": true,
+              "hiddenTo": true
+            },
+            {
+              "from": {
+                "x": 16376,
+                "y": 1104.5877574034967
+              },
+              "to": {
+                "x": 1372.521404792089,
+                "y": 706
+              },
+              "time": 0,
+              "initial": true,
+              "hiddenFrom": true,
+              "hiddenTo": true
+            }
+          ]
+        },
+        "fps": 24,
+        "frameMs": 8.8761904761679,
+        "visibleChunks": 32,
+        "totalChunks": 1932
+      },
+      "samples": [
+        {
+          "time": 1.249999999999998,
+          "station": 5521.6350322920935,
+          "lateral": 107.86321107137651,
+          "plan": 5485.534331425194,
+          "speed": 180.28540491259884
+        },
+        {
+          "time": 2.0833333333333286,
+          "station": 5670.708406737972,
+          "lateral": 114.41295822738962,
+          "plan": 5485.534331425194,
+          "speed": 179.34976863766101
+        },
+        {
+          "time": 2.8833333333333258,
+          "station": 5813.980433802631,
+          "lateral": 116.1624481894035,
+          "plan": 5485.534331425194,
+          "speed": 178.12667802998666
+        },
+        {
+          "time": 3.6666666666666563,
+          "station": 5954.336567394282,
+          "lateral": 118.56248911161416,
+          "plan": 5485.534331425194,
+          "speed": 179.5529381226917
+        },
+        {
+          "time": 4.433333333333343,
+          "station": 6091.8615732737135,
+          "lateral": 120.1251045731058,
+          "plan": 5485.534331425194,
+          "speed": 178.5090281761856
+        },
+        {
+          "time": 5.166666666666713,
+          "station": 6223.165337839902,
+          "lateral": 125.34203499007575,
+          "plan": 5485.534331425194,
+          "speed": 178.72344367947292
+        },
+        {
+          "time": 6.016666666666755,
+          "station": 6374.653232007552,
+          "lateral": 143.61831373655258,
+          "plan": 5485.534331425194,
+          "speed": 178.4793429092262
+        },
+        {
+          "time": 6.85000000000013,
+          "station": 6523.6168092617645,
+          "lateral": 157.449034125195,
+          "speed": 179.34372507308578
+        },
+        {
+          "time": 8.033333333333518,
+          "station": 6736.286265611039,
+          "lateral": 151.35760437767414,
+          "speed": 178.0096447799322
+        }
+      ]
+    },
+    {
+      "vehicle": "bus",
+      "dir": -1,
+      "scenario": "interrupted",
+      "setup": {
+        "station": 4400,
+        "lateral": -98,
+        "time": 0,
+        "initialSpeedKmh": 64.8,
+        "initialTraffic": 96,
+        "earlyControl": [
+          {
+            "time": 0.15,
+            "speedKmh": 64.20929145004975,
+            "station": 4373.15557274371,
+            "lateral": -98.0088710206198,
+            "a": 3.0921796336283127,
+            "steer": 0.15000000000000002,
+            "collisions": 0
+          },
+          {
+            "time": 0.35000000000000026,
+            "speedKmh": 64.14128608833055,
+            "station": 4337.6593496077285,
+            "lateral": -98.47867142970104,
+            "a": 3.119827992102347,
+            "steer": 0.5100000000000003,
+            "collisions": 0
+          },
+          {
+            "time": 0.4666666666666673,
+            "speedKmh": 64.65692270376427,
+            "station": 4316.845895105481,
+            "lateral": -99.34408725417747,
+            "a": -3.1390302206549165,
+            "steer": 0.3600000000000002,
+            "collisions": 0
+          },
+          {
+            "time": 0.5166666666666673,
+            "speedKmh": 64.9122124805039,
+            "station": 4307.878715759451,
+            "lateral": -99.87836805970444,
+            "a": -3.1280065509515,
+            "steer": 0.18000000000000013,
+            "collisions": 0
+          },
+          {
+            "time": 0.5333333333333339,
+            "speedKmh": 64.99991803756548,
+            "station": 4304.883057279075,
+            "lateral": -100.07893843599936,
+            "a": -3.124441113158951,
+            "steer": 0.12000000000000013,
+            "collisions": 0
+          },
+          {
+            "time": 0.6000000000000003,
+            "speedKmh": 65.35963714637037,
+            "station": 4292.866030569748,
+            "lateral": -100.97888481548803,
+            "a": -3.113164803649963,
+            "steer": 0,
+            "collisions": 0
+          },
+          {
+            "time": 0.7499999999999998,
+            "speedKmh": 65.39487721201041,
+            "station": 4265.698556656674,
+            "lateral": -103.34570448523488,
+            "a": -3.1015685463220155,
+            "steer": 0,
+            "collisions": 0
+          },
+          {
+            "time": 0.8333333333333328,
+            "speedKmh": 65.06288601293126,
+            "station": 4250.688372092466,
+            "lateral": -104.74680666226541,
+            "a": -3.0990399801846444,
+            "steer": 0,
+            "collisions": 0
+          },
+          {
+            "time": 0.866666666666666,
+            "speedKmh": 64.93058024678967,
+            "station": 4244.706452084016,
+            "lateral": -105.31418943102537,
+            "a": -3.098403423315568,
+            "steer": 0,
+            "collisions": 0
+          },
+          {
+            "time": 0.8999999999999992,
+            "speedKmh": 64.7985534166338,
+            "station": 4238.736999968843,
+            "lateral": -105.88386851960688,
+            "a": -3.097910840054593,
+            "steer": 0,
+            "collisions": 0
+          },
+          {
+            "time": 1.033333333333332,
+            "speedKmh": 64.90503185077799,
+            "station": 4214.901208077549,
+            "lateral": -108.18033477687129,
+            "a": -3.0968298342638207,
+            "steer": 0,
+            "collisions": 0
+          },
+          {
+            "time": 1.3666666666666643,
+            "speedKmh": 66.57280616353819,
+            "station": 4154.455114990361,
+            "lateral": -114.0605858616489,
+            "a": -3.0962720665061916,
+            "steer": 0,
+            "collisions": 0
+          }
+        ],
+        "earlyRightPulseTargetSimMs": 240,
+        "controlledPhaseSimMs": 1200
+      },
+      "sourceSHA256": {
+        "game.js": "00aaba1ac9908bdd0eec4fcee331dfefbd6187a1627a58310bc3e0e764ee3a26",
+        "software.js": "ab2afdc6ac94952e330a30dc6350a6329eaab79d86f481e7a64c4a848fe2184a",
+        "engine3d.js": "1abfe02d66265d0a940fdc33d82fa4c426de7d52ecafe54930a0d98119b224f7",
+        "highway.js": "6e12bc45e9c82f54b0c592900cbd7887f69079dab05119539674108e905ea47e",
+        "spatial.js": "d26ca959365d700b0291f36afeb43fcb12a506ad9498c84cf77b8d2523654f83"
+      },
+      "seconds": 9.033333333333461,
+      "collisions": 0,
+      "endStation": 2785.7617084451476,
+      "endLateral": -156.11773724794654,
+      "maxKmh": 66.38530005253567,
+      "plans": [
+        4397
+      ],
+      "traffic": 96,
+      "render": {
+        "adaptiveLevel": 2,
+        "worldPixelWidth": 460,
+        "trafficDensity": {
+          "target": 96,
+          "nearby": 12,
+          "close": 6,
+          "movingNearby": 12,
+          "queuedNearby": 0,
+          "stoppedNearby": 0,
+          "spawned": 2,
+          "relocated": 71,
+          "lastMoves": [
+            {
+              "from": {
+                "x": 28572.381497537717,
+                "y": 1940
+              },
+              "to": {
+                "x": 912.6537026269361,
+                "y": 706
+              },
+              "time": 0,
+              "initial": true,
+              "hiddenFrom": true,
+              "hiddenTo": true
+            },
+            {
+              "from": {
+                "x": 28380,
+                "y": 2218.1562014552765
+              },
+              "to": {
+                "x": 1633,
+                "y": 804.1645982463378
+              },
+              "time": 0,
+              "initial": true,
+              "hiddenFrom": true,
+              "hiddenTo": true
+            },
+            {
+              "from": {
+                "x": 28380,
+                "y": 1194.4499168451875
+              },
+              "to": {
+                "x": 1059.26894427347,
+                "y": 670
+              },
+              "time": 0,
+              "initial": true,
+              "hiddenFrom": true,
+              "hiddenTo": true
+            },
+            {
+              "from": {
+                "x": 27800,
+                "y": 2193.043389120139
+              },
+              "to": {
+                "x": 686,
+                "y": 1374.0672857735772
+              },
+              "time": 0,
+              "initial": true,
+              "hiddenFrom": true,
+              "hiddenTo": true
+            },
+            {
+              "from": {
+                "x": 27466.932782314252,
+                "y": 820
+              },
+              "to": {
+                "x": 491.5786210298538,
+                "y": 2038
+              },
+              "time": 0,
+              "initial": true,
+              "hiddenFrom": true,
+              "hiddenTo": true
+            },
+            {
+              "from": {
+                "x": 27180,
+                "y": 1063.0622089025564
+              },
+              "to": {
+                "x": 798,
+                "y": 1801.3823522161692
+              },
+              "time": 0,
+              "initial": true,
+              "hiddenFrom": true,
+              "hiddenTo": true
+            },
+            {
+              "from": {
+                "x": 27054.856104131322,
+                "y": 200.00000000000003
+              },
+              "to": {
+                "x": 505.24195632571355,
+                "y": 2074
+              },
+              "time": 0,
+              "initial": true,
+              "hiddenFrom": true,
+              "hiddenTo": true
+            },
+            {
+              "from": {
+                "x": 26970.867010864895,
+                "y": 3016
+              },
+              "to": {
+                "x": 1422.1351890973747,
+                "y": 1109
+              },
+              "time": 0,
+              "initial": true,
+              "hiddenFrom": true,
+              "hiddenTo": true
+            },
+            {
+              "from": {
+                "x": 26676,
+                "y": 573.5290687647648
+              },
+              "to": {
+                "x": 1191,
+                "y": 837.5167810909916
+              },
+              "time": 0,
+              "initial": true,
+              "hiddenFrom": true,
+              "hiddenTo": true
+            },
+            {
+              "from": {
+                "x": 26600,
+                "y": 2820.8711504703388
+              },
+              "to": {
+                "x": 924.7169742910191,
+                "y": 594
+              },
+              "time": 0,
+              "initial": true,
+              "hiddenFrom": true,
+              "hiddenTo": true
+            },
+            {
+              "from": {
+                "x": 26600,
+                "y": 2608.969938158989
+              },
+              "to": {
+                "x": 686,
+                "y": 365.46823564590886
+              },
+              "time": 0,
+              "initial": true,
+              "hiddenFrom": true,
+              "hiddenTo": true
+            },
+            {
+              "from": {
+                "x": 16376,
+                "y": 1104.5877574034967
+              },
+              "to": {
+                "x": 1372.521404792089,
+                "y": 706
+              },
+              "time": 0,
+              "initial": true,
+              "hiddenFrom": true,
+              "hiddenTo": true
+            }
+          ]
+        },
+        "fps": 17,
+        "frameMs": 19.507500000003105,
+        "visibleChunks": 39,
+        "totalChunks": 1932
+      },
+      "samples": [
+        {
+          "time": 1.6499999999999966,
+          "station": 4102.213197509365,
+          "lateral": -119.15803029341984,
+          "plan": 4396.993638117771,
+          "speed": 184.40361125704354
+        },
+        {
+          "time": 3.383333333333324,
+          "station": 3793.852962625587,
+          "lateral": -132.62501869452095,
+          "plan": 4396.993638117771,
+          "speed": 179.50269841846486
+        },
+        {
+          "time": 5.500000000000063,
+          "station": 3417.6697367313045,
+          "lateral": -155.28668138411473,
+          "speed": 179.34289341162332
+        },
+        {
+          "time": 6.98333333333347,
+          "station": 3152.8382957262497,
+          "lateral": -149.27786690642336,
+          "speed": 179.95091768222323
+        },
+        {
+          "time": 8.53333333333349,
+          "station": 2875.0581865893582,
+          "lateral": -154.27655413227976,
+          "speed": 177.71233479487793
+        }
+      ]
+    }
+  ],
+  "errors": []
+}
