@@ -1,0 +1,27 @@
+{
+  "commit": "4042f3b044f4e0a87d7971ca5ba5ad59181766df",
+  "cases": [
+    {
+      "station": 3600,
+      "lateral": 58,
+      "contact": {
+        "s": 3863.836670073117,
+        "lateral": 74.22830374051956,
+        "dx": 0.998657895938078,
+        "dz": -0.051791957681970036,
+        "kind": "express/collector separator"
+      }
+    },
+    {
+      "station": 4760,
+      "lateral": 85.78,
+      "contact": {
+        "s": 5428.012715171853,
+        "lateral": 85.78246899396565,
+        "dx": 0.9991165431490403,
+        "dz": -0.042025387635476294,
+        "kind": "express/collector separator"
+      }
+    }
+  ]
+}

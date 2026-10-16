@@ -1,0 +1,114 @@
+[
+  {
+    "vehicle": "taxi",
+    "dir": -1,
+    "lane": 22,
+    "seconds": 24.3,
+    "collisions": 0
+  },
+  {
+    "vehicle": "taxi",
+    "dir": -1,
+    "lane": 58,
+    "seconds": 25.25,
+    "collisions": 0
+  },
+  {
+    "vehicle": "taxi",
+    "dir": -1,
+    "lane": 116,
+    "seconds": 27.916666666666668,
+    "collisions": 0
+  },
+  {
+    "vehicle": "taxi",
+    "dir": -1,
+    "lane": 152,
+    "seconds": 27.9,
+    "collisions": 0
+  },
+  {
+    "vehicle": "taxi",
+    "dir": 1,
+    "lane": 22,
+    "seconds": 24.316666666666666,
+    "collisions": 0
+  },
+  {
+    "vehicle": "taxi",
+    "dir": 1,
+    "lane": 58,
+    "seconds": 25.266666666666666,
+    "collisions": 0
+  },
+  {
+    "vehicle": "taxi",
+    "dir": 1,
+    "lane": 116,
+    "seconds": 27.833333333333332,
+    "collisions": 0
+  },
+  {
+    "vehicle": "taxi",
+    "dir": 1,
+    "lane": 152,
+    "seconds": 28.166666666666668,
+    "collisions": 0
+  },
+  {
+    "vehicle": "bus",
+    "dir": -1,
+    "lane": 22,
+    "seconds": 26.583333333333332,
+    "collisions": 0
+  },
+  {
+    "vehicle": "bus",
+    "dir": -1,
+    "lane": 58,
+    "seconds": 27.833333333333332,
+    "collisions": 0
+  },
+  {
+    "vehicle": "bus",
+    "dir": -1,
+    "lane": 116,
+    "seconds": 29.983333333333334,
+    "collisions": 0
+  },
+  {
+    "vehicle": "bus",
+    "dir": -1,
+    "lane": 152,
+    "seconds": 30.233333333333334,
+    "collisions": 0
+  },
+  {
+    "vehicle": "bus",
+    "dir": 1,
+    "lane": 22,
+    "seconds": 26.666666666666668,
+    "collisions": 0
+  },
+  {
+    "vehicle": "bus",
+    "dir": 1,
+    "lane": 58,
+    "seconds": 27.933333333333334,
+    "collisions": 0
+  },
+  {
+    "vehicle": "bus",
+    "dir": 1,
+    "lane": 116,
+    "seconds": 30.316666666666666,
+    "collisions": 0
+  },
+  {
+    "vehicle": "bus",
+    "dir": 1,
+    "lane": 152,
+    "seconds": 30.55,
+    "collisions": 0
+  }
+]

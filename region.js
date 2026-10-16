@@ -66,7 +66,7 @@ function expand(m,R,rng){
 }
 function districtAt(m,p){return m.districts.reduce((best,d)=>{const x=clamp(p.x,d.xs[0],d.xs.at(-1)),y=clamp(p.y,d.ys[0],d.ys.at(-1));return !best||Math.hypot(p.x-x,p.y-y)<best.distance?{d,distance:Math.hypot(p.x-x,p.y-y)}:best;},null).d;}
 function localTarget(d,to){return{...to,node:to.node===undefined?undefined:to.node-d.nodeOffset,edgeFrom:to.edgeFrom===undefined?undefined:to.edgeFrom-d.nodeOffset,edgeTo:to.edgeTo===undefined?undefined:to.edgeTo-d.nodeOffset};}
-function route(m,from,to,R,streetRoute){
+function route(m,from,to,R,streetRoute,options={}){
  const origin=districtAt(m,from),destination=m.districts.find(d=>d.id===to.districtId)||districtAt(m,to),sample=from.roadSample||R.sampleRoad(m,from.x,from.y),p=sample.layer==='ramp'?m.roadProfiles[sample.rampIndex]:null;
  const local=(d,a,b)=>streetRoute(d,a,localTarget(d,b));
  if(sample.layer==='ground'&&origin===destination)return local(origin,from,to);
@@ -85,17 +85,21 @@ function route(m,from,to,R,streetRoute){
  }else if(p){along(p,Math.min(p.total,sample.distanceAlong+8),p.total);hx=Highway.locate(m,p.highwayJoin.x,p.highwayJoin.y).s;}
  // Choose the requested city's exit if still ahead. A missed exit uses the next
  // interchange, then returns in the opposite carriageway; never a median U-turn.
- const required=sample.layer==='highway'&&Math.abs(location.lateral)<88?1100:80;
- let exit=m.roadProfiles.find(p=>p.kind==='exit'&&p.districtId===destination.id&&p.highwayDir===dir&&(Highway.locate(m,p.highwayJoin.x,p.highwayJoin.y).s-hx)*dir>required);
- if(!exit)exit=m.roadProfiles.filter(p=>p.kind==='exit'&&p.highwayDir===dir&&(Highway.locate(m,p.highwayJoin.x,p.highwayJoin.y).s-hx)*dir>required).sort((a,b)=>(a.highwayJoin.x-b.highwayJoin.x)*dir)[0];
+ const required=80,startLateral=sample.layer==='highway'?location.lateral:dir*152,pathOptions={vehicle:from,transfer:options.transfer||from.navigationTransfer};
+ const candidates=m.roadProfiles.filter(p=>p.kind==='exit'&&p.highwayDir===dir&&(Highway.locate(m,p.highwayJoin.x,p.highwayJoin.y).s-hx)*dir>required).sort((a,b)=>(a.highwayJoin.x-b.highwayJoin.x)*dir);
+ // Check actual accessibility before choosing an exit, rather than drawing an
+ // impossible last-second jump from the express lanes into its ramp.
+ const preferred=[...candidates.filter(p=>p.districtId===destination.id),...candidates.filter(p=>p.districtId!==destination.id)];let exit=null,approach=null;
+ for(const candidate of preferred){const path=Highway.path(m,hx,Highway.locate(m,candidate.highwayJoin.x,candidate.highwayJoin.y).s,dir,startLateral,pathOptions);if(path.reachesCollectors){exit=candidate;approach=path;break;}}
  if(!exit){
-  // Beyond the last exit, follow the visible terminal turning loop on the deck.
-  const end=dir>0?m.highwayEnd-220:m.highwayStart+220;
-  Highway.path(m,hx,end,dir,sample.layer==='highway'?location.lateral:dir*152).forEach(push);
-  for(let k=1;k<=24;k++){const a=(dir>0?Math.PI/2:-Math.PI/2)-k/24*Math.PI,q=Highway.at(m,end+Math.cos(a)*152,Math.sin(a)*152);push(q);}
-  const tail=route(m,{...Highway.at(m,end,-dir*152),a:dir>0?Math.PI:0,roadSample:{layer:'highway',height:m.highwayHeight}},to,R,streetRoute);tail.forEach(push);return points;
+  // The terminal has an open turning pad. Its arc starts in the lane reached by
+  // the approach, even if no separator opening allowed a collector transfer.
+  const end=dir>0?Math.max(hx,m.highwayEnd-220):Math.min(hx,m.highwayStart+220),approach=Highway.path(m,hx,end,dir,startLateral,pathOptions);approach.forEach(push);points.transfer=approach.transfer;
+  const lateral=approach.at(-1).lateral,radius=(Math.abs(lateral)+152)/2,centre=(lateral-dir*152)/2,forwardRadius=Math.max(1,Math.min(radius,(dir>0?m.highwayEnd-end:end-m.highwayStart)-Math.hypot(from.length||44,from.width||22)/2-10));
+  for(let k=1;k<=24;k++){const a=(dir>0?Math.PI/2:-Math.PI/2)-k/24*Math.PI,q=Highway.at(m,end+Math.cos(a)*forwardRadius,centre+Math.sin(a)*radius);push(q);}
+  const tail=route(m,{...Highway.at(m,end,-dir*152),a:dir>0?Math.PI:0,length:from.length,width:from.width,roadSample:{layer:'highway',height:m.highwayHeight}},to,R,streetRoute);tail.forEach(push);return points;
  }
- const join=exit.highwayJoin;Highway.path(m,hx,Highway.locate(m,join.x,join.y).s,dir,sample.layer==='highway'?location.lateral:dir*152).forEach(push);
+ const join=exit.highwayJoin;approach.forEach(push);points.transfer=approach.transfer;
  push({x:join.x,y:join.y,height:m.highwayHeight,roadLayer:'highway'});leave(exit,exit.total);return points;
 }
 // Route length and exit guidance describe the path actually driven, including

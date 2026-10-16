@@ -1,0 +1,74 @@
+{
+  "method": "one mid-transfer fixture; keyboard pause/save, reload, Continue saved shift, map, restart",
+  "expected": 4400.007677991072,
+  "resumed": {
+    "plan": {
+      "start": 4400.007677991072,
+      "dir": 1,
+      "length": 1000,
+      "fromLateral": 58.00039254840998,
+      "toLateral": 152
+    },
+    "car": {
+      "x": 4764.197710600846,
+      "y": 3705.933875748744,
+      "a": -0.04895809497976591,
+      "speed": 0,
+      "steer": 0,
+      "kind": "taxi",
+      "length": 44,
+      "width": 22,
+      "speedKmh": 0,
+      "forwardSpeedKmh": 0,
+      "lateralAccelerationMps2": 0,
+      "longitudinalAccelerationMps2": 0,
+      "yawRate": 0,
+      "steerAngle": 0,
+      "engineLoad": 0,
+      "tireSlip": 0,
+      "engineRpm": 780,
+      "gear": 1,
+      "roadSample": {
+        "x": 4764.197710600846,
+        "z": 3705.933875748744,
+        "height": 65,
+        "grade": 0,
+        "pitch": 0,
+        "forward": {
+          "x": 0.9988017954741165,
+          "y": 0,
+          "z": -0.04893846501149139
+        },
+        "gradient": {
+          "x": 0,
+          "z": 0
+        },
+        "layer": "highway",
+        "rampIndex": null,
+        "distanceAlong": 4410.010035729305,
+        "lateralDistance": 85.77564284226902,
+        "lateral": 85.77564284226902,
+        "onRoad": true,
+        "score": -30
+      },
+      "height": 65,
+      "roadLayer": "highway",
+      "roadPitch": 0,
+      "navigationTransfer": {
+        "start": 4400.007677991072,
+        "dir": 1,
+        "length": 1000,
+        "fromLateral": 58.00039254840998,
+        "toLateral": 152
+      },
+      "throttle": 0,
+      "brake": 0,
+      "gearShift": 0,
+      "dx": 0.9988017918282659,
+      "dz": -0.04893853942084381,
+      "station": 4760,
+      "lateral": 85.77515084273013
+    }
+  },
+  "errors": []
+}

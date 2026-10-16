@@ -1,0 +1,112 @@
+[
+  {
+    "vehicle": "taxi",
+    "from": "Toronto",
+    "to": "Pickering",
+    "ok": true,
+    "seconds": 203.43333333333334,
+    "collisions": 0
+  },
+  {
+    "vehicle": "taxi",
+    "from": "Toronto",
+    "to": "Oshawa",
+    "ok": true,
+    "seconds": 252.11666666666667,
+    "collisions": 0
+  },
+  {
+    "vehicle": "taxi",
+    "from": "Pickering",
+    "to": "Toronto",
+    "ok": true,
+    "seconds": 195.88333333333333,
+    "collisions": 0
+  },
+  {
+    "vehicle": "taxi",
+    "from": "Pickering",
+    "to": "Oshawa",
+    "ok": true,
+    "seconds": 211.93333333333334,
+    "collisions": 0
+  },
+  {
+    "vehicle": "taxi",
+    "from": "Oshawa",
+    "to": "Toronto",
+    "ok": true,
+    "seconds": 247.63333333333333,
+    "collisions": 0
+  },
+  {
+    "vehicle": "taxi",
+    "from": "Oshawa",
+    "to": "Pickering",
+    "ok": true,
+    "seconds": 180.1,
+    "collisions": 0
+  },
+  {
+    "vehicle": "bus",
+    "from": "Toronto",
+    "to": "Pickering",
+    "ok": true,
+    "seconds": 212.48333333333332,
+    "collisions": 0
+  },
+  {
+    "vehicle": "bus",
+    "from": "Toronto",
+    "to": "Oshawa",
+    "ok": true,
+    "seconds": 263.53333333333336,
+    "collisions": 0
+  },
+  {
+    "vehicle": "bus",
+    "from": "Pickering",
+    "to": "Toronto",
+    "ok": true,
+    "seconds": 203.81666666666666,
+    "collisions": 0
+  },
+  {
+    "vehicle": "bus",
+    "from": "Pickering",
+    "to": "Oshawa",
+    "ok": true,
+    "seconds": 221.2,
+    "collisions": 0
+  },
+  {
+    "vehicle": "bus",
+    "from": "Oshawa",
+    "to": "Toronto",
+    "ok": true,
+    "seconds": 258.3833333333333,
+    "collisions": 0
+  },
+  {
+    "vehicle": "bus",
+    "from": "Oshawa",
+    "to": "Pickering",
+    "ok": true,
+    "seconds": 187.33333333333334,
+    "collisions": 0
+  },
+  {
+    "service": "509",
+    "stops": 10,
+    "laps": 1,
+    "boarded": 72,
+    "alighted": 36
+  },
+  {
+    "service": "900",
+    "stops": 6,
+    "laps": 1,
+    "boarded": 59,
+    "alighted": 35
+  }
+]
