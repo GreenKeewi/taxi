@@ -1,0 +1,418 @@
+[
+  {
+    "scene": "freight-corridor",
+    "state": {
+      "journey": {
+        "length": 26222.59210742041,
+        "highwayLength": 18877.5001127022,
+        "rampLength": 2855.7000247800142,
+        "estimatedSeconds": 189.56966943719192,
+        "nextExit": {
+          "city": "Oshawa",
+          "number": 3,
+          "rampIndex": 11,
+          "distance": 18877.5001127022
+        }
+      },
+      "action": "Exit 3 · Oshawa in 1.9 km",
+      "street": "Port Union Freight Corridor · EASTBOUND",
+      "render": {
+        "width": 1280,
+        "height": 800,
+        "scale": 1,
+        "staticVertices": 684789,
+        "submittedStaticVertices": 7167,
+        "visibleChunks": 52,
+        "totalChunks": 1764,
+        "dynamicVertices": 1182,
+        "drawCalls": 53,
+        "fps": 23,
+        "frameMs": 4.724999999982538,
+        "camera": {
+          "eye": [
+            8794.5,
+            81.5,
+            3828.5
+          ],
+          "yaw": -1.350884841043611,
+          "pitch": -0.035,
+          "roll": 0,
+          "fov": 1.2566370614359172
+        },
+        "car": {
+          "x": 8788.5,
+          "y": 3833,
+          "a": 0,
+          "speed": 0,
+          "steer": 0,
+          "kind": "taxi",
+          "length": 44,
+          "width": 22,
+          "speedKmh": 0,
+          "forwardSpeedKmh": 0,
+          "lateralAccelerationMps2": 0,
+          "longitudinalAccelerationMps2": 0,
+          "yawRate": 0,
+          "steerAngle": 0,
+          "engineLoad": 0,
+          "tireSlip": 0,
+          "engineRpm": 780,
+          "gear": 1,
+          "roadSample": {
+            "x": 8788.5,
+            "z": 3833,
+            "height": 65,
+            "grade": 0,
+            "pitch": 0,
+            "forward": {
+              "x": 1,
+              "y": 0,
+              "z": 0
+            },
+            "gradient": {
+              "x": 0,
+              "z": 0
+            },
+            "layer": "highway",
+            "rampIndex": null,
+            "distanceAlong": 8438.5,
+            "lateralDistance": 53,
+            "onRoad": true
+          },
+          "height": 65,
+          "roadLayer": "highway",
+          "roadPitch": 0,
+          "throttle": 0,
+          "brake": 0,
+          "gearShift": 0
+        },
+        "wheel": 0,
+        "mirror": null,
+        "software": false,
+        "roadHeight": 65,
+        "roadPitch": 0,
+        "cockpit": {
+          "vehicleType": "taxi",
+          "steer": 0,
+          "speed": 0,
+          "speedKmh": 0,
+          "health": 100,
+          "cash": 0,
+          "fares": 0,
+          "reverse": false,
+          "look": -1.350884841043611,
+          "brake": false,
+          "clock": "4:02 PM",
+          "lowPower": false,
+          "passengers": 0,
+          "capacity": 0,
+          "stops": 0,
+          "stopIndex": 0,
+          "totalStops": 0,
+          "laps": 0,
+          "doorsOpen": false,
+          "routeName": "",
+          "routeId": "",
+          "nextStop": "Oshawa University House"
+        },
+        "airportVertices": 2997,
+        "aircraft": {
+          "visible": false,
+          "vertices": 0,
+          "pose": {
+            "x": 853.7060000000047,
+            "y": 12.5,
+            "z": 4515,
+            "yaw": 0,
+            "pitch": 0,
+            "roll": 0,
+            "gear": 1,
+            "altitude": 0,
+            "phase": "ground-roll",
+            "time": 6.11666666666676,
+            "cycle": 118.20713633111154
+          }
+        }
+      }
+    }
+  },
+  {
+    "scene": "creek-reserve",
+    "state": {
+      "journey": {
+        "length": 13891.092107420405,
+        "highwayLength": 6546.0001127022,
+        "rampLength": 2855.7000247800142,
+        "estimatedSeconds": 140.24366943719207,
+        "nextExit": {
+          "city": "Oshawa",
+          "number": 3,
+          "rampIndex": 11,
+          "distance": 6546.0001127022
+        }
+      },
+      "action": "Exit 3 · Oshawa in 655 m",
+      "street": "Lynde Creek Reserve · EASTBOUND",
+      "render": {
+        "width": 1280,
+        "height": 800,
+        "scale": 1,
+        "staticVertices": 684789,
+        "submittedStaticVertices": 6192,
+        "visibleChunks": 50,
+        "totalChunks": 1764,
+        "dynamicVertices": 504,
+        "drawCalls": 51,
+        "fps": 26,
+        "frameMs": 4.00086206896632,
+        "camera": {
+          "eye": [
+            21126,
+            81.5,
+            3828.5
+          ],
+          "yaw": 1.350884841043611,
+          "pitch": -0.035,
+          "roll": 0,
+          "fov": 1.2566370614359172
+        },
+        "car": {
+          "x": 21120,
+          "y": 3833,
+          "a": 0,
+          "speed": 0,
+          "steer": 0,
+          "kind": "taxi",
+          "length": 44,
+          "width": 22,
+          "speedKmh": 0,
+          "forwardSpeedKmh": 0,
+          "lateralAccelerationMps2": 0,
+          "longitudinalAccelerationMps2": 0,
+          "yawRate": 0,
+          "steerAngle": 0,
+          "engineLoad": 0,
+          "tireSlip": 0,
+          "engineRpm": 780,
+          "gear": 1,
+          "roadSample": {
+            "x": 21120,
+            "z": 3833,
+            "height": 65,
+            "grade": 0,
+            "pitch": 0,
+            "forward": {
+              "x": 1,
+              "y": 0,
+              "z": 0
+            },
+            "gradient": {
+              "x": 0,
+              "z": 0
+            },
+            "layer": "highway",
+            "rampIndex": null,
+            "distanceAlong": 20770,
+            "lateralDistance": 53,
+            "onRoad": true
+          },
+          "height": 65,
+          "roadLayer": "highway",
+          "roadPitch": 0,
+          "throttle": 0,
+          "brake": 0,
+          "gearShift": 0
+        },
+        "wheel": 0,
+        "mirror": null,
+        "software": false,
+        "roadHeight": 65,
+        "roadPitch": 0,
+        "cockpit": {
+          "vehicleType": "taxi",
+          "steer": 0,
+          "speed": 0,
+          "speedKmh": 0,
+          "health": 100,
+          "cash": 0,
+          "fares": 0,
+          "reverse": false,
+          "look": 1.350884841043611,
+          "brake": false,
+          "clock": "4:02 PM",
+          "lowPower": false,
+          "passengers": 0,
+          "capacity": 0,
+          "stops": 0,
+          "stopIndex": 0,
+          "totalStops": 0,
+          "laps": 0,
+          "doorsOpen": false,
+          "routeName": "",
+          "routeId": "",
+          "nextStop": "Oshawa University House"
+        },
+        "airportVertices": 2997,
+        "aircraft": {
+          "visible": false,
+          "vertices": 0,
+          "pose": {
+            "x": 921.9300000000089,
+            "y": 12.5,
+            "z": 4515,
+            "yaw": 0,
+            "pitch": 0,
+            "roll": 0,
+            "gear": 1,
+            "altitude": 0,
+            "phase": "ground-roll",
+            "time": 7.416666666666825,
+            "cycle": 118.20713633111154
+          }
+        }
+      }
+    }
+  },
+  {
+    "scene": "exit-guidance",
+    "state": {
+      "journey": {
+        "length": 9786.127896402424,
+        "highwayLength": 3018.0001127021997,
+        "rampLength": 2855.7000247800142,
+        "estimatedSeconds": 118.13662001075343,
+        "nextExit": {
+          "city": "Pickering",
+          "number": 2,
+          "rampIndex": 7,
+          "distance": 3018.0001127021997
+        }
+      },
+      "action": "Exit 2 · Pickering in 300 m",
+      "street": "Port Union Freight Corridor · Keep right for your exit",
+      "render": {
+        "width": 1280,
+        "height": 800,
+        "scale": 1,
+        "staticVertices": 684789,
+        "submittedStaticVertices": 31971,
+        "visibleChunks": 50,
+        "totalChunks": 1764,
+        "dynamicVertices": 2400,
+        "drawCalls": 71,
+        "fps": 17,
+        "frameMs": 3.724113475187873,
+        "camera": {
+          "eye": [
+            11454,
+            81.5,
+            3828.5
+          ],
+          "yaw": 0,
+          "pitch": -0.035,
+          "roll": 0,
+          "fov": 1.2566370614359172
+        },
+        "car": {
+          "x": 11448,
+          "y": 3833,
+          "a": 0,
+          "speed": 0,
+          "steer": 0,
+          "kind": "taxi",
+          "length": 44,
+          "width": 22,
+          "speedKmh": 0,
+          "forwardSpeedKmh": 0,
+          "lateralAccelerationMps2": 0,
+          "longitudinalAccelerationMps2": 0,
+          "yawRate": 0,
+          "steerAngle": 0,
+          "engineLoad": 0,
+          "tireSlip": 0,
+          "engineRpm": 780,
+          "gear": 1,
+          "roadSample": {
+            "x": 11448,
+            "z": 3833,
+            "height": 65,
+            "grade": 0,
+            "pitch": 0,
+            "forward": {
+              "x": 1,
+              "y": 0,
+              "z": 0
+            },
+            "gradient": {
+              "x": 0,
+              "z": 0
+            },
+            "layer": "highway",
+            "rampIndex": null,
+            "distanceAlong": 11098,
+            "lateralDistance": 53,
+            "onRoad": true
+          },
+          "height": 65,
+          "roadLayer": "highway",
+          "roadPitch": 0,
+          "throttle": 0,
+          "brake": 0,
+          "gearShift": 0
+        },
+        "wheel": 0,
+        "mirror": {
+          "x": 539.8399999999999,
+          "y": 34.4,
+          "w": 200.32000000000002,
+          "h": 48.8
+        },
+        "software": false,
+        "roadHeight": 65,
+        "roadPitch": 0,
+        "cockpit": {
+          "vehicleType": "taxi",
+          "steer": 0,
+          "speed": 0,
+          "speedKmh": 0,
+          "health": 100,
+          "cash": 0,
+          "fares": 0,
+          "reverse": false,
+          "look": 0,
+          "brake": false,
+          "clock": "4:03 PM",
+          "lowPower": false,
+          "passengers": 0,
+          "capacity": 0,
+          "stops": 0,
+          "stopIndex": 0,
+          "totalStops": 0,
+          "laps": 0,
+          "doorsOpen": false,
+          "routeName": "",
+          "routeId": "",
+          "nextStop": "Pickering Marina Café"
+        },
+        "airportVertices": 2997,
+        "aircraft": {
+          "visible": false,
+          "vertices": 0,
+          "pose": {
+            "x": 1009.6840000000085,
+            "y": 12.5,
+            "z": 4515,
+            "yaw": 0,
+            "pitch": 0,
+            "roll": 0,
+            "gear": 1,
+            "altitude": 0,
+            "phase": "ground-roll",
+            "time": 8.900000000000135,
+            "cycle": 118.20713633111154
+          }
+        }
+      }
+    }
+  }
+]

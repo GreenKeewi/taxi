@@ -1,0 +1,17 @@
+[
+  {
+    scene: 'freight-corridor',
+    action: 'Exit 3 · Oshawa in 1.9 km',
+    street: 'Port Union Freight Corridor · EASTBOUND'
+  },
+  {
+    scene: 'creek-reserve',
+    action: 'Exit 3 · Oshawa in 655 m',
+    street: 'Lynde Creek Reserve · EASTBOUND'
+  },
+  {
+    scene: 'exit-guidance',
+    action: 'Exit 2 · Pickering in 300 m',
+    street: 'Port Union Freight Corridor · Keep right for your exit'
+  }
+]

@@ -13,7 +13,7 @@ function build(map){
   for(const key of ['buildings','triangles','vertices','trees','ramps'])stats[key]=(stats[key]||0)+(city.stats[key]||0);
  }
  const H=map.highwayHeight,z=map.hy;
- function bridge(a,b){
+ function bridge(a,b,theme){
   for(let x=a;x<b;x+=80){const end=Math.min(x+80,b),w=end-x;
    mesh.quad([x,H,z-76],[x,H,z+76],[end,H,z+76],[end,H,z-76],'#515d66');
    const first=mesh.cull.length;
@@ -28,16 +28,50 @@ function build(map){
   for(let x=a+120;x<b-80;x+=180){
    const side=(Math.floor(x/180)%2?1:-1),tz=z+side*(240+(Math.floor(x/180)%4)*60);
    mesh.box(x,8,tz,5,16,5,'#8b8063');mesh.cylinder(x,25,tz,24,30,'#668e61',6,3);
-   if(Math.floor(x/180)%4===0)mesh.box(x,13,z-580,115,26,75,'#a0a78b');
+   if(theme==='freight'&&Math.floor(x/180)%4===0)mesh.box(x,18,z-580,160,36,95,'#a79981');
   }
   for(const s of [-1,1])mesh.line(a,z-850+s*6,b,z-850+s*6,2,1,'#8b8a79');
  }
  for(let i=1;i<map.districts.length;i++){
-  const a=map.districts[i-1].highwayEnd,b=map.districts[i].highwayStart;bridge(a,b);
+  const a=map.districts[i-1].highwayEnd,b=map.districts[i].highwayStart;bridge(a,b,i===1?'freight':'wetland');
   for(let x=a+300;x<b-100;x+=520){mesh.line(x,z-860,x,z-840,3,1,'#afa992');}
   for(const dir of [-1,1]){
    const x=dir>0?a+900:b-900,city=dir>0?map.districts[i].name:map.districts[i-1].name;
    mesh.box(x,H+35,z-dir*76,3,70,3,'#637d78');mesh.box(x,H+57,z-dir*57,90,26,4,'#356b60');signs.push({x,y:H+67,z:z-dir*57,text:city.toUpperCase()+'  '+Math.round((b-a)/10)+' m',color:'#356b60'});
+  }
+ }
+
+ // Two different journeys: freight yards west of Pickering, protected
+ // creek scenery to the east. Their geometry stays outside every road envelope.
+ for(const sector of map.highwaySectors||[]){
+  const mid=(sector.start+sector.end)/2;
+  if(sector.kind==='freight'){
+   for(let i=0;i<7;i++){
+    const x=mid-500+i*155,tz=z-850;
+    mesh.box(x,10,tz,145,13,34,'#5c6863');mesh.box(x,31,tz,131,29,29,['#a5634c','#688f8b','#b39a63'][i%3]);
+    for(const side of[-1,1])for(const end of[-48,48])mesh.box(x+end,4,tz+side*18,16,8,3,'#3e4c46');
+    if(i%2===0)mesh.box(x,59,tz,131,26,29,'#718a7d');
+   }
+   for(let i=0;i<3;i++){const x=mid-180+i*240,tz=z-460;mesh.box(x,28,tz,170,56,130,'#ac9d83');mesh.box(x,58,tz,180,4,140,'#839087');map.groundColliders.push({x:x-85,y:tz-65,w:170,h:130,minHeight:0,maxHeight:60,kind:'freight warehouse'});}
+   for(const dx of[-230,170]){const cx=mid+dx,cz=z-550;for(const side of[-1,1])mesh.box(cx+side*100,80,cz,6,160,6,'#b98a52');mesh.box(cx,160,cz,220,8,9,'#cfa364');mesh.box(cx-35,146,cz,24,21,24,'#768d85');mesh.box(cx+50,113,cz,1.5,92,1.5,'#5c6e66');}
+   const x=mid+480,tz=z-360;for(const side of[-1,1])mesh.box(x+side*18,72,tz,4,144,4,'#71857b');mesh.cylinder(x,153,tz,39,42,'#b8c4ae',10);mesh.cylinder(x,178,tz,40,8,'#718c82',10,20);
+  }else{
+   for(let i=0;i<4;i++){
+    const cx=mid-950+i*650,cz=z-400-(i%2)*110,rx=300,rz=110;
+    for(let k=0;k<16;k++){const a=k*Math.PI/8,b=(k+1)*Math.PI/8;mesh.tri([cx,-.5,cz],[cx+Math.cos(a)*rx,-.5,cz+Math.sin(a)*rz],[cx+Math.cos(b)*rx,-.5,cz+Math.sin(b)*rz],'#6faaa0');}
+    for(let k=0;k<6;k++){const x=cx-200+k*80,tz=cz-rz-20;mesh.cylinder(x,68,tz,36,132,'#487f61',6,3);}
+   }
+   // Low reed islands are visible through the near-side window over the lake.
+   for(let island=0;island<3;island++){
+    const cx=mid-650+island*620,cz=map.waterfront.shoreZ+120;
+    for(let k=0;k<16;k++){const a=k*Math.PI/8,b=(k+1)*Math.PI/8;mesh.tri([cx,.2,cz],[cx+Math.cos(a)*250,.2,cz+Math.sin(a)*72],[cx+Math.cos(b)*250,.2,cz+Math.sin(b)*72],'#8cae78');}
+    for(let k=0;k<9;k++){const x=cx-180+k*45,tz=cz+(k%2?35:-30);mesh.cylinder(x,12,tz,7,24,'#789b60',5,1);}
+   }
+   for(let k=0;k<10;k++)mesh.box(mid-225+k*50,3,map.waterfront.shoreZ+18,48,5,24,'#b7ab87');
+  }
+  for(const direction of[-1,1]){
+   const x=mid-direction*700,tz=z+direction*135;mesh.box(x,45,tz,2,90,2,'#71867a');mesh.box(x,79,tz,140,28,3,sector.kind==='freight'?'#75694e':'#446e58');
+   signs.push({x,y:94,z:tz,text:sector.name.toUpperCase(),color:'#456a56'});
   }
  }
 

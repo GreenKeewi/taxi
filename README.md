@@ -10,6 +10,8 @@ Three distinct, connected centres: Toronto's original 8×7 downtown/waterfront g
 
 - **Regional dispatch** mixes intercity and local fares. **Intercity** always sends the rider to another city; **Local** stays in the current city. Pickups stay nearby. Fares and trip allowances account for the routed journey.
 - **509 Harbour Loop** retains its ten Toronto stops. **900 Lakeshore Intercity** serves six stops, travelling Toronto → Pickering → Oshawa and back.
+- The HUD shows actual driving distance, a rough journey estimate, numbered exit countdowns and acceleration/merge guidance. Freight yards and cranes distinguish the western highway stretch; creek islands and taller woodland distinguish the eastern reserve.
+- The opening pickup has a wider approach and a smooth guide curve. The later tight and reverse bays retain their parking challenge.
 - GPS uses directed street lanes, proper ramp entry/exit, and the correct deck. Missing an exit sends you to another interchange to return. End-of-corridor turning areas have a median opening; slow down to turn.
 - Gardiner/Lakeshore Expressway crosses above Lake Shore Boulevard. Eastbound ramps cross beneath the expressway before climbing alongside it, with clear space for buses and no piers in their path.
 - City meshes are split into spatial cells. Each view submits nearby cells within its viewing cone; distant cities are not drawn. The software renderer also indexes bridge-occlusion tests spatially.
@@ -23,8 +25,8 @@ Choose taxi/bus, dispatch/service, start time (12-hour display), and traffic lev
 
 ## Build and validation
 
-Static HTML/CSS/JavaScript, no backend, dependencies, or build step. Release `regional-11`. Serve with `python3 -m http.server 8080`.
+Static HTML/CSS/JavaScript, no backend, dependencies, or build step. Release `regional-12`. Serve with `python3 -m http.server 8080`.
 
-Engine tests: `node tests-region.cjs`, `node physical-regression.cjs`, `node physics-checks.cjs`. Browser regression: `node browser-regression.cjs` (requires Playwright and `/usr/bin/chromium`; uses port 8080 for this game and 8081 for the previous revision when comparing performance). The `?test` URL enables placement helpers solely for reproducible regression.
+Engine tests: `node tests-region.cjs`, `node physical-regression.cjs`, `node physics-checks.cjs`, `node journey-polish.cjs`. `node keyboard-pickup.cjs` drives the opening pickup using real browser keyboard events with normal traffic. Browser regression: `node browser-regression.cjs` (requires Playwright and `/usr/bin/chromium`; uses port 8080 for this game and 8081 for the previous revision when comparing performance). The `?test` URL enables placement helpers solely for reproducible regression.
 
 See [evidence/REPORT.md](evidence/REPORT.md) for the measured results, test boundaries, screenshots and publishing evidence. Cloud Chromium testing covers WebGL through SwiftShader and the Canvas2D fallback; it does not constitute physical Chromebook validation.

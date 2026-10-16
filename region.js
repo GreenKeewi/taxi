@@ -7,6 +7,9 @@ const distance=(a,b)=>Math.hypot(a.x-b.x,a.y-b.y),clamp=(v,a,b)=>Math.max(a,Math
 function expand(m,R,rng){
  const core={...m,id:'toronto',name:'Toronto',offset:0,theme:'downtown',regional:false};
  core.bays.forEach(b=>b.city='Toronto');
+ // Give the opening pickup a forgiving approach; subsequent tight and reverse
+ // bays retain their original parking challenge.
+ const opening=core.bays[11],approachCar=core.parked.find(p=>Math.abs(p.x-(opening.x-78))<1&&Math.abs(p.y-opening.y)<1);if(approachCar)approachCar.x=opening.x-132;
  const districts=[core];
  for(const [di,name,offset,theme] of [[1,'Pickering',13200,'garden'],[2,'Oshawa',26400,'industry']]){
   const rand=rng(m.seed+di*379),xs=[220,800,1380,1960,2540,3120],ys=[220,800,1380,1960,2460,2960].map(y=>220+(y-220)*(m.ys.at(-1)-220)/2740);
@@ -57,6 +60,7 @@ function expand(m,R,rng){
   const stop={id:'regional-'+stops.length,index:stops.length,x,y,a,type:'bus',place:d.name+(di===0?' Union Coach Terminal':a===0?' GO Station':' Civic Terminal'),city:d.name,street:d.streets[j],row:j,col:i,node:from,edgeFrom:from,edgeTo:to,districtId:d.id,routeId:'900',length:144,width:32,waiting:5+(stops.length*3)%8};stops.push(stop);d.renderMap.busStops=d.renderMap.busStops.concat({...stop,x:x-d.offset,edgeFrom:from-d.nodeOffset,edgeTo:to-d.nodeOffset});
  }
  m.busRoutes=[...core.busRoutes,{id:'900',name:'900 Lakeshore Intercity',stops,edges:[],nodes:[]}];m.busStops=[...core.busStops,...stops];
+ m.highwaySectors=[{name:'Port Union Freight Corridor',kind:'freight',start:core.highwayEnd,end:districts[1].highwayStart},{name:'Lynde Creek Reserve',kind:'wetland',start:districts[1].highwayEnd,end:districts[2].highwayStart}];
  m.groundColliders.push({x:43,y:m.waterfront.shoreZ-4,w:m.w-86,h:8,minHeight:0,maxHeight:8,kind:'quay wall'});m.dispatchMode='regional';return m;
 }
 function districtAt(m,p){return m.districts.reduce((best,d)=>{const x=clamp(p.x,d.xs[0],d.xs.at(-1)),y=clamp(p.y,d.ys[0],d.ys.at(-1));return !best||Math.hypot(p.x-x,p.y-y)<best.distance?{d,distance:Math.hypot(p.x-x,p.y-y)}:best;},null).d;}
@@ -93,5 +97,19 @@ function route(m,from,to,R,streetRoute){
  for(let x=hx+dir*100;(join.x-x)*dir>60;x+=dir*180)push({x,y:m.hy+dir*53,height:m.highwayHeight,roadLayer:'highway'});
  push({x:join.x,y:join.y,height:m.highwayHeight,roadLayer:'highway'});leave(exit,exit.total);return points;
 }
-return{expand,districtAt,route};
+// Route length and exit guidance describe the path actually driven, including
+// legal recovery after missing an exit. The estimate assumes light flowing traffic.
+function describeRoute(m,points){
+ let length=0,highwayLength=0,rampLength=0,seconds=0,nextExit=null,previousAngle=null,turning=0;
+ for(let i=1;i<points.length;i++){
+  const a=points[i-1],b=points[i],len=distance(a,b),layer=a.roadLayer||b.roadLayer||'ground',profile=m.roadProfiles[a.rampIndex??b.rampIndex];
+  if(!nextExit&&layer==='ramp'&&profile?.kind==='exit')nextExit={city:profile.city,number:m.districts.findIndex(d=>d.id===profile.districtId)+1,rampIndex:profile.index,distance:length};
+  if(layer==='highway'){highwayLength+=len;seconds+=len/250;}else if(layer==='ramp'){rampLength+=len;seconds+=len/95;}else{seconds+=len/75;const angle=Math.atan2(b.y-a.y,b.x-a.x);if(previousAngle!==null)turning+=Math.abs(Math.atan2(Math.sin(angle-previousAngle),Math.cos(angle-previousAngle)));previousAngle=angle;}
+  length+=len;
+ }
+ seconds+=turning*3;
+ return{length,highwayLength,rampLength,estimatedSeconds:seconds,nextExit};
+}
+function sectorAt(m,x){return(m.highwaySectors||[]).find(s=>x>=s.start&&x<=s.end)?.name||'Gardiner / Lakeshore Expressway';}
+return{expand,districtAt,route,describeRoute,sectorAt};
 });

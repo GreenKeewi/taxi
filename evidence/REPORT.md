@@ -1,6 +1,6 @@
 # GTA Lakeshore expansion — cloud verification
 
-2026-10-16. Release `regional-11`. The user story is keyboard menu → taxi/bus simulation → directed city/ramp/highway route → cockpit/minimap rendering, with browser-local shift saves and static GitHub Pages publishing. There is no backend or external runtime dependency.
+2026-10-16. Release `regional-12`. The user story is keyboard menu → taxi/bus simulation → directed city/ramp/highway route → cockpit/minimap rendering, with browser-local shift saves and static GitHub Pages publishing. There is no backend or external runtime dependency.
 
 ## Delivered scope
 
@@ -36,12 +36,12 @@ Cloud Chromium 1280×800, normal 48-car traffic, stationary Toronto starting vie
 
 | Renderer / mode | Expanded FPS | Expanded JS render ms | Baseline FPS | Baseline JS render ms |
 |---|---:|---:|---:|---:|
-| SwiftShader / full | 12 | 5.0 | 6 | 7.0 |
-| SwiftShader / low | 13 | 5.4 | 6 | 6.8 |
-| Canvas fallback | 30 | 13.8 | 29 | 18.3 |
-| Canvas fallback / low | 30 | 14.0 | 30 | 19.1 |
+| SwiftShader / full | 8 | 6.5 | 7 | 7.6 |
+| SwiftShader / low | 13 | 6.4 | 8 | 6.0 |
+| Canvas fallback | 29 | 17.1 | 29 | 18.6 |
+| Canvas fallback / low | 29 | 15.5 | 30 | 18.0 |
 
-The expanded world contains 679,314 static vertices. In the measured starting view, full mode submits 125,868 and low mode 105,135 (approximately 18.5% / 15.5% of the world), using nearby chunks rather than drawing every town. Full raw readings are in `browser-results.json`. The JS timing excludes GPU/compositor waits; it must not be presented as the actual displayed frame interval. These short cloud samples are indicative, not a hardware benchmark or a guarantee. **No physical Chromebook validation was performed.**
+The expanded world contains 684,789 static vertices. In the measured starting view, full mode submits 125,868 and low mode 105,135 (approximately 18.4% / 15.4% of the world), using nearby chunks rather than drawing every town. Full raw readings are in `browser-results.json`. The JS timing excludes GPU/compositor waits; it must not be presented as the actual displayed frame interval. These short cloud samples are indicative, not a hardware benchmark or a guarantee. **No physical Chromebook validation was performed.**
 
 ## Screenshots
 
@@ -61,3 +61,13 @@ Screenshots use explicit scenario placements; see `capture-evidence.cjs` and `hi
 - Local mirror browser pass: `/3d/` starts, plays, shows the 29,800-unit region and opens its map in Canvas fallback. Original 2D `/` starts and moves with Enter/W; no page errors. All original repository root file hashes match the pre-change snapshot.
 - Moving browser highway sample: 6,500 → 9,095.6 world units, 118.0 km/h, highway layer throughout, zero collisions, four nearby cars at the final capture. See `highway-browser.json`.
 - Public destinations: https://greenkeewi.github.io/taxi/ and https://greenkeewi.github.io/night-shift-taxi/3d/. Direct GET/HEAD attempts, including additional network permission, fail at the cloud proxy with `CONNECT tunnel failed, response 403` / `server: envoy`; the web fetch tool also cannot open either URL. Bypassing the proxy cannot resolve the host here. This blocks a direct live-browser load claim, not the confirmed pushes or successful GitHub deployments.
+
+## Regional-12 polish and normal-keyboard verification
+
+- Correct driving distance replaces straight-line distance. The navigation counts down to the requested numbered exit, gives right-lane and merge cues, and displays a rough driving-time estimate. Missed Pickering exits correctly direct the driver to Oshawa and back.
+- Two scenic stretches now differ: Port Union freight wagons, warehouses, cranes and a water tower; Lynde Creek woodland, ponds, reed islands and a boardwalk. These are stylized, non-road scenery.
+- The opening bay’s rear parked car moved 54 world units (5.4 m) back to give the first pickup a forgiving forward approach. Its GPS curve now eases into the bay. Other tight/reverse bays retain their previous challenge.
+- `keyboard-pickup.cjs` starts from the normal title screen with 48-car traffic and uses actual W/A/D/Space key events. It performs no car placement, traffic removal, engine stepping or game-state writes. Pickup completes in **9.43 simulation seconds**, with **zero collisions, zero red-light fines**, and no page errors. Pause/help/map also pass afterward. See `keyboard-pickup.json` and `keyboard-pickup.png`.
+- `journey-polish.json` measures 2.25–3.75 km per directed intercity route, with 1.21–2.55 km on the highway. The continuous physical driving regression still passes all 12 taxi/bus routes, measuring 179.9–272.9 seconds (approximately 3–4½ minutes), with zero collisions. Estimated HUD times assume flowing traffic and are approximate.
+- Final forced-Canvas scene samples at 1280×800: Toronto **29 FPS / 14.4 ms JS rendering**; freight corridor **30 FPS / 7.9 ms**; wetland corridor **30 FPS / 3.5 ms**. Only 9,774 / 10,029 static vertices are submitted in the two highway views, from 684,789 in the whole world. See `scene-performance.json`; these are short cloud samples, not physical Chromebook measurements.
+- New visual evidence: `keyboard-pickup.png`, `freight-corridor.png`, `creek-reserve.png`, and `exit-guidance.png`. The scenery/exit views use controlled placements; the opening-pickup screenshot follows actual browser keyboard driving.

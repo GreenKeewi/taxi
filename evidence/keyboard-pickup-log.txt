@@ -1,0 +1,14 @@
+{
+  passed: true,
+  simulationSeconds: 9.433333333333438,
+  normalTraffic: 48,
+  stats: {
+    collisions: 0,
+    redLights: 0,
+    rightOnRed: 0,
+    pickups: 1,
+    deliveries: 0,
+    missed: 0
+  },
+  errors: []
+}

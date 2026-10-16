@@ -1,0 +1,29 @@
+[
+  {
+    "scene": "toronto",
+    "fps": 29,
+    "frameMs": 14.408695652183361,
+    "visibleChunks": 40,
+    "totalChunks": 1764,
+    "submittedStaticVertices": 105135,
+    "totalStaticVertices": 684789
+  },
+  {
+    "scene": "freight",
+    "fps": 30,
+    "frameMs": 7.854583333341482,
+    "visibleChunks": 33,
+    "totalChunks": 1764,
+    "submittedStaticVertices": 9774,
+    "totalStaticVertices": 684789
+  },
+  {
+    "scene": "wetland",
+    "fps": 30,
+    "frameMs": 3.4587499999945672,
+    "visibleChunks": 35,
+    "totalChunks": 1764,
+    "submittedStaticVertices": 10029,
+    "totalStaticVertices": 684789
+  }
+]
