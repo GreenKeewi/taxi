@@ -251,6 +251,7 @@
       mesh.quad([a.x,a.height+3.5,a.z],[b.x,b.height+3.5,b.z],[b.x,b.height+6,b.z],[a.x,a.height+6,a.z],rail);
       elevatedLine(a.x,a.z,a.height+6,b.x,b.z,b.height+6,1.2,'#e0e1d1');
     }
+    if(!map.sharedHighway){
     function highwayEntryAt(x,z){
       return roads&&map.roadProfiles.some(p=>{const q=roads.project(p,x,z);return q.distance<roads.pointAt(p,q.s).halfWidth+4&&roads.elevation(p,q.s).height>H-.04;});
     }
@@ -340,6 +341,7 @@
       streetSign(merge.x,merge.z-profile.side*48,H+19,profile.kind==='exit'?'EXIT  •  CITY STREETS':'MERGE  •  90 km/h','#365d5c');
       stats.ramps++;
     }
+    }
     // Waterfront promenade: its seaward edge coincides with the simulation boundary.
     rect(90,map.hy+91,map.w-180,shore-map.hy-91,.3,'#d9d3ba');
     for(let z=map.hy+102;z<shore-6;z+=12)line(90,z,map.w-90,z,.5,.34,'#c1baa3');
@@ -399,6 +401,7 @@
       const col=materials[(b.color||0)%materials.length];
       const downtown=1-Math.min(1,Math.hypot((b.x-xs[2])/1800,(b.y-zs[2])/1600));
       const height=b.regional?b.visualHeight:b.urban?250+r()*270:90+r()*170+downtown*210;
+      b.solidHeight=height;
       const tall=height>245,style=(idx+b.roof)%3;
       if(tall){
         const podium=30+(idx%3)*8,tw=Math.min(b.w*.78,85+(idx%3)*16),td=Math.max(24,b.h*.82);

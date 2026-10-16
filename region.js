@@ -3,6 +3,7 @@
    connect their independent grids. There are no surface roads across the gaps. */
 (function(root,factory){const api=factory();if(typeof module==='object'&&module.exports)module.exports=api;if(root)root.TaxiRegion=api;})(typeof globalThis!=='undefined'?globalThis:this,function(){
 'use strict';
+const Highway=typeof module==='object'&&module.exports?require('./highway.js'):globalThis.TaxiHighway;
 const distance=(a,b)=>Math.hypot(a.x-b.x,a.y-b.y),clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 function expand(m,R,rng){
  const core={...m,id:'toronto',name:'Toronto',offset:0,theme:'downtown',regional:false};
@@ -61,7 +62,7 @@ function expand(m,R,rng){
  }
  m.busRoutes=[...core.busRoutes,{id:'900',name:'900 Lakeshore Intercity',stops,edges:[],nodes:[]}];m.busStops=[...core.busStops,...stops];
  m.highwaySectors=[{name:'Port Union Freight Corridor',kind:'freight',start:core.highwayEnd,end:districts[1].highwayStart},{name:'Lynde Creek Reserve',kind:'wetland',start:districts[1].highwayEnd,end:districts[2].highwayStart}];
- m.groundColliders.push({x:43,y:m.waterfront.shoreZ-4,w:m.w-86,h:8,minHeight:0,maxHeight:8,kind:'quay wall'});m.dispatchMode='regional';return m;
+ m.groundColliders.push({x:43,y:m.waterfront.shoreZ-4,w:m.w-86,h:8,minHeight:0,maxHeight:8,kind:'quay wall'});m.dispatchMode='regional';Highway.configure(m,R);return m;
 }
 function districtAt(m,p){return m.districts.reduce((best,d)=>{const x=clamp(p.x,d.xs[0],d.xs.at(-1)),y=clamp(p.y,d.ys[0],d.ys.at(-1));return !best||Math.hypot(p.x-x,p.y-y)<best.distance?{d,distance:Math.hypot(p.x-x,p.y-y)}:best;},null).d;}
 function localTarget(d,to){return{...to,node:to.node===undefined?undefined:to.node-d.nodeOffset,edgeFrom:to.edgeFrom===undefined?undefined:to.edgeFrom-d.nodeOffset,edgeTo:to.edgeTo===undefined?undefined:to.edgeTo-d.nodeOffset};}
@@ -74,27 +75,27 @@ function route(m,from,to,R,streetRoute){
  function along(profile,start,end){const dir=end>=start?1:-1;for(let s=start;dir>0?s<end:s>end;s+=dir*18){const q=R.pointAt(profile,s);push({x:q.x,y:q.z,height:q.height,roadLayer:'ramp',rampIndex:profile.index});}const q=R.pointAt(profile,end);push({x:q.x,y:q.z,height:q.height,roadLayer:'ramp',rampIndex:profile.index});}
  function leave(profile,start){along(profile,start,0);const d=m.districts.find(d=>d.id===profile.districtId),exit={x:profile.x0+18,y:profile.z0-136,a:-Math.PI/2,height:0,roadLayer:'ground'};push(exit);const tail=route(m,exit,to,R,streetRoute);tail.forEach(push);}
  if(p&&p.kind==='exit'){leave(p,sample.distanceAlong);return points;}
- let hx=from.x,dir=p?p.highwayDir:from.y>=m.hy?1:-1;
+ const location=Highway.locate(m,from.x,from.y);let hx=location.s,dir=p?p.highwayDir:location.lateral>=0?1:-1;
  if(sample.layer==='ground'){
   dir=destination.offset>origin.offset?1:-1;
   const entry=m.roadProfiles.find(p=>p.districtId===origin.id&&p.kind==='entry'&&p.highwayDir===dir),node=m.nodes[entry.surfaceNodeId],prev=m.nodes[node.id-origin.xs.length];
   // Finish the ground route heading south in the right lane at the ramp mouth.
   const access={x:entry.x0,y:entry.z0-160,a:Math.PI/2,type:'bus',edgeFrom:prev.id,edgeTo:node.id,node:prev.id,row:prev.j,col:prev.i,districtId:origin.id};
-  local(origin,from,access).forEach(push);push({x:entry.x0,y:entry.z0,height:0,roadLayer:'ramp',rampIndex:entry.index});along(entry,0,entry.total);hx=entry.highwayJoin.x;
- }else if(p){along(p,Math.min(p.total,sample.distanceAlong+8),p.total);hx=p.highwayJoin.x;}
+  local(origin,from,access).forEach(push);push({x:entry.x0,y:entry.z0,height:0,roadLayer:'ramp',rampIndex:entry.index});along(entry,0,entry.total);hx=Highway.locate(m,entry.highwayJoin.x,entry.highwayJoin.y).s;
+ }else if(p){along(p,Math.min(p.total,sample.distanceAlong+8),p.total);hx=Highway.locate(m,p.highwayJoin.x,p.highwayJoin.y).s;}
  // Choose the requested city's exit if still ahead. A missed exit uses the next
  // interchange, then returns in the opposite carriageway; never a median U-turn.
- let exit=m.roadProfiles.find(p=>p.kind==='exit'&&p.districtId===destination.id&&p.highwayDir===dir&&(p.highwayJoin.x-hx)*dir>80);
- if(!exit)exit=m.roadProfiles.filter(p=>p.kind==='exit'&&p.highwayDir===dir&&(p.highwayJoin.x-hx)*dir>40).sort((a,b)=>(a.highwayJoin.x-b.highwayJoin.x)*dir)[0];
+ const required=sample.layer==='highway'&&Math.abs(location.lateral)<88?1100:80;
+ let exit=m.roadProfiles.find(p=>p.kind==='exit'&&p.districtId===destination.id&&p.highwayDir===dir&&(Highway.locate(m,p.highwayJoin.x,p.highwayJoin.y).s-hx)*dir>required);
+ if(!exit)exit=m.roadProfiles.filter(p=>p.kind==='exit'&&p.highwayDir===dir&&(Highway.locate(m,p.highwayJoin.x,p.highwayJoin.y).s-hx)*dir>required).sort((a,b)=>(a.highwayJoin.x-b.highwayJoin.x)*dir)[0];
  if(!exit){
   // Beyond the last exit, follow the visible terminal turning loop on the deck.
-  const end=dir>0?m.highwayEnd-80:m.highwayStart+80;
-  push({x:end,y:m.hy+dir*53,height:m.highwayHeight,roadLayer:'highway'});
-  for(let k=1;k<=24;k++){const a=(dir>0?Math.PI/2:-Math.PI/2)-k/24*Math.PI;push({x:end+Math.cos(a)*53,y:m.hy+Math.sin(a)*53,height:m.highwayHeight,roadLayer:'highway'});}
-  const tail=route(m,{x:end,y:m.hy-dir*53,a:dir>0?Math.PI:0,height:m.highwayHeight,roadLayer:'highway',roadSample:{x:end,z:m.hy-dir*53,layer:'highway',height:m.highwayHeight}},to,R,streetRoute);tail.forEach(push);return points;
+  const end=dir>0?m.highwayEnd-220:m.highwayStart+220;
+  Highway.path(m,hx,end,dir,sample.layer==='highway'?location.lateral:dir*152).forEach(push);
+  for(let k=1;k<=24;k++){const a=(dir>0?Math.PI/2:-Math.PI/2)-k/24*Math.PI,q=Highway.at(m,end+Math.cos(a)*152,Math.sin(a)*152);push(q);}
+  const tail=route(m,{...Highway.at(m,end,-dir*152),a:dir>0?Math.PI:0,roadSample:{layer:'highway',height:m.highwayHeight}},to,R,streetRoute);tail.forEach(push);return points;
  }
- const join=exit.highwayJoin;
- for(let x=hx+dir*100;(join.x-x)*dir>60;x+=dir*180)push({x,y:m.hy+dir*53,height:m.highwayHeight,roadLayer:'highway'});
+ const join=exit.highwayJoin;Highway.path(m,hx,Highway.locate(m,join.x,join.y).s,dir,sample.layer==='highway'?location.lateral:dir*152).forEach(push);
  push({x:join.x,y:join.y,height:m.highwayHeight,roadLayer:'highway'});leave(exit,exit.total);return points;
 }
 // Route length and exit guidance describe the path actually driven, including

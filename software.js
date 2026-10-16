@@ -28,7 +28,7 @@
   }
   function roadBlocksPoint(roads,eye,x,y,z) {
     const dx=x-eye[0],dy=y-eye[1],dz=z-eye[2],m=roads.map;
-    if(Math.abs(dy)>1e-8){const t=(m.highwayHeight-eye[1])/dy;if(t>.0001&&t<1.00001){const px=eye[0]+dx*t,pz=eye[2]+dz*t;if(px>=m.highwayStart&&px<=m.highwayEnd&&Math.abs(pz-m.hy)<=m.highwayHalf)return true;}}
+    if(Math.abs(dy)>1e-8){const t=(m.highwayHeight-eye[1])/dy;if(t>.0001&&t<1.00001){const px=eye[0]+dx*t,pz=eye[2]+dz*t;if(m.sharedHighway){const q=root.TaxiHighway.locate(m,px,pz);if(q.s>=m.highwayStart&&q.s<=m.highwayEnd&&Math.abs(q.lateral)<=m.highwayHalf)return true;}else if(px>=m.highwayStart&&px<=m.highwayEnd&&Math.abs(pz-m.hy)<=m.highwayHalf)return true;}}
     const minX=Math.min(x,eye[0]),maxX=Math.max(x,eye[0]),minZ=Math.min(z,eye[2]),maxZ=Math.max(z,eye[2]);
     // Walk only the cells crossed by this sightline. A long regional map must
     // not multiply every support test by every ramp in distant cities.

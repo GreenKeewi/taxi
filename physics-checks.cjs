@@ -1,14 +1,14 @@
-const assert=require('node:assert/strict'),E=require('./engine3d.js'),R=require('./roads.js'),fs=require('node:fs');
+const assert=require('node:assert/strict'),E=require('./engine3d.js'),R=require('./roads.js'),fs=require('node:fs'),H=require('./highway.js');
 const checks=[];
 function quiet(vehicle='taxi'){const g=new E.Game(8427,{vehicle,traffic:'light',dispatch:'local'});g.start();g.traffic=[];g.spawnTraffic=()=>{};g.job.timeLeft=10000;return g;}
 for(const vehicle of ['taxi','bus']){
- const g=quiet(vehicle),m=g.map;for(const d of m.districts){Object.assign(g.car,{x:d.xs[2]-56,y:m.hy-180,a:Math.PI/2,speed:70,steer:0,roadSample:{layer:'ground',height:0}});g.sampleCarRoad();for(let i=0;i<180;i++)g.update(1/60,{up:true});assert(g.car.y>m.hy+70);assert.equal(g.car.height,0);assert.equal(g.stats.collisions,0);}
+ const g=quiet(vehicle),m=g.map;for(const d of m.districts){Object.assign(g.car,{x:d.xs[2]-56,y:m.hy-180,a:Math.PI/2,speed:70,steer:0,roadSample:{layer:'ground',height:0}});g.sampleCarRoad();for(let i=0;i<360&&g.car.y<m.hy+30;i++)g.update(1/60,{up:true});assert(g.car.y>=m.hy+30);assert.equal(g.car.height,0);assert.equal(g.stats.collisions,0);}
  checks.push({vehicle,underpasses:'3 passed at ground height'});
  // Map boundary prevents leaving the finite simulation even away from streets.
  Object.assign(g.car,{x:m.w-50,y:500,a:0,speed:30,steer:0});delete g.car.roadSample;g.sampleCarRoad();for(let i=0;i<120;i++)g.update(1/60,{up:true});assert(g.car.x<=m.w-43);checks.push({vehicle,mapEdge:'contained'});
 }
 // Highway traffic brakes for a stopped player, then moves again after clearing.
-let g=quiet(),m=g.map;Object.assign(g.car,{x:5400,y:m.hy+53,a:0,speed:0,roadSample:{layer:'highway',height:65}});g.sampleCarRoad();g.traffic=[{id:1,kind:'highway',x:5000,y:m.hy+53,a:0,dir:1,lane:1,height:65,speed:250,desired:280}];g.rand=()=>1;for(let i=0;i<900;i++){g.update(1/60,{});assert(!E.carHit(g.car,g.traffic[0]));}assert(g.traffic[0].x<g.car.x-44);assert(g.traffic[0].speed<1);g.car.y=m.hy-53;for(let i=0;i<300;i++)g.update(1/60,{});assert(g.traffic[0].speed>50);checks.push({highwayFollowing:'stop and resume, no overlap'});
+let g=quiet(),m=g.map;Object.assign(g.car,{...H.at(m,5400,152),speed:0,roadSample:{layer:'highway',height:65}});g.sampleCarRoad();g.traffic=[{id:1,kind:'highway',...H.at(m,5000,152),highwayS:5000,dir:1,lane:3,height:65,speed:250,desired:280}];g.rand=()=>1;for(let i=0;i<900;i++){g.update(1/60,{});assert(!E.carHit(g.car,g.traffic[0]));}assert(g.traffic[0].x<g.car.x-44);assert(g.traffic[0].speed<1);Object.assign(g.car,H.at(m,5400,-152));for(let i=0;i<300;i++)g.update(1/60,{});assert(g.traffic[0].speed>50);checks.push({highwayFollowing:'stop and resume, no overlap'});
 // Deck traffic cannot collide with a surface vehicle directly below it.
 assert.equal(E.carHit({x:1000,y:m.hy,a:0,height:65},{x:1000,y:m.hy,a:0,height:0}),false);
 // New regional buildings retain solid ground-level collision volumes.

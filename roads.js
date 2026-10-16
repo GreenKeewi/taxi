@@ -3,8 +3,9 @@
    a real smooth ascent, a level acceleration lane, and a lane-aligned taper. */
 (function(root,factory){const api=factory();if(typeof module==='object'&&module.exports)module.exports=api;if(root)root.TaxiRoads=api;})(typeof globalThis!=='undefined'?globalThis:this,function(){
   'use strict';
+  const Highway=typeof module==='object'&&module.exports?require('./highway.js'):globalThis.TaxiHighway;
   const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
-  const VERSION=4,RAMP_HALF=37,HIGHWAY_HALF=76;
+  const VERSION=5,RAMP_HALF=42,HIGHWAY_HALF=174;
   function smooth(t){t=clamp(t,0,1);return t*t*t*(10+t*(-15+6*t));}
   function smoothSlope(t){if(t<=0||t>=1)return 0;return 30*t*t*(1-t)*(1-t);}
   function configure(map){
@@ -19,13 +20,13 @@
       const dir=east?-1:1,side=dir*travelDir,x0=map.xs[east?map.xs.length-1:0]+(kind==='entry'?-38:38);
       // Eastbound enters from beyond the west end of the divided viaduct.
       // Westbound enters directly from its north shoulder. Neither crosses lanes.
-      const laneZ=map.hy+side*53,accelZ=map.hy+side*108;
+      const laneZ=map.hy+side*152,accelZ=map.hy+side*212;
       const curveStartZ=accelZ-radius,straight=Math.max(1,curveStartZ-z0),arc=radius*Math.PI/2;
       const turnEnd=straight+arc,total=turnEnd+acceleration+taper;
       // Eastbound slip roads cross beneath both carriageways, then climb
       // along the outboard acceleration lane. Intermediate interchanges must
       // never cut through the expressway median at deck height.
-      const riseStart=side===1?turnEnd+40:110,riseEnd=side===1?turnEnd+acceleration-40:turnEnd-50;
+      const riseStart=side===1?turnEnd+20:110,riseEnd=side===1?turnEnd+650:turnEnd-50;
       const profile={index,kind,travelDir,dir,side,x0,z0,radius,straight,arc,turnEnd,acceleration,taper,total,riseStart,riseEnd,laneZ,accelZ,halfWidth:RAMP_HALF,height:map.highwayHeight,points:[]};
       // Explicit transition vertices prevent any segment from straddling joins.
       const joins=[0,riseStart,straight,turnEnd,riseEnd,turnEnd+acceleration,total].sort((a,b)=>a-b);
@@ -83,7 +84,7 @@
     else{const d=s-p.turnEnd;x=p.x0+p.dir*(p.radius+d);const t=(d-p.acceleration)/p.taper;z=p.accelZ+(p.laneZ-p.accelZ)*smooth(t);dx=p.dir;dz=(p.laneZ-p.accelZ)*smoothSlope(t)/p.taper;const n=Math.hypot(dx,dz);dx/=n;dz/=n;}
     const e=elevation(p,s),norm=Math.hypot(1,e.grade);
     const halfWidth=p.halfWidth-16*smooth((s-p.turnEnd-p.acceleration)/p.taper);
-    return{x,z,s,height:e.height,grade:e.grade,halfWidth,dx,dz,nx:-dz,nz:dx,forward:{x:dx/norm,y:e.grade/norm,z:dz/norm}};
+    const point={x,z,s,height:e.height,grade:e.grade,halfWidth,dx,dz,nx:-dz,nz:dx,forward:{x:dx/norm,y:e.grade/norm,z:dz/norm}};return p.alignment?Highway.warpPoint(point,p.alignment,p.mapHeight,smooth(s/p.turnEnd),smoothSlope(s/p.turnEnd)/p.turnEnd):point;
   }
   function travelPointAt(profile,distance){
     const q=pointAt(profile,profile.travelDir===1?distance:profile.total-distance),dir=profile.travelDir;
@@ -113,36 +114,16 @@
       (map.groundRoads||[]).some(g=>groundRoadContains(g,x,z));
   }
   function sampleRoad(map,x,z,previous){
-    configure(map);
-    // Previous samples are an explicit layer history. An unseeded lookup may
-    // inspect the top road, but an established ground car stays beneath it.
-    // Far relocations are debug/recovery placements, not physics movement.
-    const history=previous&&(!Number.isFinite(previous.x)||!Number.isFinite(previous.z)||Math.hypot(x-previous.x,z-previous.z)<200)?previous:null;
-    const highway=x>=map.highwayStart&&x<=map.highwayEnd&&Math.abs(z-map.hy)<=HIGHWAY_HALF;
-    const hits=[];
-    for(const p of map.roadProfiles){
-      const minX=Math.min(p.x0,p.x0+p.dir*(p.radius+p.acceleration+p.taper))-RAMP_HALF;
-      const maxX=Math.max(p.x0,p.x0+p.dir*(p.radius+p.acceleration+p.taper))+RAMP_HALF;
-      if(x<minX||x>maxX||z<p.z0-RAMP_HALF||z>Math.max(p.accelZ,p.laneZ)+RAMP_HALF)continue;
-      const hit=project(p,x,z),q=pointAt(p,hit.s);if(hit.distance>q.halfWidth+.001)continue;
-      if(history&&history.layer==='ground'&&(q.height>.04||hit.s>p.riseStart+10))continue;
-      if(history&&history.layer==='highway'&&q.height<map.highwayHeight-.5)continue;
-      if(history&&history.layer==='ramp'&&history.rampIndex!==p.index&&Math.abs(q.height-history.height)>1)continue;
-      hits.push({p,hit,q});
+    configure(map);const history=previous&&(!Number.isFinite(previous.x)||!Number.isFinite(previous.z)||Math.hypot(x-previous.x,z-previous.z)<200)?previous:null,hits=[];
+    for(const p of map.roadProfiles){const box=p.bounds;if(box&&(x<box.minX||x>box.maxX||z<box.minZ||z>box.maxZ))continue;if(!box&&(Math.abs(x-p.x0)>p.radius+p.acceleration+p.taper+RAMP_HALF||z<p.z0-RAMP_HALF||z>Math.max(p.accelZ,p.laneZ)+RAMP_HALF))continue;
+      const hit=project(p,x,z);if(hit.distance>RAMP_HALF)continue;const q=pointAt(p,hit.s);if(hit.distance>q.halfWidth+.05)continue;
+      if(history&&history.layer==='ground'&&q.height>1)continue;
+      if(history&&history.layer!=='ground'&&history.rampIndex!==p.index&&Math.abs(q.height-history.height)>5)continue;
+      hits.push({x,z,height:q.height,grade:q.grade,pitch:Math.atan(q.grade),forward:q.forward,gradient:{x:q.dx*q.grade,z:q.dz*q.grade},layer:'ramp',rampIndex:p.index,rampKind:p.kind,travelDir:p.travelDir,distanceAlong:hit.s,lateralDistance:hit.distance,onRoad:true,score:hit.distance+(history?.rampIndex===p.index?-50:0)});
     }
-    hits.sort((a,b)=>{
-      if(history&&history.layer==='ramp'){
-        const ownA=a.p.index===history.rampIndex,ownB=b.p.index===history.rampIndex;
-        if(ownA!==ownB)return ownA?-1:1;
-      }
-      return a.hit.distance-b.hit.distance;
-    });
-    const chosen=hits[0];
-    if(chosen){const {p,hit,q}=chosen;
-      return{x,z,height:q.height,grade:q.grade,pitch:Math.atan(q.grade),forward:q.forward,gradient:{x:q.dx*q.grade,z:q.dz*q.grade},layer:'ramp',rampIndex:p.index,rampKind:p.kind,travelDir:p.travelDir,distanceAlong:hit.s,lateralDistance:hit.distance,onRoad:true};
-    }
-    const deckAllowed=!history||history.layer==='highway'||history.layer==='ramp'&&history.height>=map.highwayHeight-.5;
-    if(highway&&deckAllowed)return{x,z,height:map.highwayHeight,grade:0,pitch:0,forward:{x:z>=map.hy?1:-1,y:0,z:0},gradient:{x:0,z:0},layer:'highway',rampIndex:null,distanceAlong:x-map.highwayStart,lateralDistance:Math.abs(z-map.hy),onRoad:true};
+    const loc=map.sharedHighway&&map.highwayAlignment?Highway.locate(map,x,z):{s:x,lateral:z-map.hy,dx:1,dz:0};
+    if(loc.s>=map.highwayStart-.05&&loc.s<=map.highwayEnd+.05&&Math.abs(loc.lateral)<=HIGHWAY_HALF+.05&&(!history||history.layer!=='ground'&&Math.abs(history.height-map.highwayHeight)<5))hits.push({x,z,height:map.highwayHeight,grade:0,pitch:0,forward:{x:loc.dx,y:0,z:loc.dz},gradient:{x:0,z:0},layer:'highway',rampIndex:null,distanceAlong:loc.s-map.highwayStart,lateralDistance:Math.abs(loc.lateral),lateral:loc.lateral,onRoad:true,score:history?.layer==='highway'?-30:0});
+    hits.sort((a,b)=>a.score-b.score);if(hits.length)return hits[0];
     return{x,z,height:0,grade:0,pitch:0,forward:{x:1,y:0,z:0},gradient:{x:0,z:0},layer:'ground',rampIndex:null,distanceAlong:0,lateralDistance:0,onRoad:isSurfaceStreet(map,x,z)};
   }
   // Supply the existing grid navigator with an honest surface-road prefix.

@@ -13,6 +13,8 @@ function build(map){
   for(const key of ['buildings','triangles','vertices','trees','ramps'])stats[key]=(stats[key]||0)+(city.stats[key]||0);
  }
  const H=map.highwayHeight,z=map.hy;
+ for(let station=map.highwayStart+600;station<map.highwayEnd-300;station+=2400)for(const dir of[-1,1])for(const [lat,text]of[[40,'EXPRESS · THROUGH'],[134,'COLLECTORS · CITY EXITS']]){const p=root.TaxiHighway.at(map,station,dir*lat);signs.push({x:p.x,y:H+18,z:p.y,text,color:'#40695d'});}
+
  function bridge(a,b,theme){
   for(let x=a;x<b;x+=80){const end=Math.min(x+80,b),w=end-x;
    mesh.quad([x,H,z-76],[x,H,z+76],[end,H,z+76],[end,H,z-76],'#515d66');
@@ -33,7 +35,7 @@ function build(map){
   for(const s of [-1,1])mesh.line(a,z-850+s*6,b,z-850+s*6,2,1,'#8b8a79');
  }
  for(let i=1;i<map.districts.length;i++){
-  const a=map.districts[i-1].highwayEnd,b=map.districts[i].highwayStart;bridge(a,b,i===1?'freight':'wetland');
+  const a=map.districts[i-1].highwayEnd,b=map.districts[i].highwayStart;// Deck, ramps and railings come from the shared highway model.
   for(let x=a+300;x<b-100;x+=520){mesh.line(x,z-860,x,z-840,3,1,'#afa992');}
   for(const dir of [-1,1]){
    const x=dir>0?a+900:b-900,city=dir>0?map.districts[i].name:map.districts[i-1].name;
@@ -75,8 +77,12 @@ function build(map){
   }
  }
 
+ append(root.TaxiHighway.build(map,root.TaxiRoads,T));
+ for(const profile of map.roadProfiles){const q=root.TaxiRoads.pointAt(profile,0),x=q.x+(profile.kind==='entry'?-54:54),tz=q.z+75;mesh.box(x,25,tz,2,50,2,'#6a8278');mesh.box(x,45,tz,48,10,2,'#356859');signs.push({x,y:54,z:tz,text:(profile.street==='Spadina Avenue'?'SPADINA · ':'')+(profile.kind==='entry'?(profile.highwayDir>0?'EAST':'WEST')+' COLLECTOR ON-RAMP':'EXIT TO CITY STREETS'),color:'#356859'});}
+ for(const station of[map.highwayStart+130,map.highwayEnd-130]){const q=root.TaxiHighway.at(map,station,190);signs.push({x:q.x,y:H+25,z:q.y,text:'END · SLOW FOR TURNAROUND',color:'#8d7146'});}
+
  for(const p of map.roadProfiles.filter(p=>p.kind==='exit')){
-  const x=p.highwayJoin.x-p.highwayDir*350,side=p.highwayDir,zp=z+side*83;
+  const q=root.TaxiHighway.at(map,p.highwayJoin.x-p.highwayDir*350,p.highwayDir*194),x=q.x,side=p.highwayDir,zp=q.y;
   mesh.box(x,H+33,zp,2,66,2,'#657d76');mesh.box(x,H+56,zp,100,30,3,'#306457');
   signs.push({x,y:H+69,z:zp,text:'EXIT '+(map.districts.findIndex(d=>d.id===p.districtId)+1)+' · '+p.city.toUpperCase()+' ↗',color:'#306457'});
  }
