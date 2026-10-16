@@ -1,0 +1,987 @@
+{
+  "reported": [
+    {
+      "kind": "taxi",
+      "dir": 1,
+      "start": 3600,
+      "transfer": {
+        "start": 4278.596747752497,
+        "dir": 1,
+        "length": 1000,
+        "fromLateral": 58.00039731700306,
+        "toLateral": 152
+      },
+      "bodySamples": 6249
+    },
+    {
+      "kind": "taxi",
+      "dir": -1,
+      "start": 5600,
+      "transfer": {
+        "start": 5421.403252247503,
+        "dir": -1,
+        "length": 1000,
+        "fromLateral": -58.000143362949885,
+        "toLateral": -152
+      },
+      "bodySamples": 1722
+    },
+    {
+      "kind": "bus",
+      "dir": 1,
+      "start": 3600,
+      "transfer": {
+        "start": 4296.863154340295,
+        "dir": 1,
+        "length": 1000,
+        "fromLateral": 58.00039731700306,
+        "toLateral": 152
+      },
+      "bodySamples": 6250
+    },
+    {
+      "kind": "bus",
+      "dir": -1,
+      "start": 5600,
+      "transfer": {
+        "start": 5403.136845659705,
+        "dir": -1,
+        "length": 1000,
+        "fromLateral": -58.000143362949885,
+        "toLateral": -152
+      },
+      "bodySamples": 1722
+    },
+    {
+      "kind": "taxi",
+      "dir": 1,
+      "station": 5300,
+      "lateral": 98,
+      "remainingRecovery": {
+        "start": 5300.008140194449,
+        "dir": 1,
+        "length": 1000,
+        "fromLateral": 98.00035551161476,
+        "toLateral": 152,
+        "recovery": true,
+        "clearanceLength": 400
+      },
+      "refreshes": 43,
+      "save": "retained",
+      "bodySamples": 5267
+    },
+    {
+      "kind": "taxi",
+      "dir": -1,
+      "station": 5300,
+      "lateral": -98,
+      "remainingRecovery": {
+        "start": 5299.991879123911,
+        "dir": -1,
+        "length": 1000,
+        "fromLateral": -98.0003555117985,
+        "toLateral": -152,
+        "recovery": true,
+        "clearanceLength": 600
+      },
+      "refreshes": 43,
+      "save": "retained",
+      "bodySamples": 1542
+    },
+    {
+      "kind": "taxi",
+      "dir": -1,
+      "station": 4400,
+      "lateral": -98,
+      "remainingRecovery": {
+        "start": 4399.98703503116,
+        "dir": -1,
+        "length": 1000,
+        "fromLateral": -98.00066327177784,
+        "toLateral": -152,
+        "recovery": true,
+        "clearanceLength": 400
+      },
+      "refreshes": 43,
+      "save": "retained",
+      "bodySamples": 1002
+    },
+    {
+      "kind": "bus",
+      "dir": 1,
+      "station": 5300,
+      "lateral": 98,
+      "remainingRecovery": {
+        "start": 5300.008140194449,
+        "dir": 1,
+        "length": 1000,
+        "fromLateral": 98.00035551161476,
+        "toLateral": 152,
+        "recovery": true,
+        "clearanceLength": 300
+      },
+      "refreshes": 43,
+      "save": "retained",
+      "bodySamples": 5265
+    },
+    {
+      "kind": "bus",
+      "dir": -1,
+      "station": 5300,
+      "lateral": -98,
+      "remainingRecovery": {
+        "start": 5299.991879123911,
+        "dir": -1,
+        "length": 1000,
+        "fromLateral": -98.0003555117985,
+        "toLateral": -152,
+        "recovery": true,
+        "clearanceLength": 600
+      },
+      "refreshes": 43,
+      "save": "retained",
+      "bodySamples": 1542
+    },
+    {
+      "kind": "bus",
+      "dir": -1,
+      "station": 4400,
+      "lateral": -98,
+      "remainingRecovery": {
+        "start": 4399.98703503116,
+        "dir": -1,
+        "length": 1000,
+        "fromLateral": -98.00066327177784,
+        "toLateral": -152,
+        "recovery": true,
+        "clearanceLength": 300
+      },
+      "refreshes": 43,
+      "save": "retained",
+      "bodySamples": 1002
+    }
+  ],
+  "reroutes": [
+    {
+      "kind": "taxi",
+      "dir": 1,
+      "refreshes": 43,
+      "retainedStart": 4400.007677991072,
+      "reconstructedStart": 4399.974483188116
+    },
+    {
+      "kind": "taxi",
+      "dir": -1,
+      "refreshes": 43,
+      "retainedStart": 5399.9955931960885,
+      "reconstructedStart": 5400.0262516993735
+    },
+    {
+      "kind": "bus",
+      "dir": 1,
+      "refreshes": 43,
+      "retainedStart": 4400.007677991072,
+      "reconstructedStart": 4399.974483188116
+    },
+    {
+      "kind": "bus",
+      "dir": -1,
+      "refreshes": 43,
+      "retainedStart": 5399.9955931960885,
+      "reconstructedStart": 5400.0262516993735
+    }
+  ],
+  "sweep": [
+    {
+      "kind": "taxi",
+      "dir": -1,
+      "lateral": 22,
+      "station": 4096.680843776956,
+      "transfer": {
+        "start": 3668.0840960244577,
+        "dir": -1,
+        "length": 1000,
+        "fromLateral": -22,
+        "toLateral": -152
+      },
+      "bodySamples": 2010
+    },
+    {
+      "kind": "taxi",
+      "dir": -1,
+      "lateral": 22,
+      "station": 5850,
+      "transfer": {
+        "start": 5421.403252247503,
+        "dir": -1,
+        "length": 1000,
+        "fromLateral": -22,
+        "toLateral": -152
+      },
+      "bodySamples": 3039
+    },
+    {
+      "kind": "taxi",
+      "dir": -1,
+      "lateral": 22,
+      "station": 10850,
+      "transfer": {
+        "start": 10421.403252247503,
+        "dir": -1,
+        "length": 1000,
+        "fromLateral": -22,
+        "toLateral": -152
+      },
+      "bodySamples": 6039
+    },
+    {
+      "kind": "taxi",
+      "dir": -1,
+      "lateral": 22,
+      "station": 16769.69300139322,
+      "transfer": {
+        "start": 16341.096253640726,
+        "dir": -1,
+        "length": 1000,
+        "fromLateral": -22,
+        "toLateral": -152
+      },
+      "bodySamples": 9422
+    },
+    {
+      "kind": "taxi",
+      "dir": -1,
+      "lateral": 22,
+      "station": 20850,
+      "transfer": {
+        "start": 20421.403252247503,
+        "dir": -1,
+        "length": 1000,
+        "fromLateral": -22,
+        "toLateral": -152
+      },
+      "bodySamples": 11759
+    },
+    {
+      "kind": "taxi",
+      "dir": -1,
+      "lateral": 22,
+      "station": 25850,
+      "transfer": {
+        "start": 25421.403252247503,
+        "dir": -1,
+        "length": 1000,
+        "fromLateral": -22,
+        "toLateral": -152
+      },
+      "bodySamples": 14759
+    },
+    {
+      "kind": "taxi",
+      "dir": -1,
+      "lateral": 22,
+      "station": 29310,
+      "transfer": {
+        "start": 29310,
+        "dir": -1,
+        "length": 1000,
+        "fromLateral": -22,
+        "toLateral": -152
+      },
+      "bodySamples": 16742
+    },
+    {
+      "kind": "taxi",
+      "dir": -1,
+      "lateral": 58,
+      "station": 4096.680843776956,
+      "transfer": {
+        "start": 3668.0840960244577,
+        "dir": -1,
+        "length": 1000,
+        "fromLateral": -58,
+        "toLateral": -152
+      },
+      "bodySamples": 2009
+    },
+    {
+      "kind": "taxi",
+      "dir": -1,
+      "lateral": 58,
+      "station": 5850,
+      "transfer": {
+        "start": 5421.403252247503,
+        "dir": -1,
+        "length": 1000,
+        "fromLateral": -58,
+        "toLateral": -152
+      },
+      "bodySamples": 3039
+    },
+    {
+      "kind": "taxi",
+      "dir": -1,
+      "lateral": 58,
+      "station": 10850,
+      "transfer": {
+        "start": 10421.403252247503,
+        "dir": -1,
+        "length": 1000,
+        "fromLateral": -58,
+        "toLateral": -152
+      },
+      "bodySamples": 6039
+    },
+    {
+      "kind": "taxi",
+      "dir": -1,
+      "lateral": 58,
+      "station": 16769.69300139322,
+      "transfer": {
+        "start": 16341.096253640726,
+        "dir": -1,
+        "length": 1000,
+        "fromLateral": -58,
+        "toLateral": -152
+      },
+      "bodySamples": 9394
+    },
+    {
+      "kind": "taxi",
+      "dir": -1,
+      "lateral": 58,
+      "station": 20850,
+      "transfer": {
+        "start": 20421.403252247503,
+        "dir": -1,
+        "length": 1000,
+        "fromLateral": -58,
+        "toLateral": -152
+      },
+      "bodySamples": 11759
+    },
+    {
+      "kind": "taxi",
+      "dir": -1,
+      "lateral": 58,
+      "station": 25850,
+      "transfer": {
+        "start": 25421.403252247503,
+        "dir": -1,
+        "length": 1000,
+        "fromLateral": -58,
+        "toLateral": -152
+      },
+      "bodySamples": 14759
+    },
+    {
+      "kind": "taxi",
+      "dir": -1,
+      "lateral": 58,
+      "station": 29310,
+      "transfer": {
+        "start": 29310,
+        "dir": -1,
+        "length": 1000,
+        "fromLateral": -58,
+        "toLateral": -152
+      },
+      "bodySamples": 16736
+    },
+    {
+      "kind": "taxi",
+      "dir": 1,
+      "lateral": 22,
+      "station": 430,
+      "transfer": {
+        "start": 430,
+        "dir": 1,
+        "length": 1000,
+        "fromLateral": 22,
+        "toLateral": 152
+      },
+      "bodySamples": 16684
+    },
+    {
+      "kind": "taxi",
+      "dir": 1,
+      "lateral": 22,
+      "station": 3850,
+      "transfer": {
+        "start": 4278.596747752497,
+        "dir": 1,
+        "length": 1000,
+        "fromLateral": 22,
+        "toLateral": 152
+      },
+      "bodySamples": 14653
+    },
+    {
+      "kind": "taxi",
+      "dir": 1,
+      "lateral": 22,
+      "station": 8850,
+      "transfer": {
+        "start": 9278.596747752497,
+        "dir": 1,
+        "length": 1000,
+        "fromLateral": 22,
+        "toLateral": 152
+      },
+      "bodySamples": 11898
+    },
+    {
+      "kind": "taxi",
+      "dir": 1,
+      "lateral": 22,
+      "station": 12970.306998606777,
+      "transfer": {
+        "start": 13398.903746359274,
+        "dir": 1,
+        "length": 1000,
+        "fromLateral": 22,
+        "toLateral": 152
+      },
+      "bodySamples": 9439
+    },
+    {
+      "kind": "taxi",
+      "dir": 1,
+      "lateral": 22,
+      "station": 18850,
+      "transfer": {
+        "start": 19278.596747752497,
+        "dir": 1,
+        "length": 1000,
+        "fromLateral": 22,
+        "toLateral": 152
+      },
+      "bodySamples": 5956
+    },
+    {
+      "kind": "taxi",
+      "dir": 1,
+      "lateral": 22,
+      "station": 23850,
+      "transfer": {
+        "start": 24278.596747752497,
+        "dir": 1,
+        "length": 1000,
+        "fromLateral": 22,
+        "toLateral": 152
+      },
+      "bodySamples": 3192
+    },
+    {
+      "kind": "taxi",
+      "dir": 1,
+      "lateral": 22,
+      "station": 26166.413325547448,
+      "transfer": {
+        "start": 26595.010073299945,
+        "dir": 1,
+        "length": 1000,
+        "fromLateral": 22,
+        "toLateral": 152
+      },
+      "bodySamples": 1803
+    },
+    {
+      "kind": "taxi",
+      "dir": 1,
+      "lateral": 58,
+      "station": 430,
+      "transfer": {
+        "start": 430,
+        "dir": 1,
+        "length": 1000,
+        "fromLateral": 58,
+        "toLateral": 152
+      },
+      "bodySamples": 16684
+    },
+    {
+      "kind": "taxi",
+      "dir": 1,
+      "lateral": 58,
+      "station": 3850,
+      "transfer": {
+        "start": 4278.596747752497,
+        "dir": 1,
+        "length": 1000,
+        "fromLateral": 58,
+        "toLateral": 152
+      },
+      "bodySamples": 14652
+    },
+    {
+      "kind": "taxi",
+      "dir": 1,
+      "lateral": 58,
+      "station": 8850,
+      "transfer": {
+        "start": 9278.596747752497,
+        "dir": 1,
+        "length": 1000,
+        "fromLateral": 58,
+        "toLateral": 152
+      },
+      "bodySamples": 11879
+    },
+    {
+      "kind": "taxi",
+      "dir": 1,
+      "lateral": 58,
+      "station": 12970.306998606777,
+      "transfer": {
+        "start": 13398.903746359274,
+        "dir": 1,
+        "length": 1000,
+        "fromLateral": 58,
+        "toLateral": 152
+      },
+      "bodySamples": 9439
+    },
+    {
+      "kind": "taxi",
+      "dir": 1,
+      "lateral": 58,
+      "station": 18850,
+      "transfer": {
+        "start": 19278.596747752497,
+        "dir": 1,
+        "length": 1000,
+        "fromLateral": 58,
+        "toLateral": 152
+      },
+      "bodySamples": 5954
+    },
+    {
+      "kind": "taxi",
+      "dir": 1,
+      "lateral": 58,
+      "station": 23850,
+      "transfer": {
+        "start": 24278.596747752497,
+        "dir": 1,
+        "length": 1000,
+        "fromLateral": 58,
+        "toLateral": 152
+      },
+      "bodySamples": 3175
+    },
+    {
+      "kind": "taxi",
+      "dir": 1,
+      "lateral": 58,
+      "station": 26166.413325547448,
+      "transfer": {
+        "start": 26595.010073299945,
+        "dir": 1,
+        "length": 1000,
+        "fromLateral": 58,
+        "toLateral": 152
+      },
+      "bodySamples": 1803
+    },
+    {
+      "kind": "bus",
+      "dir": -1,
+      "lateral": 22,
+      "station": 4096.680843776956,
+      "transfer": {
+        "start": 3649.8176894366597,
+        "dir": -1,
+        "length": 1000,
+        "fromLateral": -22,
+        "toLateral": -152
+      },
+      "bodySamples": 2011
+    },
+    {
+      "kind": "bus",
+      "dir": -1,
+      "lateral": 22,
+      "station": 5850,
+      "transfer": {
+        "start": 5403.136845659705,
+        "dir": -1,
+        "length": 1000,
+        "fromLateral": -22,
+        "toLateral": -152
+      },
+      "bodySamples": 3039
+    },
+    {
+      "kind": "bus",
+      "dir": -1,
+      "lateral": 22,
+      "station": 10850,
+      "transfer": {
+        "start": 10403.136845659705,
+        "dir": -1,
+        "length": 1000,
+        "fromLateral": -22,
+        "toLateral": -152
+      },
+      "bodySamples": 6039
+    },
+    {
+      "kind": "bus",
+      "dir": -1,
+      "lateral": 22,
+      "station": 16769.69300139322,
+      "transfer": {
+        "start": 16322.829847052928,
+        "dir": -1,
+        "length": 1000,
+        "fromLateral": -22,
+        "toLateral": -152
+      },
+      "bodySamples": 9423
+    },
+    {
+      "kind": "bus",
+      "dir": -1,
+      "lateral": 22,
+      "station": 20850,
+      "transfer": {
+        "start": 20403.136845659705,
+        "dir": -1,
+        "length": 1000,
+        "fromLateral": -22,
+        "toLateral": -152
+      },
+      "bodySamples": 11759
+    },
+    {
+      "kind": "bus",
+      "dir": -1,
+      "lateral": 22,
+      "station": 25850,
+      "transfer": {
+        "start": 25403.136845659705,
+        "dir": -1,
+        "length": 1000,
+        "fromLateral": -22,
+        "toLateral": -152
+      },
+      "bodySamples": 14759
+    },
+    {
+      "kind": "bus",
+      "dir": -1,
+      "lateral": 22,
+      "station": 29310,
+      "transfer": {
+        "start": 29310,
+        "dir": -1,
+        "length": 1000,
+        "fromLateral": -22,
+        "toLateral": -152
+      },
+      "bodySamples": 16742
+    },
+    {
+      "kind": "bus",
+      "dir": -1,
+      "lateral": 58,
+      "station": 4096.680843776956,
+      "transfer": {
+        "start": 3649.8176894366597,
+        "dir": -1,
+        "length": 1000,
+        "fromLateral": -58,
+        "toLateral": -152
+      },
+      "bodySamples": 2010
+    },
+    {
+      "kind": "bus",
+      "dir": -1,
+      "lateral": 58,
+      "station": 5850,
+      "transfer": {
+        "start": 5403.136845659705,
+        "dir": -1,
+        "length": 1000,
+        "fromLateral": -58,
+        "toLateral": -152
+      },
+      "bodySamples": 3039
+    },
+    {
+      "kind": "bus",
+      "dir": -1,
+      "lateral": 58,
+      "station": 10850,
+      "transfer": {
+        "start": 10403.136845659705,
+        "dir": -1,
+        "length": 1000,
+        "fromLateral": -58,
+        "toLateral": -152
+      },
+      "bodySamples": 6039
+    },
+    {
+      "kind": "bus",
+      "dir": -1,
+      "lateral": 58,
+      "station": 16769.69300139322,
+      "transfer": {
+        "start": 16322.829847052928,
+        "dir": -1,
+        "length": 1000,
+        "fromLateral": -58,
+        "toLateral": -152
+      },
+      "bodySamples": 9394
+    },
+    {
+      "kind": "bus",
+      "dir": -1,
+      "lateral": 58,
+      "station": 20850,
+      "transfer": {
+        "start": 20403.136845659705,
+        "dir": -1,
+        "length": 1000,
+        "fromLateral": -58,
+        "toLateral": -152
+      },
+      "bodySamples": 11759
+    },
+    {
+      "kind": "bus",
+      "dir": -1,
+      "lateral": 58,
+      "station": 25850,
+      "transfer": {
+        "start": 25403.136845659705,
+        "dir": -1,
+        "length": 1000,
+        "fromLateral": -58,
+        "toLateral": -152
+      },
+      "bodySamples": 14759
+    },
+    {
+      "kind": "bus",
+      "dir": -1,
+      "lateral": 58,
+      "station": 29310,
+      "transfer": {
+        "start": 29310,
+        "dir": -1,
+        "length": 1000,
+        "fromLateral": -58,
+        "toLateral": -152
+      },
+      "bodySamples": 16736
+    },
+    {
+      "kind": "bus",
+      "dir": 1,
+      "lateral": 22,
+      "station": 430,
+      "transfer": {
+        "start": 430,
+        "dir": 1,
+        "length": 1000,
+        "fromLateral": 22,
+        "toLateral": 152
+      },
+      "bodySamples": 16684
+    },
+    {
+      "kind": "bus",
+      "dir": 1,
+      "lateral": 22,
+      "station": 3850,
+      "transfer": {
+        "start": 4296.863154340295,
+        "dir": 1,
+        "length": 1000,
+        "fromLateral": 22,
+        "toLateral": 152
+      },
+      "bodySamples": 14654
+    },
+    {
+      "kind": "bus",
+      "dir": 1,
+      "lateral": 22,
+      "station": 8850,
+      "transfer": {
+        "start": 9296.863154340295,
+        "dir": 1,
+        "length": 1000,
+        "fromLateral": 22,
+        "toLateral": 152
+      },
+      "bodySamples": 11899
+    },
+    {
+      "kind": "bus",
+      "dir": 1,
+      "lateral": 22,
+      "station": 12970.306998606777,
+      "transfer": {
+        "start": 13417.170152947072,
+        "dir": 1,
+        "length": 1000,
+        "fromLateral": 22,
+        "toLateral": 152
+      },
+      "bodySamples": 9439
+    },
+    {
+      "kind": "bus",
+      "dir": 1,
+      "lateral": 22,
+      "station": 18850,
+      "transfer": {
+        "start": 19296.863154340295,
+        "dir": 1,
+        "length": 1000,
+        "fromLateral": 22,
+        "toLateral": 152
+      },
+      "bodySamples": 5956
+    },
+    {
+      "kind": "bus",
+      "dir": 1,
+      "lateral": 22,
+      "station": 23850,
+      "transfer": {
+        "start": 24296.863154340295,
+        "dir": 1,
+        "length": 1000,
+        "fromLateral": 22,
+        "toLateral": 152
+      },
+      "bodySamples": 3192
+    },
+    {
+      "kind": "bus",
+      "dir": 1,
+      "lateral": 22,
+      "station": 26166.413325547448,
+      "transfer": {
+        "start": 26613.276479887743,
+        "dir": 1,
+        "length": 1000,
+        "fromLateral": 22,
+        "toLateral": 152
+      },
+      "bodySamples": 1803
+    },
+    {
+      "kind": "bus",
+      "dir": 1,
+      "lateral": 58,
+      "station": 430,
+      "transfer": {
+        "start": 430,
+        "dir": 1,
+        "length": 1000,
+        "fromLateral": 58,
+        "toLateral": 152
+      },
+      "bodySamples": 16684
+    },
+    {
+      "kind": "bus",
+      "dir": 1,
+      "lateral": 58,
+      "station": 3850,
+      "transfer": {
+        "start": 4296.863154340295,
+        "dir": 1,
+        "length": 1000,
+        "fromLateral": 58,
+        "toLateral": 152
+      },
+      "bodySamples": 14653
+    },
+    {
+      "kind": "bus",
+      "dir": 1,
+      "lateral": 58,
+      "station": 8850,
+      "transfer": {
+        "start": 9296.863154340295,
+        "dir": 1,
+        "length": 1000,
+        "fromLateral": 58,
+        "toLateral": 152
+      },
+      "bodySamples": 11879
+    },
+    {
+      "kind": "bus",
+      "dir": 1,
+      "lateral": 58,
+      "station": 12970.306998606777,
+      "transfer": {
+        "start": 13417.170152947072,
+        "dir": 1,
+        "length": 1000,
+        "fromLateral": 58,
+        "toLateral": 152
+      },
+      "bodySamples": 9439
+    },
+    {
+      "kind": "bus",
+      "dir": 1,
+      "lateral": 58,
+      "station": 18850,
+      "transfer": {
+        "start": 19296.863154340295,
+        "dir": 1,
+        "length": 1000,
+        "fromLateral": 58,
+        "toLateral": 152
+      },
+      "bodySamples": 5955
+    },
+    {
+      "kind": "bus",
+      "dir": 1,
+      "lateral": 58,
+      "station": 23850,
+      "transfer": {
+        "start": 24296.863154340295,
+        "dir": 1,
+        "length": 1000,
+        "fromLateral": 58,
+        "toLateral": 152
+      },
+      "bodySamples": 3175
+    },
+    {
+      "kind": "bus",
+      "dir": 1,
+      "lateral": 58,
+      "station": 26166.413325547448,
+      "transfer": {
+        "start": 26613.276479887743,
+        "dir": 1,
+        "length": 1000,
+        "fromLateral": 58,
+        "toLateral": 152
+      },
+      "bodySamples": 1803
+    }
+  ],
+  "save": "remaining transfer survives snapshot/restore",
+  "timing": {
+    "samples": 172,
+    "medianMs": 2.470084999999983,
+    "p95Ms": 4.34265999999991,
+    "maxMs": 5.173527000000007
+  }
+}

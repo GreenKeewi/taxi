@@ -1,0 +1,94 @@
+[
+  {
+    "kind": "taxi",
+    "dir": 1,
+    "from": 5300,
+    "before": {
+      "transfer": null,
+      "clear": false,
+      "endLateral": 98
+    },
+    "after": {
+      "transfer": {
+        "start": 5300,
+        "dir": 1,
+        "length": 1000,
+        "fromLateral": 98,
+        "toLateral": 152,
+        "recovery": true,
+        "clearanceLength": 400
+      },
+      "clear": true,
+      "endLateral": 152
+    }
+  },
+  {
+    "kind": "taxi",
+    "dir": -1,
+    "from": 4400,
+    "before": {
+      "transfer": null,
+      "clear": false,
+      "endLateral": -98
+    },
+    "after": {
+      "transfer": {
+        "start": 4400,
+        "dir": -1,
+        "length": 1000,
+        "fromLateral": -98,
+        "toLateral": -152,
+        "recovery": true,
+        "clearanceLength": 400
+      },
+      "clear": true,
+      "endLateral": -152
+    }
+  },
+  {
+    "kind": "bus",
+    "dir": 1,
+    "from": 5300,
+    "before": {
+      "transfer": null,
+      "clear": false,
+      "endLateral": 98
+    },
+    "after": {
+      "transfer": {
+        "start": 5300,
+        "dir": 1,
+        "length": 1000,
+        "fromLateral": 98,
+        "toLateral": 152,
+        "recovery": true,
+        "clearanceLength": 300
+      },
+      "clear": true,
+      "endLateral": 152
+    }
+  },
+  {
+    "kind": "bus",
+    "dir": -1,
+    "from": 4400,
+    "before": {
+      "transfer": null,
+      "clear": false,
+      "endLateral": -98
+    },
+    "after": {
+      "transfer": {
+        "start": 4400,
+        "dir": -1,
+        "length": 1000,
+        "fromLateral": -98,
+        "toLateral": -152,
+        "recovery": true,
+        "clearanceLength": 300
+      },
+      "clear": true,
+      "endLateral": -152
+    }
+  }
+]
