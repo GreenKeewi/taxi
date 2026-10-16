@@ -1,0 +1,181 @@
+{
+  "ramps": [
+    {
+      "kind": "taxi",
+      "index": 0,
+      "street": "Spadina Avenue",
+      "wheelSamples": 2836,
+      "conflicts": 0
+    },
+    {
+      "kind": "taxi",
+      "index": 1,
+      "street": "East interchange",
+      "wheelSamples": 2412,
+      "conflicts": 0
+    },
+    {
+      "kind": "taxi",
+      "index": 2,
+      "street": "Spadina Avenue",
+      "wheelSamples": 2412,
+      "conflicts": 0
+    },
+    {
+      "kind": "taxi",
+      "index": 3,
+      "street": "East interchange",
+      "wheelSamples": 2836,
+      "conflicts": 0
+    },
+    {
+      "kind": "taxi",
+      "index": 4,
+      "street": "West interchange",
+      "wheelSamples": 2836,
+      "conflicts": 0
+    },
+    {
+      "kind": "taxi",
+      "index": 5,
+      "street": "East interchange",
+      "wheelSamples": 2412,
+      "conflicts": 0
+    },
+    {
+      "kind": "taxi",
+      "index": 6,
+      "street": "West interchange",
+      "wheelSamples": 2412,
+      "conflicts": 0
+    },
+    {
+      "kind": "taxi",
+      "index": 7,
+      "street": "East interchange",
+      "wheelSamples": 2836,
+      "conflicts": 0
+    },
+    {
+      "kind": "taxi",
+      "index": 8,
+      "street": "West interchange",
+      "wheelSamples": 2836,
+      "conflicts": 0
+    },
+    {
+      "kind": "taxi",
+      "index": 9,
+      "street": "East interchange",
+      "wheelSamples": 2412,
+      "conflicts": 0
+    },
+    {
+      "kind": "taxi",
+      "index": 10,
+      "street": "West interchange",
+      "wheelSamples": 2412,
+      "conflicts": 0
+    },
+    {
+      "kind": "taxi",
+      "index": 11,
+      "street": "East interchange",
+      "wheelSamples": 2836,
+      "conflicts": 0
+    },
+    {
+      "kind": "bus",
+      "index": 0,
+      "street": "Spadina Avenue",
+      "wheelSamples": 2836,
+      "conflicts": 0
+    },
+    {
+      "kind": "bus",
+      "index": 1,
+      "street": "East interchange",
+      "wheelSamples": 2412,
+      "conflicts": 0
+    },
+    {
+      "kind": "bus",
+      "index": 2,
+      "street": "Spadina Avenue",
+      "wheelSamples": 2412,
+      "conflicts": 0
+    },
+    {
+      "kind": "bus",
+      "index": 3,
+      "street": "East interchange",
+      "wheelSamples": 2836,
+      "conflicts": 0
+    },
+    {
+      "kind": "bus",
+      "index": 4,
+      "street": "West interchange",
+      "wheelSamples": 2836,
+      "conflicts": 0
+    },
+    {
+      "kind": "bus",
+      "index": 5,
+      "street": "East interchange",
+      "wheelSamples": 2412,
+      "conflicts": 0
+    },
+    {
+      "kind": "bus",
+      "index": 6,
+      "street": "West interchange",
+      "wheelSamples": 2412,
+      "conflicts": 0
+    },
+    {
+      "kind": "bus",
+      "index": 7,
+      "street": "East interchange",
+      "wheelSamples": 2836,
+      "conflicts": 0
+    },
+    {
+      "kind": "bus",
+      "index": 8,
+      "street": "West interchange",
+      "wheelSamples": 2836,
+      "conflicts": 0
+    },
+    {
+      "kind": "bus",
+      "index": 9,
+      "street": "East interchange",
+      "wheelSamples": 2412,
+      "conflicts": 0
+    },
+    {
+      "kind": "bus",
+      "index": 10,
+      "street": "West interchange",
+      "wheelSamples": 2412,
+      "conflicts": 0
+    },
+    {
+      "kind": "bus",
+      "index": 11,
+      "street": "East interchange",
+      "wheelSamples": 2836,
+      "conflicts": 0
+    }
+  ],
+  "seams": [
+    "all eight lane centres sampled through curved deck/chunk seams"
+  ],
+  "body": {
+    "dimensions": "44 × 22 centred on vehicle origin",
+    "source": "same BODY_OUTLINE used by mesh and SAT",
+    "clearance": "0.1 world-unit gap clear; 0.1 penetration contacts; chamfer void clear"
+  },
+  "legacySave": "migrates old straight-road save onto collector deck"
+}

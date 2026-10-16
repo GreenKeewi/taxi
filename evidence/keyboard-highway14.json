@@ -1,0 +1,64 @@
+{
+  "results": [
+    {
+      "end": {
+        "x": 11784.368264936778,
+        "y": 3840.989364699304,
+        "a": 0.030700776996010894,
+        "speed": 1.4187107520193771,
+        "steer": -0.12000000000000013,
+        "kind": "taxi",
+        "length": 44,
+        "width": 22,
+        "speedKmh": 0.5107358707269758,
+        "forwardSpeedKmh": 0.5107358707269758,
+        "lateralAccelerationMps2": -0.0017976064413437757,
+        "longitudinalAccelerationMps2": 1.18571760589571,
+        "yawRate": -0.013127866495387075,
+        "steerAngle": -0.08309759547471471,
+        "engineLoad": 0.09401699699870544,
+        "tireSlip": 0,
+        "engineRpm": 990.9062004436878,
+        "gear": 1,
+        "roadSample": {
+          "x": 11784.368264936778,
+          "z": 3840.989364699304,
+          "height": 65,
+          "grade": 0,
+          "pitch": 0,
+          "forward": {
+            "x": 0.9987296952382471,
+            "y": 0,
+            "z": 0.05038844956255451
+          },
+          "gradient": {
+            "x": 0,
+            "z": 0
+          },
+          "layer": "highway",
+          "rampIndex": null,
+          "distanceAlong": 11442.047522203695,
+          "lateralDistance": 152.7890672910604,
+          "lateral": 152.7890672910604,
+          "onRoad": true,
+          "score": -30
+        },
+        "height": 65,
+        "roadLayer": "highway",
+        "roadPitch": 0,
+        "throttle": 0.34922446110570354,
+        "brake": 0.2974824433168409,
+        "gearShift": 0
+      },
+      "station": 11792.047522203695,
+      "lateral": 152.7890672910604,
+      "maxKmh": 101.65622376466837,
+      "minHeight": 65,
+      "maxHeight": 65,
+      "collisions": 0,
+      "traffic": 48
+    }
+  ],
+  "errors": [],
+  "method": "initial placement at station 6000; normal traffic; key input only thereafter"
+}

@@ -4,7 +4,7 @@
     "from": "Toronto",
     "to": "Pickering",
     "ok": true,
-    "seconds": 212.01666666666668,
+    "seconds": 203.43333333333334,
     "collisions": 0
   },
   {
@@ -12,7 +12,7 @@
     "from": "Toronto",
     "to": "Oshawa",
     "ok": true,
-    "seconds": 261.25,
+    "seconds": 252.18333333333334,
     "collisions": 0
   },
   {
@@ -20,7 +20,7 @@
     "from": "Pickering",
     "to": "Toronto",
     "ok": true,
-    "seconds": 184.11666666666667,
+    "seconds": 195.86666666666667,
     "collisions": 0
   },
   {
@@ -28,7 +28,7 @@
     "from": "Pickering",
     "to": "Oshawa",
     "ok": true,
-    "seconds": 210.41666666666666,
+    "seconds": 211.96666666666667,
     "collisions": 0
   },
   {
@@ -36,7 +36,7 @@
     "from": "Oshawa",
     "to": "Toronto",
     "ok": true,
-    "seconds": 233.16666666666666,
+    "seconds": 247.61666666666667,
     "collisions": 0
   },
   {
@@ -44,7 +44,7 @@
     "from": "Oshawa",
     "to": "Pickering",
     "ok": true,
-    "seconds": 179.93333333333334,
+    "seconds": 180.1,
     "collisions": 0
   },
   {
@@ -52,7 +52,7 @@
     "from": "Toronto",
     "to": "Pickering",
     "ok": true,
-    "seconds": 221.53333333333333,
+    "seconds": 212.23333333333332,
     "collisions": 0
   },
   {
@@ -60,7 +60,7 @@
     "from": "Toronto",
     "to": "Oshawa",
     "ok": true,
-    "seconds": 272.9166666666667,
+    "seconds": 263.5833333333333,
     "collisions": 0
   },
   {
@@ -68,7 +68,7 @@
     "from": "Pickering",
     "to": "Toronto",
     "ok": true,
-    "seconds": 190.21666666666667,
+    "seconds": 203.61666666666667,
     "collisions": 0
   },
   {
@@ -76,7 +76,7 @@
     "from": "Pickering",
     "to": "Oshawa",
     "ok": true,
-    "seconds": 219.7,
+    "seconds": 221.23333333333332,
     "collisions": 0
   },
   {
@@ -84,7 +84,7 @@
     "from": "Oshawa",
     "to": "Toronto",
     "ok": true,
-    "seconds": 241.8,
+    "seconds": 258.21666666666664,
     "collisions": 0
   },
   {
@@ -92,21 +92,21 @@
     "from": "Oshawa",
     "to": "Pickering",
     "ok": true,
-    "seconds": 186.48333333333332,
+    "seconds": 187.16666666666666,
     "collisions": 0
   },
   {
     "service": "509",
     "stops": 10,
     "laps": 1,
-    "boarded": 77,
-    "alighted": 41
+    "boarded": 81,
+    "alighted": 46
   },
   {
     "service": "900",
     "stops": 6,
     "laps": 1,
-    "boarded": 55,
-    "alighted": 19
+    "boarded": 61,
+    "alighted": 27
   }
 ]

@@ -3,8 +3,8 @@
 (function(root){'use strict';
 const T=root.Taxi3D;
 function build(map){
- const mesh=new T.Mesh(),signs=[],stats={districts:map.districts.length};mesh.cull=[];mesh.underRoad=[];mesh.roadMap=map;
- function append(source,dx=0){const a=source.data;for(let i=0;i<a.length;i+=6)mesh.data.push(a[i]+dx,a[i+1],a[i+2],a[i+3],a[i+4],a[i+5]);for(let i=0;i<a.length/18;i++){mesh.cull.push(source.cull?.[i]||0);mesh.underRoad.push(source.underRoad?.[i]||0);}}
+ const mesh=new T.Mesh(),signs=[],stats={districts:map.districts.length};mesh.cull=[];mesh.underRoad=[];mesh.roadSurface=[];mesh.roadMap=map;
+ function append(source,dx=0){const triangleOffset=mesh.data.length/18,a=source.data;for(let i=0;i<a.length;i+=6)mesh.data.push(a[i]+dx,a[i+1],a[i+2],a[i+3],a[i+4],a[i+5]);for(let i=0;i<a.length/18;i++){mesh.cull.push(source.cull?.[i]||0);mesh.underRoad[triangleOffset+i]=source.underRoad?.[i]||0;mesh.roadSurface[triangleOffset+i]=source.roadSurface?.[i]||0;}}
  // Local origins keep the original city builder and its collision geometry intact.
  for(const [di,d] of map.districts.entries()){
   d.renderMap.regionTileGround=true;d.renderMap.terminalWest=di===0;d.renderMap.terminalEast=di===map.districts.length-1;
@@ -106,7 +106,7 @@ function build(map){
 }
 function chunks(mesh,size=400){
  const bins=new Map();
- function add(a,b,c,t){const x=(a[0]+b[0]+c[0])/3,z=(a[2]+b[2]+c[2])/3,key=Math.floor(x/size)+','+Math.floor(z/size);let bin=bins.get(key);if(!bin){bin=new T.Mesh();bin.underRoad=[];bin.roadMap=mesh.roadMap;bin.bounds={minX:Infinity,maxX:-Infinity,minZ:Infinity,maxZ:-Infinity};bins.set(key,bin);}const color=a.slice(3,6);bin.tri(a,b,c,color);bin.cull[bin.cull.length-1]=mesh.cull[t]||0;bin.underRoad.push(mesh.underRoad?.[t]||0);for(const p of[a,b,c]){bin.bounds.minX=Math.min(bin.bounds.minX,p[0]);bin.bounds.maxX=Math.max(bin.bounds.maxX,p[0]);bin.bounds.minZ=Math.min(bin.bounds.minZ,p[2]);bin.bounds.maxZ=Math.max(bin.bounds.maxZ,p[2]);}}
+ function add(a,b,c,t){const x=(a[0]+b[0]+c[0])/3,z=(a[2]+b[2]+c[2])/3,key=Math.floor(x/size)+','+Math.floor(z/size);let bin=bins.get(key);if(!bin){bin=new T.Mesh();bin.underRoad=[];bin.roadSurface=[];bin.roadMap=mesh.roadMap;bin.bounds={minX:Infinity,maxX:-Infinity,minZ:Infinity,maxZ:-Infinity};bins.set(key,bin);}const color=a.slice(3,6);bin.tri(a,b,c,color);bin.cull[bin.cull.length-1]=mesh.cull[t]||0;bin.underRoad.push(mesh.underRoad?.[t]||0);bin.roadSurface.push(mesh.roadSurface?.[t]||0);for(const p of[a,b,c]){bin.bounds.minX=Math.min(bin.bounds.minX,p[0]);bin.bounds.maxX=Math.max(bin.bounds.maxX,p[0]);bin.bounds.minZ=Math.min(bin.bounds.minZ,p[2]);bin.bounds.maxZ=Math.max(bin.bounds.maxZ,p[2]);}}
  function split(a,b,c,t,depth=0){
   const ab=Math.hypot(a[0]-b[0],a[2]-b[2]),bc=Math.hypot(b[0]-c[0],b[2]-c[2]),ca=Math.hypot(c[0]-a[0],c[2]-a[2]),long=Math.max(ab,bc,ca);
   if(long>700&&depth<16){let p=a,q=b,r=c;if(bc===long){p=b;q=c;r=a;}else if(ca===long){p=c;q=a;r=b;}const mid=p.map((v,i)=>(v+q[i])/2);split(p,mid,r,t,depth+1);split(mid,q,r,t,depth+1);}else add(a,b,c,t);

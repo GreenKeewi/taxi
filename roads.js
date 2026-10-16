@@ -122,7 +122,7 @@
       hits.push({x,z,height:q.height,grade:q.grade,pitch:Math.atan(q.grade),forward:q.forward,gradient:{x:q.dx*q.grade,z:q.dz*q.grade},layer:'ramp',rampIndex:p.index,rampKind:p.kind,travelDir:p.travelDir,distanceAlong:hit.s,lateralDistance:hit.distance,onRoad:true,score:hit.distance+(history?.rampIndex===p.index?-50:0)});
     }
     const loc=map.sharedHighway&&map.highwayAlignment?Highway.locate(map,x,z):{s:x,lateral:z-map.hy,dx:1,dz:0};
-    if(loc.s>=map.highwayStart-.05&&loc.s<=map.highwayEnd+.05&&Math.abs(loc.lateral)<=HIGHWAY_HALF+.05&&(!history||history.layer!=='ground'&&Math.abs(history.height-map.highwayHeight)<5))hits.push({x,z,height:map.highwayHeight,grade:0,pitch:0,forward:{x:loc.dx,y:0,z:loc.dz},gradient:{x:0,z:0},layer:'highway',rampIndex:null,distanceAlong:loc.s-map.highwayStart,lateralDistance:Math.abs(loc.lateral),lateral:loc.lateral,onRoad:true,score:history?.layer==='highway'?-30:0});
+    if(loc.s>=map.highwayStart-.05&&loc.s<=map.highwayEnd+.05&&Math.abs(loc.lateral)<=(map.highwayAlignment?Highway.widthAt(map,loc.s):HIGHWAY_HALF)+.05&&(!history||history.layer!=='ground'&&Math.abs(history.height-map.highwayHeight)<5))hits.push({x,z,height:map.highwayHeight,grade:0,pitch:0,forward:{x:loc.dx,y:0,z:loc.dz},gradient:{x:0,z:0},layer:'highway',rampIndex:null,distanceAlong:loc.s-map.highwayStart,lateralDistance:Math.abs(loc.lateral),lateral:loc.lateral,onRoad:true,score:history?.layer==='highway'?-30:0});
     hits.sort((a,b)=>a.score-b.score);if(hits.length)return hits[0];
     return{x,z,height:0,grade:0,pitch:0,forward:{x:1,y:0,z:0},gradient:{x:0,z:0},layer:'ground',rampIndex:null,distanceAlong:0,lateralDistance:0,onRoad:isSurfaceStreet(map,x,z)};
   }

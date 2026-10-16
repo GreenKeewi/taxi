@@ -1,0 +1,13 @@
+PASS bus ramp 0 49s 0.0..65.0
+PASS bus ramp 1 42s 0.0..65.0
+PASS bus ramp 2 44s 0.0..65.0
+PASS bus ramp 3 47s 0.0..65.0
+PASS bus ramp 4 47s 0.0..65.0
+PASS bus ramp 5 43s 0.0..65.0
+PASS bus ramp 6 43s 0.0..65.0
+PASS bus ramp 7 48s 0.0..65.0
+PASS bus ramp 8 47s 0.0..65.0
+PASS bus ramp 9 43s 0.0..65.0
+PASS bus ramp 10 44s 0.0..65.0
+PASS bus ramp 11 49s 0.0..65.0
+ALL RAMPS PASSED 24

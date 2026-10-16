@@ -6,10 +6,12 @@ The original 2D game remains at https://greenkeewi.github.io/night-shift-taxi/.
 
 ## The regional expansion
 
-Three distinct, connected centres: Toronto's original 8×7 downtown/waterfront grid, a greener 6×6 Pickering-inspired town, and a lower industrial 6×6 Oshawa-inspired town. There are 128 junctions, 109 taxi destinations, twelve slip roads, and a continuous four-lane expressway across a 2.98 km wide world. Two greenbelt stretches each provide about a kilometre of uninterrupted highway driving. These are compressed, fictional places, not exact real street geometry.
+Three distinct, connected centres: Toronto's original 8×7 downtown/waterfront grid, a greener 6×6 Pickering-inspired town, and a lower industrial 6×6 Oshawa-inspired town. There are 128 junctions, 109 taxi destinations, twelve slip roads, and a continuous eight-lane express/collector highway across a 2.98 km wide world. Two greenbelt stretches each provide about a kilometre of uninterrupted highway driving. These are compressed, fictional places, not exact real street geometry.
 
 - **Regional dispatch** mixes intercity and local fares. **Intercity** always sends the rider to another city; **Local** stays in the current city. Pickups stay nearby. Fares and trip allowances account for the routed journey.
 - **509 Harbour Loop** retains its ten Toronto stops. **900 Lakeshore Intercity** serves six stops, travelling Toronto → Pickering → Oshawa and back.
+- The highway curves through the corridor. Each direction has two express lanes and two collectors; city ramps join the collectors. Separator openings are shared by road geometry, collision, traffic and GPS. Spadina feeds the western Toronto ramps; other avenues retain ground-level underpasses.
+- A shared road model builds the deck, ramp surfaces and exact guardrail contacts. Four tyre contact points support the car across seams; the body collision hull shares the rendered chamfered outline, with no invisible rectangular corner padding.
 - The HUD shows actual driving distance, a rough journey estimate, numbered exit countdowns and acceleration/merge guidance. Freight yards and cranes distinguish the western highway stretch; creek islands and taller woodland distinguish the eastern reserve.
 - The opening pickup has a wider approach and a smooth guide curve. The later tight and reverse bays retain their parking challenge.
 - GPS uses directed street lanes, proper ramp entry/exit, and the correct deck. Missing an exit sends you to another interchange to return. End-of-corridor turning areas have a median opening; slow down to turn.
@@ -25,8 +27,10 @@ Choose taxi/bus, dispatch/service, start time (12-hour display), and traffic lev
 
 ## Build and validation
 
-Static HTML/CSS/JavaScript, no backend, dependencies, or build step. Release `regional-13`. Serve with `python3 -m http.server 8080`.
+Static HTML/CSS/JavaScript, no backend, dependencies, or build step. Release `highway-14`. Serve with `python3 -m http.server 8080`.
 
-Engine tests: `node tests-region.cjs`, `node physical-regression.cjs`, `node physics-checks.cjs`, `node journey-polish.cjs`. `node keyboard-navigation.cjs` checks native menu/link focus and activation alongside arrow controls. `node keyboard-pickup.cjs` drives the opening pickup using real browser keyboard events with normal traffic. Browser regression: `node browser-regression.cjs` (requires Playwright and `/usr/bin/chromium`; uses port 8080 for this game and 8081 for the previous revision when comparing performance). The `?test` URL enables placement helpers solely for reproducible regression.
+Engine tests: `node tests-region.cjs`, `node physical-regression.cjs`, `node physics-checks.cjs`, `node journey-polish.cjs`, `node highway14-regression.cjs`, `node terminal14-regression.cjs`, `node mesh14-regression.cjs`. `node keyboard-ramps.cjs` and `node keyboard-highway14.cjs` exercise real browser keyboard input (set `TAXI_URL` for the local server). `node keyboard-navigation.cjs` checks native menu/link focus and activation alongside arrow controls. `node keyboard-pickup.cjs` drives the opening pickup using real browser keyboard events with normal traffic. Browser regression: `node browser-regression.cjs` (requires Playwright and `/usr/bin/chromium`; uses port 8080 for this game and 8081 for the previous revision when comparing performance). The `?test` URL enables placement helpers solely for reproducible regression.
 
 See [evidence/REPORT.md](evidence/REPORT.md) for the measured results, test boundaries, screenshots and publishing evidence. Cloud Chromium testing covers WebGL through SwiftShader and the Canvas2D fallback; it does not constitute physical Chromebook validation.
+
+The highway repair evidence is in [evidence/HIGHWAY14.md](evidence/HIGHWAY14.md), including all 24 taxi/bus ramp keyboard cases, high-speed collector transfer, precise hull and Canvas surface tests.

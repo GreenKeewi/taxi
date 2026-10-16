@@ -1,0 +1,29 @@
+[
+  {
+    scene: 'toronto',
+    fps: 30,
+    frameMs: 15.882222222226362,
+    visibleChunks: 40,
+    totalChunks: 1932,
+    submittedStaticVertices: 105135,
+    totalStaticVertices: 740523
+  },
+  {
+    scene: 'freight',
+    fps: 30,
+    frameMs: 9.442916666673652,
+    visibleChunks: 33,
+    totalChunks: 1932,
+    submittedStaticVertices: 16263,
+    totalStaticVertices: 740523
+  },
+  {
+    scene: 'wetland',
+    fps: 30,
+    frameMs: 5.0654166666635625,
+    visibleChunks: 30,
+    totalChunks: 1932,
+    submittedStaticVertices: 18426,
+    totalStaticVertices: 740523
+  }
+]

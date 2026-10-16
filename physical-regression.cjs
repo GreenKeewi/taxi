@@ -2,7 +2,7 @@ const assert=require('node:assert/strict'),E=require('./engine3d.js'),R=require(
 const results=[];
 for(const vehicle of ['taxi','bus'])for(const ai of [0,1,2])for(const bi of [0,1,2]){
  if(ai===bi)continue;g.options.busRoute=vehicle==='bus'?'900':'509';g.setVehicle(vehicle);g.start();g.spawnTraffic=()=>{};g.traffic=[];const a=g.map.districts[ai].bays[10],b=g.map.districts[bi].bays[15];Object.assign(g.car,{x:a.x,y:a.roadY+56,a:0,speed:0});delete g.car.roadSample;g.sampleCarRoad();g.job.timeLeft=10000;
- const result=drive(E.route(g.map,g.car,b),900);const summary={vehicle,from:a.city,to:b.city,ok:result.ok,seconds:result.time,collisions:g.stats.collisions};results.push(summary);console.log(JSON.stringify(summary));if(!result.ok){console.log(JSON.stringify(result,null,2));process.exitCode=1;break;}
+ const result=drive(E.route(g.map,g.car,b),900);const summary={vehicle,from:a.city,to:b.city,ok:result.ok,seconds:result.time,collisions:g.stats.collisions};results.push(summary);console.log(JSON.stringify(summary));if(!result.ok){console.log(JSON.stringify(result,null,2));throw Error('Continuous drive failed: '+vehicle+' '+a.city+' -> '+b.city);}
 }
 // Every actual bus stop can serve passengers after a forward physical approach.
 for(const service of ['509','900']){g.options.busRoute=service;g.setVehicle('bus');g.start();g.traffic=[];let total=0;

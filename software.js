@@ -28,7 +28,7 @@
   }
   function roadBlocksPoint(roads,eye,x,y,z) {
     const dx=x-eye[0],dy=y-eye[1],dz=z-eye[2],m=roads.map;
-    if(Math.abs(dy)>1e-8){const t=(m.highwayHeight-eye[1])/dy;if(t>.0001&&t<1.00001){const px=eye[0]+dx*t,pz=eye[2]+dz*t;if(m.sharedHighway){const q=root.TaxiHighway.locate(m,px,pz);if(q.s>=m.highwayStart&&q.s<=m.highwayEnd&&Math.abs(q.lateral)<=m.highwayHalf)return true;}else if(px>=m.highwayStart&&px<=m.highwayEnd&&Math.abs(pz-m.hy)<=m.highwayHalf)return true;}}
+    if(Math.abs(dy)>1e-8){const t=(m.highwayHeight-eye[1])/dy;if(t>.0001&&t<1.00001){const px=eye[0]+dx*t,pz=eye[2]+dz*t;if(m.sharedHighway){const q=root.TaxiHighway.locate(m,px,pz);if(q.s>=m.highwayStart&&q.s<=m.highwayEnd&&Math.abs(q.lateral)<=root.TaxiHighway.widthAt(m,q.s))return true;}else if(px>=m.highwayStart&&px<=m.highwayEnd&&Math.abs(pz-m.hy)<=m.highwayHalf)return true;}}
     const minX=Math.min(x,eye[0]),maxX=Math.max(x,eye[0]),minZ=Math.min(z,eye[2]),maxZ=Math.max(z,eye[2]);
     // Walk only the cells crossed by this sightline. A long regional map must
     // not multiply every support test by every ramp in distant cities.
@@ -96,6 +96,7 @@
       const src = mesh.data, n = Math.floor(src.length / 18);
       if (!b.data || b.capacity < n) { b.capacity = capacity(n); b.data = new Float32Array(b.capacity * CACHE); }
       const dst = b.data; b.count = n * 3; b.triangles = n;
+      b.roadSurface=mesh.roadSurface?Uint8Array.from(mesh.roadSurface):null;
       b.underRoad=mesh.underRoad?Uint8Array.from(mesh.underRoad):null;
       b.roadOccluders=mesh.roadMap?roadOccluders(mesh.roadMap):null;
       for (let t = 0; t < n; t++) {
@@ -215,7 +216,7 @@
             n = out / 3; const swap = input; input = output; output = swap;
           }
           if (n < 3) continue;
-          const o = count * DRAW;
+          const o = count * DRAW; q[o+27]=b.roadSurface&&b.roadSurface[t]?1:0;
           // Ignore camera pitch for face ordering so glazing stays on its parent facade.
           q[o] = horizontal; q[o + 1] = data[d + 10]; q[o + 2] = data[d + 13]; q[o + 3] = n;
           let area = 0, lastX = 0, lastY = 0, firstX = 0, firstY = 0;
@@ -244,7 +245,7 @@
           if (color !== style) { ctx.fillStyle = color; style = color; }
           ctx.beginPath(); ctx.moveTo(q[o + 5], q[o + 6]);
           for (let v = 1; v < n; v++) ctx.lineTo(q[o + 5 + v * 2], q[o + 6 + v * 2]);
-          ctx.closePath(); ctx.fill();
+          ctx.closePath(); ctx.fill();if(q[o+27]){ctx.strokeStyle=color;ctx.lineWidth=.7;ctx.stroke();}
         }
       };
       draw(floors); draw(solids); ctx.restore();

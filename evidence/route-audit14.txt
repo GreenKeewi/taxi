@@ -1,0 +1,36 @@
+Toronto -> Toronto { points: 99, metres: 205, bad: 0 }
+Toronto -> Pickering { points: 833, metres: 2351, bad: 0 }
+Toronto -> Oshawa { points: 1163, metres: 3674, bad: 0 }
+Pickering -> Toronto { points: 779, metres: 2261, bad: 0 }
+Pickering -> Pickering { points: 99, metres: 238, bad: 0 }
+Pickering -> Oshawa { points: 845, metres: 2430, bad: 0 }
+Oshawa -> Toronto { points: 1110, metres: 3583, bad: 0 }
+Oshawa -> Pickering { points: 754, metres: 2230, bad: 0 }
+Oshawa -> Oshawa { points: 99, metres: 238, bad: 0 }
+509 Spadina & Front -> Rogers Centre { points: 24, metres: 32, bad: 0 }
+509 Rogers Centre -> King & Simcoe { points: 43, metres: 96, bad: 0 }
+509 King & Simcoe -> King & Yonge { points: 43, metres: 97, bad: 0 }
+509 King & Yonge -> Union East { points: 23, metres: 31, bad: 0 }
+509 Union East -> Yonge Harbour { points: 43, metres: 93, bad: 0 }
+509 Yonge Harbour -> Lake Shore Market { points: 24, metres: 35, bad: 0 }
+509 Lake Shore Market -> Harbourfront { points: 43, metres: 97, bad: 0 }
+509 Harbourfront -> Music Garden { points: 43, metres: 96, bad: 0 }
+509 Music Garden -> Spadina Quay { points: 24, metres: 35, bad: 0 }
+509 Spadina Quay -> Spadina & Front { points: 42, metres: 93, bad: 0 }
+900 Toronto Union Coach Terminal -> Toronto Union Coach Terminal { points: 43, metres: 67, bad: 0 }
+900 Toronto Union Coach Terminal -> Pickering GO Station { points: 872, metres: 2406, bad: 0 }
+900 Pickering GO Station -> Oshawa GO Station { points: 827, metres: 2360, bad: 0 }
+900 Oshawa GO Station -> Oshawa Civic Terminal { points: 43, metres: 81, bad: 0 }
+900 Oshawa Civic Terminal -> Pickering Civic Terminal { points: 812, metres: 2327, bad: 0 }
+900 Pickering Civic Terminal -> Toronto Union Coach Terminal { points: 818, metres: 2306, bad: 0 }
+highway 500 -1 -> Toronto { points: 405, metres: 911, bad: 0 }
+highway 500 1 -> Toronto { points: 383, metres: 867, bad: 0 }
+highway 7000 -1 -> Toronto { points: 324, metres: 872, bad: 0 }
+highway 7000 1 -> Toronto { points: 1087, metres: 3181, bad: 0 }
+highway 15000 -1 -> Toronto { points: 524, metres: 1673, bad: 0 }
+highway 15000 1 -> Toronto { points: 1548, metres: 5026, bad: 0 }
+highway 22000 -1 -> Toronto { points: 699, metres: 2373, bad: 0 }
+highway 22000 1 -> Toronto { points: 1373, metres: 4326, bad: 0 }
+highway 29200 -1 -> Toronto { points: 879, metres: 3094, bad: 0 }
+highway 29200 1 -> Toronto { points: 902, metres: 3137, bad: 0 }
+PASS region graph, ramp layers, routes, no surface shortcuts

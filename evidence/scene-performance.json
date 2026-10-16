@@ -1,29 +1,29 @@
 [
   {
     "scene": "toronto",
-    "fps": 29,
-    "frameMs": 14.408695652183361,
+    "fps": 30,
+    "frameMs": 15.882222222226362,
     "visibleChunks": 40,
-    "totalChunks": 1764,
+    "totalChunks": 1932,
     "submittedStaticVertices": 105135,
-    "totalStaticVertices": 684789
+    "totalStaticVertices": 740523
   },
   {
     "scene": "freight",
     "fps": 30,
-    "frameMs": 7.854583333341482,
+    "frameMs": 9.442916666673652,
     "visibleChunks": 33,
-    "totalChunks": 1764,
-    "submittedStaticVertices": 9774,
-    "totalStaticVertices": 684789
+    "totalChunks": 1932,
+    "submittedStaticVertices": 16263,
+    "totalStaticVertices": 740523
   },
   {
     "scene": "wetland",
     "fps": 30,
-    "frameMs": 3.4587499999945672,
-    "visibleChunks": 35,
-    "totalChunks": 1764,
-    "submittedStaticVertices": 10029,
-    "totalStaticVertices": 684789
+    "frameMs": 5.0654166666635625,
+    "visibleChunks": 30,
+    "totalChunks": 1932,
+    "submittedStaticVertices": 18426,
+    "totalStaticVertices": 740523
   }
 ]
