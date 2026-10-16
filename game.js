@@ -35,7 +35,10 @@ function note(text){latestEvent={title:text,text:'',tone:'info'};eventUntil=perf
 addEventListener('resize',()=>{if(renderer)resize();});
 addEventListener('blur',()=>{keys.clear();if(mode==='playing')showMenu('paused');});
 document.addEventListener('visibilitychange',()=>{if(document.hidden&&mode==='playing')showMenu('paused');lastTime=0;});
-addEventListener('keydown',e=>{if(mode==='unsupported')return;const k=e.key.toLowerCase();if(['arrowup','arrowdown','arrowleft','arrowright',' ','tab','enter','escape'].includes(k))e.preventDefault();if(e.repeat)return;
+addEventListener('keydown',e=>{if(mode==='unsupported'||e.ctrlKey||e.metaKey||e.altKey)return;const k=e.key.toLowerCase(),menuNavigation=mode!=='playing'&&mode!=='map';
+ // Let browser focus and activation reach every visible menu button/link.
+ if(menuNavigation&&(k==='tab'||(['enter',' '].includes(k)&&e.target.closest?.('button,a,input,select,textarea'))))return;
+ if(['arrowup','arrowdown','arrowleft','arrowright',' ','tab','enter','escape'].includes(k))e.preventDefault();if(e.repeat)return;
  if(k==='l'){lowPower=!lowPower;try{localStorage.setItem('torontoTaxi3dLow',lowPower?'1':'0');}catch(e){}resize();note(lowPower?'LOW POWER · 30 FPS':'FULL FRAME RATE');return;}
  if(k==='m'){toggleSound();return;}
  if(mode==='guide'){if(['enter','escape','h','f1'].includes(k))closeGuide();return;}

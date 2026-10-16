@@ -21,12 +21,12 @@ Three distinct, connected centres: Toronto's original 8×7 downtown/waterfront g
 
 Enter starts/confirms; arrows select menu rows, and left/right changes a setting. WASD or arrows drive; S/down brakes, then reverses. Space brakes. Q/E look left/right; C looks behind. Shift plus the pedals gives fine parking control. Escape/P pauses; F1 opens help; Tab opens the regional map; H sounds the horn; R calls roadside assist ($15); L toggles low power; M toggles sound.
 
-Choose taxi/bus, dispatch/service, start time (12-hour display), and traffic level with the keyboard. Fines and assist can leave the balance below zero. Low power limits rendering to 30 FPS and reduces resolution/draw distance; it is not a guarantee of 30 FPS on every device.
+Choose taxi/bus, dispatch/service, start time (12-hour display), and traffic level with the keyboard. On menu screens, Tab/Shift+Tab reaches every button and link; Enter/Space activates a focused control. Tab opens the regional map while driving. Fines and assist can leave the balance below zero. Low power limits rendering to 30 FPS and reduces resolution/draw distance; it is not a guarantee of 30 FPS on every device.
 
 ## Build and validation
 
-Static HTML/CSS/JavaScript, no backend, dependencies, or build step. Release `regional-12`. Serve with `python3 -m http.server 8080`.
+Static HTML/CSS/JavaScript, no backend, dependencies, or build step. Release `regional-13`. Serve with `python3 -m http.server 8080`.
 
-Engine tests: `node tests-region.cjs`, `node physical-regression.cjs`, `node physics-checks.cjs`, `node journey-polish.cjs`. `node keyboard-pickup.cjs` drives the opening pickup using real browser keyboard events with normal traffic. Browser regression: `node browser-regression.cjs` (requires Playwright and `/usr/bin/chromium`; uses port 8080 for this game and 8081 for the previous revision when comparing performance). The `?test` URL enables placement helpers solely for reproducible regression.
+Engine tests: `node tests-region.cjs`, `node physical-regression.cjs`, `node physics-checks.cjs`, `node journey-polish.cjs`. `node keyboard-navigation.cjs` checks native menu/link focus and activation alongside arrow controls. `node keyboard-pickup.cjs` drives the opening pickup using real browser keyboard events with normal traffic. Browser regression: `node browser-regression.cjs` (requires Playwright and `/usr/bin/chromium`; uses port 8080 for this game and 8081 for the previous revision when comparing performance). The `?test` URL enables placement helpers solely for reproducible regression.
 
 See [evidence/REPORT.md](evidence/REPORT.md) for the measured results, test boundaries, screenshots and publishing evidence. Cloud Chromium testing covers WebGL through SwiftShader and the Canvas2D fallback; it does not constitute physical Chromebook validation.
