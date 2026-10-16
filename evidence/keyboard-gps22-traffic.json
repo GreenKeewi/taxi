@@ -1,0 +1,290 @@
+{
+  "method": "one initial pose; normal traffic; unmodified live director; trusted CDP key events; normal Canvas animation and 0.5-second UI GPS refresh",
+  "results": [
+    {
+      "vehicle": "taxi",
+      "dir": 1,
+      "scenario": "interrupted",
+      "setup": {
+        "station": 5300,
+        "lateral": 98,
+        "time": 0,
+        "initialSpeedKmh": 64.8,
+        "initialTraffic": 96
+      },
+      "seconds": 7.816666666666845,
+      "collisions": 0,
+      "endStation": 6910.568429279207,
+      "endLateral": 151.35293713511783,
+      "maxKmh": 75.72408547124327,
+      "plans": [
+        5303
+      ],
+      "traffic": 96,
+      "render": {
+        "adaptiveLevel": 0,
+        "worldPixelWidth": 800,
+        "trafficDensity": {
+          "target": 96,
+          "nearby": 1,
+          "close": 0,
+          "movingNearby": 1,
+          "queuedNearby": 0,
+          "stoppedNearby": 0,
+          "spawned": 2,
+          "relocated": 40,
+          "lastMoves": [
+            {
+              "from": {
+                "x": 28572.381497537717,
+                "y": 1940
+              },
+              "to": {
+                "x": 912.6537026269361,
+                "y": 706
+              },
+              "time": 0,
+              "initial": true,
+              "hiddenFrom": true,
+              "hiddenTo": true
+            },
+            {
+              "from": {
+                "x": 28380,
+                "y": 2218.1562014552765
+              },
+              "to": {
+                "x": 1633,
+                "y": 804.1645982463378
+              },
+              "time": 0,
+              "initial": true,
+              "hiddenFrom": true,
+              "hiddenTo": true
+            },
+            {
+              "from": {
+                "x": 28380,
+                "y": 1194.4499168451875
+              },
+              "to": {
+                "x": 1059.26894427347,
+                "y": 670
+              },
+              "time": 0,
+              "initial": true,
+              "hiddenFrom": true,
+              "hiddenTo": true
+            },
+            {
+              "from": {
+                "x": 27800,
+                "y": 2193.043389120139
+              },
+              "to": {
+                "x": 686,
+                "y": 1374.0672857735772
+              },
+              "time": 0,
+              "initial": true,
+              "hiddenFrom": true,
+              "hiddenTo": true
+            },
+            {
+              "from": {
+                "x": 27466.932782314252,
+                "y": 820
+              },
+              "to": {
+                "x": 491.5786210298538,
+                "y": 2038
+              },
+              "time": 0,
+              "initial": true,
+              "hiddenFrom": true,
+              "hiddenTo": true
+            },
+            {
+              "from": {
+                "x": 27180,
+                "y": 1063.0622089025564
+              },
+              "to": {
+                "x": 798,
+                "y": 1801.3823522161692
+              },
+              "time": 0,
+              "initial": true,
+              "hiddenFrom": true,
+              "hiddenTo": true
+            },
+            {
+              "from": {
+                "x": 27054.856104131322,
+                "y": 200.00000000000003
+              },
+              "to": {
+                "x": 505.24195632571355,
+                "y": 2074
+              },
+              "time": 0,
+              "initial": true,
+              "hiddenFrom": true,
+              "hiddenTo": true
+            },
+            {
+              "from": {
+                "x": 26970.867010864895,
+                "y": 3016
+              },
+              "to": {
+                "x": 1422.1351890973747,
+                "y": 1109
+              },
+              "time": 0,
+              "initial": true,
+              "hiddenFrom": true,
+              "hiddenTo": true
+            },
+            {
+              "from": {
+                "x": 26676,
+                "y": 573.5290687647648
+              },
+              "to": {
+                "x": 1191,
+                "y": 837.5167810909916
+              },
+              "time": 0,
+              "initial": true,
+              "hiddenFrom": true,
+              "hiddenTo": true
+            },
+            {
+              "from": {
+                "x": 26600,
+                "y": 2820.8711504703388
+              },
+              "to": {
+                "x": 924.7169742910191,
+                "y": 594
+              },
+              "time": 0,
+              "initial": true,
+              "hiddenFrom": true,
+              "hiddenTo": true
+            },
+            {
+              "from": {
+                "x": 26600,
+                "y": 2608.969938158989
+              },
+              "to": {
+                "x": 686,
+                "y": 365.46823564590886
+              },
+              "time": 0,
+              "initial": true,
+              "hiddenFrom": true,
+              "hiddenTo": true
+            },
+            {
+              "from": {
+                "x": 16376,
+                "y": 1104.5877574034967
+              },
+              "to": {
+                "x": 1372.521404792089,
+                "y": 706
+              },
+              "time": 0,
+              "initial": true,
+              "hiddenFrom": true,
+              "hiddenTo": true
+            }
+          ]
+        },
+        "fps": 30,
+        "frameMs": 5.85627705644155,
+        "visibleChunks": 32,
+        "totalChunks": 1932
+      },
+      "samples": [
+        {
+          "time": 0.049999999999999996,
+          "station": 5308.996517659363,
+          "lateral": 97.99991577773609,
+          "plan": 5303.007303535824,
+          "speed": 179.45132240872132
+        },
+        {
+          "time": 1.0499999999999987,
+          "station": 5495.908031730937,
+          "lateral": 105.18616566059676,
+          "plan": 5303.007303535824,
+          "speed": 199.7305196813087
+        },
+        {
+          "time": 1.8166666666666627,
+          "station": 5654.535072974203,
+          "lateral": 114.0867361220606,
+          "plan": 5303.007303535824,
+          "speed": 209.8510824409712
+        },
+        {
+          "time": 2.583333333333327,
+          "station": 5815.0558475230355,
+          "lateral": 118.66006632430796,
+          "plan": 5303.007303535824,
+          "speed": 208.80899728407442
+        },
+        {
+          "time": 3.249999999999991,
+          "station": 5954.532407355765,
+          "lateral": 125.8110349359352,
+          "plan": 5303.007303535824,
+          "speed": 208.63234156120444
+        },
+        {
+          "time": 3.9166666666666554,
+          "station": 6093.715853310548,
+          "lateral": 138.1073418870951,
+          "plan": 5303.007303535824,
+          "speed": 209.0249944305508
+        },
+        {
+          "time": 4.616666666666686,
+          "station": 6239.6219285128755,
+          "lateral": 151.13720420462755,
+          "plan": 5303.007303535824,
+          "speed": 208.9720618000295
+        },
+        {
+          "time": 5.283333333333386,
+          "station": 6379.257627688729,
+          "lateral": 156.4112651416057,
+          "speed": 208.1493009616245
+        },
+        {
+          "time": 5.98333333333342,
+          "station": 6526.052426333984,
+          "lateral": 154.488435681145,
+          "speed": 208.8693699504555
+        },
+        {
+          "time": 6.666666666666788,
+          "station": 6669.443434992408,
+          "lateral": 151.16849545388393,
+          "speed": 209.51699932723758
+        },
+        {
+          "time": 7.366666666666823,
+          "station": 6816.196102065377,
+          "lateral": 150.8645480578018,
+          "speed": 209.01941518072974
+        }
+      ]
+    }
+  ],
+  "errors": []
+}

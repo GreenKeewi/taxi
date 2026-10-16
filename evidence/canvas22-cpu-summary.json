@@ -1,0 +1,426 @@
+{
+  "before-1x": {
+    "sampledMilliseconds": 4639.222,
+    "rawProfile": "/workspace/canvas22-exploratory/canvas22-before-1x-cpu.json",
+    "selfTop20": [
+      {
+        "function": "(program)",
+        "milliseconds": 2004.682,
+        "percent": 43.21159884135745
+      },
+      {
+        "function": "draw",
+        "milliseconds": 510.151,
+        "percent": 10.996477426602995
+      },
+      {
+        "function": "fill",
+        "milliseconds": 469.013,
+        "percent": 10.109733916592049
+      },
+      {
+        "function": "scene",
+        "milliseconds": 309.777,
+        "percent": 6.677348055342038
+      },
+      {
+        "function": "updateTraffic",
+        "milliseconds": 144.132,
+        "percent": 3.106814030455969
+      },
+      {
+        "function": "roadBlocksPoint",
+        "milliseconds": 119.586,
+        "percent": 2.5777166947389025
+      },
+      {
+        "function": "upload",
+        "milliseconds": 112.981,
+        "percent": 2.435343684781629
+      },
+      {
+        "function": "lineTo",
+        "milliseconds": 97.966,
+        "percent": 2.1116902791028322
+      },
+      {
+        "function": "vehicle",
+        "milliseconds": 93.236,
+        "percent": 2.0097335285959583
+      },
+      {
+        "function": "(anonymous)",
+        "milliseconds": 79.31,
+        "percent": 1.7095538864059534
+      },
+      {
+        "function": "TaxiSoftwareRenderer._depthOrder",
+        "milliseconds": 69.143,
+        "percent": 1.4904007611621086
+      },
+      {
+        "function": "g.updateTraffic",
+        "milliseconds": 46.71,
+        "percent": 1.0068498554283456
+      },
+      {
+        "function": "closePath",
+        "milliseconds": 40.348,
+        "percent": 0.8697147926958443
+      },
+      {
+        "function": "(garbage collector)",
+        "milliseconds": 36.092,
+        "percent": 0.7779752725780315
+      },
+      {
+        "function": "stepPhysics",
+        "milliseconds": 34.868,
+        "percent": 0.7515915384088108
+      },
+      {
+        "function": "reset",
+        "milliseconds": 32.565,
+        "percent": 0.7019495941345337
+      },
+      {
+        "function": "render",
+        "milliseconds": 31.894,
+        "percent": 0.6874859620858842
+      },
+      {
+        "function": "near",
+        "milliseconds": 31.87,
+        "percent": 0.6869686339649191
+      },
+      {
+        "function": "proto.scene",
+        "milliseconds": 29.619,
+        "percent": 0.6384475672860666
+      },
+      {
+        "function": "trafficPoseClear",
+        "milliseconds": 26.809,
+        "percent": 0.5778770664564016
+      }
+    ]
+  },
+  "before-4x": {
+    "sampledMilliseconds": 7452.932,
+    "rawProfile": "/workspace/canvas22-exploratory/canvas22-before-4x-cpu.json",
+    "selfTop20": [
+      {
+        "function": "(program)",
+        "milliseconds": 2496.982,
+        "percent": 33.5033514326979
+      },
+      {
+        "function": "updateTraffic",
+        "milliseconds": 802.149,
+        "percent": 10.762864869825728
+      },
+      {
+        "function": "draw",
+        "milliseconds": 617.008,
+        "percent": 8.27872842526941
+      },
+      {
+        "function": "fill",
+        "milliseconds": 449.471,
+        "percent": 6.030794323629949
+      },
+      {
+        "function": "scene",
+        "milliseconds": 298.536,
+        "percent": 4.005618191605666
+      },
+      {
+        "function": "g.updateTraffic",
+        "milliseconds": 278.255,
+        "percent": 3.733497098859885
+      },
+      {
+        "function": "carHit",
+        "milliseconds": 273.178,
+        "percent": 3.6653762572904194
+      },
+      {
+        "function": "reset",
+        "milliseconds": 186.72,
+        "percent": 2.5053227374139464
+      },
+      {
+        "function": "trafficPoseClear",
+        "milliseconds": 164.773,
+        "percent": 2.2108480259849412
+      },
+      {
+        "function": "near",
+        "milliseconds": 158.806,
+        "percent": 2.1307855753950258
+      },
+      {
+        "function": "stepPhysics",
+        "milliseconds": 156.089,
+        "percent": 2.09433012403709
+      },
+      {
+        "function": "upload",
+        "milliseconds": 126.194,
+        "percent": 1.6932128187939994
+      },
+      {
+        "function": "roadBlocksPoint",
+        "milliseconds": 117.149,
+        "percent": 1.5718511855468424
+      },
+      {
+        "function": "lineTo",
+        "milliseconds": 99.74,
+        "percent": 1.3382652625839067
+      },
+      {
+        "function": "vehicle",
+        "milliseconds": 97.058,
+        "percent": 1.302279425063854
+      },
+      {
+        "function": "TaxiSoftwareRenderer._depthOrder",
+        "milliseconds": 86.929,
+        "percent": 1.1663731803805535
+      },
+      {
+        "function": "(anonymous)",
+        "milliseconds": 85.625,
+        "percent": 1.1488767105348607
+      },
+      {
+        "function": "(garbage collector)",
+        "milliseconds": 75.012,
+        "percent": 1.0064763773505514
+      },
+      {
+        "function": "receivingSpace",
+        "milliseconds": 74.686,
+        "percent": 1.0021022598891283
+      },
+      {
+        "function": "buildingHit",
+        "milliseconds": 70.294,
+        "percent": 0.9431724320039415
+      }
+    ]
+  },
+  "after-1x": {
+    "sampledMilliseconds": 4628.976,
+    "rawProfile": "/workspace/canvas22-exploratory/canvas22-after-1x-cpu.json",
+    "selfTop20": [
+      {
+        "function": "(program)",
+        "milliseconds": 1461.088,
+        "percent": 31.563957125722837
+      },
+      {
+        "function": "(idle)",
+        "milliseconds": 709.5,
+        "percent": 15.32736397855595
+      },
+      {
+        "function": "draw",
+        "milliseconds": 443.854,
+        "percent": 9.588600156924555
+      },
+      {
+        "function": "fill",
+        "milliseconds": 379.282,
+        "percent": 8.193648012000926
+      },
+      {
+        "function": "scene",
+        "milliseconds": 327.616,
+        "percent": 7.077504830441981
+      },
+      {
+        "function": "upload",
+        "milliseconds": 144.675,
+        "percent": 3.1254212594750976
+      },
+      {
+        "function": "roadBlocksPoint",
+        "milliseconds": 135.539,
+        "percent": 2.928055794629309
+      },
+      {
+        "function": "vehicle",
+        "milliseconds": 101.987,
+        "percent": 2.2032302608611496
+      },
+      {
+        "function": "(anonymous)",
+        "milliseconds": 95.232,
+        "percent": 2.057301658077294
+      },
+      {
+        "function": "updateTraffic",
+        "milliseconds": 70.362,
+        "percent": 1.5200338044526478
+      },
+      {
+        "function": "lineTo",
+        "milliseconds": 68.877,
+        "percent": 1.4879532751952051
+      },
+      {
+        "function": "render",
+        "milliseconds": 39.327,
+        "percent": 0.8495831475471033
+      },
+      {
+        "function": "TaxiSoftwareRenderer._depthOrder",
+        "milliseconds": 39.088,
+        "percent": 0.8444200185959054
+      },
+      {
+        "function": "(garbage collector)",
+        "milliseconds": 35.523,
+        "percent": 0.7674051453280379
+      },
+      {
+        "function": "reset",
+        "milliseconds": 33.548,
+        "percent": 0.7247391215681395
+      },
+      {
+        "function": "proto.scene",
+        "milliseconds": 32.618,
+        "percent": 0.7046482850634784
+      },
+      {
+        "function": "carHit",
+        "milliseconds": 29.848,
+        "percent": 0.6448078365495954
+      },
+      {
+        "function": "softwareVehicleBuffer",
+        "milliseconds": 27.827,
+        "percent": 0.6011480724894663
+      },
+      {
+        "function": "closePath",
+        "milliseconds": 26.042,
+        "percent": 0.5625866282305201
+      },
+      {
+        "function": "g.updateTraffic",
+        "milliseconds": 25.494,
+        "percent": 0.5507481568277736
+      }
+    ]
+  },
+  "after-4x": {
+    "sampledMilliseconds": 7417.21,
+    "rawProfile": "/workspace/canvas22-exploratory/canvas22-after-4x-cpu.json",
+    "selfTop20": [
+      {
+        "function": "(program)",
+        "milliseconds": 2426.919,
+        "percent": 32.72010634726534
+      },
+      {
+        "function": "draw",
+        "milliseconds": 614.376,
+        "percent": 8.283114540372997
+      },
+      {
+        "function": "fill",
+        "milliseconds": 494.153,
+        "percent": 6.662249012768952
+      },
+      {
+        "function": "updateTraffic",
+        "milliseconds": 427.546,
+        "percent": 5.764242889172613
+      },
+      {
+        "function": "scene",
+        "milliseconds": 400.27,
+        "percent": 5.396503537044253
+      },
+      {
+        "function": "(anonymous)",
+        "milliseconds": 289.803,
+        "percent": 3.9071699466510994
+      },
+      {
+        "function": "g.updateTraffic",
+        "milliseconds": 265.484,
+        "percent": 3.579297336869254
+      },
+      {
+        "function": "carHit",
+        "milliseconds": 228.036,
+        "percent": 3.07441746964155
+      },
+      {
+        "function": "upload",
+        "milliseconds": 195.833,
+        "percent": 2.6402515231468437
+      },
+      {
+        "function": "near",
+        "milliseconds": 185.768,
+        "percent": 2.5045535989947703
+      },
+      {
+        "function": "trafficPoseClear",
+        "milliseconds": 163.017,
+        "percent": 2.197821013561703
+      },
+      {
+        "function": "vehicle",
+        "milliseconds": 153.121,
+        "percent": 2.064401574176813
+      },
+      {
+        "function": "roadBlocksPoint",
+        "milliseconds": 146.813,
+        "percent": 1.9793561190798157
+      },
+      {
+        "function": "stepPhysics",
+        "milliseconds": 127.209,
+        "percent": 1.7150518860865474
+      },
+      {
+        "function": "reset",
+        "milliseconds": 117.383,
+        "percent": 1.5825761977886563
+      },
+      {
+        "function": "(garbage collector)",
+        "milliseconds": 94.42,
+        "percent": 1.2729853947778207
+      },
+      {
+        "function": "lineTo",
+        "milliseconds": 83.556,
+        "percent": 1.1265152260755729
+      },
+      {
+        "function": "buildingHit",
+        "milliseconds": 68.635,
+        "percent": 0.925347940802539
+      },
+      {
+        "function": "TaxiSoftwareRenderer._depthOrder",
+        "milliseconds": 67.476,
+        "percent": 0.9097221192335123
+      },
+      {
+        "function": "render",
+        "milliseconds": 61.208,
+        "percent": 0.825215950471943
+      }
+    ]
+  }
+}

@@ -40,7 +40,7 @@
     if(root.TaxiRoads)root.TaxiRoads.configure(map);
     enrich(map);
     const mesh=new root.Taxi3D.Mesh(), signs=[], r=random((map.seed||8427)^0x51C170);
-    mesh.underRoad=[];mesh.roadMap=map;
+    mesh.underRoad=[];mesh.optionalDetail=[];mesh.roadMap=map;
     const stats={seed:map.seed||8427,buildings:0,skyscrapers:0,tallestBuilding:0,backgroundBuildings:0,trees:0,lamps:0,shelters:0,landmarks:0,roadSegments:0,crosswalks:0,elevatedRoads:0,ramps:0,bridgePiers:0,busStops:0,waterfrontStreets:0,waterfrontPiers:0};
     const xs=map.xs, zs=map.ys, lastX=xs.length-1, lastZ=zs.length-1, RH=map.roadHalf||82, SH=map.sidewalkHalf||94;
     const shore=map.waterfront?map.waterfront.shoreZ:map.h-65;
@@ -372,6 +372,7 @@
       face([[x+w-margin,bot,z+d+p],[x+margin,bot,z+d+p],[x+margin,top,z+d+p],[x+w-margin,top,z+d+p]],tint(glassColor,.72));
       face([[x-p,bot,z+d-margin],[x-p,bot,z+margin],[x-p,top,z+margin],[x-p,top,z+d-margin]],tint(glassColor,.69));
       face([[x+w+p,bot,z+margin],[x+w+p,bot,z+d-margin],[x+w+p,top,z+d-margin],[x+w+p,top,z+margin]],tint(glassColor,1.14));
+      const detailStart=mesh.cull.length;
       const floorStep=height>250?22:18;
       for(let y=base+14;y<top-4;y+=floorStep){
         const col=tint(color,style===1?.94:.82),h=style===1?1.4:2.1,q=p+.07;
@@ -390,6 +391,7 @@
         face([[x-q,bot,z+dz+.65],[x-q,bot,z+dz-.65],[x-q,top,z+dz-.65],[x-q,top,z+dz+.65]],tint(mc,.72));
         face([[x+w+q,bot,z+dz-.65],[x+w+q,bot,z+dz+.65],[x+w+q,top,z+dz+.65],[x+w+q,top,z+dz-.65]],mc);
       }
+      for(let i=detailStart;i<mesh.cull.length;i++)mesh.optionalDetail[i]=1;
     }
     const materials=[
       ['#b9c8c4','#6795a4'],['#d0c2a7','#6592a0'],['#7d9ca8','#4f839c'],

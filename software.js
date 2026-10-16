@@ -63,7 +63,7 @@
       this.canvas = canvas; this.ctx = context; this.scale = 1;
       this.width = canvas.width || 1; this.height = canvas.height || 1;
       this.calls = 0; this.software = true;
-      this.far = 1600; this.mirrorFar = 850;
+      this.far = 1600; this.mirrorFar = 850; this.detailFar=Infinity;
       this.gl = { deleteBuffer(b) { if (b) { b.data = null; b.count = 0; b.triangles = 0; b.capacity = 0; } } };
       this._palette = []; this._colors = new Map();
       this._projected = {main:new Map(),mirror:new Map()};this._projectionCacheBytes=0;this._viewKeys={main:null,mirror:null};
@@ -98,6 +98,7 @@
       const src = mesh.data, n = Math.floor(src.length / 18);
       if (!b.data || b.capacity < n) { b.capacity = capacity(n); b.data = new Float32Array(b.capacity * CACHE); }
       const dst = b.data; b.count = n * 3; b.triangles = n;
+      b.smallDetail=new Uint8Array(n);
       b.roadSurface=mesh.roadSurface?Uint8Array.from(mesh.roadSurface):null;
       b.underRoad=mesh.underRoad?Uint8Array.from(mesh.underRoad):null;
       b.roadOccluders=mesh.roadMap?roadOccluders(mesh.roadMap):null;
@@ -124,6 +125,9 @@
         dst[d + 15] = Math.hypot(dst[d+16],dst[d+17],dst[d+18]);
         dst[d+19] = mesh.cull&&mesh.cull[t]?1:0;
         dst[d+23]=3;
+        // Small facade/foliage/furniture faces are optional at distance. Driving
+        // surfaces, bridge structure, barriers and all dynamic objects are kept.
+        b.smallDetail[t]=!b.dynamic&&!mesh.roadCritical?.[t]&&!mesh.underRoad?.[t]&&!mesh.roadSurface?.[t]&&!dst[d+14]&&(mesh.optionalDetail?.[t]||ymax-ymin<8&&radius<22)?1:0;
       }
       // Treat Mesh.quad's two triangles as one face for stable painter ordering.
       for (let t = 0; t + 1 < n; t++) {
@@ -179,7 +183,7 @@
       const cp = Math.cos(camera.pitch || 0), sp = Math.sin(camera.pitch || 0), cr=Math.cos(camera.roll||0), sr=Math.sin(camera.roll||0);
       const tanY = Math.tan(fov / 2), tanX = tanY * w / h, focal = h / (2 * tanY), horizontalSign = camera.mirror ? -1 : 1;
       const sxNorm = Math.sqrt(1 + tanX * tanX), syNorm = Math.sqrt(1 + tanY * tanY);
-      const viewKey=[x,y,w,h,...eye,camera.yaw,camera.pitch||0,camera.roll||0,fov,far,!!camera.mirror].join(':'),viewSlot=rect?'mirror':'main',viewCache=this._projected[viewSlot];
+      const viewKey=[x,y,w,h,...eye,camera.yaw,camera.pitch||0,camera.roll||0,fov,far,this.detailFar,!!camera.mirror].join(':'),viewSlot=rect?'mirror':'main',viewCache=this._projected[viewSlot];
       // A moving camera projects directly; populate reusable faces only after
       // the exact view repeats, avoiding cache-copy work throughout a drive.
       const stableView=this._viewKeys[viewSlot]===viewKey;this._viewKeys[viewSlot]=viewKey;
@@ -201,6 +205,7 @@
           const horizontal = dx * cyaw + dz * syaw;
           const depth = horizontal * cp + dy * sp, rawRight = -dx * syaw + dz * cyaw, rawUp = dy * cp - horizontal * sp, right=rawRight*cr+rawUp*sr, up=rawUp*cr-rawRight*sr;
           const radius = data[d + 12], flat = data[d + 14] === 1;
+          if(b.smallDetail[t]&&horizontal-radius>this.detailFar)continue;
           if (depth + radius < near || depth - radius > far || Math.abs(right) - radius * sxNorm > depth * tanX || Math.abs(up) - radius * syNorm > depth * tanY) continue;
           // Subpixel details have no readable shape, especially in the small mirror.
           if (!flat && depth > 80 && data[d + 15] * focal * focal / (depth * depth) < (rect ? 1.1 : .18)) continue;
@@ -251,7 +256,7 @@
           if (Math.abs(area) < (rect ? .2 : .08)) continue;
           // Quantized atmospheric colors avoid generating thousands of strings each frame.
           const distance = Math.max(0, Math.hypot(dx, dy, dz) - (flat ? radius * .5 : 0));
-          q[o + 4] = Math.max(0, Math.min(FOG_STEPS, Math.round((distance - 400) / 1850 * FOG_STEPS)));
+          q[o + 4] = Math.max(0, Math.min(FOG_STEPS, Math.round((distance - 400) / (this.adaptiveFog?Math.max(400,far-400):1850) * FOG_STEPS)));
           if (flat) ground[ng++] = count; else objects[no++] = count;
           count++;
         }

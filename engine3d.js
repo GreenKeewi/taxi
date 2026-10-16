@@ -138,16 +138,18 @@ function damp(value,target,dt,response){return value+(target-value)*(1-Math.exp(
 // One immutable sensing snapshot per physics step replaces per-car global scans.
 // Lane groups carry queue/storage checks; the spatial hash supplies crossing,
 // player and merge checks without coupling ground traffic to the upper deck.
+function sensingPose(q,c){q.id=c.id;q.kind=c.kind;q.x=c.x;q.y=c.y;q.a=c.a;q.speed=c.speed;q.height=c.height;q.length=c.length;q.width=c.width;q.box=c.box;q.from=c.from;q.to=c.to;q.next=c.next;q.t=c.t;q.lane=c.lane;q.laneOffset=c.laneOffset;q.turn=!!c.turn;q.turnSign=c.turnSign;return q;}
+function collisionPose(c,x,y,a){return{id:c.id,x,y,a,height:c.height,kind:c.kind,length:c.length,width:c.width,box:c.box};}
 class TrafficIndex{
  constructor(){this.cells=new Map();this.edges=new Map();this.lanes=new Map();this.byId=new Map();this.actual=new Map();this.buckets=[];this.output=[];this.highways=Array.from({length:8},()=>[]);this.stamp=0;this.queryStamp=0;}
  bucket(map,key){let list=map.get(key);if(!list){list=[];map.set(key,list);}if(!list.length)this.buckets.push(list);return list;}
  reset(cars,player,map){for(const list of this.buckets)list.length=0;this.buckets.length=0;for(const list of this.highways)list.length=0;this.stamp++;this.work={cars:cars.length,queries:0,candidates:0};
-  for(const c of cars){let q=this.byId.get(c.id);if(!q){q={};this.byId.set(c.id,q);}Object.assign(q,c);q.turn=!!c.turn;q._stamp=this.stamp;this.actual.set(c.id,c);this.add(q);
+  for(const c of cars){let q=this.byId.get(c.id);if(!q){q={};this.byId.set(c.id,q);}sensingPose(q,c);q._stamp=this.stamp;this.actual.set(c.id,c);this.add(q);
    if(c.kind==='highway'){q.station=Number.isFinite(c.highwayS)?c.highwayS:Highway.locate(map,c.x,c.y).s;q.offset=c.highwayOffset??Highway.locate(map,c.x,c.y).lateral;for(let lane=0;lane<4;lane++)if(Math.abs(q.offset-c.dir*Highway.LANES[lane])<40||c.lane===lane)this.highways[(c.dir>0?4:0)+lane].push(q);}
    else{const key=(c.from<<16)|c.to;this.bucket(this.edges,key).push(q);for(let lane=0;lane<2;lane++)if(Math.abs((c.laneOffset??LANES[c.lane])-LANES[lane])<26||c.lane===lane)this.bucket(this.lanes,key*2+lane).push(q);}
   }
   for(const [id,q]of this.byId)if(q._stamp!==this.stamp){this.byId.delete(id);this.actual.delete(id);}for(const list of this.highways)list.sort((a,b)=>a.station-b.station||a.id-b.id);
-  if(!this.player)this.player={};Object.assign(this.player,player);this.player.id='player';this.add(this.player);return this;
+  if(!this.player)this.player={};sensingPose(this.player,player);this.player.id='player';this.add(this.player);return this;
  }
  add(c){this.bucket(this.cells,((Math.floor(c.x/240)&65535)<<16)|(Math.floor(c.y/240)&65535)).push(c);}
  near(c,radius){const out=this.output;out.length=0;const r=radius+60,r2=r*r;this.work.queries++;for(let x=Math.floor((c.x-r)/240);x<=Math.floor((c.x+r)/240);x++){const column=(x&65535)<<16;for(let y=Math.floor((c.y-r)/240);y<=Math.floor((c.y+r)/240);y++)for(const q of this.cells.get(column|(y&65535))||[]){if(q.id===c.id||Math.abs((q.height||0)-(c.height||0))>10)continue;const dx=q.x-c.x,dy=q.y-c.y;if(dx*dx+dy*dy<=r2){out.push(q);this.work.candidates++;}}}return out;}
@@ -226,7 +228,7 @@ class Game{
     const free=Math.min(c.desired,kmhToSpeed(c.lane<2?120:95)),heading=Highway.at(m,c.highwayS,c.highwayOffset).a+(c.dir===1?0:PI),hc=Math.cos(heading),hs=Math.sin(heading);let desired=free;
     for(const o of index.highway(c,Math.max(180,c.speed*1.3+c.speed*c.speed/110))){const dx=o.x-c.x,dy=o.y-c.y,ahead=dx*hc+dy*hs,across=Math.abs(-dx*hs+dy*hc);if(across<((c.width||22)+(o.width||22))/2+3&&ahead>0)desired=Math.min(desired,this.followingSpeed(c,o,ahead,heading,55));}
     c.queueing=desired<free*.65;c.queueReason=c.queueing?'leader':null;c.speed+=clamp(desired-c.speed,-75*dt,30*dt);let station=c.highwayS+c.dir*c.speed*dt;const bound=c.dir===1?m.highwayEnd-25:m.highwayStart+25;if((station-bound)*c.dir>0){const wrap=c.dir===1?m.highwayStart+30:m.highwayEnd-30,q=Highway.at(m,wrap,c.highwayOffset);if(dist(q,this.car)>160&&!index.near(q,110).length)station=wrap;else{station=c.highwayS;c.speed=0;}}
-    const pose=Highway.at(m,station,c.highwayOffset),next={...c,x:pose.x,y:pose.y,a:pose.a+(c.dir===1?0:PI)};if(!this.trafficPoseClear(c,next,index)||Highway.collidersNear(m,next).some(b=>buildingHit(next,b))){c.speed=0;c.highwayOffset=oldOffset;c.queueing=true;c.queueReason='blocked';}else{c.highwayS=station;c.x=next.x;c.y=next.y;c.a=next.a;}c.stopped=c.speed<3;continue;
+    const pose=Highway.at(m,station,c.highwayOffset),next=collisionPose(c,pose.x,pose.y,pose.a+(c.dir===1?0:PI));if(!this.trafficPoseClear(c,next,index)||Highway.collidersNear(m,next).some(b=>buildingHit(next,b))){c.speed=0;c.highwayOffset=oldOffset;c.queueing=true;c.queueReason='blocked';}else{c.highwayS=station;c.x=next.x;c.y=next.y;c.a=next.a;}c.stopped=c.speed<3;continue;
    }
    if(c.lane===undefined)c.lane=0;if(c.laneOffset===undefined)c.laneOffset=LANES[c.lane];if(c.next===undefined)this.planTraffic(c);
    const free=Math.min(kmhToSpeed(60),c.desired*(1+Math.min(.3,this.difficulty*.015)));let target=free;
@@ -234,7 +236,7 @@ class Game{
     target=Math.min(target,c.turnSign===0?kmhToSpeed(48):kmhToSpeed(18));const look=22+(this.car.length||44)/2+28+c.speed*.7+c.speed*c.speed/100,tc=Math.cos(c.a),ts=Math.sin(c.a);for(const o of index.near(c,look)){const rx=o.x-c.x,ry=o.y-c.y,along=rx*tc+ry*ts,across=Math.abs(-rx*ts+ry*tc);if(along>0&&across<((c.width||22)+(o.width||22))/2+3)target=Math.min(target,this.followingSpeed(c,o,along,c.a,45));}
     if(this.turnConflictsWithPlayer(c,target))target=0;
     c.speed+=clamp(target-c.speed,-65*dt,28*dt);const nextTurnT=c.turn.t+c.speed*dt,pos=samplePath(c.turn.path,nextTurnT);
-    if(!this.trafficPoseClear(c,{...c,...pos},index)){c.speed=0;c.stopped=true;c.queueing=true;c.queueReason='blocked crossing';continue;}
+    if(!this.trafficPoseClear(c,collisionPose(c,pos.x,pos.y,pos.a),index)){c.speed=0;c.stopped=true;c.queueing=true;c.queueReason='blocked crossing';continue;}
     c.turn.t=nextTurnT;c.x=pos.x;c.y=pos.y;c.a=pos.a;if(c.turn.t>=c.turn.path.length){const oldTo=c.to;c.from=oldTo;c.to=c.next;c.t=JUNCTION_EXIT;c.turn=null;this.releaseTraffic(c);c.laneOffset=LANES[c.lane];this.planTraffic(c);}c.stopped=c.speed<3;c.queueing=c.stopped;c.queueReason=c.stopped?'blocked crossing':null;continue;
    }
    const oldT=c.t,oldLaneOffset=c.laneOffset,n=m.nodes[c.from],to=m.nodes[c.to],L=dist(n,to),a=Math.atan2(to.y-n.y,to.x-n.x),left=L-c.t,stop=L-JUNCTION_ENTRY,s=signal(m,to,this.time),green=(Math.abs(to.x-n.x)>1?s.horizontal:s.vertical)==='green';
@@ -250,7 +252,7 @@ class Game{
    c.queueing=target<free*.65;if(c.queueing){if(c.waitSince===undefined)c.waitSince=this.time;}else c.waitSince=undefined;
    c.speed+=clamp(target-c.speed,-70*dt,28*dt);c.stopped=c.speed<3;let advance=c.speed*dt;if(c.reserved!==c.to&&c.t+advance>stop){advance=Math.max(0,stop-c.t);c.speed=0;}c.t+=advance;
    const pos=lanePoint(n,to,c.t,c.lane),delta=c.laneOffset-LANES[c.lane],nx=pos.x-Math.sin(a)*delta,ny=pos.y+Math.cos(a)*delta;
-   if(!this.trafficPoseClear(c,{...c,x:nx,y:ny,a},index)){c.t=oldT;c.laneOffset=oldLaneOffset;c.speed=0;c.stopped=true;c.queueing=true;c.queueReason='blocked';c.stalled=(c.stalled||0)+dt;continue;}
+   if(!this.trafficPoseClear(c,collisionPose(c,nx,ny,a),index)){c.t=oldT;c.laneOffset=oldLaneOffset;c.speed=0;c.stopped=true;c.queueing=true;c.queueReason='blocked';c.stalled=(c.stalled||0)+dt;continue;}
    c.x=nx;c.y=ny;c.a=a;if(c.t>=stop&&c.reserved===c.to){c.t=stop;c.laneOffset=LANES[c.lane];c.turn={path:this.trafficMovement(c).path,t:0};}c.stalled=c.speed<2?(c.stalled||0)+dt:0;
   }
  }

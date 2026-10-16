@@ -1,0 +1,21 @@
+{
+  "initialOuterCollectorAttempt": {
+    "initialWorldSpeed": 160,
+    "desiredWorldSpeed": 190,
+    "laneOffset": 152,
+    "oneX": "both complete, roughly30FPS",
+    "baselineFourX": "collision atstation8360/lateral159 with automatedkeyboardcontroller; rawtwo1xruns retained in canvas22-driving-paired.json",
+    "followup": "lower-speed innercollector116, same director and population; all before/after conditions changed equally"
+  },
+  "innerCollectorFirstAttempt": {
+    "speedKmh": 50.4,
+    "laneOffset": 116,
+    "baselineFourX": "collision atstation8729/lateral103 under reactive keyboard controller; raw1xpair retained in canvas22-driving-inner50.json",
+    "followup": "all releases now use the same naturally near-straight highway section; car translates160m and live director remains on; safer comparison separates renderer latency from high-speed steering-controller failure"
+  },
+  "nearStraightReactiveSteeringAttempt": {
+    "baselineFourX": "reactive keyboard steering still caused a collision nearstation4475/lateral149; no-state-reset cruise comparison then used fixedinitialtangentheading with nativepedals",
+    "artifact": "canvas22-driving-failed-translated.json"
+  },
+  "successfulFinalMethod": "canvas22-driving-cruise.json: same actualnear-straight160msegment with normal96cars and unchangedlive director; single initial pose and destination; nativepedals; no intersections or exits duringmeasurement"
+}

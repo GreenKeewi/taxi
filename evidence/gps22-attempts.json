@@ -1,0 +1,27 @@
+{
+  "scope": "Higher-speed live-traffic keyboard recovery; retained failed attempts, not a guarantee for every speed/body",
+  "attempts": [
+    {
+      "vehicle": "taxi",
+      "direction": 1,
+      "initialKmh": 64.8,
+      "controllerDeadband": 0.08,
+      "outcome": "collision near station5429 before early shallow turn was followed; inferred controller deadband issue; subsequent finer-controller east pass recorded separately"
+    },
+    {
+      "vehicle": "taxi",
+      "direction": -1,
+      "initialKmh": 64.8,
+      "desiredKmh": 75.6,
+      "controllerDeadband": 0.02,
+      "outcome": "collision near4275; finer-controller64.8km/h west retest passes"
+    },
+    {
+      "vehicle": "bus",
+      "direction": 1,
+      "initialKmh": 64.8,
+      "desiredKmh": 64.8,
+      "outcome": "collision near5411 at closing separator; failed bus64 artifact retained; current renderer task does not alter GPS geometry or steering physics"
+    }
+  ]
+}
